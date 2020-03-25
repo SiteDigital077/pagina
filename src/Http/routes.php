@@ -1,5 +1,7 @@
 <?php
 
+
+
 Route::group(['middleware' => ['auths','administrador']], function (){
  Route::resource('gestion/paginas', 'DigitalsiteSaaS\Pagina\Http\PaginaController');
  Route::resource('gestion/paginas/crear', 'DigitalsiteSaaS\Pagina\Http\PaginaController@show');
@@ -8,10 +10,12 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  Route::get('gestion/paginas/editar/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@editar');
  Route::get('gestion/paginas/subpagina/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@subpagina');
  Route::get('gestion/paginas/eliminar/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@eliminar');
- Route::get('/gestion/contenidos/diagrama/update/{id}', function($id){
-  $diagramas = DigitalsiteSaaS\Pagina\Diagrama::where('id', "=", $id)->get();  
-  return View::make('pagina::actualizar-diagrama')->with('diagramas', $diagramas);
- });
+
+
+ 
+
+Route::get('gestion/contenidos/diagrama/update/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@editardiagrama');
+
 });
 
 Route::group(['middleware' => ['auths','administrador']], function (){
@@ -27,16 +31,14 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  Route::post('gestion/contenidos/actualizarservicio', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@actualizarservicio');
  Route::post('gestion/contenidos/actualizarventa', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@actualizarventa');
  Route::post('gestion/contenidos/redes-sociales', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@updatered');
- Route::get('/gestion/redes-sociales', function(){
-  $template = DB::table('templa')->get();
-  $plantilla = DigitalsiteSaaS\Pagina\Template::all();  
-  return View::make('pagina::configuracion.redes')->with('plantilla', $plantilla)->with('template', $template);
- });
+ 
+ 
 
-  Route::get('/gestion/ubicacion', function(){
-   $pais = DigitalsiteSaaS\Pagina\Paiscon::all();
-    return view('pagina::configuracion.paises')->with('pais',$pais);
- });
+  Route::get('gestion/redes-sociales', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@verredes'); 
+
+  Route::get('gestion/ubicacion', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@verubicacion');
+
+ 
 
   Route::get('gestion/pais-editar/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@paiseditar'); 
   Route::post('gestion/actualizarpais/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@actualizarpais');
@@ -51,9 +53,13 @@ Route::group(['middleware' => ['auths','administrador']], function (){
   Route::get('gestion/departamento-editar/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@departamentoeditar');
   Route::post('gestion/actualizardepartamento/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@actualizardepartamento');
   Route::get('gestion/eliminardepartamento/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@eliminardepartamento');
-  Route::get('gestion/crear-departamento/{id}', function($id){
-  return View::make('pagina::configuracion.crear-departamento');
-  });
+  
+
+  Route::get('gestion/crear-departamento/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@creardepartamento');
+  
+  
+
+
   Route::get('gestion/departamentos/importExport', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@importExportdep');
   Route::get('gestion/departamentos/downloadExcel/{type}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@downloadExceldep');
   Route::post('gestion/departamentos/importExcel', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@importExceldep');
@@ -63,18 +69,20 @@ Route::group(['middleware' => ['auths','administrador']], function (){
   Route::get('gestion/municipio-editar/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@municipioeditar'); 
   Route::post('gestion/actualizarmunicipio/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@actualizarmunicipio');
   Route::get('gestion/eliminarmunicipio/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@eliminarmunicipio');
-  Route::get('gestion/crear-municipio/{id}', function($id){
-    return View::make('pagina::configuracion.crear-municipio');
-});
 
- Route::get('/gestion/configurar-correo', function(){
-  $datos = DB::table('datos')->where('id','=',1)->get(); 
-  return View::make('pagina::configuracion.correo')->with('datos', $datos);
- });
- Route::get('/gestion/logo-head', function(){
-  $plantilla = DB::table('template')->get();  
-  return View::make('pagina::configuracion.logo-head')->with('plantilla', $plantilla);
- });
+   Route::get('gestion/crear-municipio/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@creamunicipio');
+ 
+
+ Route::get('gestion/configurar-correo', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@configcorreo');
+ 
+ 
+ 
+
+ Route::get('gestion/logo-head', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@logohead');
+
+ Route::get('gestion/logo-foooter', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@logohead');
+
+
  Route::get('/gestion/logo-footer', function(){
   $plantilla = DB::table('template')->get();  
   return View::make('pagina::configuracion.logo-footer')->with('plantilla', $plantilla);
@@ -98,10 +106,17 @@ Route::group(['middleware' => ['auths','administrador']], function (){
 
 
 Route::group(['middleware' => ['auths','administrador']], function (){
+  Route::get('gestion/registrosaas', 'DigitalsiteSaaS\Pagina\Http\PaginaController@registrosaas');
+
+  Route::post('gestion/registrosaas/create', 'DigitalsiteSaaS\Pagina\Http\UsersaasController@create');
+
+
  Route::resource('gestion/calendario/registro', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@registrar');
  Route::resource('gestion/contenidos', 'DigitalsiteSaaS\Pagina\Http\ContenidoController');
  Route::post('gestion/contenidos/creardiagrama', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@creardiagrama');
  Route::get('gestion/contenidos/digitales/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@digitales');
+
+
  Route::resource('gestion/contenidos/diagrama', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@diagrama');
  Route::post('gestion/contenidos/actualizardiagrama/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@actualizardiagrama');
  Route::get('gestion/contenidos/graficos/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@graficos');
@@ -267,31 +282,9 @@ $inputs = DB::table('inputs')->get();
  });
 });
 
+// Esta información es abierta
 
-Route::group(['middleware' => ['web']], function (){
- Route::get('ingresar', 'DigitalsiteSaaS\Pagina\Http\WebController@ingresar');
- Route::resource('ingreso-comunidad', 'DigitalsiteSaaS\Pagina\Http\WebController@ingresarcomunidad');
- Route::post('mensajes/crearmensajeinput', 'DigitalsiteSaaS\Pagina\Http\WebController@crearmensajeinput');
- Route::get('/', 'DigitalsiteSaaS\Pagina\Http\WebController@index');
- Route::get('/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@paginas');
- Route::get('{{id}}', 'DigitalsiteSaaS\Pagina\Http\WebController@subpaginas');
- Route::get('blog/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@blog');
- Route::get('gestiones/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@gestion');
- 
- Route::get('/oferta/{id}', function($id){
-  $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
- $ofertas = DB::table('empleos')->where('titulo_empslug', '=', $id)->get();
- $blogfoot = \DigitalsiteSaaS\Pagina\Bloguero::inRandomOrder()->take(6)->get();
- $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
- $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
- $ip = $arr_ip['ip'];
- $ciudad = $arr_ip['city'];
- $pais = $arr_ip['country'];
- return View::make('pagina::vista-empleos')->with('ofertas', $ofertas)->with('plantilla', $plantilla)->with('menu', $menu)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('blogfoot', $blogfoot);
- });
-
-
-});
+//Termina aca
 
 
 Route::get('/gestor/validacionesinput/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@checkUsernameAvailabilityinput');
@@ -403,6 +396,36 @@ Route::get('gestor/validacion/pagina', function () {
 
 });
 
+Route::get('gestor/validacion/emailsaas', function () {
+          $user = DB::table('users')->where('email', Input::get('email'))->count();
+    if($user > 0) {
+        $isAvailable = FALSE;
+    } else {
+        $isAvailable = TRUE;
+    }
+    echo json_encode(
+            array(
+                'valid' => $isAvailable
+            )); 
+
+});
+
+Route::get('gestor/validacion/fqdn', function () {
+
+$fqdn = sprintf('%s.%s', Input::get('fqdn'), env('APP_DOMAIN'));
+$user = DB::table('tenancy.hostnames')->where('fqdn', $fqdn)->count();
+    if($user > 0) {
+        $isAvailable = FALSE;
+    } else {
+        $isAvailable = TRUE;
+    }
+    echo json_encode(
+            array(
+                'valid' => $isAvailable
+            )); 
+
+});
+
 Route::get('/ciudad/ajax-subcatweb',function(){
 
         $cat_id = Input::get('cat_id');
@@ -422,4 +445,27 @@ Route::get('/ubicacion/ajax-subcatweb',function(){
         $cat_id = Input::get('cat_id');
         $subcategories = DigitalsiteSaaS\Carrito\Municipio::where('departamento_id', '=', $cat_id)->get();
         return Response::json($subcategories);
+});
+
+Route::group(['middleware' => ['web']], function (){
+ Route::get('ingresar', 'DigitalsiteSaaS\Pagina\Http\WebController@ingresar');
+ Route::resource('ingreso-comunidad', 'DigitalsiteSaaS\Pagina\Http\WebController@ingresarcomunidad');
+ Route::post('mensajes/crearmensajeinput', 'DigitalsiteSaaS\Pagina\Http\WebController@crearmensajeinput');
+ Route::get('/', 'DigitalsiteSaaS\Pagina\Http\WebController@index');
+ Route::get('/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@paginas');
+ Route::get('{{id}}', 'DigitalsiteSaaS\Pagina\Http\WebController@subpaginas');
+ Route::get('blog/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@blog');
+ Route::get('gestiones/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@gestion');
+ 
+ Route::get('/oferta/{id}', function($id){
+  $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
+ $ofertas = DB::table('empleos')->where('titulo_empslug', '=', $id)->get();
+ $blogfoot = \DigitalsiteSaaS\Pagina\Bloguero::inRandomOrder()->take(6)->get();
+ $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+ $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
+ $ip = $arr_ip['ip'];
+ $ciudad = $arr_ip['city'];
+ $pais = $arr_ip['country'];
+ return View::make('pagina::vista-empleos')->with('ofertas', $ofertas)->with('plantilla', $plantilla)->with('menu', $menu)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('blogfoot', $blogfoot);
+ });
 });

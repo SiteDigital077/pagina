@@ -94,57 +94,14 @@
 
 <footer>
  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="//cdn.ckeditor.com/4.6.0/full/ckeditor.js"></script>
-   {{ Html::script('ckfinder/ckfinder.js') }}   
-
-   <script language="javascript" type="text/javascript">
-   CKEDITOR.replace('editor',{
-      filebrowserBrowseUrl: '/browser/browse.php',
-      filebrowserImageBrowseUrl: '/browser/browse.php?type=Images',
-      filebrowserUploadUrl: '/uploader/upload.php',
-      filebrowserImageUploadUrl: '/uploader/upload.php?type=Images',
-      filebrowserWindowWidth: '900',
-      filebrowserWindowHeight: '400',
-      filebrowserBrowseUrl: '../../../ckfinder/ckfinder.html',
-      filebrowserImageBrowseUrl: '../../../ckfinder/ckfinder.html?Type=Images',
-      filebrowserFlashBrowseUrl: '../../../ckfinder/ckfinder.html?Type=Flash',
-      filebrowserUploadUrl: '../../../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-      filebrowserImageUploadUrl: '../../../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-      filebrowserFlashUploadUrl: '../../../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
-    });
-    </script>
 
 
+
+
+<script src="https://cdn.ckeditor.com/4.11.2/full/ckeditor.js"></script>
 
 <script>
-
-
-  var button1 = document.getElementById( 'ckfinder-modal-1' );
-
-
-  button1.onclick = function() {
-    selectFileWithCKFinder( 'ckfinder-input-1' );
-  };
-
-  function selectFileWithCKFinder( elementId ) {
-    CKFinder.modal( {
-      chooseFiles: true,
-      width: 1200,
-      height: 600,
-      onInit: function( finder ) {
-        finder.on( 'files:choose', function( evt ) {
-          var file = evt.data.files.first();
-          var output = document.getElementById( elementId );
-          output.value = file.getUrl();
-        } );
-
-        finder.on( 'file:choose:resizedImage', function( evt ) {
-          var output = document.getElementById( elementId );
-          output.value = evt.data.resizedUrl;
-        } );
-      }
-    } );
-  }
+  CKEDITOR.replace( 'editor', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
 </script>
 
 

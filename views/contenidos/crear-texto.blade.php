@@ -3,7 +3,7 @@
     @section('cabecera')
     @parent
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
-    <script src="/vendors/ckeditor/ckeditor.js"></script>  
+
     @stop
 
 @section('ContenidoSite-01')
@@ -133,12 +133,17 @@
 
 
 
-
-  <script type="text/javascript">  
-       CKEDITOR.replace( 'editor' );  
-    </script>  
-
-<script src="/vendors/ckeditor/config.js?t=HBDD" type="text/javascript"></script>
-
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('button-image').addEventListener('click', (event) => {
+      event.preventDefault();
+      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
+    });
+  });
+  // set file link
+  function fmSetLink($url) {
+    document.getElementById('image_label').value = $url;
+  }
+</script>
 
 @stop

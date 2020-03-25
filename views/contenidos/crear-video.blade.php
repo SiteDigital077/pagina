@@ -4,7 +4,7 @@
     @section('cabecera')
     @parent
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
-    <script src="/vendors/ckeditor/ckeditor.js"></script>  
+
     @stop
 
 @section('ContenidoSite-01')
@@ -63,10 +63,13 @@
                                         </div>
 
                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                               <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="Click para seleccionar imagen" class="form-control" />
-                                            </div>
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                          <div class="col-md-9">
+                                           <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                           </div>
+                                          </div>
                                         </div>
 
                                          <div class="form-group">
@@ -135,13 +138,6 @@
 </div>
 
 
-
-
-<script type="text/javascript">  
-       CKEDITOR.replace( 'editor' );  
-    </script>  
-
-<script src="/vendors/ckeditor/config.js?t=HBDD" type="text/javascript"></script>
 
 
 <script type="text/javascript">

@@ -17,11 +17,11 @@ class Bloguero extends Model
 
     	public function pages(){
 
-		return $this->belongsTo('Page');
+		return $this->belongsTo('DigitalsiteSaaS\Pagina\Tenant\Page');
 	}
 
 		public function images(){
-	return $this->hasMany('Maxi');
+	return $this->hasMany('DigitalsiteSaaS\Pagina\Tenant\Maxi');
 
 	}
 }

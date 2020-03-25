@@ -23,6 +23,13 @@
          <li>
        <a href="/gestion/ubicacion"><i class="gi gi-google_maps"></i></i> Ubicación</a>
       </li>
+      </li>
+      @if(!$tenantName)
+         <li>
+       <a href="/gestion/registrosaas"><i class="gi gi-google_maps"></i></i> Hotsnames</a>
+      </li>
+      
+      @endif
       @if(Auth::user()->id == 1)
       <li>
        <a href="/gestion/venta"><i class="gi gi-usd"></i> Ventas</a>

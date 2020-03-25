@@ -107,25 +107,17 @@
 
 <footer>
 
-<script type="text/javascript">  
-       CKEDITOR.replace( 'editor' );  
-    </script>  
-
-<script src="/vendors/ckeditor/config.js?t=HBDD" type="text/javascript"></script>
-
-<script type="text/javascript">
-function openKCFinder(field) {
-    window.KCFinder = {
-        callBack: function(url) {
-            field.value = url;
-            window.KCFinder = null;
-        }
-    };
-    window.open('/vendors/kcfinder/browse.php?type=images&dir=files/public', 'kcfinder_textbox',
-        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-        'resizable=1, scrollbars=0, width=800, height=600'
-    );
-}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('button-image').addEventListener('click', (event) => {
+      event.preventDefault();
+      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
+    });
+  });
+  // set file link
+  function fmSetLink($url) {
+    document.getElementById('image_label').value = $url;
+  }
 </script>
 
 </footer>

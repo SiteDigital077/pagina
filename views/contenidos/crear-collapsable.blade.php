@@ -6,7 +6,7 @@
     @section('cabecera')
     @parent
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
-    <script src="/vendors/ckeditor/ckeditor.js"></script>  
+
     @stop
     
 @section('ContenidoSite-01')
@@ -81,10 +81,10 @@
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 
-<script type="text/javascript">  
-       CKEDITOR.replace( 'editor' );  
-    </script>  
+<script src="https://cdn.ckeditor.com/4.11.2/full/ckeditor.js"></script>
 
-<script src="/vendors/ckeditor/config.js?t=HBDD" type="text/javascript"></script>
+<script>
+  CKEDITOR.replace( 'editor', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
+</script>
 
 @stop

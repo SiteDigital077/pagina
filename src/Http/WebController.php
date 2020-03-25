@@ -26,6 +26,7 @@
  use DigitalsiteSaaS\Pagina\Empleo;
  use DigitalsiteSaaS\Pagina\Pais;
  use DigitalsiteSaaS\Pagina\Content;
+ use DigitalsiteSaaS\Pagina\Ips;
  use Mail;
  use DB;
  use Hash;
@@ -42,6 +43,7 @@
  use App\Mail\Registro;
  use App\Mail\Mensajema;
  use App\Http\Requests\FormularioFormRequest;
+ use Auth;
 
  use Hyn\Tenancy\Models\Hostname;
 use Hyn\Tenancy\Models\Website;
@@ -59,14 +61,14 @@ use Hyn\Tenancy\Repositories\WebsiteRepository;
 
 public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('web');
 
         $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
         if ($hostname){
             $fqdn = $hostname->fqdn;
             $this->tenantName = explode(".", $fqdn)[0];
         }
-
+      
     }
 
   private function total(){
@@ -853,10 +855,14 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 	 }
     }
 
-    public function estadistica(){
+  public function estadistica(){
  	 $user =  DB::table('ips')->where('ip', Input::get('ip'))->first();	
  	 if ($user){} else{
-     $pagina = new Estadistica;
+   if(!$this->tenantName){
+   $pagina = new Estadistica;
+   }else{
+   $pagina = new \DigitalsiteSaaS\Pagina\Tenant\Estadistica;
+   }
 	 $pagina->ip = Input::get('ip');
 	 $pagina->host = Input::get('host');
 	 $pagina->navegador = Input::get('navegador');

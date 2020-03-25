@@ -3,7 +3,7 @@
     @section('cabecera')
     @parent
      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
-    <script src="/vendors/ckeditor/ckeditor.js"></script>  
+  
     @stop
 
 @section('ContenidoSite-01')
@@ -145,25 +145,23 @@
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 
- <script type="text/javascript">  
-       CKEDITOR.replace( 'editor' );  
-    </script>  
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('button-image').addEventListener('click', (event) => {
+      event.preventDefault();
+      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
+    });
+  });
+  // set file link
+  function fmSetLink($url) {
+    document.getElementById('image_label').value = $url;
+  }
+</script>
 
-<script src="/vendors/ckeditor/config.js?t=HBDD" type="text/javascript"></script>
+<script src="https://cdn.ckeditor.com/4.11.2/full/ckeditor.js"></script>
 
-<script type="text/javascript">
-function openKCFinder(field) {
-    window.KCFinder = {
-        callBack: function(url) {
-            field.value = url;
-            window.KCFinder = null;
-        }
-    };
-    window.open('/vendors/kcfinder/browse.php?type=images&dir=files/public', 'kcfinder_textbox',
-        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-        'resizable=1, scrollbars=0, width=800, height=600'
-    );
-}
+<script>
+  CKEDITOR.replace( 'editor', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
 </script>
 
 

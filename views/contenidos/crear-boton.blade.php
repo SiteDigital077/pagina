@@ -3,7 +3,7 @@
     @section('cabecera')
     @parent
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
-    <script src="/vendors/ckeditor/ckeditor.js"></script>  
+
     @stop
 
 @section('ContenidoSite-01')
@@ -180,14 +180,6 @@
                           
 </div>
 
-
-
-
-  <script type="text/javascript">  
-       CKEDITOR.replace( 'editor' );  
-    </script>  
-
-<script src="/vendors/ckeditor/config.js?t=HBDD" type="text/javascript"></script>
 
 
 @stop

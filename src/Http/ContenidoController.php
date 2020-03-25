@@ -2,6 +2,7 @@
 
  namespace DigitalsiteSaaS\Pagina\Http;
  use DigitalsiteSaaS\Pagina\Page;
+ use DigitalsiteSaaS\Pagina\Inputweb;
  use DigitalsiteSaaS\Pagina\Registro;
  use DigitalsiteSaaS\Pagina\Maxi;
  use DigitalsiteSaaS\Pagina\Maxicar;
@@ -50,7 +51,6 @@
             $fqdn = $hostname->fqdn;
             $this->tenantName = explode(".", $fqdn)[0];
         }
-        dd($this->tenantName);
  }
 
  public function index(){
@@ -59,16 +59,28 @@
  }
 
  public function digitales($id){
+  if(!$this->tenantName){
   $master = Page::find($id);
   $contenido = Page::find($id)->Contents;
   $banners = Page::find($id)->Contents;
-
   $paginations = Page::find($id)->Blogs;
   $collapses = Page::find($id)->Contents;
   $carousel = Page::find($id)->Contents;
   $tabs = Page::find($id)->Contents;
   $shuffle = Page::find($id)->Contents;
   $formula = Page::find($id)->Contents;
+  }else{
+  $master = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id);
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id)->Contents;
+  $banners = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id)->Contents;
+  $paginations = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id)->Blogs;
+  $collapses = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id)->Contents;
+  $carousel = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id)->Contents;
+  $tabs = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id)->Contents;
+  $shuffle = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id)->Contents;
+  $formula = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id)->Contents;
+
+  }
   return view('pagina::contenidos')->with('contenido', $contenido)->with('galeria', $contenido)->with('master', $master)->with('paginations', $paginations)->with('collapses', $collapses)->with('tabs', $tabs)->with('shuffle', $shuffle)->with('banners', $banners)->with('formula', $formula)->with('carousel', $carousel);
  }
 
@@ -87,7 +99,11 @@
   $data = json_encode($notaweb, true);
   $vowels = array('"', '[', ']');
   $onlyconsonants = str_replace($vowels, '', $data);
+  if(!$this->tenantName){
   $contenido = new Content;
+  }else{
+  $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Content;
+  }
   $contenido->title = Input::get('titulo');
   $contenido->slugcon = Str::slug($contenido->title);
   $contenido->description = Input::get('descripcion');
@@ -117,7 +133,11 @@
  }
 
  public function crearinput(){
+  if(!$this->tenantName){
   $contenido = new Formu;
+  }else{
+  $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Formu;  
+  }
   $contenido->tipo = Input::get('tipo');
   $contenido->nombre = Input::get('nombre');
   $contenido->content_id = Input::get('content_id');
@@ -163,20 +183,36 @@
  }
 
  public function editar($id){
+  if(!$this->tenantName){
   $contenido = Content::find($id);
   $roles = DB::table('roles_comunidad')->get();
-  $notador = DB::table('contents')->where('id','=',$id)->get();
-   foreach ($notador as $notadores){
-    $ideman = $notadores->roles_id;
-    $id_str = explode(',', $ideman);
-    $rols = DB::table('roles_comunidad')->whereIn('id', $id_str)->get();
+  $notador = Content::where('id','=',$id)->get();
+  foreach ($notador as $notadores){
+  $ideman = $notadores->roles_id;
+  $id_str = explode(',', $ideman);
+  $rols = DB::table('roles_comunidad')->whereIn('id', $id_str)->get();
    }
-  $notas = DB::table('contents')
-   ->join('categoria_comunidades', 'contents.contents', '=', 'categoria_comunidades.id')
+  $notas = Content::join('categoria_comunidades', 'contents.contents', '=', 'categoria_comunidades.id')
    ->where('contents.id', '=' ,$id)->get();
   $posicion = DB::table('posicion')->pluck('posicion');
   $categoria = DB::table('categoria_comunidades')->where('webtipodev','=','1')->get();
   $categoriadina = DB::table('categoria_comunidades')->where('webtipodev','=','2')->get();
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
+  $roles = DB::table('roles_comunidad')->get();
+  $notador = \DigitalsiteSaaS\Pagina\Tenant\Content::where('id','=',$id)->get();
+  foreach ($notador as $notadores){
+  $ideman = $notadores->roles_id;
+  $id_str = explode(',', $ideman);
+  $rols = DB::table('roles_comunidad')->whereIn('id', $id_str)->get();
+   }
+  $notas = \DigitalsiteSaaS\Pagina\Tenant\Content::join('categoria_comunidades', 'contents.contents', '=', 'categoria_comunidades.id')
+   ->where('contents.id', '=' ,$id)->get();
+  $posicion = DB::table('posicion')->pluck('posicion');
+  $categoria = DB::table('categoria_comunidades')->where('webtipodev','=','1')->get();
+  $categoriadina = DB::table('categoria_comunidades')->where('webtipodev','=','2')->get();
+  }
+
   return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('categoria', $categoria)->with('categoriadina', $categoriadina)->with('notas', $notas)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols);
  }
 
@@ -191,7 +227,11 @@
   $vowels = array('"', '[', ']');
   $onlyconsonants = str_replace($vowels, '', $data);
   $input = Input::all();
+  if(!$this->tenantName){
   $contenido = Content::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
+  }
   $contenido->title = Input::get('titulo');
   $contenido->slugcon = Str::slug($contenido->title);
   $contenido->description = Input::get('descripcion');
@@ -238,7 +278,10 @@
 
  public function actualizardiagrama($id){
   $input = Input::all();
+  if(!$this->tenantName){
   $pagina = Diagrama::find($id);
+  }
+  $pagina = \DigitalsiteSaaS\Pagina\Tenant\Diagrama::find($id);
   $pagina->posicionSD01 = Input::get('posicionsd01');
   $pagina->posicionSD1 = Input::get('posicionsd1');
   $pagina->posicionSD2 = Input::get('posicionsd2');
@@ -288,13 +331,21 @@
  }
 
  public function eliminar($id){
+  if(!$this->tenantName){
   $contenido = Content::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
+  }
   $contenido->delete();
   return Redirect('gestion/contenidos/digitales/'.$contenido->page_id)->with('status', 'ok_delete');
  }
 
  public function crearblog(){
+  if(!$this->tenantName){
   $contenido = new Bloguero;
+  }else{
+  $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Bloguero; 
+  }
   $contenido->title = Input::get('titulo');
   $contenido->slug = Str::slug($contenido->title);
   $contenido->description = Input::get('descripcion');
@@ -313,7 +364,11 @@
  }
 
  public function creargaleria(){
+  if(!$this->tenantName){
   $contenido = new Maxi;
+  }else{
+  $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Maxi;
+  }
   $contenido->titlesd = Input::get('titulo');
   $contenido->imagesd = Input::get('FilePath');
   $contenido->descriptionsd = Input::get('descripcion');
@@ -341,7 +396,11 @@
  }
 
   public function crearcarouselimg(){
+  if(!$this->tenantName){
   $contenido = new Carousel;
+  }else{
+  $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Carousel;  
+  }
   $contenido->imagen_car = Input::get('FilePath');
   $contenido->titulo_car = Input::get('titulo');
   $contenido->descripcionweb_car = Input::get('descripcionweb');
@@ -365,7 +424,11 @@
  }
 
  public function crearcollapse(){
+  if(!$this->tenantName){
   $contenido = new Maxo;
+  }else{
+  $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Maxo;
+  }
   $contenido->titlecl = Input::get('titulo');
   $contenido->slug = Str::slug($contenido->titlecl);
   $contenido->descriptioncl = Input::get('descripcion');
@@ -392,7 +455,11 @@
  }
 
   public function crearempleo(){
+  if(!$this->tenantName){
   $contenido = new Empleo;
+  }else{
+  $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Empleo; 
+  }
   $contenido->titulo_emp = Input::get('titulo');
   $contenido->titulo_empslug = Str::slug($contenido->titulo_emp);
   $contenido->descripcion_emp = Input::get('descripcion');;
@@ -420,7 +487,11 @@
 	
  public function actualizarblog($id){
   $input = Input::all();
+  if(!$this->tenantName){
   $contenido = Bloguero::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::find($id);
+  }
   $contenido->title = Input::get('titulo');
   $contenido->description = Input::get('descripcion');
   $contenido->content = Input::get('contenido');
@@ -455,7 +526,11 @@
 
  public function actualizargaleria($id){
   $input = Input::all();
+  if(!$this->tenantName){
   $contenido = Maxi::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Maxi::find($id);
+  }
   $contenido->state = Input::get('estado');
   $contenido->titlesd = Input::get('titulo');
   $contenido->imagesd = Input::get('FilePath');
@@ -484,7 +559,11 @@
 
  public function actualizarcarouselimg($id){
   $input = Input::all();
+  if(!$this->tenantName){
   $contenido = Carousel::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Carousel::find($id);  
+  }
   $contenido->titulo_car = Input::get('titulo');
   $contenido->slug_car =  Str::slug($contenido->titulo_car);
   $contenido->descripcionweb_car = Input::get('descripcionweb');
@@ -502,7 +581,11 @@
  
  public function actualizarinput($id){
   $input = Input::all();
+  if(!$this->tenantName){
   $contenido = Formu::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Formu::find($id); 
+  }
   $contenido->tipo = Input::get('tipo');
   $contenido->nombre = Input::get('nombre');
   $contenido->respon = Input::get('responsive');
@@ -523,7 +606,11 @@
 
  public function actualizarcollapse($id){
   $input = Input::all();
+  if(!$this->tenantName){
   $contenido = Maxo::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Maxo::find($id);
+  }
   $contenido->titlecl = Input::get('titulo');
   $contenido->slug = Str::slug($contenido->titlecl);
   $contenido->state = Input::get('state');
@@ -550,7 +637,11 @@
 
   public function actualizarempleo($id){
   $input = Input::all();
+  if(!$this->tenantName){
   $contenido = Empleo::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Empleo::find($id); 
+  }
   $contenido->titulo_emp = Input::get('titulo');
   $contenido->titulo_empslug = Str::slug($contenido->titulo_emp);
   $contenido->descripcion_emp = Input::get('descripcion');;
@@ -579,7 +670,11 @@
  }  
 
  public function editargaleria($id){
+  if(!$this->tenantName){
   $contenido = Maxi::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Maxi::find($id); 
+  }
   return view('pagina::editar-galeria')->with('contenido', $contenido);
  }
 
@@ -589,12 +684,20 @@
  }
 
    public function editarcarouselimg($id){
-  $contenido = Carousel::find($id);
-  return view('pagina::editar-carouselimg')->with('contenido', $contenido);
+   if(!$this->tenantName){
+   $contenido = Carousel::find($id);
+   }else{
+   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Carousel::find($id);
+   }
+   return view('pagina::editar-carouselimg')->with('contenido', $contenido);
  }
 
  public function editarinput($id){
-  $contenido = DB::table('inputs')->where('id','=',$id)->get();
+  if(!$this->tenantName){
+  $contenido = Inputweb::where('id','=',$id)->get();
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Inputweb::where('id','=',$id)->get();
+  }
   return view('pagina::editar-input')->with('contenido', $contenido);
  }
 
@@ -604,7 +707,11 @@
  }
 
  public function editarcollapse($id){
+  if(!$this->tenantName){
   $contenido = Maxo::find($id);
+  }else{
+    $contenido = \DigitalsiteSaaS\Pagina\Tenant\Maxo::find($id);
+  }
   return view('pagina::editar-collapse')->with('contenido', $contenido);
  }
 
@@ -614,9 +721,13 @@
  }
 
 public function editarempleo($id){
-  $contenido = DB::table('empleos')->where('id','=', $id)->get();
+  if(!$this->tenantName){
+  $contenido = Empleo::where('id','=', $id)->get();
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Empleo::where('id','=', $id)->get();
+  }
   return view('pagina::editar-empleo')->with('contenido', $contenido);
- }
+  }
 
  public function editarshuffle($id){
   $contenido = Maxe::find($id);
@@ -624,12 +735,20 @@ public function editarempleo($id){
  }
 
  public function editarblog($id){
+  if(!$this->tenantName){
   $contenido = Bloguero::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::find($id);
+  }
   return View('pagina::editar-blog')->with('contenido', $contenido);
  }
 
  public function eliminarblog($id){
+  if(!$this->tenantName){
   $contenido = Bloguero::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::find($id);  
+  }
   $contenido->delete();
   return Redirect('gestion/contenidos/digitales/'.$contenido->page_id)->with('status', 'ok_delete');
  }
@@ -642,7 +761,11 @@ public function editarempleo($id){
  }
 
  public function eliminarinput($id){
+  if(!$this->tenantName){
   $contenido = Formu::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Formu::find($id);  
+  }
   $contenido->delete();
   return Redirect('gestion/contenidos/camposformulario/'.$contenido->content_id)->with('status', 'ok_delete');
  }
@@ -666,7 +789,11 @@ public function editarempleo($id){
  }
 
  public function eliminarcollapse($id){
+  if(!$this->tenantName){
   $contenido = Maxo::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Maxo::find($id);
+  }
   $contenido->delete();
   return Redirect('gestion/contenidos/subcollapse/'.$contenido->content_id)->with('status', 'ok_delete');
  }
@@ -678,13 +805,21 @@ public function editarempleo($id){
  }
 
   public function eliminarempleo($id){
+  if(!$this->tenantName){  
   $contenido = Empleo::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Empleo::find($id); 
+  }
   $contenido->delete();
   return Redirect('gestion/contenidos/subempleo/'.$contenido->content_id)->with('status', 'ok_delete');
  }
 
  public function eliminargaleria($id){
+  if(!$this->tenantName){
   $contenido = Maxi::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Maxi::find($id);
+  }
   $contenido->delete();
   return Redirect('gestion/contenidos/imagenesgaleria/'.$contenido->content_id)->with('status', 'ok_delete');
  }
@@ -696,7 +831,11 @@ public function editarempleo($id){
  }
 
  public function eliminarcarouselimg($id){
+  if(!$this->tenantName){
   $contenido = Carousel::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Carousel::find($id);
+  }
   $contenido->delete();
   return Redirect('gestion/contenidos/imagenescarousel/'.$contenido->content_id)->with('status', 'ok_delete');
  }
@@ -718,17 +857,29 @@ public function editarempleo($id){
  }
 
  public function imagenesgaleria($id){
+  if(!$this->tenantName){
   $contenido = Content::find($id)->Images;
   $contenida = Content::find($id)->Images;
   $conteni = Content::find($id);
+ }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id)->Images;
+  $contenida = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id)->Images;
+  $conteni = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
+ }
   return view('pagina::modulo-galeria')->with('contenido', $contenido)->with('contenida', $contenida)->with('amour', $contenido)->with('conteni', $conteni)->with('face', $contenido);
  }
 
 
 public function imagenescarousel($id){
+  if(!$this->tenantName){
   $contenido = Content::find($id)->Imagescar;
   $contenida = Content::find($id)->Imagescar;
   $conteni = Content::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id)->Imagescar;
+  $contenida = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id)->Imagescar;
+  $conteni = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
+  }
   return view('pagina::modulo-carousel')->with('contenido', $contenido)->with('contenida', $contenida)->with('amour', $contenido)->with('conteni', $conteni)->with('face', $contenido);
  }
 
@@ -753,14 +904,24 @@ public function imagenescarousel($id){
  }
 
  public function camposformulario($id){
+  if(!$this->tenantName){
   $contenido = Formu::where('content_id', '=', $id)->get();
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Formu::where('content_id', '=', $id)->get();
+  }
   return view('pagina::modulo-formulario')->with('contenido', $contenido)->with('amour', $contenido)->with('face', $contenido);
  }
 
  public function subcollapse($id){
+  if(!$this->tenantName){
   $contenido = Content::find($id)->Collapses;
   $contenida = Content::find($id)->Collapses;
   $conteni = Content::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id)->Collapses;
+  $contenida = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id)->Collapses;
+  $conteni = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
+  }
   return view('pagina::modulo-collapse')->with('contenido', $contenido)->with('contenida', $contenida)->with('amour', $contenido)->with('conteni', $conteni)->with('face', $contenido);
  }
 
@@ -779,9 +940,15 @@ public function imagenescarousel($id){
  }
 
   public function subempleo($id){
+  if(!$this->tenantName){
   $contenido = Content::find($id)->Empleo;
   $contenida = Content::find($id)->Empleo;
   $conteni = Content::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id)->Empleo;
+  $contenida = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id)->Empleo;
+  $conteni = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
+  }
   return view('pagina::modulo-empleo')->with('contenido', $contenido)->with('contenida', $contenida)->with('amour', $contenido)->with('conteni', $conteni)->with('face', $contenido);
  }
 
@@ -842,7 +1009,11 @@ public function imagenescarousel($id){
  }
 
  public function blog($id){
+  if(!$this->tenantName){
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
+  }else{
+  $posicion = \DigitalsiteSaaS\Pagina\Tenant\Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');  
+  }
   return view('pagina::contenidos/crear-blog')->with('posicion', $posicion);
  }
 

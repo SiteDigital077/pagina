@@ -8,7 +8,7 @@
   @parent
   {{ Html::style('EstilosSD/dist/css/jquery.minicolors.css') }}
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
-  <script src="/vendors/ckeditor/ckeditor.js"></script>  
+
   @stop
  @section('ContenidoSite-01')
 
@@ -1269,11 +1269,14 @@
                                             </div>
                                         </div>
 
-                                             <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                               <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                            <div class="form-group">
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
 
@@ -1905,10 +1908,13 @@
                                         </div>
 
                                          <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                                <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
                                          <div class="form-group">
@@ -2014,10 +2020,13 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                                <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
                                         <div class="form-group">
@@ -2174,12 +2183,17 @@
                                             </div>
                                         </div>
 
+
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                                <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
+
 
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">URL</label>
@@ -2519,10 +2533,13 @@
                                        
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                                <input type="text" name="FilePath" readonly="readonly" onclick="openKCFindera(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
                             
@@ -2637,10 +2654,13 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                                <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
                                         <div class="form-group">
@@ -2766,11 +2786,14 @@
                                             </div>
                                         </div>
 
-                                             <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                              <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                         <div class="form-group">
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
                                          <div class="form-group">
@@ -2986,11 +3009,14 @@
                                             </div>
                                         </div>
 
-                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                             <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                        <div class="form-group">
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
                                         <div class="form-group">
@@ -3118,11 +3144,14 @@
                                             </div>
                                         </div>
 
-                                          <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                                <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                        <div class="form-group">
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
                                         <div class="form-group">
@@ -3715,11 +3744,14 @@
                                             </div>
                                         </div>
 
-                                            <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                              <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                         <div class="form-group">
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
                                         <div class="form-group">
@@ -3823,10 +3855,14 @@
                                         </div>
 
                                               <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                              <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="Click para seleccionar imagen" class="form-control" />
-                                            </div>
+                                         <div class="form-group">
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
 
@@ -3923,11 +3959,14 @@
                                             </div>
                                         </div>
 
-                                             <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                              <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                            <div class="form-group">
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
                                          <div class="form-group">
@@ -4081,10 +4120,13 @@
 
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                                <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" placeholder="Click para seleccionar imagen" class="form-control" />
-                                            </div>
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
 
@@ -4371,11 +4413,14 @@
                                             </div>
                                         </div>
 
-                                           <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                               <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                          <div class="form-group">
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
 
@@ -4520,10 +4565,13 @@
                                         </div>
 
                                            <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                               <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
 
@@ -4702,10 +4750,13 @@
                                         </div>
 
                                           <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                              <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
                                             <div class="form-group">
@@ -4873,10 +4924,13 @@
                                         </div>
 
                                            <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                               <input type="text" name="FilePath" readonly="readonly" onclick="openKCFinder(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
 
@@ -5127,11 +5181,14 @@
                                             </div>
                                         </div> 
 
-                                            <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
-                                            <div class="col-md-9">
-                                               <input type="text" name="FilePath" readonly="readonly" onclick="openKCFindera(this)" value="{{$contenido->image}}" class="form-control" />
-                                            </div>
+                                           <div class="form-group">
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image1" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
                                         </div>
 
                                          <div class="form-group">
@@ -6695,58 +6752,24 @@ $(".chosen-select").chosen();
 </script>
 
 
-<script type="text/javascript">  
-       CKEDITOR.replace( 'editor' );  
-    </script>  
-
-<script src="/vendors/ckeditor/config.js?t=HBDD" type="text/javascript"></script>
-
-<script type="text/javascript">
-function openKCFinder(field) {
-    window.KCFinder = {
-        callBack: function(url) {
-            field.value = url;
-            window.KCFinder = null;
-        }
-    };
-    window.open('/vendors/kcfinder/browse.php?type=images&dir=files/public', 'kcfinder_textbox',
-        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-        'resizable=1, scrollbars=0, width=800, height=600'
-    );
-}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('button-image').addEventListener('click', (event) => {
+      event.preventDefault();
+      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
+    });
+  });
+  // set file link
+  function fmSetLink($url) {
+    document.getElementById('image_label').value = $url;
+  }
 </script>
 
-<script type="text/javascript">
-function openKCFindera(field) {
-    window.KCFinder = {
-        callBack: function(url) {
-            field.value = url;
-            window.KCFinder = null;
-        }
-    };
-    window.open('/vendors/kcfinder/browse.php?type=files&dir=files/public', 'kcfinder_textbox',
-        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-        'resizable=1, scrollbars=0, width=800, height=600'
-    );
-}
+<script src="https://cdn.ckeditor.com/4.11.2/full/ckeditor.js"></script>
+
+<script>
+  CKEDITOR.replace( 'editor', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
 </script>
-
-
-<script type="text/javascript">
-function openKCFinder(field) {
-    window.KCFinder = {
-        callBack: function(url) {
-            field.value = url;
-            window.KCFinder = null;
-        }
-    };
-    window.open('/vendors/kcfinder/browse.php?type=images&dir=files/public', 'kcfinder_textbox',
-        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-        'resizable=1, scrollbars=0, width=800, height=600'
-    );
-}
-</script>
-
 
 
 

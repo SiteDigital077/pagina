@@ -23,6 +23,18 @@ use Excel;
 class ConfiguracionController extends Controller
 {
 
+    protected $tenantName = null;
+
+ public function __construct(){
+  $this->middleware('auth');
+
+  $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
+        if ($hostname){
+            $fqdn = $hostname->fqdn;
+            $this->tenantName = explode(".", $fqdn)[0];
+        }
+ }
+
     
     /**
      * Display a listing of the resource.
@@ -30,10 +42,11 @@ class ConfiguracionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+     $tenantName = $this->tenantName;
      $templates = DB::table('templa')
      ->join('users','users.id','=','templa.user_id')
      ->get();
-     return view('pagina::configuracion.ver-templates')->with('templates', $templates);
+     return view('pagina::configuracion.ver-templates')->with('templates', $templates)->with('tenantName', $tenantName);
     }
 
     /**
@@ -183,29 +196,104 @@ class ConfiguracionController extends Controller
     }
 
     public function venta(){
-     $venta = DB::table('venta')->where('id', '=', '1')->get();
+     if(!$this->tenantName){  
+     $venta = Venta::where('id', '=', '1')->get();
+     }else{
+     $venta = \DigitalsiteSaaS\Pagina\Tenant\Venta::where('id', '=', '1')->get();   
+     }
      return View('pagina::configuracion.venta')->with('venta', $venta);
     }
 
     public function crearlogo(){
      $contenido = Input::all();
+     if(!$this->tenantName){
      $contenido = Template::find(1);
+     }else{
+     $contenido = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1); 
+     }
      $contenido->logo = Input::get('FilePath');
      $contenido->save();
      return Redirect('gestion/logo-head')->with('status', 'ok_update');
     }
 
+    public function verredes(){
+    if(!$this->tenantName){
+     $template = Template::all();
+     $plantilla = Template::all();
+    }else{
+     $template = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+     $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all(); 
+    }
+     return View('pagina::configuracion.redes')->with('plantilla', $plantilla)->with('template', $template);
+    }
+
+    public function verubicacion(){
+    $pais = DigitalsiteSaaS\Pagina\Paiscon::all();
+    return View('pagina::configuracion.paises')->with('pais',$pais);
+    }
+
+    public function creardepartamentos($id){
+     return View('pagina::configuracion.crear-departamento');
+    }
+
+    public function creamunicipio($id){
+    return View('pagina::configuracion.crear-municipio');
+    }
+
+    public function configcorreo(){
+    if(!$this->tenantName){
+    $datos = Date::where('id','=',1)->get();
+    }else{
+    $datos = \DigitalsiteSaaS\Pagina\Tenant\Date::where('id','=',1)->get();  
+    }
+    return View('pagina::configuracion.correo')->with('datos', $datos);
+    }
+
+    public function logohead(){
+    if(!$this->tenantName){ 
+    $plantilla = Template::all();
+    }else{
+    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();   
+    }
+    return View('pagina::configuracion.logo-head')->with('plantilla', $plantilla);
+    }
+
+
+
+    public function logofooter(){
+    if(!$this->tenantName){ 
+    $plantilla = Template::all();
+    }else{
+    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();   
+    }
+    return View('pagina::configuracion.logo-footer')->with('plantilla', $plantilla);
+    }
+
+
+
+
     public function crearlogofooter(){
      $contenido = Input::all();
+     if(!$this->tenantName){ 
      $contenido = Template::find(1);
+     }else{
+     $contenido = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1);   
+     }
      $contenido->logofooter = Input::get('FilePath');        
      $contenido->save();
      return Redirect('gestion/logo-footer')->with('status', 'ok_update');
     }
 
+
+
+
     public function actualizarservicio(){
      $input = Input::all();
+     if(!$this->tenantName){ 
      $contenido = Date::find(1);
+     }else{
+     $contenido = \DigitalsiteSaaS\Pagina\Tenant\Date::find(1);  
+     }
      $contenido->correo = Input::get('correo');
      $contenido->sujeto = Input::get('sujeto');
      $contenido->mensaje = Input::get('mensaje');
@@ -215,7 +303,11 @@ class ConfiguracionController extends Controller
 
     public function actualizarventa(){
      $input = Input::all();
+     if(!$this->tenantName){ 
      $contenido = Venta::find(1);
+     }else{
+     $contenido = \DigitalsiteSaaS\Pagina\Tenant\Venta::find(1);   
+     }
      $contenido->pagina = Input::get('pagina');
      $contenido->estadistica = Input::get('estadistica');
      $contenido->calendario = Input::get('calendario');
@@ -229,7 +321,11 @@ class ConfiguracionController extends Controller
 
     public function updatered(){
      $input = Input::all();
+     if(!$this->tenantName){
      $contenido = Template::find(1);
+     }else{
+     $contenido = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
+     }
      $contenido->facebook = Input::get('facebook');
      $contenido->twitter = Input::get('twitter');
      $contenido->youtube = Input::get('youtube');

@@ -23,7 +23,7 @@ class PaginaServiceProvider extends ServiceProvider
 
 	
 
-		require __DIR__ . '/Http/helpers.php';
+		require_once __DIR__ . '/Http/helpers.php';
 		require __DIR__ . '/Http/routes.php';
 
 

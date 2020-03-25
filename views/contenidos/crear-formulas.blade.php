@@ -147,13 +147,12 @@
 </div>
 
 
-  <script type="text/javascript">  
-       CKEDITOR.replace( 'editor' );  
-    </script>  
-
-<script src="/vendors/ckeditor/config.js?t=HBDD" type="text/javascript"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.11.2/full/ckeditor.js"></script>
 
+<script>
+  CKEDITOR.replace( 'editor', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
+</script>
 
 
 @stop
