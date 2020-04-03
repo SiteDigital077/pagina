@@ -22,6 +22,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use App\User;
 use Input;
+use File;
 use Redirect;
 
 class UsersaasController extends Controller
@@ -64,6 +65,8 @@ use RegistersUsers;
        
         $website = new Website;
         $website->uuid = Str::random(10);
+        $path = public_path() . '/saas/'.$website->uuid;
+        File::makeDirectory($path, 0777, true);
         app(WebsiteRepository::class)->create($website);
         $hostname = new Hostname();
         $hostname->fqdn = $fqdn;
