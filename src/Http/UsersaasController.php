@@ -58,6 +58,8 @@ use RegistersUsers;
            'password' => Hash::make(Input::get('password')),
         ]);
 
+       	
+
         $fqdn = sprintf('%s.%s', Input::get('fqdn'), env('APP_DOMAIN'));
        
         $website = new Website;
@@ -67,6 +69,12 @@ use RegistersUsers;
         $hostname->fqdn = $fqdn;
         $hostname = app(HostnameRepository::class)->create($hostname);
         app(HostnameRepository::class)->attach($hostname, $website);
+  
+
+        $update = User::where('id', $metrica->id)
+            ->update(['saas_id' => $hostname->id,]);
+
+
         return Redirect('/gestion/registrosaas')->with('status', 'ok_create');
     }
 

@@ -511,8 +511,8 @@ $categories = Pais::all();
       ->orderBy('nivel','ASC')
       ->get();
 
-   $banners = Page::find($post->id)->Banners()->orderByRaw("RAND()")->take(1)->get();
-  $terminos = \DigitalsiteSaaS\Pagina\Template::all();
+   $banners = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Banners()->orderByRaw("RAND()")->take(1)->get();
+  $terminos = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
 $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $bannersback = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Banners()->orderByRaw("RAND()")->take(1)->get();
    $contenidona = \DigitalsiteSaaS\Pagina\Tenant\Maxo::join('contents','contents.id','=','collapse.content_id')
@@ -558,8 +558,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      $autorfil = session()->get('autor');
      $subcategoriafil = session()->get('subcategoria');
      if(DB::table('venta')->where('id', '1')->value('comunidad') == 1)
-   $products = DB::table('products')
-      ->whereBetween('precio', array($min_price, $max_price))
+   $products = \DigitalsiteSaaS\Pagina\Tenant\Product::whereBetween('precio', array($min_price, $max_price))
       ->where('category_id', 'like', '%' . $clientes . '%')
       ->where('area_id', 'like', '%' . $areafil . '%')
       ->where('parametro_id', 'like', '%' . $parametrofil . '%')
@@ -570,8 +569,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       ->orderByRaw("RAND()")
       ->paginate(12);
       else
-         $products = DB::table('products')
-      ->whereBetween('precio', array($min_price, $max_price))
+         $products =  \DigitalsiteSaaS\Pagina\Tenant\Product::whereBetween('precio', array($min_price, $max_price))
       ->where('category_id', 'like', '%' . $clientes . '%')
       //->where('area_id', 'like', '%' . $areafil . '%')
       //->where('parametro_id', 'like', '%' . $parametrofil . '%')
