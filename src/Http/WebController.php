@@ -27,6 +27,7 @@
  use DigitalsiteSaaS\Pagina\Pais;
  use DigitalsiteSaaS\Pagina\Content;
  use DigitalsiteSaaS\Pagina\Ips;
+ use DigitalsiteSaaS\Pagina\Diagrama;
  use Mail;
  use DB;
  use Hash;
@@ -104,8 +105,8 @@ public function __construct()
      $plantilla = Template::all();
      $plantillaes = Template::all();
      $paginations = Page::find($user->id)->Blogs()->paginate(9);
-     $diagramas = DB::table('diagramas')->where('id', "=", $user->id)->get();
-     $temawebs = DB::table('template')->where('id','=','1')->get();
+     $diagramas = Diagrama::where('id', "=", $user->id)->get();
+     $temawebs = Template::where('id','=','1')->get();
      foreach($temawebs as $temaweb){
       $contenido = Content::where('page_id',"=",$user->id)
       /*->where('template',"=",$temaweb->template)*/
@@ -208,8 +209,8 @@ public function __construct()
      $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
      $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
      $paginations = \DigitalsiteSaaS\Pagina\Tenant\Page::find($user->id)->Blogs()->paginate(9);
-     $diagramas = DB::table('diagramas')->where('id', "=", $user->id)->get();
-     $temawebs = DB::table('template')->where('id','=','1')->get();
+     $diagramas = \DigitalsiteSaaS\Pagina\Tenant\Diagrama::where('id', "=", $user->id)->get();
+     $temawebs = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id','=','1')->get();
      foreach($temawebs as $temaweb){
       $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::where('page_id',"=",$user->id)
       /*->where('template',"=",$temaweb->template)*/
@@ -335,7 +336,7 @@ public function __construct()
 	 $comunidadtres = Nota::join('area_comunidades','area_comunidades.id','=','notas_comunidades.area_id')
 	  ->join('contents','contents.contents','=','notas_comunidades.nota_comunidad_id')
 	  ->inRandomOrder()->get();
-	 $diagramas = DB::table('diagramas')->where('id',"=",$post->id)->get();
+	 $diagramas = Diagrama::where('id',"=",$post->id)->get();
 	 $fichones = Page::find($post->id)->Fichas()->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'fichones');
 	 
    $contenido = Content::where('page_id',"=",$post->id)
@@ -482,9 +483,9 @@ $categories = Pais::all();
    $post = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->first();
    $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->get();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
-   $masa = DB::table('pages')->count('page_id');
+   $masa = \DigitalsiteSaaS\Pagina\Tenant\Page::count('page_id');
    $cama = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id);
-   $maria = Nota::inRandomOrder()->take(4)->get();
+   $maria = \DigitalsiteSaaS\Pagina\Tenant\Nota::inRandomOrder()->take(4)->get();
    $filtros = DB::table('categoriessd')->get();
    $shuffle = DB::table('shuffleweb')->get();
    $shuffleimg = DB::table('shuffle')->get();
@@ -503,7 +504,7 @@ $categories = Pais::all();
    $comunidadtres = \DigitalsiteSaaS\Pagina\Tenant\Nota::join('area_comunidades','area_comunidades.id','=','notas_comunidades.area_id')
     ->join('contents','contents.contents','=','notas_comunidades.nota_comunidad_id')
     ->inRandomOrder()->get();
-   $diagramas = DB::table('diagramas')->where('id',"=",$post->id)->get();
+   $diagramas = \DigitalsiteSaaS\Pagina\Tenant\Diagrama::where('id',"=",$post->id)->get();
    $fichones = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Fichas()->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'fichones');
    
    $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::where('page_id',"=",$post->id)
