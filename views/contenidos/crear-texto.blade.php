@@ -146,4 +146,11 @@
   }
 </script>
 
+
+<script src="https://cdn.ckeditor.com/4.11.2/full/ckeditor.js"></script>
+
+<script>
+  CKEDITOR.replace( 'editor', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
+</script>
+
 @stop

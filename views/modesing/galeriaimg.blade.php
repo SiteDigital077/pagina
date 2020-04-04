@@ -44,7 +44,7 @@
         <img src="{{$contenido->imagesd}}" alt="First slide"  class="img-responsive">
       <div class="container">
         <div class="carousel-caption">
-                <hgroup class="zoomInDown animated pull-right">
+                <hgroup class="zoomInDown animated center-block">
                      <h1 class="fadeInLeft animated">{!!$contenido->titlesd!!}</h1>
           <h4 class="slideInRight animated">{!!$contenido->contentsd!!}</h4>
           @if($contenido->urlsd == '')

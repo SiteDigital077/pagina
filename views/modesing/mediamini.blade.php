@@ -3,14 +3,14 @@
  <div class="{{$contenido->imageal}}">
  	 @if($contenido->url == NULL) 
    @if($contenido->contents == NULL)
-   <img class="media-object img-responsive" src="{{$contenido->image}}" alt="{{$contenido->title}}" title="{{$contenido->title}}">
+   <img class="media-object img-responsive" src="{{$contenido->image}}" alt="{{$contenido->title}}" title="{{$contenido->title}}" style="padding:10px">
     @else
   <i class="{{$contenido->contents}}" aria-hidden="true"></i>
   @endif
   @else
   <a href="{{$contenido->url}}">
      @if($contenido->contents == NULL)
-   <img class="media-object img-responsive" src="{{$contenido->image}}" alt="{{$contenido->title}}" title="{{$contenido->title}}">
+   <img class="media-object img-responsive" src="{{$contenido->image}}" alt="{{$contenido->title}}" title="{{$contenido->title}}" style="padding:10px">
    @else
   <i class="{{$contenido->contents}}" aria-hidden="true"></i>
   @endif
