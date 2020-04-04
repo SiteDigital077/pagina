@@ -211,7 +211,7 @@ public function __construct()
      $diagramas = DB::table('diagramas')->where('id', "=", $user->id)->get();
      $temawebs = DB::table('template')->where('id','=','1')->get();
      foreach($temawebs as $temaweb){
-      $contenido = Content::where('page_id',"=",$user->id)
+      $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::where('page_id',"=",$user->id)
       /*->where('template',"=",$temaweb->template)*/
       ->orderBy('nivel','ASC')
       ->get();

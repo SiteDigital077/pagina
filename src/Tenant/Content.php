@@ -17,7 +17,7 @@ class Content extends Model
 
 	public function pages(){
 
-		return $this->belongsTo('DigitalsiteSaaS\Pagina\Page');
+		return $this->belongsTo('DigitalsiteSaaS\Pagina\Tenant\Page');
 	}
 
 	public function subpages(){
@@ -26,37 +26,37 @@ class Content extends Model
 	}
 
 		public function images(){
-	return $this->hasMany('DigitalsiteSaaS\Pagina\Maxi');
+	return $this->hasMany('DigitalsiteSaaS\Pagina\Tenant\Maxi');
 
 	}
 
 		public function imagescar(){
-	return $this->hasMany('DigitalsiteSaaS\Pagina\Carousel');
+	return $this->hasMany('DigitalsiteSaaS\Pagina\Tenant\Carousel');
 
 	}
 
 		public function collapses(){
-	return $this->hasMany('DigitalsiteSaaS\Pagina\Maxo');
+	return $this->hasMany('DigitalsiteSaaS\Pagina\Tenant\Maxo');
 
 	}
 
 			public function tabs(){
-	return $this->hasMany('DigitalsiteSaaS\Pagina\Maxu');
+	return $this->hasMany('DigitalsiteSaaS\Pagina\Tenant\Maxu');
 
 	}
 
 			public function empleo(){
-	return $this->hasMany('DigitalsiteSaaS\Pagina\Empleo');
+	return $this->hasMany('DigitalsiteSaaS\Pagina\Tenant\Empleo');
 
 	}
 
 			public function shuffles(){
-	return $this->hasMany('DigitalsiteSaaS\Pagina\Maxe');
+	return $this->hasMany('DigitalsiteSaaS\Pagina\Tenant\Maxe');
 
 	}
 
 			public function formus(){
-	return $this->hasMany('DigitalsiteSaaS\Pagina\Formu');
+	return $this->hasMany('DigitalsiteSaaS\Pagina\Tenant\Formu');
 
 	}
 
