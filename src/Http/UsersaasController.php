@@ -82,7 +82,12 @@ use RegistersUsers;
 
          $updatedate = DB::table('tenancy.hostnames')->where('id', $hostname->id)
             ->update(['presentacion' => $periodo]);
-    
+        
+        $pass = Hash::make($password);
+
+         $mihost =  ($website->uuid.'.');
+         $website = DB::table($mihost.'users')->where('id', '1')
+         ->update(['password' => $pass]);
 
         return Redirect('/gestion/registrosaas')->with('status', 'ok_create');
     }
