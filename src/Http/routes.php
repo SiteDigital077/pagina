@@ -1,8 +1,13 @@
 <?php
 
 
+Route::group(['middleware' => ['auths','saas']], function (){
+
+ Route::get('saas/sitesaas', 'DigitalsiteSaaS\Pagina\Http\PaginaController@sitesaas');
+});
 
 Route::group(['middleware' => ['auths','administrador']], function (){
+
  Route::resource('gestion/paginas', 'DigitalsiteSaaS\Pagina\Http\PaginaController');
  Route::resource('gestion/paginas/crear', 'DigitalsiteSaaS\Pagina\Http\PaginaController@show');
  Route::post('gestion/paginas/crearpagina', 'DigitalsiteSaaS\Pagina\Http\PaginaController@crearpagina');
@@ -20,6 +25,12 @@ Route::get('gestion/contenidos/diagrama/update/{id}', 'DigitalsiteSaaS\Pagina\Ht
 
 Route::group(['middleware' => ['auths','administrador']], function (){
  Route::resource('/gestor/ver-templates', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController');
+ Route::get('/gestor/planes-saas', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@planessaas');
+  Route::get('/gestor/crear-plansaas', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@crearplanessaas');
+   Route::post('/suscripcion/crear-plan', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@crearplan');
+   Route::get('/suscripcion/eliminar-plan/{id}', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@eliminarplan');
+   Route::get('/suscripcion/ver-clientes', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@listaclientes');
+    Route::get('/suscripcion/ver-suscripciones', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@listasuscripciones');
  Route::post('/gestor/zip', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@template');
  Route::get('/gestor/subir-template', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@templatevista');
  Route::resource('gestor/templates/eliminartemplate', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@destroy');
@@ -447,7 +458,11 @@ Route::get('/ubicacion/ajax-subcatweb',function(){
         return Response::json($subcategories);
 });
 
+
+
+
 Route::group(['middleware' => ['web']], function (){
+ Route::post('/suscripcion/suscripcion', 'DigitalsiteSaaS\Pagina\Http\UsersaasController@suscripcion');
  Route::get('ingresar', 'DigitalsiteSaaS\Pagina\Http\WebController@ingresar');
  Route::resource('ingreso-comunidad', 'DigitalsiteSaaS\Pagina\Http\WebController@ingresarcomunidad');
  Route::post('mensajes/crearmensajeinput', 'DigitalsiteSaaS\Pagina\Http\WebController@crearmensajeinput');
@@ -456,6 +471,9 @@ Route::group(['middleware' => ['web']], function (){
  Route::get('{{id}}', 'DigitalsiteSaaS\Pagina\Http\WebController@subpaginas');
  Route::get('blog/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@blog');
  Route::get('gestiones/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@gestion');
+
+
+  Route::get('suscripcion/servicio', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@formulario');
  
  Route::get('/oferta/{id}', function($id){
   $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
@@ -469,3 +487,7 @@ Route::group(['middleware' => ['web']], function (){
  return View::make('pagina::vista-empleos')->with('ofertas', $ofertas)->with('plantilla', $plantilla)->with('menu', $menu)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('blogfoot', $blogfoot);
  });
 });
+
+
+
+

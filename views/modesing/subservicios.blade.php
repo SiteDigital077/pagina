@@ -8,8 +8,9 @@
 		@else
 		 <i class="{{$contenido->image}}" aria-hidden="true"></i>
 		@endif
-		<div class="caption">
-			  <p class="counter-value" style="text-align: center;" data-count="{{$contenido->imageal}}">0</p>
+		<div class="counter">
+			   <span class="count percent" style="text-align: center" data-count="{{$contenido->imageal}}">0</span>
+
 			  <h2>{{$contenido->title}}</h2>
 		</div>
 	</div>

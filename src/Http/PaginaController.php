@@ -19,6 +19,7 @@
  use Hyn\Tenancy\Models\Website;
  use Hyn\Tenancy\Repositories\HostnameRepository;
  use Hyn\Tenancy\Repositories\WebsiteRepository;
+ use Carbon\Carbon;
 
  class PaginaController extends Controller{
 
@@ -52,6 +53,30 @@ protected $tenantName = null;
  
 }
 
+
+ public function sitesaas(){
+  $number = Auth::user()->id;
+
+ 
+  $infosaas = DB::table('tenancy.hostnames')
+  ->join('tenancy.websites','websites.id','=','hostnames.website_id')
+  ->where('hostnames.id', Auth::user()->saas_id)
+  ->get();
+    foreach ($infosaas as $infosaasweb) {
+     $mihost =  ($infosaasweb->uuid.'.');
+   $website = DB::table($mihost.'users')->get();
+
+ $dias = date('Y-m-d');
+ if($dias <=  $infosaasweb->presentacion){
+  $resp = 'true';
+ }else{
+  $resp = 'false';
+ }
+
+  }
+
+  return View('pagina::saas.dashboard')->with('number', $number)->with('infosaas', $infosaas)->with('website', $website)->with('resp', $resp);
+} 
 
 
  public function show(){

@@ -19,6 +19,7 @@ use DigitalsiteSaaS\Pagina\Departamentocon;
 use DigitalsiteSaaS\Pagina\Pais;
 use DigitalsiteSaaS\Pagina\Municipio;
 use Excel;
+use GuzzleHttp\Client;
 
 class ConfiguracionController extends Controller
 {
@@ -175,6 +176,9 @@ class ConfiguracionController extends Controller
     public function templatevista(){
      return view('pagina::configuracion.crear-template');
     }
+
+   
+
 
     public function crearconfiguracion(){
      $configuracion = new Color;
