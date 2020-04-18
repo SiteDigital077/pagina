@@ -7,103 +7,108 @@
 
  @section('ContenidoSite-01')
 <div class="container">
-	
-
+	 
  	<div class="col-lg-8">
+ 		<?php $status=Session::get('status'); ?>
+  @if($status=='ko_datos')
+   <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Los datos de tarjeta ingresados no son validos verifique e intente de nuevo</strong>
+   </div>
+  @endif
 		{{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('suscripcion/suscripcion'))) }}
 	
-			<legend>Form title</legend>
-		
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background: #f4f4f4">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 25px">			
+
 			<div class="form-group">
+				<h5 for="" class="text-primary">Informacion contable</h5>
+				<hr>		
+			</div>
+		
+			<div class="form-group col-lg-12">
 				<label for="">Card number</label>
-				<input type="text" name="card_number" class="form-control">
+				<input type="text" name="card_number" class="form-control" value="{{ old('card_number') }}" placeholder="00000000000000000">
 			</div>
-			<div class="form-group">
+			<div class="form-group col-lg-5">
 				<label for="">Año expiración</label>
-				<input type="text" name="exp_year" class="form-control">
+				<input type="text" name="exp_year" class="form-control" value="{{ old('exp_year') }}" placeholder="0000">
 			</div>
-			<div class="form-group">
+			<div class="form-group col-lg-4">
 				<label for="">Mes de expiración</label>
-				<input type="text" name="exp_month" class="form-control">
+				<input type="text" name="exp_month" class="form-control" value="{{ old('exp_month') }}" placeholder="00">
 			</div>
-			<div class="form-group">
+			<div class="form-group col-lg-4">
 				<label for="">cvc</label>
-				<input type="text" name="cvc" class="form-control">
+				<input type="text" name="cvc" class="form-control" value="{{ old('cvc') }}" placeholder="000">
 			</div>
+			<div class="form-group col-lg-12">
+				<h5 for="" class="text-primary">Informacion personal</h5>
+				<hr>		
+			</div>
+			
 		
-			<div class="form-group">
+			<div class="form-group col-lg-12">
 				<label for="">Plan selecionado</label>
 				<input type="text" name="id_plan" class="form-control" value="{{Session::get('suscripcion')}}">
 			</div>
 			
-			<div class="form-group">
+			<div class="form-group col-lg-12">
 				<label for="">Nombre</label>
-				<input type="text" name="name" id="name" class="form-control">
+				<input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" placeholder="Nombre">
 			</div>
 
-			<div class="form-group">
+			<div class="form-group col-lg-12">
 				<label for="">Email</label>
-				<input type="email" name="email" class="form-control">
+				<input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email">
 			</div>
 
-			<div class="form-group">
+			<div class="form-group col-lg-12">
 				<label for="">Nombre empresa o Hostanme</label>
-				<input type="text" name="fqdn" class="form-control">
+				<input type="text" name="fqdn" class="form-control" value="{{ old('fqdn') }}" placeholder="Nombre empresa o Hostanme">
 			</div>
 
-			<div class="form-group">
+			<div class="form-group col-lg-12">
 				<label for="">Teléfono</label>
-				<input type="text" name="phone" class="form-control">
+				<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" placeholder="Teléfono">
 			</div>
-			<div class="form-group">
+			<div class="form-group col-lg-12">
 				<label for="">Contraseña</label>
-				<input type="password" name="password" class="form-control">
+				<input type="password" name="password" class="form-control" placeholder="Contraseña">
 			</div>
 
-			<div class="form-group">
+			<div class="form-group col-lg-12">
 				<label for="">Confirmar contraeña</label>
-				<input type="password" name="password_confirmation" class="form-control">
+				<input type="password" name="password_confirmation" class="form-control" placeholder="Repetir contraseña">
 			</div>
+			<button type="submit" class="btn btn-primary btn-lg">Registrar cuenta</button>
+	</div>
 	
-		
-			<button type="submit" class="btn btn-primary">Submit</button>
+	
 		{{ Form::close() }}
 	</div>
+	</div>
 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-		
-		 <div class="box">
-    <div class="container">
-     	<div class="row">
 
-			 @foreach($xmls['data'] as $data)
-			 @if($data['id_plan'] == Session::get('suscripcion'))
-			    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-               
-					<div class="box-part text-center">
-                        
-                        <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
-                        
-						<div class="title">
-							<h4>{{$data['name']}}</h4>
-						</div>
-                        
-						<div class="text">
-							<span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-						</div>
-                        
-						<form action="/suscripcioneli/session" method="post">
-                        	<button type="submit" class="btn btn-danger btn-md">Cancelar suscripción</button>
-                          </form>
-                        
-					 </div>
-				</div>	
-				@else
+@foreach($xmls['data'] as $data)
+			 @if($data['id_plan'] == Session::get('suscripcion'))	
+<div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading text-center"><h3 class="text-center">{{$data['name']}}</h3></div>
+  <div class="panel-body">
+	<h3 class="text-center"> ${{number_format($data['amount'],0,",",".")}}/Mensual</h3>
+	<h3 class="text-center text-primary"></h3>
+	<form action="/suscripcioneli/session" method="post">
+    <button type="submit" class="btn btn-danger btn-md center-block">Cancelar suscripción</button>
+    </form>
+  </div>
+
+ 
+</div>
+@else
 
 			@endif 	
 			 @endforeach
-		</div>		
-    </div>
-</div>
 
 	</div>
 </div>

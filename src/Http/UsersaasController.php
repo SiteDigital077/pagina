@@ -10,7 +10,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-
+use DigitalsiteSaaS\Carrito\Transaccion;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -50,6 +50,27 @@ use RegistersUsers;
         return view('auth.register')->with('tenantName', $this->tenantName);
     }
 
+    private function subtotal(){
+   $cart = session()->get('cart');
+   $subtotal = 0;
+   if($cart == null){}
+   else{
+  foreach($cart as $item){
+   $subtotal += $item->preciodescfin * $item->quantity;
+   }}
+   return $subtotal;
+  }
+
+  private function total(){
+   $cart = session()->get('cart');
+   $total = 0;
+   if($cart == null){}
+   else{
+  foreach ($cart as $item) {
+   $total += $item->precioinivafin * $item->quantity;
+   }}
+   return $total;
+  }
 
 
     protected function create($name, $email, $empresa, $password, $periodo)
@@ -136,6 +157,10 @@ $password = $request->input('password');
  ]);
  $xmls = json_decode($responsed->getBody()->getContents(), true);
 
+if($xmls['data']['status'] == 'error'){
+
+return Redirect('/suscripcion/servicio')->with('status', 'ko_datos')->withInput();
+}
  $token_id = $xmls['id'];
 
  $responsedcus = $client->post('https://api.secure.payco.co/payment/v1/customer/create', [
@@ -172,26 +197,64 @@ $customer_id = $xmlscus['data']['customerId'];
   'token_card' => $token_id,
   'doc_type' => 'CC',
   'doc_number' => '1014184224',
-  'url_confirmation' => 'http://sitedesarrollo.local/',
+  'url_confirmation' => 'http://sitedesarrollo.local/respuesta/respuesta',
   'method_confirmation' => 'POST',
   ],
  ]);
 $xmlstok = json_decode($responsedtok->getBody()->getContents(), true);
+
+ $responsecob = $client->post('https://api.secure.payco.co/payment/v1/charge/subscription/create', [
+  'headers' => [
+  'Authorization' =>  $tok,
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Type' => 'sdk-jwt',
+  ],
+  'json' => [
+  'id_plan' => $plan,
+  'customer' => $customer_id,
+  'token_card' => $token_id,
+  'doc_type' => 'CC',
+  'doc_number' => '1014184224',
+  'url_response' => 'https:/secure.payco.co/restpagos/testRest/endpagopse.php',
+  'url_confirmation' => 'http://sitedesarrollo.local/respuesta/respuesta',
+  'method_confirmation' => 'GET',
+  'ip' => '190.000.000.000',
+  ],
+ ]);
+$xmlscob = json_decode($responsecob->getBody()->getContents(), true);
+
+
+
+$referencia = $xmlscob['data']['ref_payco'];
+$valor = $xmlscob['data']['valor'];
+$estado = $xmlscob['data']['estado'];
+$autorizacion = $xmlscob['data']['autorizacion'];
+$ip = $xmlscob['data']['ip'];
+$tipo = $xmlscob['data']['tipo_doc'];
+$documento = $xmlscob['data']['documento'];
 $periodos = $xmlstok['current_period_end'];
 $periodo =  \Carbon\Carbon::parse($periodos)->format('Y-m-d');
 
-
-$this->create($name, $email, $empresa, $password, $periodo);
+if($xmlscob['data']['estado'] == 'Aceptada'){
+ Transaccion::insert(
+    array('referencia' => $referencia,'valor' => $valor,'estado' => $estado,'request_id' => $autorizacion,'ip' => $ip, 'documento' => $documento,'tipo' => $tipo));
+  $this->create($name, $email, $empresa, $password, $periodo);
+}else{
+  dd('Otra respuesta');
 }
 
+    $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
+    $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+    $subtotal = $this->subtotal();
+    $total = $this->total();
+     return Redirect('/respuesta/suscripcion/'.$referencia)->with('referencia', $referencia)->with('valor', $valor)->with('estado', $estado)->with('autorizacion', $autorizacion)->with('ip', $ip)->with('tipo', $tipo)->with('documento', $documento)->with('plantilla', $plantilla)->with('menu', $menu)->with('subtotal', $subtotal)->with('total', $total);
+
+}
 
 
 
       
     }
-
-  
-
-  
 
 

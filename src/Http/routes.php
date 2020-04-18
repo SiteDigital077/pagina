@@ -471,6 +471,8 @@ Route::group(['middleware' => ['web']], function (){
  Route::get('{{id}}', 'DigitalsiteSaaS\Pagina\Http\WebController@subpaginas');
  Route::get('blog/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@blog');
  Route::get('gestiones/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@gestion');
+ Route::get('respuesta/suscripcion/{id}', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@respuesta');
+ Route::get('respuesta/respuesta', 'DigitalsiteSaaS\Pagina\Http\WebController@respuestaweb');
 
 
   Route::get('suscripcion/servicio', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@formulario');

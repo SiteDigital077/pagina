@@ -62,6 +62,7 @@ protected $tenantName = null;
   ->join('tenancy.websites','websites.id','=','hostnames.website_id')
   ->where('hostnames.id', Auth::user()->saas_id)
   ->get();
+
     foreach ($infosaas as $infosaasweb) {
      $mihost =  ($infosaasweb->uuid.'.');
    $website = DB::table($mihost.'users')->get();

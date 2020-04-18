@@ -737,7 +737,6 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       }
 
 
-
     public function ingresar(){
 	 $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
 	 $cart = session()->get('cart');

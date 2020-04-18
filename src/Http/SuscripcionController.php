@@ -24,6 +24,7 @@ use App\User;
 use Input;
 use File;
 use Redirect;
+use DigitalsiteSaaS\Carrito\Transaccion;
 use GuzzleHttp\Client;
 
  class SuscripcionController extends Controller
@@ -75,7 +76,7 @@ use GuzzleHttp\Client;
     ],
     ]);
     $xmls = json_decode($responsed->getBody()->getContents(), true);
-
+    dd($xmls);
     return view('pagina::configuracion.planes-saas')->with('xmls', $xmls);
   }
 
@@ -124,6 +125,7 @@ use GuzzleHttp\Client;
     ],
     ]);
     $xmls = json_decode($responsed->getBody()->getContents(), true);
+    dd($xmls);
     return view('pagina::suscripcion.clientes')->with('xmls', $xmls);
   }
 
@@ -220,6 +222,17 @@ use GuzzleHttp\Client;
     $total = $this->total();
     return view('pagina::suscripcion.formulario')->with('plantilla', $plantilla)->with('menu', $menu)->with('xmls', $xmls)->with('subtotal', $subtotal)->with('total', $total);
   }
+
+
+   public function respuesta($id){
+
+    $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
+    $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+    $subtotal = $this->subtotal();
+    $total = $this->total();
+    $informacion = Transaccion::where('referencia','=',$id)->get();
+    return view('pagina::suscripcion.respuesta')->with('plantilla', $plantilla)->with('menu', $menu)->with('subtotal', $subtotal)->with('total', $total)->with('informacion', $informacion);
+    }
 
   }
 
