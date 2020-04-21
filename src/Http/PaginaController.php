@@ -7,8 +7,10 @@
  use Zipper;
  use File;
  use Storage;
+ use DigitalsiteSaaS\Pagina\User;
  use DigitalsiteSaaS\Pagina\Zippera;
  use DigitalsiteSaaS\Pagina\Color;
+  use DigitalsiteSaaS\Pagina\Pais;
  use App\Http\Controllers\Controller;
  use Input;
  use DigitalsiteSaaS\Pagina\Diagrama;
@@ -20,6 +22,7 @@
  use Hyn\Tenancy\Repositories\HostnameRepository;
  use Hyn\Tenancy\Repositories\WebsiteRepository;
  use Carbon\Carbon;
+ use Hash;
 
  class PaginaController extends Controller{
 
@@ -78,6 +81,56 @@ protected $tenantName = null;
 
   return View('pagina::saas.dashboard')->with('number', $number)->with('infosaas', $infosaas)->with('website', $website)->with('resp', $resp);
 } 
+
+ public function editarsaas(){
+  $paises = Pais::all();
+  $usuario = User::leftJoin('paises', 'paises.id', '=', 'users.pais_id')->where('users.id','=', Auth::user()->id)->get();
+  return View('pagina::saas.editar-usuario')->with('usuario', $usuario)->with('paises', $paises);
+ }
+
+  public function editarcontrasena(){
+  $paises = Pais::all();
+  $usuario = User::leftJoin('paises', 'paises.id', '=', 'users.pais_id')->where('users.id','=', Auth::user()->id)->get();
+  return View('pagina::saas.editar-contrasena')->with('usuario', $usuario)->with('paises', $paises);
+ }
+
+ public function actualizaruser($id){
+ $remember = Input::get('_token');
+ $password = Input::get('password');
+ $input = Input::all();
+ $user = User::find($id);
+ $user->name = Input::get('nombre');
+ $user->last_name = Input::get('apellido');
+ $user->tipo_documento = Input::get('tipo');
+ $user->documento = Input::get('documento');
+ $user->email = Input::get('email');
+ $user->address = Input::get('direccion');
+ $user->pais_id = Input::get('pais');
+ $user->phone = Input::get('telefono');
+ $user->rol_id = Auth::user()->rol_id;
+ $user->save();
+ return Redirect('/editar/usuariosaas')->with('status', 'ok_update');
+}
+
+public function actualizaruserpass($id){
+ $remember = Input::get('_token');
+ $password = Input::get('password');
+ $input = Input::all();
+ $user = User::find($id);
+ $user->name = Input::get('nombre');
+ $user->last_name = Input::get('apellido');
+ $user->tipo_documento = Input::get('tipo');
+ $user->documento = Input::get('documento');
+ $user->email = Input::get('email');
+ $user->address = Input::get('direccion');
+ $user->pais_id = Input::get('pais');
+ $user->phone = Input::get('telefono');
+ $user->rol_id = Auth::user()->rol_id;
+ $user->password = Hash::make($password);
+ $user->remember_token = Hash::make($remember);
+ $user->save();
+ return Redirect('/editar/usuariosaas')->with('status', 'ok_update');
+}
 
 
  public function show(){

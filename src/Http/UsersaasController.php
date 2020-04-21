@@ -118,6 +118,11 @@ use RegistersUsers;
 
 public function suscripcion(Request $request){
 
+$credenciales = Credencial::where('id', 1)->get();
+    foreach ($credenciales as $credencialesw) {
+        $public_key = $credencialesw->public_key;
+        $private_key = $credencialesw->private_key;
+    }
 $card_number = $request->input('card_number');
 $exp_year = $request->input('exp_year');
 $exp_month = $request->input('exp_month');
@@ -133,8 +138,8 @@ $password = $request->input('password');
  $client = new Client(['http_errors' => false]);
  $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
   'form_params' => [
-  'public_key' => '00183a3712a6c49a93ebe60d06613558',
-  'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+  'public_key' => $public_key,
+  'private_key' => $private_key,
   ],
  ]);
  $xml = json_decode($response->getBody()->getContents(), true);

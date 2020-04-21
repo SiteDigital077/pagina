@@ -4,6 +4,10 @@
 Route::group(['middleware' => ['auths','saas']], function (){
 
  Route::get('saas/sitesaas', 'DigitalsiteSaaS\Pagina\Http\PaginaController@sitesaas');
+ Route::get('editar/usuariosaas', 'DigitalsiteSaaS\Pagina\Http\PaginaController@editarsaas');
+ Route::post('usuario/actualizar/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@actualizaruser');
+  Route::post('usuario/actualizarpass/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@actualizaruserpass');
+ Route::get('editar/contrasena', 'DigitalsiteSaaS\Pagina\Http\PaginaController@editarcontrasena');
 });
 
 Route::group(['middleware' => ['auths','administrador']], function (){
@@ -31,6 +35,8 @@ Route::group(['middleware' => ['auths','administrador']], function (){
    Route::get('/suscripcion/eliminar-plan/{id}', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@eliminarplan');
    Route::get('/suscripcion/ver-clientes', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@listaclientes');
     Route::get('/suscripcion/ver-suscripciones', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@listasuscripciones');
+    Route::get('/suscripcion/credenciales', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@editarcredenciales');
+    Route::post('/suscripcion/editarcredenciales', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@editarcredencialesweb');
  Route::post('/gestor/zip', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@template');
  Route::get('/gestor/subir-template', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@templatevista');
  Route::resource('gestor/templates/eliminartemplate', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@destroy');

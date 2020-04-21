@@ -7,7 +7,7 @@
 <i class="far fa-check-circle text-center text-promary center-block" style="font-size: 100px; color: green"></i>
 <p class="text-center" style="font-size: 22px">¡Tu pago se ha regstrado satisfactoriamente!</p>
 
-
+<br><br><br><br><br>
   @foreach($informacion as $informacion)
    <table class="table table-striped" >
       <thead class="bg-primary">

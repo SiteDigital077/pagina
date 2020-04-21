@@ -21,10 +21,10 @@
                                     <!-- Customer Info -->
                                     <div class="block-section text-center">
                                         <a href="javascript:void(0)">
-                                            <img src="img/placeholders/avatars/avatar4@2x.jpg" alt="avatar" class="img-circle">
+                                            <img src="/modulo-saas/img/avatar4@2x.jpg" alt="avatar" class="img-circle">
                                         </a>
                                         <h3>
-                                            <strong>Jonathan Taylor</strong><br><small></small>
+                                            <strong>{{Auth::user()->name}} {{Auth::user()->last_name}}</strong><br><small></small>
                                         </h3>
                                     </div>
                                     <table class="table table-borderless table-striped table-vcenter" >
@@ -35,15 +35,11 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>ingresao administación</strong></td>
-                                                <td><a href="//{{$infosaas->fqdn}}/login" target="_blank">{{$infosaas->fqdn}}/login</a></td>
+                                                <td><a href="//{{$infosaas->fqdn}}/login" target="_blank">{{$infosaas->fqdn}}/sd/login</a></td>
                                             </tr>
                                              <tr>
                                                 <td class="text-right"><strong>Email</strong></td>
                                                 <td>{{$website->email}}</td>
-                                            </tr>
-                                             <tr>
-                                                <td class="text-right"><strong>Password</strong></td>
-                                                <td>{{$website->password}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>Base de datos</strong></td>

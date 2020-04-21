@@ -14,6 +14,9 @@
       <li>
       	<a href="/suscripcion/ver-suscripciones"><i class="fa fa-file-o"></i>Suscripciones</a>
       </li>
+      <li>
+        <a href="/suscripcion/credenciales"><i class="fa fa-file-o"></i>Credenciales</a>
+      </li>
      </ul>
     </div>
 

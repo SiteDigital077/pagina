@@ -25,6 +25,7 @@ use Input;
 use File;
 use Redirect;
 use DigitalsiteSaaS\Carrito\Transaccion;
+use DigitalsiteSaaS\Pagina\Credencial;
 use GuzzleHttp\Client;
 
  class SuscripcionController extends Controller
@@ -55,13 +56,36 @@ use GuzzleHttp\Client;
   public function crearplanessaas(){
     return view('pagina::configuracion.crear-plansaas');
   }
+  
+   public function editarcredenciales(){
+    $credenciales = Credencial::where('id', '=', '1')->get();
+
+    return view('pagina::suscripcion.credenciales')->with('credenciales', $credenciales);
+  }
+
+   public function editarcredencialesweb(){
+     $input = Input::all();
+     $user = Credencial::find(1);
+     $user->public_key = Input::get('public_key');
+     $user->private_key = Input::get('private_key');
+     $user->save();
+    return Redirect('/suscripcion/credenciales')->with('status', 'ok_update');
+  }
+
+
+
 
   public function planessaas(){
+    $credenciales = Credencial::where('id', 1)->get();
+    foreach ($credenciales as $credencialesw) {
+        $public_key = $credencialesw->public_key;
+        $private_key = $credencialesw->private_key;
+    }
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    'public_key' => $public_key,
+    'private_key' =>  $private_key,
      ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -76,17 +100,21 @@ use GuzzleHttp\Client;
     ],
     ]);
     $xmls = json_decode($responsed->getBody()->getContents(), true);
-    dd($xmls);
     return view('pagina::configuracion.planes-saas')->with('xmls', $xmls);
   }
 
 
   public function eliminarplan($id){
+    $credenciales = Credencial::where('id', 1)->get();
+    foreach ($credenciales as $credencialesw) {
+        $public_key = $credencialesw->public_key;
+        $private_key = $credencialesw->private_key;
+    }
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    'public_key' => $public_key,
+    'private_key' => $private_key,
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -105,12 +133,18 @@ use GuzzleHttp\Client;
   }
 
   public function listaclientes(){
-    $public_key = '00183a3712a6c49a93ebe60d06613558';
+    $credenciales = Credencial::where('id', 1)->get();
+    foreach ($credenciales as $credencialesw) {
+        $public_key = $credencialesw->public_key;
+        $private_key = $credencialesw->private_key;
+    }
+
+    $public_key = $public_key;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    'public_key' => $public_key,
+    'private_key' => $private_key,
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -125,17 +159,23 @@ use GuzzleHttp\Client;
     ],
     ]);
     $xmls = json_decode($responsed->getBody()->getContents(), true);
-    dd($xmls);
+
     return view('pagina::suscripcion.clientes')->with('xmls', $xmls);
   }
 
   public function listasuscripciones(){
-    $public_key = '00183a3712a6c49a93ebe60d06613558';
+
+    $credenciales = Credencial::where('id', 1)->get();
+    foreach ($credenciales as $credencialesw) {
+        $public_key = $credencialesw->public_key;
+        $private_key = $credencialesw->private_key;
+    }
+    $public_key = $public_key;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    'public_key' => $public_key,
+    'private_key' => $private_key,
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -156,6 +196,11 @@ use GuzzleHttp\Client;
 
 
   public function crearplan(Request $request){
+    $credenciales = Credencial::where('id', 1)->get();
+    foreach ($credenciales as $credencialesw) {
+        $public_key = $credencialesw->public_key;
+        $private_key = $credencialesw->private_key;
+    }
     $name = $request->input('name');
     $id_plan = Str::slug($name);
     $description = $request->input('description');
@@ -167,8 +212,8 @@ use GuzzleHttp\Client;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    'public_key' => $public_key,
+    'private_key' => $private_key,
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -197,11 +242,16 @@ use GuzzleHttp\Client;
   }
 
   public function formulario(){
+    $credenciales = Credencial::where('id', 1)->get();
+    foreach ($credenciales as $credencialesw) {
+        $public_key = $credencialesw->public_key;
+        $private_key = $credencialesw->private_key;
+    }
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    'public_key' => $public_key,
+    'private_key' => $private_key,
      ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
