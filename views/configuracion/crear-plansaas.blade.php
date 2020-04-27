@@ -4,46 +4,96 @@
 
 
 
+		  <div class="container">
+   <div class="col-md-12">
+    <div class="block">
+     
+     <div class="block-title">
+      <div class="block-options pull-right">
+      </div>
+      <h2><strong>Crear</strong> plan</h2>
+     </div>
+
+     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('suscripcion/crear-plan'))) }}
+      <div class="form-group">
+       <label class="col-md-3 control-label" for="example-text-input">Identificado del plan</label>
+        <div class="col-md-9">
+         {{Form::text('id_plan', '', array('class' => 'form-control','placeholder'=>'Ingrese el identificador del plan'))}}
+        </div>
+      </div>
+      
+      <div class="form-group">
+       <label class="col-md-3 control-label" for="example-email-input">Nombre del plan</label>
+        <div class="col-md-9">
+         {{Form::text('name', '', array('class' => 'form-control','placeholder'=>'Ingrese el nombre del plan'))}}
+        </div>
+      </div>
+
+      <div class="form-group">
+       <label class="col-md-3 control-label" for="example-email-input">Descripción del plan</label>
+        <div class="col-md-9">
+         {{Form::text('description', '', array('class' => 'form-control', 'placeholder'=>'Ingrese la descripción del plan'))}}
+        </div>
+      </div>
+
+
+       <div class="form-group">
+       <label class="col-md-3 control-label" for="example-email-input">Valor del plan</label>
+        <div class="col-md-9">
+         {{Form::text('amount', '', array('class' => 'form-control','placeholder'=>'Ingrese el valor del plan'))}}
+        </div>
+      </div>
+
+
+      <div class="form-group">
+       <label class="col-md-3 control-label" for="example-password-input">Tipo de moneda</label>
+        <div class="col-md-9">
+         {{Form::text('moneda', '', array('class' => 'form-control','placeholder'=>'Ingrese el tipo de moneda'))}}
+        </div>
+      </div>
+
+      <div class="form-group">
+       <label class="col-md-3 control-label" for="example-password-input">Intervalo</label>
+        <div class="col-md-9">
+         {{Form::text('intervalo', '', array('class' => 'form-control','placeholder'=>'Ingrese el intervalo'))}}
+        </div>
+      </div>
+
+       <div class="form-group">
+       <label class="col-md-3 control-label" for="example-password-input">Intervalo conteo</label>
+        <div class="col-md-9">
+         {{Form::text('int_conteo', '', array('class' => 'form-control','placeholder'=>'Ingrese el intervalo de conteo'))}}
+        </div>
+      </div>
+
+      <div class="form-group">
+       <label class="col-md-3 control-label" for="example-password-input">Dias prueba</label>
+        <div class="col-md-9">
+         {{Form::text('trial', '', array('class' => 'form-control','placeholder'=>'Ingrese los días prueba'))}}
+        </div>
+      </div>
+
+
+
+      <div class="form-group form-actions">
+       <div class="col-md-9 col-md-offset-3">
+        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-angle-right"></i> Crear plan</button>
+       </div>
+      </div>
+     
+     {{ Form::close() }}
+     
+
+
+    
+    </div>
+   </div>
+  </div>                         
+
+
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 		
-		<form action="{{url('suscripcion/crear-plan')}}" method="post" role="form">
-			<legend>Form title</legend>
-		
-			<div class="form-group">
-				<label for="">ID Plan</label>
-				<input type="text" name="id_plan" class="form-control">
-			</div>
-			<div class="form-group">
-				<label for="">Nombre plan</label>
-				<input type="text" name="name" class="form-control">
-			</div>
-			<div class="form-group">
-				<label for="">Descripcion</label>
-				<input type="text" name="description" class="form-control">
-			</div>
-			<div class="form-group">
-				<label for="">Valor</label>
-				<input type="text" name="amount" class="form-control">
-			</div>
-			<div class="form-group">
-				<label for="">Moneda</label>
-				<input type="text" name="moneda" class="form-control" value="COP">
-			</div>
-			<div class="form-group">
-				<label for="">Intervalo</label>
-				<input type="text" name="intervalo" class="form-control">
-			</div>
-			<div class="form-group">
-				<label for="">Intervalo conteo</label>
-				<input type="text" name="int_conteo" class="form-control">
-			</div>
-			<div class="form-group">
-				<label for="">Dias Trial</label>
-				<input type="text" name="trial" class="form-control">
-			</div>
-	
-			<button type="submit" class="btn btn-primary">Submit</button>
-	
-		</div>
 	
  @stop
 

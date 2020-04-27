@@ -468,6 +468,7 @@ Route::get('/ubicacion/ajax-subcatweb',function(){
 
 
 Route::group(['middleware' => ['web']], function (){
+  Route::post('respuesta/informacion', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@informacion');
  Route::post('/suscripcion/suscripcion', 'DigitalsiteSaaS\Pagina\Http\UsersaasController@suscripcion');
  Route::get('ingresar', 'DigitalsiteSaaS\Pagina\Http\WebController@ingresar');
  Route::resource('ingreso-comunidad', 'DigitalsiteSaaS\Pagina\Http\WebController@ingresarcomunidad');

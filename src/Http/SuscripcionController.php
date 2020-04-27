@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
+use Request;
 use App\Http\Controllers\Controller;
 use Hyn\Tenancy\Models\Hostname;
 use Hyn\Tenancy\Models\Website;
@@ -84,8 +84,8 @@ use GuzzleHttp\Client;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => $public_key,
-    'private_key' =>  $private_key,
+    'public_key' => '00183a3712a6c49a93ebe60d06613558',
+    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
      ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -113,8 +113,8 @@ use GuzzleHttp\Client;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => $public_key,
-    'private_key' => $private_key,
+    'public_key' => '00183a3712a6c49a93ebe60d06613558',
+    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -143,8 +143,8 @@ use GuzzleHttp\Client;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => $public_key,
-    'private_key' => $private_key,
+    'public_key' => '00183a3712a6c49a93ebe60d06613558',
+    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -174,8 +174,8 @@ use GuzzleHttp\Client;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => $public_key,
-    'private_key' => $private_key,
+    'public_key' => '00183a3712a6c49a93ebe60d06613558',
+    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -190,7 +190,7 @@ use GuzzleHttp\Client;
     ],
     ]);
     $xmls = json_decode($responsed->getBody()->getContents(), true);
-
+    dd($xmls);
     return view('pagina::suscripcion.suscripciones')->with('xmls', $xmls);
   }
 
@@ -203,7 +203,7 @@ use GuzzleHttp\Client;
     }
     $name = $request->input('name');
     $id_plan = Str::slug($name);
-    $description = $request->input('description');
+    $description = Str::slug($name);
     $amount = $request->input('amount');
     $moneda = $request->input('moneda');
     $intervalo = $request->input('intervalo');
@@ -212,8 +212,8 @@ use GuzzleHttp\Client;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => $public_key,
-    'private_key' => $private_key,
+    'public_key' => '00183a3712a6c49a93ebe60d06613558',
+    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -250,8 +250,8 @@ use GuzzleHttp\Client;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => $public_key,
-    'private_key' => $private_key,
+    'public_key' => '00183a3712a6c49a93ebe60d06613558',
+    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
      ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -282,6 +282,86 @@ use GuzzleHttp\Client;
     $total = $this->total();
     $informacion = Transaccion::where('referencia','=',$id)->get();
     return view('pagina::suscripcion.respuesta')->with('plantilla', $plantilla)->with('menu', $menu)->with('subtotal', $subtotal)->with('total', $total)->with('informacion', $informacion);
+    }
+
+
+     public function informacion(Request $request){
+       $referencia = Request::input('x_ref_payco');
+       $valor = Request::input('x_amount');
+       $fecha_trans = Request::input('x_fecha_transaccion');
+       $respuesta = Request::input('x_respuesta');
+       $descripcion = Request::input('x_description');
+       $autorizacion = Request::input('x_approval_code');
+       $franquicia = Request::input('x_franchise');
+       $recibo = Request::input('x_transaction_id');
+       $banco = Request::input('x_bank_name');
+       $extra2 = Request::input('x_extra2');
+       $extra3 = Request::input('x_extra3');
+       $email = Request::input('x_customer_email');
+       $pais = Request::input('x_customer_country');
+       $moneda = Request::input('x_currency_code');
+       $iva = Request::input('x_tax');
+       $suscripcion =  Request::input('x_extra1');
+       $ip = Request::input('x_customer_ip');
+       $public_key = '00183a3712a6c49a93ebe60d06613558';
+       $union = $suscripcion . '/' . $public_key;
+
+       $client = new Client(['http_errors' => false]);
+       $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
+       'form_params' => [
+       'public_key' => '00183a3712a6c49a93ebe60d06613558',
+       'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+        ],
+       ]);
+       $xml = json_decode($response->getBody()->getContents(), true);
+       $token = $xml['bearer_token'];
+       $tok = "Bearer"." ".$token;
+       $responsed = $client->get('https://api.secure.payco.co/recurring/v1/subscription/'.$union, [
+       'headers' => [
+       'Authorization' =>  $tok,
+       'Content-Type' => 'application/json',
+       'Accept' => 'application/json',
+       'Type' => 'sdk-jwt',
+       ],
+       ]);
+       $xmls = json_decode($responsed->getBody()->getContents(), true);
+    
+       $fechaweb = $xmls['current_period_end'];
+
+       DB::table('trans_payco')->insert([
+        ['ref_payco' => $referencia],
+        ['valor' => $valor],
+        ['iva' => $iva],
+        ['fecha_trans' => $fecha_trans],
+        ['respuesta' => $respuesta],
+        ['descripcion' => $descripcion],
+        ['autorizacion' => $autorizacion],
+        ['recibo' => $recibo],
+        ['franquicia' => $franquicia],
+        ['banco' => $banco],
+        ['extra1' => $suscripcion],
+        ['extra2' => $extra2],
+        ['extra3' => $extra3],
+        ['pais' => $pais],
+        ['moneda' => $moneda],
+        ['email' => $email],
+        ['ip' => $ip]
+    ]);
+
+       $users = DB::table('users')->join('tenancy.hostnames', 'users.saas_id', '=', 'tenancy.hostnames.id')
+       ->where('email', '=', $email)
+       ->get();
+     if($respuesta == 'Acepdata'){
+        foreach ($users as $usersna) {
+         $upda = DB::table('tenancy.hostnames')->where('id', '=', $usersna->saas_id)
+          ->update(['presentacion' => $fechaweb]);
+      
+        }
+        }
+
+
+
+
     }
 
   }

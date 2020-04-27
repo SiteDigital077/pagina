@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 use DigitalsiteSaaS\Carrito\Transaccion;
+use DigitalsiteSaaS\Pagina\Credencial;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -73,7 +74,7 @@ use RegistersUsers;
   }
 
 
-    protected function create($name, $email, $empresa, $password, $periodo)
+    protected function create($name, $email, $empresa, $password, $periodo, $plan)
     {
 
        $metrica = User::create([
@@ -102,7 +103,7 @@ use RegistersUsers;
             ->update(['saas_id' => $hostname->id,]);
 
          $updatedate = DB::table('tenancy.hostnames')->where('id', $hostname->id)
-            ->update(['presentacion' => $periodo]);
+            ->update(['presentacion' => $periodo,'plan_id' => $plan]);
         
         $pass = Hash::make($password);
 
@@ -138,8 +139,8 @@ $password = $request->input('password');
  $client = new Client(['http_errors' => false]);
  $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
   'form_params' => [
-  'public_key' => $public_key,
-  'private_key' => $private_key,
+  'public_key' => '00183a3712a6c49a93ebe60d06613558',
+  'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
   ],
  ]);
  $xml = json_decode($response->getBody()->getContents(), true);
@@ -202,7 +203,7 @@ $customer_id = $xmlscus['data']['customerId'];
   'token_card' => $token_id,
   'doc_type' => 'CC',
   'doc_number' => '1014184224',
-  'url_confirmation' => 'http://sitedesarrollo.local/respuesta/respuesta',
+  'url_confirmation' => 'http://siteavanza.com/respuesta/informacion/',
   'method_confirmation' => 'POST',
   ],
  ]);
@@ -222,15 +223,15 @@ $xmlstok = json_decode($responsedtok->getBody()->getContents(), true);
   'doc_type' => 'CC',
   'doc_number' => '1014184224',
   'url_response' => 'https:/secure.payco.co/restpagos/testRest/endpagopse.php',
-  'url_confirmation' => 'http://sitedesarrollo.local/respuesta/respuesta',
-  'method_confirmation' => 'GET',
+  'url_confirmation' => 'http://siteavanza.com/respuesta/informacion/',
+  'method_confirmation' => 'POST',
   'ip' => '190.000.000.000',
   ],
  ]);
 $xmlscob = json_decode($responsecob->getBody()->getContents(), true);
 
 
-
+$plan = $xmlscob['subscription']['idPlan'];
 $referencia = $xmlscob['data']['ref_payco'];
 $valor = $xmlscob['data']['valor'];
 $estado = $xmlscob['data']['estado'];
@@ -244,7 +245,7 @@ $periodo =  \Carbon\Carbon::parse($periodos)->format('Y-m-d');
 if($xmlscob['data']['estado'] == 'Aceptada'){
  Transaccion::insert(
     array('referencia' => $referencia,'valor' => $valor,'estado' => $estado,'request_id' => $autorizacion,'ip' => $ip, 'documento' => $documento,'tipo' => $tipo));
-  $this->create($name, $email, $empresa, $password, $periodo);
+  $this->create($name, $email, $empresa, $password, $periodo, $plan);
 }else{
   dd('Otra respuesta');
 }

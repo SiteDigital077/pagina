@@ -408,7 +408,25 @@
 }
 
 </style>
-<div id="generic_price_table">   
+
+<div role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#mensual" aria-controls="home" role="mensual" data-toggle="tab">Mensual</a>
+        </li>
+        <li role="presentation">
+            <a href="#semestral" aria-controls="tab" role="tab" data-toggle="tab">Semestral</a>
+        </li>
+        <li role="presentation">
+            <a href="#anual" aria-controls="tab" role="tab" data-toggle="tab">Anual</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="mensual">
+        <div id="generic_price_table">   
 <section>
        
         <div class="container">
@@ -416,9 +434,10 @@
             <!--BLOCK ROW START-->
             <div class="row">
              @foreach($xmls['data'] as $data)
+             @if($data['interval_count'] == 1)
                 <div class="col-md-4">
                 
-                	<!--PRICE CONTENT START-->
+                    <!--PRICE CONTENT START-->
                     <div class="generic_content clearfix">
                         
                         <!--HEAD PRICE DETAIL START-->
@@ -427,10 +446,10 @@
                             <!--HEAD CONTENT START-->
                             <div class="generic_head_content clearfix">
                             
-                            	<!--HEAD START-->
+                                <!--HEAD START-->
                                 <div class="head_bg"></div>
                                 <div class="head">
-                                    <span><b>{{$data['name']}}</b></span>
+                                    <span><b>{{$data['description']}}</b></span>
                                 </div>
                                 <!--//HEAD END-->
                                 
@@ -438,7 +457,7 @@
                             <!--//HEAD CONTENT END-->
                             
                             <!--PRICE START-->
-                            <div class="generic_price_tag clearfix">	
+                            <div class="generic_price_tag clearfix">    
                                 <span class="price">
                                  
                      <span class="currency"><b>$ {{number_format($data['amount'],0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Mes</span></span>
@@ -453,8 +472,8 @@
                         
                         <!--FEATURE LIST START-->
                         <div class="generic_feature_list">
-                        	<ul>
-                            	<li><span>2GB</span> Bandwidth</li>
+                            <ul>
+                                <li><span>2GB</span> Bandwidth</li>
                                 <li><span>150GB</span> Storage</li>
                                 <li><span>12</span> Accounts</li>
                                 <li><span>7</span> Host Domain</li>
@@ -466,10 +485,10 @@
                         <!--BUTTON START-->{{Session::get('suscripcion')}}
                         <div class="generic_price_btn clearfix">
                           <form action="/suscripcion/session" method="post">
-                          		<input type="hidden" name="id_plan" id="input" class="form-control" value="{{$data['id_plan']}}" required="required">
+                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$data['id_plan']}}" required="required">
                 
 
-                        	<button type="submit" class="btn btn-primary btn-md">Adquirir plan</button>
+                            <button type="submit" class="btn btn-primary btn-md">Adquirir plan</button>
                           </form>
                         </div>
                         <!--//BUTTON END-->
@@ -478,6 +497,8 @@
                     <!--//PRICE CONTENT END-->
                         
                 </div>
+                @else
+                @endif
                 @endforeach
               
             
@@ -485,4 +506,177 @@
     </section>             
 
 </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="semestral">
+             <div id="generic_price_table">   
+<section>
+       
+        <div class="container">
+            
+            <!--BLOCK ROW START-->
+            <div class="row">
+             @foreach($xmls['data'] as $data)
+             @if($data['interval_count'] == 6)
+                <div class="col-md-4">
+                
+                    <!--PRICE CONTENT START-->
+                    <div class="generic_content clearfix">
+                        
+                        <!--HEAD PRICE DETAIL START-->
+                        <div class="generic_head_price clearfix">
+                        
+                            <!--HEAD CONTENT START-->
+                            <div class="generic_head_content clearfix">
+                            
+                                <!--HEAD START-->
+                                <div class="head_bg"></div>
+                                <div class="head">
+                                    <span><b>{{$data['description']}}</b></span>
+                                </div>
+                                <!--//HEAD END-->
+                                
+                            </div>
+                            <!--//HEAD CONTENT END-->
+                            
+                            <!--PRICE START-->
+                            <div class="generic_price_tag clearfix">    
+                                <span class="price">
+                                 
+                     <span class="currency"><b>$ {{number_format($data['amount'],0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Mes</span></span>
+                                    
+                                    
+                                </span>
+                            </div>
+                            <!--//PRICE END-->
+                            
+                        </div>                            
+                        <!--//HEAD PRICE DETAIL END-->
+                        
+                        <!--FEATURE LIST START-->
+                        <div class="generic_feature_list">
+                            <ul>
+                                <li><span>2GB</span> Bandwidth</li>
+                                <li><span>150GB</span> Storage</li>
+                                <li><span>12</span> Accounts</li>
+                                <li><span>7</span> Host Domain</li>
+                                <li><span>24/7</span> Support</li>
+                            </ul>
+                        </div>
+                        <!--//FEATURE LIST END-->
+                        
+                        <!--BUTTON START-->{{Session::get('suscripcion')}}
+                        <div class="generic_price_btn clearfix">
+                          <form action="/suscripcion/session" method="post">
+                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$data['id_plan']}}" required="required">
+                
+
+                            <button type="submit" class="btn btn-primary btn-md">Adquirir plan</button>
+                          </form>
+                        </div>
+                        <!--//BUTTON END-->
+                        
+                    </div>
+                    <!--//PRICE CONTENT END-->
+                        
+                </div>
+                @else
+                @endif
+                @endforeach
+              
+            
+        </div>
+    </section>             
+
+</div>
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="anual">
+           
+             <div id="generic_price_table">   
+<section>
+       
+        <div class="container">
+            
+            <!--BLOCK ROW START-->
+            <div class="row">
+             @foreach($xmls['data'] as $data)
+             @if($data['interval_count'] == 12)
+                <div class="col-md-4">
+                
+                    <!--PRICE CONTENT START-->
+                    <div class="generic_content clearfix">
+                        
+                        <!--HEAD PRICE DETAIL START-->
+                        <div class="generic_head_price clearfix">
+                        
+                            <!--HEAD CONTENT START-->
+                            <div class="generic_head_content clearfix">
+                            
+                                <!--HEAD START-->
+                                <div class="head_bg"></div>
+                                <div class="head">
+                                    <span><b>{{$data['description']}}</b></span>
+                                </div>
+                                <!--//HEAD END-->
+                                
+                            </div>
+                            <!--//HEAD CONTENT END-->
+                            
+                            <!--PRICE START-->
+                            <div class="generic_price_tag clearfix">    
+                                <span class="price">
+                                 
+                     <span class="currency"><b>$ {{number_format($data['amount'],0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Mes</span></span>
+                                    
+                                    
+                                </span>
+                            </div>
+                            <!--//PRICE END-->
+                            
+                        </div>                            
+                        <!--//HEAD PRICE DETAIL END-->
+                        
+                        <!--FEATURE LIST START-->
+                        <div class="generic_feature_list">
+                            <ul>
+                                <li><span>2GB</span> Bandwidth</li>
+                                <li><span>150GB</span> Storage</li>
+                                <li><span>12</span> Accounts</li>
+                                <li><span>7</span> Host Domain</li>
+                                <li><span>24/7</span> Support</li>
+                            </ul>
+                        </div>
+                        <!--//FEATURE LIST END-->
+                        
+                        <!--BUTTON START-->{{Session::get('suscripcion')}}
+                        <div class="generic_price_btn clearfix">
+                          <form action="/suscripcion/session" method="post">
+                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$data['id_plan']}}" required="required">
+                
+
+                            <button type="submit" class="btn btn-primary btn-md">Adquirir plan</button>
+                          </form>
+                        </div>
+                        <!--//BUTTON END-->
+                        
+                    </div>
+                    <!--//PRICE CONTENT END-->
+                        
+                </div>
+                @else
+                @endif
+                @endforeach
+              
+            
+        </div>
+    </section>             
+
+</div>
+            
+        </div>
+    </div>
+</div>
+
+
 

@@ -222,6 +222,7 @@ public function __construct()
 	  ->orderBy('position','ASC')
 	  ->where('contents.page_id', '=' ,$user->id)
 	  ->get();
+
 	 return view('desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidone', $contenidone)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('formulario', $formulario)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('comunidad', $comunidad)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('shuffle', $shuffle)->with('shuffleimg', $shuffleimg)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('xmls', $xmls);
      }}
 
@@ -241,6 +242,7 @@ public function __construct()
   }
 }
      $users = DB::table('pages')->where('posti', '1')->get();
+    
   foreach ($users as $user){
      $cama = \DigitalsiteSaaS\Pagina\Tenant\Page::find($user->id);
      $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
@@ -341,6 +343,7 @@ public function __construct()
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$user->id)
     ->get();
+
     if($resp == 'true'){
    return view('desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidone', $contenidone)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('formulario', $formulario)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('comunidad', $comunidad)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('shuffle', $shuffle)->with('shuffleimg', $shuffleimg)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories);
     }else{

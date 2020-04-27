@@ -1,17 +1,22 @@
 @extends ('adminsite.layout')
 
  @section('ContenidoSite-01')
- <div class="content-header">
-  <ul class="nav-horizontal text-center">
-   <li>
-    <a href="/gestion/usuario"><i class="gi gi-parents"></i> Usuarios</a>
-   </li>
-   <li class="active">
-    <a href="/gestion/crear-usuario"><i class="fa fa-user-plus"></i> Crear Usuario</a>
-   </li>
-  </ul>
- </div>
-
+<div class="content-header">
+    <ul class="nav-horizontal text-center">
+      <li>
+       <a href="/gestor/planes-saas"><i class="fa fa-file-text"></i>Planes</a>
+      </li>
+      <li>
+       <a href="/suscripcion/ver-clientes"><i class="fa fa-file-o"></i>Clientes</a>
+      </li> 
+      <li>
+        <a href="/suscripcion/ver-suscripciones"><i class="fa fa-file-o"></i>Suscripciones</a>
+      </li>
+      <li class="active">
+        <a href="/suscripcion/credenciales"><i class="fa fa-file-o"></i>Credenciales</a>
+      </li>
+     </ul>
+    </div>
  <div class="container">
 
  <?php $status=Session::get('status');?>
