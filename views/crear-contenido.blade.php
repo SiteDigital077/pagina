@@ -329,6 +329,8 @@ Crear Nuevo Contenido
                                     </div>
                                 </a>
                             </div>
+
+@if($plan == '0' OR  $plan == 'plan-mensual-intermedio' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-intermedio' OR $plan == 'plan-mensual-avanzado' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-avanzado')
   <div class="col-sm-6 col-lg-3">
                                 <a href="/gestion/contenidos/baner/{{Request::segment(4)}}" class="widget widget-hover-effect1 themed-background">
                                     <div class="widget-simple">
@@ -340,7 +342,8 @@ Crear Nuevo Contenido
                                     </div>
                                 </a>
                             </div>
-
+@else
+@endif
   <div class="col-sm-6 col-lg-3">
                                 <a href="/gestion/contenidos/parallax/{{Request::segment(4)}}" class="widget widget-hover-effect1 themed-background">
                                     <div class="widget-simple">
@@ -353,6 +356,7 @@ Crear Nuevo Contenido
                                 </a>
                             </div>
 
+@if($plan == '0' OR  $plan == 'plan-mensual-intermedio' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-intermedio' OR $plan == 'plan-mensual-avanzado' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-avanzado')
  <div class="col-sm-6 col-lg-3">
                                 <a href="/gestion/contenidos/formulas/{{Request::segment(4)}}" class="widget widget-hover-effect1 themed-background">
                                     <div class="widget-simple">
@@ -364,7 +368,9 @@ Crear Nuevo Contenido
                                     </div>
                                 </a>
                             </div> 
-
+@else
+@endif
+@if($plan == '0' OR  $plan == 'plan-mensual-intermedio' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-intermedio' OR $plan == 'plan-mensual-avanzado' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-avanzado')
  <div class="col-sm-6 col-lg-3">
                                 <a href="/gestion/contenidos/productos/{{Request::segment(4)}}" class="widget widget-hover-effect1 themed-background">
                                     <div class="widget-simple">
@@ -376,7 +382,9 @@ Crear Nuevo Contenido
                                     </div>
                                 </a>
                             </div> 
-
+@else
+@endif
+@if($plan == '0' OR  $plan == 'plan-mensual-intermedio' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-intermedio' OR $plan == 'plan-mensual-avanzado' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-avanzado')
 <div class="col-sm-6 col-lg-3">
                                 <a href="/gestion/contenidos/filtros/{{Request::segment(4)}}" class="widget widget-hover-effect1 themed-background">
                                     <div class="widget-simple">
@@ -388,6 +396,8 @@ Crear Nuevo Contenido
                                     </div>
                                 </a>
                             </div> 
+@else
+@endif
 <div class="col-sm-6 col-lg-3">
                                 <a href="/gestion/contenidos/filtrosdinami/{{Request::segment(4)}}" class="widget widget-hover-effect1 themed-background">
                                     <div class="widget-simple">
@@ -544,7 +554,8 @@ Crear Nuevo Contenido
                                         </h4>
                                     </div>
                                 </a>
-                            </div> 
+                            </div>
+@if($plan == '0' OR  $plan == 'plan-mensual-intermedio' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-intermedio' OR $plan == 'plan-mensual-avanzado' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-avanzado')
 <div class="col-sm-6 col-lg-3">
                                 <a href="/gestion/contenidos/empleos/{{Request::segment(4)}}" class="widget widget-hover-effect1 themed-background">
                                     <div class="widget-simple">
@@ -556,7 +567,8 @@ Crear Nuevo Contenido
                                     </div>
                                 </a>
                             </div> 
-
+@else
+@endif
 <div class="col-sm-6 col-lg-3">
                                 <a href="/gestion/contenidos/boton/{{Request::segment(4)}}" class="widget widget-hover-effect1 themed-background">
                                     <div class="widget-simple">

@@ -12,7 +12,6 @@
  <a class="btn btn-primary" href="/">regresar al sitio</a>
  </div>
  @else
- <br><br><br><br><br>
 <div class="container">
 	 
  	<div class="col-lg-8">
@@ -29,7 +28,7 @@
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 25px">			
 
 			<div class="form-group">
-				<h5 for="" class="text-primary">Informacion contable</h5>
+				<h5 for="" class="text-primary">Información contable</h5>
 				<hr>		
 			</div>
 		
@@ -50,17 +49,27 @@
 				<input type="text" name="cvc" class="form-control" value="{{ old('cvc') }}" placeholder="000">
 			</div>
 			<div class="form-group col-lg-12">
-				<h5 for="" class="text-primary">Informacion personal</h5>
+				<h5 for="" class="text-primary">Información personal</h5>
 				<hr>		
 			</div>
 			
 		
-		
-				<input type="hidden" name="id_plan" class="form-control" value="{{Session::get('suscripcion')}}">
+		    <input type="hidden" name="ip" class="form-control" value="{{Request::ip()}}">
+			<input type="hidden" name="id_plan" class="form-control" value="{{Session::get('suscripcion')}}">
 		
 			<div class="form-group col-lg-12">
 				<label for="">Nombre</label>
 				<input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" placeholder="Nombre">
+			</div>
+
+			<div class="form-group col-lg-6">
+				<label for="">Tipo Documento</label>
+				<input type="text" name="tipo" class="form-control" value="{{ old('tipo') }}" placeholder="Tipo documento">
+			</div>
+
+			<div class="form-group col-lg-6">
+				<label for="">Documento</label>
+				<input type="text" name="documento" class="form-control" value="{{ old('documento') }}" placeholder="Documento">
 			</div>
 
 			<div class="form-group col-lg-12">
@@ -86,7 +95,9 @@
 				<label for="">Confirmar contraeña</label>
 				<input type="password" name="password_confirmation" class="form-control" placeholder="Repetir contraseña">
 			</div>
-			<button type="submit" class="btn btn-primary btn-lg">Registrar cuenta</button>
+			<div class="form-group col-lg-12">
+			<button type="submit" class="btn btn-primary btn-md btn-block">Registrar suscripción</button>
+		</div>
 	</div>
 	
 	
@@ -114,7 +125,7 @@
 
 	</div>
 </div>
-<br><br>
+
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 {{ Html::script('modulo-saas/valida.js') }}
   {{ Html::script('//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js') }} 

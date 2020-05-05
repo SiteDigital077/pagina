@@ -9,7 +9,7 @@ use App\Providers\RouteServiceProvider;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use DB;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Request;
@@ -56,11 +56,29 @@ use GuzzleHttp\Client;
   public function crearplanessaas(){
     return view('pagina::configuracion.crear-plansaas');
   }
+
+  public function resperror(){
+      $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
+    $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+    $subtotal = $this->subtotal();
+    $total = $this->total();
+    return view('pagina::suscripcion.respuesta-error')->with('plantilla', $plantilla)->with('menu', $menu)->with('subtotal', $subtotal)->with('total', $total);
+  }
+
+
+
   
    public function editarcredenciales(){
     $credenciales = Credencial::where('id', '=', '1')->get();
 
     return view('pagina::suscripcion.credenciales')->with('credenciales', $credenciales);
+  }
+
+
+  public function pagos(){
+    $facturas = DB::table('trans_payco')->get();
+
+    return view('pagina::suscripcion.pagos')->with('facturas', $facturas);
   }
 
    public function editarcredencialesweb(){
@@ -102,6 +120,45 @@ use GuzzleHttp\Client;
     $xmls = json_decode($responsed->getBody()->getContents(), true);
     return view('pagina::configuracion.planes-saas')->with('xmls', $xmls);
   }
+
+
+  public function cancelarplan(Request $request){
+    $idsuscripcion = Input::get('idsuscripcion');
+    $credenciales = Credencial::where('id', 1)->get();
+    foreach ($credenciales as $credencialesw) {
+        $public_key = $credencialesw->public_key;
+        $private_key = $credencialesw->private_key;
+    }
+
+    $client = new Client(['http_errors' => false]);
+    $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
+    'form_params' => [
+    'public_key' => '00183a3712a6c49a93ebe60d06613558',
+    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    ],
+    ]);
+    $xml = json_decode($response->getBody()->getContents(), true);
+    $token = $xml['bearer_token'];
+    $tok = "Bearer"." ".$token;
+    $responsed = $client->post('https://api.secure.payco.co/recurring/v1/subscription/cancel', [
+    'headers' => [
+    'Authorization' =>  $tok,
+    'Content-Type' => 'application/json',
+    'Accept' => 'application/json',
+    'Type' => 'sdk-jwt',
+    ],
+    'json' => [
+    'id' => $idsuscripcion,
+    ],
+    ]);
+    $xmls = json_decode($responsed->getBody()->getContents(), true);
+    $respuesta = $xmls['status'];
+    if($respuesta == 'true'){
+      return Redirect('/saas/sitesaas')->with('status', 'ok_create');
+    }
+    return Redirect('/saas/sitesaas')->with('status', 'ok_delete');
+  }
+
 
 
   public function eliminarplan($id){
@@ -329,23 +386,23 @@ use GuzzleHttp\Client;
        $fechaweb = $xmls['current_period_end'];
 
        DB::table('trans_payco')->insert([
-        ['ref_payco' => $referencia],
-        ['valor' => $valor],
-        ['iva' => $iva],
-        ['fecha_trans' => $fecha_trans],
-        ['respuesta' => $respuesta],
-        ['descripcion' => $descripcion],
-        ['autorizacion' => $autorizacion],
-        ['recibo' => $recibo],
-        ['franquicia' => $franquicia],
-        ['banco' => $banco],
-        ['extra1' => $suscripcion],
-        ['extra2' => $extra2],
-        ['extra3' => $extra3],
-        ['pais' => $pais],
-        ['moneda' => $moneda],
-        ['email' => $email],
-        ['ip' => $ip]
+        ['ref_payco' => $referencia,
+         'valor' => $valor,
+         'iva' => $iva,
+         'fecha_trans' => $fecha_trans,
+         'respuesta' => $respuesta,
+         'descripcion' => $descripcion,
+         'autorizacion' => $autorizacion,
+         'recibo' => $recibo,
+         'franquicia' => $franquicia,
+         'banco' => $banco,
+         'extra1' => $suscripcion,
+         'extra2' => $extra2,
+         'extra3' => $extra3,
+         'pais' => $pais,
+         'moneda' => $moneda,
+         'email' => $email,
+         'ip' => $ip]
     ]);
 
        $users = DB::table('users')->join('tenancy.hostnames', 'users.saas_id', '=', 'tenancy.hostnames.id')

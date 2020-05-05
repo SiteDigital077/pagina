@@ -69,6 +69,7 @@
   $tabs = Page::find($id)->Contents;
   $shuffle = Page::find($id)->Contents;
   $formula = Page::find($id)->Contents;
+  $plan = 0;
   }else{
   $master = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id);
   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id)->Contents;
@@ -79,10 +80,18 @@
   $tabs = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id)->Contents;
   $shuffle = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id)->Contents;
   $formula = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id)->Contents;
+  $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
+        if ($hostname){
+            $plan = $hostname->plan_id;
+          
+        }
+  
 
   }
-  return view('pagina::contenidos')->with('contenido', $contenido)->with('galeria', $contenido)->with('master', $master)->with('paginations', $paginations)->with('collapses', $collapses)->with('tabs', $tabs)->with('shuffle', $shuffle)->with('banners', $banners)->with('formula', $formula)->with('carousel', $carousel);
+  return view('pagina::contenidos')->with('contenido', $contenido)->with('galeria', $contenido)->with('master', $master)->with('paginations', $paginations)->with('collapses', $collapses)->with('tabs', $tabs)->with('shuffle', $shuffle)->with('banners', $banners)->with('formula', $formula)->with('carousel', $carousel)->with('plan', $plan);
  }
+
+
 
  public function diagrama($id){
   $diagramacion = DB::table('diagramas')->where('id', '=', $id)->get();
@@ -91,7 +100,17 @@
 
  public function graficos($id){
   $contenido = Page::find($id);
-  return view('pagina::crear-contenido')->with('contenido', $contenido);
+   if(!$this->tenantName){
+    $plan = 0;
+   }{
+   $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
+        if ($hostname){
+            $plan = $hostname->plan_id;
+          
+        }
+    }
+       
+  return view('pagina::crear-contenido')->with('contenido', $contenido)->with('plan', $plan);
  }
 
  public function creargrafico(){
@@ -1134,7 +1153,16 @@ public function imagenescarousel($id){
 
  public function baner($id){
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
-  return view('pagina::contenidos/crear-baner')->with('posicion', $posicion);
+    if(!$this->tenantName){
+    $plan = 0;
+   }{
+   $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
+        if ($hostname){
+            $plan = $hostname->plan_id;
+          
+        }
+    }
+  return view('pagina::contenidos/crear-baner')->with('posicion', $posicion)->with('plan', $plan);
  }	
 
  public function collapsable($id){
@@ -1164,17 +1192,44 @@ public function imagenescarousel($id){
 
  public function formulas($id){
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
-  return view('pagina::contenidos/crear-formulas')->with('posicion', $posicion);
+   if(!$this->tenantName){
+    $plan = 0;
+   }{
+   $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
+        if ($hostname){
+            $plan = $hostname->plan_id;
+          
+        }
+    }
+  return view('pagina::contenidos/crear-formulas')->with('posicion', $posicion)->with('plan', $plan);
  }
 
  public function productos($id){
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
-  return view('pagina::contenidos/crear-productos')->with('posicion', $posicion);
+    if(!$this->tenantName){
+    $plan = 0;
+   }{
+   $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
+        if ($hostname){
+            $plan = $hostname->plan_id;
+          
+        }
+    }
+  return view('pagina::contenidos/crear-productos')->with('posicion', $posicion)->with('plan', $plan);
  }
 
  public function filtros($id){
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
-  return view('pagina::contenidos/crear-filtros')->with('posicion', $posicion);
+   if(!$this->tenantName){
+    $plan = 0;
+   }{
+   $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
+        if ($hostname){
+            $plan = $hostname->plan_id;
+          
+        }
+    }
+  return view('pagina::contenidos/crear-filtros')->with('posicion', $posicion)->with('plan', $plan);
  }
 
  public function filtrosdinami($id){
@@ -1237,7 +1292,17 @@ public function imagenescarousel($id){
 
  public function empleos($id){
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
-  return view('pagina::contenidos/crear-empleo')->with('posicion', $posicion);
+  $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
+   if(!$this->tenantName){
+    $plan = 0;
+   }{
+   $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
+        if ($hostname){
+            $plan = $hostname->plan_id;
+          
+        }
+    }
+  return view('pagina::contenidos/crear-empleo')->with('posicion', $posicion)->with('plan', $plan);
  }
 
  public function backimage($id){

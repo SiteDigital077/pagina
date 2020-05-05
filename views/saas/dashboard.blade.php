@@ -6,7 +6,24 @@
 <div class="row">
   
 
+
+
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+  <?php $status=Session::get('status');?>
+    @if($status=='ok_create')
+      <div class="alert alert-success">
+       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+       <strong>Se ha cancelado la suscripción correctamente</strong> US ...
+      </div>
+    @endif
+
+    @if($status=='ok_delete')
+      <div class="alert alert-danger">
+       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+       <strong>No se ha cancelado la suscripción verifique e intente de nuevo</strong> US ...
+      </div>
+    @endif
 
  <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -29,6 +46,14 @@
                                     </div>
                                     <table class="table table-borderless table-striped table-vcenter" >
                                         <tbody>
+                                             <tr>
+                                                <td class="text-right"><strong>Estado</strong></td>
+                                                @if($resp == 'true')
+                                    <td><span class="label label-success"><i class="fa fa-check"></i> Activo </span></td>
+                                                @else
+                                    <td><span class="label label-danger"><i class="fa fa-check"></i> Inactivo </span></td>
+                                                @endif
+                                            </tr>
                                             <tr>
                                                 <td class="text-right" style="width: 50%;"><strong>Hostname</strong></td>
                                                 <td><a href="//{{$infosaas->fqdn}}" target="_blank">{{$infosaas->fqdn}}</a></td>
@@ -49,14 +74,21 @@
                                                 <td class="text-right"><strong>Fecha registro</strong></td>
                                                 <td>{{$infosaas->created_at}}</td>
                                             </tr>
+
                                             <tr>
-                                                <td class="text-right"><strong>Estado</strong></td>
-                                                @if($resp == 'true')
-                                    <td><span class="label label-success"><i class="fa fa-check"></i> Activo </span></td>
-                                                @else
-                                    <td><span class="label label-danger"><i class="fa fa-check"></i> Inactivo </span></td>
-                                                @endif
+                                                <td class="text-right"><strong>Suscripción</strong></td>
+                                            <td>
+                                            {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/usuario/cancelarplan'))) }}
+                                            <input type="hidden" class="form-control" name="idsuscripcion" id="" placeholder="Input field" value="{{$idsuscripcion}}">
+                                             <script language="JavaScript">
+                                             function confirmar ( mensaje ) {
+                                             return confirm( mensaje );}
+                                            </script>
+                                            <button onclick="return confirmar('¿Está seguro que desea cancelar la suscripción?')" type="submit" class="btn btn-primary">Cancelar suscripción</button>
+                                            {{ Form::close() }}
+                                            </td>
                                             </tr>
+                                           
                                         </tbody>
                                     </table>
                                     <!-- END Customer Info -->
@@ -65,6 +97,7 @@
                             </div>
   
 </div>
+                 
 
 @endforeach
 @endforeach
@@ -81,21 +114,26 @@
                                 <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">ID</th>
-                                            <th class="text-center"><i class="gi gi-user"></i></th>
-                                            <th>Client</th>
-                                            <th>Email</th>
-                                            <th>Subscription</th>
-                                            <th class="text-center">Actions</th>
+                                            <th class="text-center">Referencia</th>
+                                            <th class="text-center">Fecha</th>
+                                            <th  class="text-center">Valor</th>
+                                              <th  class="text-center">Autorización</th>
+                                               <th class="text-center">Franquicia</th>
+                                            <th class="text-center">Email</th>
+                                            <th class="text-center">Estado</th>
+                                            <th class="text-center">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($facturas as $facturas)
                                         <tr>
-                                            <td class="text-center">1</td>
-                                            <td class="text-center"><img src="img/placeholders/avatars/avatar15.jpg" alt="avatar" class="img-circle"></td>
-                                            <td><a href="javascript:void(0)">client1</a></td>
-                                            <td>client1@company.com</td>
-                                            <td><span class="label label-info">Business</span></td>
+                                            <td class="text-center">{{$facturas->ref_payco}}</td>
+                                            <td class="text-center">{{$facturas->fecha_trans}}</td>
+                                            <td class="text-center"><b>$ {{number_format($facturas->valor,0,",",".")}}</b></td>
+                                            <td class="text-center">{{$facturas->autorizacion}}</a></td>
+                                            <td class="text-center">{{$facturas->franquicia}}</a></td>
+                                            <td class="text-center">{{$facturas->email}}</td>
+                                            <td class="text-center"><span class="label label-success">{{$facturas->respuesta}}</span></td>
                                             <td class="text-center">
                                                 <div class="btn-group">
                                                     <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
@@ -103,87 +141,11 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-center">2</td>
-                                            <td class="text-center"><img src="img/placeholders/avatars/avatar2.jpg" alt="avatar" class="img-circle"></td>
-                                            <td><a href="javascript:void(0)">client2</a></td>
-                                            <td>client2@company.com</td>
-                                            <td><span class="label label-primary">Personal</span></td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">3</td>
-                                            <td class="text-center"><img src="img/placeholders/avatars/avatar7.jpg" alt="avatar" class="img-circle"></td>
-                                            <td><a href="javascript:void(0)">client3</a></td>
-                                            <td>client3@company.com</td>
-                                            <td><span class="label label-info">Business</span></td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">4</td>
-                                            <td class="text-center"><img src="img/placeholders/avatars/avatar2.jpg" alt="avatar" class="img-circle"></td>
-                                            <td><a href="javascript:void(0)">client4</a></td>
-                                            <td>client4@company.com</td>
-                                            <td><span class="label label-info">Business</span></td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">5</td>
-                                            <td class="text-center"><img src="img/placeholders/avatars/avatar6.jpg" alt="avatar" class="img-circle"></td>
-                                            <td><a href="javascript:void(0)">client5</a></td>
-                                            <td>client5@company.com</td>
-                                            <td><span class="label label-info">Business</span></td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">6</td>
-                                            <td class="text-center"><img src="img/placeholders/avatars/avatar13.jpg" alt="avatar" class="img-circle"></td>
-                                            <td><a href="javascript:void(0)">client6</a></td>
-                                            <td>client6@company.com</td>
-                                            <td><span class="label label-success">VIP</span></td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                       
+                                     @endforeach
+                                    
                                       
                                      
-                                        <tr>
-                                            <td class="text-center">60</td>
-                                            <td class="text-center"><img src="img/placeholders/avatars/avatar12.jpg" alt="avatar" class="img-circle"></td>
-                                            <td><a href="javascript:void(0)">client60</a></td>
-                                            <td>client60@company.com</td>
-                                            <td><span class="label label-warning">Trial</span></td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                            
                                     </tbody>
                                 </table>
                             </div>

@@ -7,7 +7,7 @@
     @stop
 
 @section('ContenidoSite-01')
- 
+  @if($plan == '0' OR  $plan == 'plan-mensual-intermedio' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-intermedio' OR $plan == 'plan-mensual-avanzado' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-avanzado')
 
 <div class="container">
   <div class="row">
@@ -129,6 +129,7 @@
 <script>
   CKEDITOR.replace( 'editor', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
 </script>
-
+@else
+@endif
 
 @stop

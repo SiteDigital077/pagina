@@ -1,21 +1,24 @@
  @extends ('adminsite.layout')
  
  @section('ContenidoSite-01')
-  {{ Html::style('//cdn.datatables.net/plug-ins/be7019ee387/integration/bootstrap/3/dataTables.bootstrap.css') }}
+
 
  <div class="content-header">
     <ul class="nav-horizontal text-center">
       <li class="active">
-       <a href="/gestor/planes-saas"><i class="fa fa-file-text"></i>Planes</a>
+       <a href="/gestor/planes-saas"><i class="fa fa-list-alt"></i>Planes</a>
       </li>
       <li>
-       <a href="/suscripcion/ver-clientes"><i class="fa fa-file-o"></i>Clientes</a>
+       <a href="/suscripcion/ver-clientes"><i class="fa fa-users"></i>Clientes</a>
       </li> 
       <li>
-      	<a href="/suscripcion/ver-suscripciones"><i class="fa fa-file-o"></i>Suscripciones</a>
+      	<a href="/suscripcion/ver-suscripciones"><i class="fa fa-pencil-square"></i>Suscripciones</a>
       </li>
       <li>
-        <a href="/suscripcion/credenciales"><i class="fa fa-file-o"></i>Credenciales</a>
+        <a href="/suscripcion/pagos"><i class="fa fa-credit-card"></i>Pagos</a>
+      </li>
+      <li>
+        <a href="/suscripcion/credenciales"><i class="fa fa-unlock-alt"></i>Credenciales</a>
       </li>
      </ul>
     </div>
@@ -79,9 +82,17 @@
 
 
 
- {{ HTML::script('//code.jquery.com/jquery-1.11.1.min.js') }}
- {{ HTML::script('//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js') }}
- {{ HTML::script('//cdn.datatables.net/plug-ins/be7019ee387/integration/bootstrap/3/dataTables.bootstrap.js') }}
- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+ <script type="text/javascript">
+$(document).ready(function(){
+    $('#example-datatable').DataTable();
+});
+</script>
+
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script src="/adminsite/js/pages/tablesDatatables.js"></script>
+        <script>$(function(){ TablesDatatables.init(); });</script>
  @stop
 

@@ -45,10 +45,16 @@
     <li role="presentation"><a href="#collap" aria-controls="messages" role="tab" data-toggle="tab">Collapse</a></li>
     <li role="presentation"><a href="#tab" aria-controls="messages" role="tab" data-toggle="tab">Tab</a></li>
     <li role="presentation"><a href="#shuffle" aria-controls="messages" role="tab" data-toggle="tab">Shuffle</a></li>
+    @if($plan == '0' OR  $plan == 'plan-mensual-intermedio' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-intermedio' OR $plan == 'plan-mensual-avanzado' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-avanzado')
     <li role="presentation"><a href="#banner" aria-controls="messages" role="tab" data-toggle="tab">Publicidad</a></li>
     <li role="presentation"><a href="#formu" aria-controls="messages" role="tab" data-toggle="tab">Formularios</a></li>
+    @else
+    @endif
     <li role="presentation"><a href="#carousel" aria-controls="messages" role="tab" data-toggle="tab">Carousel</a></li>
+    @if($plan == '0' OR  $plan == 'plan-mensual-intermedio' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-intermedio' OR $plan == 'plan-mensual-avanzado' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-avanzado')
     <li role="presentation"><a href="#empleos" aria-controls="messages" role="tab" data-toggle="tab">Empleos</a></li>
+    @else
+    @endif
    
   </ul>
 

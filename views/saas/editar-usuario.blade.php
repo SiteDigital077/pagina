@@ -3,11 +3,11 @@
  @section('ContenidoSite-01')
  <div class="content-header">
   <ul class="nav-horizontal text-center">
-   <li>
-    <a href="/gestion/usuario"><i class="gi gi-parents"></i> Usuarios</a>
-   </li>
    <li class="active">
-    <a href="/gestion/crear-usuario"><i class="fa fa-user-plus"></i> Crear Usuario</a>
+    <a href="/editar/usuariosaas"><i class="gi gi-edit sidebar-nav-icon"></i> Editar datos</a>
+   </li>
+   <li>
+    <a href="/editar/contrasena"><i class="fa fa-unlock-alt sidebar-nav-icon"></i> Cambiar Contraseña</a>
    </li>
   </ul>
  </div>

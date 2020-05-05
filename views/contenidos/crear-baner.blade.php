@@ -3,7 +3,7 @@
 
 
  @section('ContenidoSite-01')
-
+ @if($plan == '0' OR  $plan == 'plan-mensual-intermedio' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-intermedio' OR $plan == 'plan-mensual-avanzado' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-avanzado')
 
 <div class="container">
   <div class="row">
@@ -142,4 +142,8 @@
 
 
 </footer>
+
+@else
+ <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+@endif
  @stop

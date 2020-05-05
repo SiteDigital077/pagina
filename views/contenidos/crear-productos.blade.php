@@ -7,8 +7,7 @@
     @stop
 
 @section('ContenidoSite-01')
- 
-
+ @if($plan == '0' OR  $plan == 'plan-mensual-intermedio' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-intermedio' OR $plan == 'plan-mensual-avanzado' OR $plan == 'plan-semestral-intermedio' OR $plan == 'plan-anual-avanzado')
 <div class="container">
   <div class="row">
                             <div class="col-md-12">
@@ -112,12 +111,9 @@
                           </div>
                           
 </div>
-
-
-
-
-
 <script src="/vendors/ckeditor/config.js?t=HBDD" type="text/javascript"></script>
 
+@else
+@endif
 
 @stop

@@ -6,6 +6,7 @@ Route::group(['middleware' => ['auths','saas']], function (){
  Route::get('saas/sitesaas', 'DigitalsiteSaaS\Pagina\Http\PaginaController@sitesaas');
  Route::get('editar/usuariosaas', 'DigitalsiteSaaS\Pagina\Http\PaginaController@editarsaas');
  Route::post('usuario/actualizar/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@actualizaruser');
+ Route::post('usuario/cancelarplan/', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@cancelarplan');
   Route::post('usuario/actualizarpass/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@actualizaruserpass');
  Route::get('editar/contrasena', 'DigitalsiteSaaS\Pagina\Http\PaginaController@editarcontrasena');
 });
@@ -30,6 +31,7 @@ Route::get('gestion/contenidos/diagrama/update/{id}', 'DigitalsiteSaaS\Pagina\Ht
 Route::group(['middleware' => ['auths','administrador']], function (){
  Route::resource('/gestor/ver-templates', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController');
  Route::get('/gestor/planes-saas', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@planessaas');
+ Route::get('/suscripcion/pagos', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@pagos');
   Route::get('/gestor/crear-plansaas', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@crearplanessaas');
    Route::post('/suscripcion/crear-plan', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@crearplan');
    Route::get('/suscripcion/eliminar-plan/{id}', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@eliminarplan');
@@ -468,6 +470,7 @@ Route::get('/ubicacion/ajax-subcatweb',function(){
 
 
 Route::group(['middleware' => ['web']], function (){
+  Route::get('/respuesta/error', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@resperror');
   Route::post('respuesta/informacion', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@informacion');
  Route::post('/suscripcion/suscripcion', 'DigitalsiteSaaS\Pagina\Http\UsersaasController@suscripcion');
  Route::get('ingresar', 'DigitalsiteSaaS\Pagina\Http\WebController@ingresar');

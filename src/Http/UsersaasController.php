@@ -134,6 +134,9 @@ $email = $request->input('email');
 $plan = $request->input('id_plan');
 $empresa = $request->input('fqdn');
 $password = $request->input('password');
+$ip = $request->input('ip');
+$tipo = $request->input('tipo');
+$documento = $request->input('documento');
 
 
  $client = new Client(['http_errors' => false]);
@@ -220,12 +223,12 @@ $xmlstok = json_decode($responsedtok->getBody()->getContents(), true);
   'id_plan' => $plan,
   'customer' => $customer_id,
   'token_card' => $token_id,
-  'doc_type' => 'CC',
-  'doc_number' => '1014184224',
+  'doc_type' => $tipo,
+  'doc_number' => $documento,
   'url_response' => 'https:/secure.payco.co/restpagos/testRest/endpagopse.php',
   'url_confirmation' => 'http://siteavanza.com/respuesta/informacion/',
   'method_confirmation' => 'POST',
-  'ip' => '190.000.000.000',
+  'ip' => $ip,
   ],
  ]);
 $xmlscob = json_decode($responsecob->getBody()->getContents(), true);
@@ -247,7 +250,7 @@ if($xmlscob['data']['estado'] == 'Aceptada'){
     array('referencia' => $referencia,'valor' => $valor,'estado' => $estado,'request_id' => $autorizacion,'ip' => $ip, 'documento' => $documento,'tipo' => $tipo));
   $this->create($name, $email, $empresa, $password, $periodo, $plan);
 }else{
-  dd('Otra respuesta');
+ return Redirect('/respuesta/error/');
 }
 
     $plantilla = \DigitalsiteSaaS\Pagina\Template::all();

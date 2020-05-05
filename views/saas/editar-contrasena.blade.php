@@ -4,10 +4,10 @@
  <div class="content-header">
   <ul class="nav-horizontal text-center">
    <li>
-    <a href="/gestion/usuario"><i class="gi gi-parents"></i> Usuarios</a>
+    <a href="/editar/usuariosaas"><i class="gi gi-edit sidebar-nav-icon"></i> Editar datos</a>
    </li>
    <li class="active">
-    <a href="/gestion/crear-usuario"><i class="fa fa-user-plus"></i> Crear Usuario</a>
+    <a href="/editar/contrasena"><i class="fa fa-unlock-alt sidebar-nav-icon"></i> Cambiar Contraseña</a>
    </li>
   </ul>
  </div>
@@ -120,7 +120,7 @@
 
       <div class="form-group form-actions">
        <div class="col-md-9 col-md-offset-3">
-        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-angle-right"></i> Editar usuario</button>
+        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-angle-right"></i> Cambiar contraseña</button>
        </div>
       </div>
      
