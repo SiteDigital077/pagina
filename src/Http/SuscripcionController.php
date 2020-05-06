@@ -366,35 +366,12 @@ use Auth;
 
 
   public function formulario(){
-    $credenciales = Credencial::where('id', 1)->get();
-    foreach ($credenciales as $credencialesw) {
-        $public_key = $credencialesw->public_key;
-        $private_key = $credencialesw->private_key;
-    }
-    $client = new Client(['http_errors' => false]);
-    $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
-    'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
-     ],
-    ]);
-    $xml = json_decode($response->getBody()->getContents(), true);
-    $token = $xml['bearer_token'];
-    $tok = "Bearer"." ".$token;
-    $responsed = $client->get('https://api.secure.payco.co/recurring/v1/plans/public_key/', [
-    'headers' => [
-    'Authorization' =>  $tok,
-    'Content-Type' => 'application/json',
-    'Accept' => 'application/json',
-    'Type' => 'sdk-jwt',
-    ],
-    ]);
-    $xmls = json_decode($responsed->getBody()->getContents(), true);
+    $planes = DB::table('planes')->get();
     $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
     $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
     $subtotal = $this->subtotal();
     $total = $this->total();
-    return view('pagina::suscripcion.formulario')->with('plantilla', $plantilla)->with('menu', $menu)->with('xmls', $xmls)->with('subtotal', $subtotal)->with('total', $total);
+    return view('pagina::suscripcion.formulario')->with('plantilla', $plantilla)->with('menu', $menu)->with('planes', $planes)->with('subtotal', $subtotal)->with('total', $total);
   }
 
 

@@ -106,12 +106,12 @@
 	</div>
 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 
-   @foreach($xmls['data'] as $data)
-	@if($data['id_plan'] == Session::get('suscripcion'))	
+   @foreach($planes as $planes)
+	@if($planes->id_plan == Session::get('suscripcion'))	
      <div class="panel panel-primary">
-      <div class="panel-heading text-center"><h3 class="text-center">{{$data['name']}}</h3></div>
+      <div class="panel-heading text-center"><h3 class="text-center">{{$planes->name}}</h3></div>
        <div class="panel-body">
-	   <h3 class="text-center"> ${{number_format($data['amount'],0,",",".")}}/Mensual</h3>
+	   <h3 class="text-center"> ${{number_format($planes->amount,0,",",".")}}/Mensual</h3>
 	   <h3 class="text-center text-primary"></h3>
 	  <form action="/suscripcioneli/session" method="post">
        <button type="submit" class="btn btn-danger btn-md center-block">Cancelar suscripción</button>
