@@ -1290,6 +1290,11 @@ public function imagenescarousel($id){
   return view('pagina::contenidos/crear-totaleventos')->with('posicion', $posicion);
  }
 
+ public function planes($id){
+  $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
+  return view('pagina::contenidos/crear-plan')->with('posicion', $posicion);
+ }
+
  public function empleos($id){
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');

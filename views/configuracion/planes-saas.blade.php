@@ -25,7 +25,27 @@
 
 <div role="tabpanel" class="tab-pane active" id="contenido">
  <div class="container">
-  <?php $name=Session::get('name');?>
+ <?php $status=Session::get('status');?>
+    @if($status=='ok_create')
+      <div class="alert alert-success">
+       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+       <strong>Página registrada con exito</strong> US ...
+      </div>
+    @endif
+
+    @if($status=='ok_delete')
+      <div class="alert alert-danger">
+       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+       <strong>Página eliminada con exito</strong> US ...
+      </div>
+    @endif
+
+    @if($status=='ok_update')
+      <div class="alert alert-warning">
+       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+       <strong>Página actualizada con exito</strong> US ...
+      </div>
+    @endif
 
 
 <a class="btn btn-primary pull-right" href="/gestor/crear-plansaas">Crear plan de suscripción</a>
@@ -61,7 +81,7 @@
                                          <td>{{$data['created']}}</td>
                                  
                                          <td class="text-center">
-                                     
+                                        <a href="/gestor/editar-plan/{{$data['id_plan']}}"><span id="tup" data-toggle="tooltip" data-placement="left" title="Editar Plan" class="btn btn-success"><i class="fa fa-pencil-square-o sidebar-nav-icon"></i></span></a>
                                           <script language="JavaScript">
                                             function confirmar ( mensaje ) {
                                             return confirm( mensaje );}

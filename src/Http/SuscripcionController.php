@@ -26,7 +26,9 @@ use File;
 use Redirect;
 use DigitalsiteSaaS\Carrito\Transaccion;
 use DigitalsiteSaaS\Pagina\Credencial;
+use DigitalsiteSaaS\Pagina\Planes;
 use GuzzleHttp\Client;
+use Auth;
 
  class SuscripcionController extends Controller
  {
@@ -91,7 +93,18 @@ use GuzzleHttp\Client;
   }
 
 
+  public function editarplanessaas($id){
 
+    $planes = DB::table('planes')->where('id_plan','=',$id)->get();
+    return view('pagina::configuracion.editar-planessaas')->with('planes', $planes);
+  }
+
+  public function actualizarhost(){
+
+      $plan = DB::table('tenancy.hostnames')->where('id','=',Auth::user()->saas_id)->get();
+    
+    return view('pagina::suscripcion.editar-host')->with('plan', $plan);
+  }
 
   public function planessaas(){
     $credenciales = Credencial::where('id', 1)->get();
@@ -258,14 +271,15 @@ use GuzzleHttp\Client;
         $public_key = $credencialesw->public_key;
         $private_key = $credencialesw->private_key;
     }
-    $name = $request->input('name');
+    $name = Input::get('name');
     $id_plan = Str::slug($name);
-    $description = Str::slug($name);
-    $amount = $request->input('amount');
-    $moneda = $request->input('moneda');
-    $intervalo = $request->input('intervalo');
-    $int_conteo = $request->input('int_conteo');
-    $trial = $request->input('trial');
+    $description = Input::get('description');
+    $amount = Input::get('amount');
+    $moneda = Input::get('moneda');
+    $intervalo = Input::get('intervalo');
+    $int_conteo = Input::get('int_conteo');
+    $trial = Input::get('trial');
+
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
@@ -295,8 +309,61 @@ use GuzzleHttp\Client;
     ],
     ]);
     $xmls = json_decode($responsed->getBody()->getContents(), true);
-    return Redirect('/gestor/planes-saas')->with('status', 'ok_create');
+
+     $respuesta = $xmls['status'];
+     if($respuesta == 'true'){
+     $plan = new Planes;
+     $plan->name = Input::get('name');
+     $plan->id_plan = Str::slug($plan->name);
+     $plan->description = Input::get('description');
+     $plan->amount = Input::get('amount');
+     $plan->moneda = Input::get('moneda');
+     $plan->intervalo = Input::get('intervalo');
+     $plan->int_conteo = Input::get('int_conteo');
+     $plan->datos = Input::get('datos');
+     $plan->estado = Input::get('estado');
+     $plan->trial = Input::get('trial');
+     $plan->datos = Input::get('datos');
+     $plan->estado = Input::get('estado');
+     $plan->save();
+
+     return Redirect('/gestor/planes-saas')->with('status', 'ok_create');
+   }
+
+    return Redirect('/gestor/planes-saas')->with('status', 'ok_delete');
   }
+
+  public function actualizarplansaas($id){
+
+  Planes::where('id_plan', $id)
+       ->update([
+           'name' => Input::get('name'),
+           'id_plan' => Input::get('id_plan'),
+           'description' => Input::get('description'),
+           'amount' => Input::get('amount'),
+           'moneda' => Input::get('moneda'),
+           'intervalo' => Input::get('intervalo'),
+           'int_conteo' => Input::get('int_conteo'),
+           'datos' => Input::get('datos'),
+           'estado' => Input::get('estado'),
+           'trial' => Input::get('trial')
+        ]);
+
+
+ return Redirect('/gestor/planes-saas')->with('status', 'ok_update');
+}
+
+  public function updatehost($id){
+
+  DB::table('tenancy.hostnames')->where('id', '=', $id)
+       ->update([
+           'fqdn' => Input::get('hostname'),
+        ]);
+
+
+ return Redirect('/actualizar/host')->with('status', 'ok_update');
+}
+
 
   public function formulario(){
     $credenciales = Credencial::where('id', 1)->get();

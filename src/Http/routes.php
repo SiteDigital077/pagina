@@ -9,6 +9,8 @@ Route::group(['middleware' => ['auths','saas']], function (){
  Route::post('usuario/cancelarplan/', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@cancelarplan');
   Route::post('usuario/actualizarpass/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@actualizaruserpass');
  Route::get('editar/contrasena', 'DigitalsiteSaaS\Pagina\Http\PaginaController@editarcontrasena');
+  Route::get('actualizar/host', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@actualizarhost');
+  Route::post('suscripcion/actualizarhost/{id}', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@updatehost');
 });
 
 Route::group(['middleware' => ['auths','administrador']], function (){
@@ -31,6 +33,8 @@ Route::get('gestion/contenidos/diagrama/update/{id}', 'DigitalsiteSaaS\Pagina\Ht
 Route::group(['middleware' => ['auths','administrador']], function (){
  Route::resource('/gestor/ver-templates', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController');
  Route::get('/gestor/planes-saas', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@planessaas');
+  Route::get('/gestor/editar-plan/{id}', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@editarplanessaas');
+   Route::post('suscripcion/editar-plan/{id}', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@actualizarplansaas');
  Route::get('/suscripcion/pagos', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@pagos');
   Route::get('/gestor/crear-plansaas', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@crearplanessaas');
    Route::post('/suscripcion/crear-plan', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@crearplan');
@@ -182,6 +186,7 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  Route::get('gestion/contenidos/calendario/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@calendario');
  Route::get('gestion/contenidos/totaleventos/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@totaleventos');
  Route::get('gestion/contenidos/empleos/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@empleos');
+ Route::get('gestion/contenidos/planes/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@planes');
  Route::get('gestion/contenidos/videoclips/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@videoclips');
  Route::get('gestion/contenidos/backimage/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@backimage');
  Route::get('gestion/contenidos/cuenta/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@cuenta');

@@ -433,8 +433,8 @@
             
             <!--BLOCK ROW START-->
             <div class="row">
-             @foreach($xmls['data'] as $data)
-             @if($data['interval_count'] == 1)
+             @foreach($planessaas as $planessaasm)
+             @if($planessaasm->int_conteo == 1)
                 <div class="col-md-4">
                 
                     <!--PRICE CONTENT START-->
@@ -449,7 +449,7 @@
                                 <!--HEAD START-->
                                 <div class="head_bg"></div>
                                 <div class="head">
-                                    <span><b>{{$data['description']}}</b></span>
+                                    <span><b>{{$planessaasm->description}}</b></span>
                                 </div>
                                 <!--//HEAD END-->
                                 
@@ -460,7 +460,7 @@
                             <div class="generic_price_tag clearfix">    
                                 <span class="price">
                                  
-                     <span class="currency"><b>$ {{number_format($data['amount'],0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Mes</span></span>
+                     <span class="currency"><b>$ {{number_format($planessaasm->amount,0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Mes</span></span>
                                     
                                     
                                 </span>
@@ -472,20 +472,16 @@
                         
                         <!--FEATURE LIST START-->
                         <div class="generic_feature_list">
-                            <ul>
-                                <li><span>2GB</span> Bandwidth</li>
-                                <li><span>150GB</span> Storage</li>
-                                <li><span>12</span> Accounts</li>
-                                <li><span>7</span> Host Domain</li>
-                                <li><span>24/7</span> Support</li>
-                            </ul>
+                         
+                               {!!$planessaasm->datos!!}
+                          
                         </div>
                         <!--//FEATURE LIST END-->
                         
-                        <!--BUTTON START-->{{Session::get('suscripcion')}}
+                        <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
                           <form action="/suscripcion/session" method="post">
-                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$data['id_plan']}}" required="required">
+                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$planessaasm->id_plan}}" required="required">
                 
 
                             <button type="submit" class="btn btn-primary btn-md">Adquirir plan</button>
@@ -515,8 +511,8 @@
             
             <!--BLOCK ROW START-->
             <div class="row">
-             @foreach($xmls['data'] as $data)
-             @if($data['interval_count'] == 6)
+               @foreach($planessaas as $planessaass)
+             @if($planessaass->int_conteo == 6)
                 <div class="col-md-4">
                 
                     <!--PRICE CONTENT START-->
@@ -531,7 +527,7 @@
                                 <!--HEAD START-->
                                 <div class="head_bg"></div>
                                 <div class="head">
-                                    <span><b>{{$data['description']}}</b></span>
+                                    <span><b>{{$planessaass->description}}</b></span>
                                 </div>
                                 <!--//HEAD END-->
                                 
@@ -542,7 +538,7 @@
                             <div class="generic_price_tag clearfix">    
                                 <span class="price">
                                  
-                     <span class="currency"><b>$ {{number_format($data['amount'],0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Mes</span></span>
+                     <span class="currency"><b>$ {{number_format($planessaass->amount,0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Mes</span></span>
                                     
                                     
                                 </span>
@@ -554,20 +550,14 @@
                         
                         <!--FEATURE LIST START-->
                         <div class="generic_feature_list">
-                            <ul>
-                                <li><span>2GB</span> Bandwidth</li>
-                                <li><span>150GB</span> Storage</li>
-                                <li><span>12</span> Accounts</li>
-                                <li><span>7</span> Host Domain</li>
-                                <li><span>24/7</span> Support</li>
-                            </ul>
+                            {!!$planessaasm->datos!!}
                         </div>
                         <!--//FEATURE LIST END-->
                         
-                        <!--BUTTON START-->{{Session::get('suscripcion')}}
+                        <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
                           <form action="/suscripcion/session" method="post">
-                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$data['id_plan']}}" required="required">
+                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$planessaass->id_plan}}" required="required">
                 
 
                             <button type="submit" class="btn btn-primary btn-md">Adquirir plan</button>
@@ -600,8 +590,8 @@
             
             <!--BLOCK ROW START-->
             <div class="row">
-             @foreach($xmls['data'] as $data)
-             @if($data['interval_count'] == 12)
+               @foreach($planessaas as $planessaasa)
+             @if($planessaasa->int_conteo == 12)
                 <div class="col-md-4">
                 
                     <!--PRICE CONTENT START-->
@@ -616,7 +606,7 @@
                                 <!--HEAD START-->
                                 <div class="head_bg"></div>
                                 <div class="head">
-                                    <span><b>{{$data['description']}}</b></span>
+                                    <span><b>{{$planessaasa->description}}</b></span>
                                 </div>
                                 <!--//HEAD END-->
                                 
@@ -627,7 +617,7 @@
                             <div class="generic_price_tag clearfix">    
                                 <span class="price">
                                  
-                     <span class="currency"><b>$ {{number_format($data['amount'],0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Mes</span></span>
+                     <span class="currency"><b>$ {{number_format($planessaasa->amount,0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Mes</span></span>
                                     
                                     
                                 </span>
@@ -639,20 +629,14 @@
                         
                         <!--FEATURE LIST START-->
                         <div class="generic_feature_list">
-                            <ul>
-                                <li><span>2GB</span> Bandwidth</li>
-                                <li><span>150GB</span> Storage</li>
-                                <li><span>12</span> Accounts</li>
-                                <li><span>7</span> Host Domain</li>
-                                <li><span>24/7</span> Support</li>
-                            </ul>
+                            {!!$planessaasm->datos!!}
                         </div>
                         <!--//FEATURE LIST END-->
                         
-                        <!--BUTTON START-->{{Session::get('suscripcion')}}
+                        <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
                           <form action="/suscripcion/session" method="post">
-                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$data['id_plan']}}" required="required">
+                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$planessaasa->id_plan}}" required="required">
                 
 
                             <button type="submit" class="btn btn-primary btn-md">Adquirir plan</button>

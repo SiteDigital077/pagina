@@ -23,6 +23,7 @@
  use Hyn\Tenancy\Repositories\WebsiteRepository;
  use Carbon\Carbon;
  use Hash;
+ use GuzzleHttp\Client;
 
  class PaginaController extends Controller{
 
@@ -58,6 +59,9 @@ protected $tenantName = null;
 
 
  public function sitesaas(){
+
+
+
   $number = Auth::user()->id;
 $idsuscripcion = DB::table('trans_payco')->where('email', '=', Auth::user()->email)->pluck('extra1')->first();
 

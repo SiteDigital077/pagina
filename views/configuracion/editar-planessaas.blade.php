@@ -1,4 +1,4 @@
- @extends ('adminsite.layout')
+@extends ('adminsite.layout')
  
  @section('ContenidoSite-01')
  
@@ -16,93 +16,98 @@
       </div>
       <h2><strong>Crear</strong> plan</h2>
      </div>
+@foreach($planes as $planes)
+     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('suscripcion/editar-plan',$planes->id_plan))) }}
 
-     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('suscripcion/crear-plan'))) }}
-      <div class="form-group">
+
+
+      <div class="form-group hidden-xs hidden-sm hidden-md hidden-lg">
        <label class="col-md-3 control-label" for="example-text-input">Identificado del plan</label>
         <div class="col-md-9">
-         {{Form::text('id_plan', '', array('class' => 'form-control','placeholder'=>'Ingrese el identificador del plan'))}}
+         {{Form::text('id_plan', $planes->id_plan, array('class' => 'form-control','placeholder'=>'Ingrese el identificador del plan'))}}
         </div>
       </div>
       
-      <div class="form-group">
+      <div class="form-group hidden-xs hidden-sm hidden-md hidden-lg">
        <label class="col-md-3 control-label" for="example-email-input">Nombre del plan</label>
         <div class="col-md-9">
-         {{Form::text('name', '', array('class' => 'form-control','placeholder'=>'Ingrese el nombre del plan'))}}
+         {{Form::text('name', $planes->name, array('class' => 'form-control','placeholder'=>'Ingrese el nombre del plan'))}}
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group hidden-xs hidden-sm hidden-md hidden-lg">
        <label class="col-md-3 control-label" for="example-email-input">Descripción del plan</label>
         <div class="col-md-9">
-         {{Form::text('description', '', array('class' => 'form-control', 'placeholder'=>'Ingrese la descripción del plan'))}}
+         {{Form::text('description', $planes->description, array('class' => 'form-control', 'placeholder'=>'Ingrese la descripción del plan'))}}
         </div>
       </div>
 
 
-       <div class="form-group">
+       <div class="form-group hidden-xs hidden-sm hidden-md hidden-lg">
        <label class="col-md-3 control-label" for="example-email-input">Valor del plan</label>
         <div class="col-md-9">
-         {{Form::text('amount', '', array('class' => 'form-control','placeholder'=>'Ingrese el valor del plan'))}}
+         {{Form::text('amount', $planes->amount, array('class' => 'form-control','placeholder'=>'Ingrese el valor del plan'))}}
         </div>
       </div>
 
 
-      <div class="form-group">
+      <div class="form-group hidden-xs hidden-sm hidden-md hidden-lg">
        <label class="col-md-3 control-label" for="example-password-input">Tipo de moneda</label>
         <div class="col-md-9">
-         {{Form::text('moneda', '', array('class' => 'form-control','placeholder'=>'Ingrese el tipo de moneda'))}}
+         {{Form::text('moneda', $planes->moneda, array('class' => 'form-control','placeholder'=>'Ingrese el tipo de moneda'))}}
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group hidden-xs hidden-sm hidden-md hidden-lg">
        <label class="col-md-3 control-label" for="example-password-input">Intervalo</label>
         <div class="col-md-9">
-         {{Form::text('intervalo', '', array('class' => 'form-control','placeholder'=>'Ingrese el intervalo'))}}
+         {{Form::text('intervalo', $planes->intervalo, array('class' => 'form-control','placeholder'=>'Ingrese el intervalo'))}}
         </div>
       </div>
 
-       <div class="form-group">
+       <div class="form-group hidden-xs hidden-sm hidden-md hidden-lg">
        <label class="col-md-3 control-label" for="example-password-input">Intervalo conteo</label>
         <div class="col-md-9">
-         {{Form::text('int_conteo', '', array('class' => 'form-control','placeholder'=>'Ingrese el intervalo de conteo'))}}
+         {{Form::text('int_conteo', $planes->int_conteo, array('class' => 'form-control','placeholder'=>'Ingrese el intervalo de conteo'))}}
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group hidden-xs hidden-sm hidden-md hidden-lg">
        <label class="col-md-3 control-label" for="example-password-input">Dias prueba</label>
         <div class="col-md-9">
-         {{Form::text('trial', '', array('class' => 'form-control','placeholder'=>'Ingrese los días prueba'))}}
+         {{Form::text('trial', $planes->trial, array('class' => 'form-control','placeholder'=>'Ingrese los días prueba'))}}
         </div>
       </div>
 
        <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-text-input">Datos</label>
                                             <div class="col-md-9">
-                                                {{Form::textarea('datos', '', array('class' => 'ckeditor','id' => 'editor','placeholder'=>'Ingrese contenido'))}}
+                                                {{Form::textarea('datos', $planes->datos, array('class' => 'ckeditor','id' => 'editor','placeholder'=>'Ingrese contenido'))}}
                                             </div>
                                         </div>
 
 
-              <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-select">Estado plan</label>
+            
+             <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Visualización</label>
                                             <div class="col-md-9">
-                                                 {{ Form::select('estado', [
+                                                 {{ Form::select('estado', [$planes->estado => $planes->estado,
                                                 '1' => 'Activo',
                                                 '0' => 'Inactivo'], null, array('class' => 'form-control')) }}
                                              </div>
                                         </div>
 
 
+
       <div class="form-group form-actions">
        <div class="col-md-9 col-md-offset-3">
-        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-angle-right"></i> Crear plan</button>
+        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-angle-right"></i> Editar plan</button>
        </div>
       </div>
      
      {{ Form::close() }}
      
-
+  @endforeach
 
     
     </div>
@@ -117,7 +122,7 @@
 <script>
   CKEDITOR.replace( 'editor', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
 </script>
-	
+
  @stop
 
 			
