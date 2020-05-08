@@ -449,7 +449,7 @@
                                 <!--HEAD START-->
                                 <div class="head_bg"></div>
                                 <div class="head">
-                                    <span><b>{{$planessaasm->description}}</b></span>
+                                    <span><b>{{$planessaasm->name}}</b></span>
                                 </div>
                                 <!--//HEAD END-->
                                 
@@ -527,7 +527,7 @@
                                 <!--HEAD START-->
                                 <div class="head_bg"></div>
                                 <div class="head">
-                                    <span><b>{{$planessaass->description}}</b></span>
+                                    <span><b>{{$planessaass->name}}</b></span>
                                 </div>
                                 <!--//HEAD END-->
                                 
@@ -538,7 +538,7 @@
                             <div class="generic_price_tag clearfix">    
                                 <span class="price">
                                  
-                     <span class="currency"><b>$ {{number_format($planessaass->amount,0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Mes</span></span>
+                     <span class="currency"><b>$ {{number_format($planessaass->amount,0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Semestre</span></span>
                                     
                                     
                                 </span>
@@ -606,7 +606,7 @@
                                 <!--HEAD START-->
                                 <div class="head_bg"></div>
                                 <div class="head">
-                                    <span><b>{{$planessaasa->description}}</b></span>
+                                    <span><b>{{$planessaasa->name}}</b></span>
                                 </div>
                                 <!--//HEAD END-->
                                 
@@ -617,7 +617,7 @@
                             <div class="generic_price_tag clearfix">    
                                 <span class="price">
                                  
-                     <span class="currency"><b>$ {{number_format($planessaasa->amount,0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Mes</span></span>
+                     <span class="currency"><b>$ {{number_format($planessaasa->amount,0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Año</span></span>
                                     
                                     
                                 </span>

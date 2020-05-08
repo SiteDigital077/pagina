@@ -44,6 +44,7 @@
  use App\Mail\Registro;
  use App\Mail\Mensajema;
  use App\Mail\SendMailable;
+ use Validator;
 
  use App\Http\Requests\FormularioFormRequest;
  use Auth;
@@ -824,7 +825,12 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
     }
 
     public function checkUsernameAvailabilityinput($id){
+      if(!$this->tenantName){
      $user = Formu::orWhere('content_id','=', $id)->where('nombreinput', Input::get('nombreinput'))->count();
+     }
+     else{
+       $user = \DigitalsiteSaaS\Pagina\Tenant\Formu::orWhere('content_id','=', $id)->where('nombreinput', Input::get('nombreinput'))->count();
+     }
      if($user > 0){
       $isAvailable = FALSE;
      }else{

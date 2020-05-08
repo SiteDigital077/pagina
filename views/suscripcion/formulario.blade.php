@@ -6,6 +6,7 @@
     @stop
 
  @section('ContenidoSite-01')
+  <br><br><br><br>
  @if(Session::get('suscripcion') == '')
  <h1 class="text-center">No tiene planes seleccionados</h1>
  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -130,5 +131,6 @@
 {{ Html::script('modulo-saas/valida.js') }}
   {{ Html::script('//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js') }} 
 @endif
+ <br><br>
 @stop
 

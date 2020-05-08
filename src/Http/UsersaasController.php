@@ -137,7 +137,7 @@ $password = $request->input('password');
 $ip = $request->input('ip');
 $tipo = $request->input('tipo');
 $documento = $request->input('documento');
-
+dd($plan);
 
  $client = new Client(['http_errors' => false]);
  $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
@@ -190,8 +190,6 @@ return Redirect('/suscripcion/servicio')->with('status', 'ko_datos')->withInput(
  $xmlscus = json_decode($responsedcus->getBody()->getContents(), true);
 
 $customer_id = $xmlscus['data']['customerId'];
-
-
 
  $responsedtok = $client->post('https://api.secure.payco.co/recurring/v1/subscription/create', [
   'headers' => [

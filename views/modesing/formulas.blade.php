@@ -54,16 +54,16 @@
    <input type="hidden" name="form_id" id="input" class="form-control" value="{{$formulario->content_id}}">
    <input type="hidden" name="redireccion" id="input" class="form-control" value="{{Request::url()}}">
 	 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-   
+
 
   
  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-   
-@if(!empty($errors->first()))
-  
-            <span class="text-danger">{{ $errors->first() }}</span>
-      
-@endif
+    {!! NoCaptcha::display() !!}
+ @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                @endif
     
 <br>
     {{Form::submit('Enviar', array('class' => 'btn btn-primary btn-block', 'id' => 'sbt')  )}}
