@@ -28,64 +28,75 @@
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background: #f4f4f4">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 25px">			
 
-			<div class="form-group">
-				<h5 for="" class="text-primary">Información contable</h5>
-				<hr>		
-			</div>
+			
 		
-			<div class="form-group col-lg-12">
-				<label for="">Card number</label>
-				<input type="text" name="card_number" class="form-control" value="{{ old('card_number') }}" placeholder="00000000000000000">
-			</div>
-			<div class="form-group col-lg-5">
-				<label for="">Año expiración</label>
-				<input type="text" name="exp_year" class="form-control" value="{{ old('exp_year') }}" placeholder="0000">
-			</div>
-			<div class="form-group col-lg-4">
-				<label for="">Mes de expiración</label>
-				<input type="text" name="exp_month" class="form-control" value="{{ old('exp_month') }}" placeholder="00">
-			</div>
-			<div class="form-group col-lg-4">
-				<label for="">cvc</label>
-				<input type="text" name="cvc" class="form-control" value="{{ old('cvc') }}" placeholder="000">
-			</div>
 			<div class="form-group col-lg-12">
 				<h5 for="" class="text-primary">Información personal</h5>
 				<hr>		
 			</div>
-			
-		
-		    <input type="hidden" name="ip" class="form-control" value="{{Request::ip()}}">
-			<input type="hidden" name="id_plan" class="form-control" value="{{Session::get('suscripcion')}}">
-		
-			<div class="form-group col-lg-12">
+
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="form-group col-lg-6">
 				<label for="">Nombre</label>
 				<input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" placeholder="Nombre">
 			</div>
 
 			<div class="form-group col-lg-6">
+				<label for="">Apellido</label>
+				<input type="text" name="last_name" id="last_name" class="form-control" value="{{ old('last_name') }}" placeholder="Apellido">
+			</div>
+	</div>
+
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+			<div class="form-group col-lg-6">
 				<label for="">Tipo Documento</label>
-				<input type="text" name="tipo" class="form-control" value="{{ old('tipo') }}" placeholder="Tipo documento">
+				 <select id="tipo" name="tipo" class="form-control">
+                  <option value="" selected>Seleccione tipo documento</option>
+                  <option value="1">Cédula ciudadania</option>
+                  <option value="2">Cédula extranjeria</option>
+                  <option value="4">Tarjeta identidad</option>
+                  <option value="5">Pasaporte</option>
+                 </select>
 			</div>
 
 			<div class="form-group col-lg-6">
 				<label for="">Documento</label>
 				<input type="text" name="documento" class="form-control" value="{{ old('documento') }}" placeholder="Documento">
 			</div>
+	</div>
 
-			<div class="form-group col-lg-12">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="form-group col-lg-6">
 				<label for="">Email</label>
 				<input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email">
 			</div>
 
-			<div class="form-group col-lg-12">
-				<label for="">Nombre empresa o Hostanme</label>
-				<input type="text" name="fqdn" class="form-control" value="{{ old('fqdn') }}" placeholder="Nombre empresa o Hostanme">
+			<div class="form-group col-lg-6">
+				<label for="">Número contacto</label>
+				<input type="text" name="numero" class="form-control" value="{{ old('numero') }}" placeholder="Número de contacto">
 			</div>
+	</div>
 
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="form-group col-lg-6">
+				<label for="">Empresa</label>
+				<input type="text" name="empresa" class="form-control" value="{{ old('phone') }}" placeholder="Teléfono">
+			</div>
+			<div class="form-group col-lg-6">
+				<label for="">NIT</label>
+				<input type="text" name="nit" class="form-control" value="{{ old('nit') }}" placeholder="NIT">
+			</div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="form-group col-lg-12">
-				<label for="">Teléfono</label>
-				<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" placeholder="Teléfono">
+				<label for="">País</label>
+				 <select id="pais" name="pais" class="form-control">
+                  <option value="" selected>Seleccione país</option>
+                  @foreach($pais as $pais)
+                  <option value="{{$pais->id}}">{{$pais->pais}}</option>
+                  @endforeach
+                 </select>
 			</div>
 			<div class="form-group col-lg-12">
 				<label for="">Contraseña</label>
@@ -96,11 +107,12 @@
 				<label for="">Confirmar contraeña</label>
 				<input type="password" name="password_confirmation" class="form-control" placeholder="Repetir contraseña">
 			</div>
+		</div>
 			<div class="form-group col-lg-12">
-			<button type="submit" class="btn btn-primary btn-md btn-block">Registrar suscripción</button>
+			<button type="submit" class="btn btn-primary btn-md btn-block">crear cuenta</button>
 		</div>
 	</div>
-	
+
 	
 		{{ Form::close() }}
 	</div>

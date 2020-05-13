@@ -60,7 +60,12 @@ protected $tenantName = null;
 
  public function sitesaas(){
 
+if(!Auth::user()->saas_id){
+  $suscripcion = DB::table('suscripcion')->where('user_id','=', Auth::user()->id)->orderby('id','DESC')->take(1)->get();
 
+  $planes = DB::table('planes')->get();
+ return View('pagina::saas.dashboard')->with('planes', $planes)->with('suscripcion', $suscripcion);
+}else{
 
   $number = Auth::user()->id;
 $idsuscripcion = DB::table('trans_payco')->where('email', '=', Auth::user()->email)->pluck('extra1')->first();
@@ -86,6 +91,7 @@ $idsuscripcion = DB::table('trans_payco')->where('email', '=', Auth::user()->ema
   }
 
   return View('pagina::saas.dashboard')->with('number', $number)->with('infosaas', $infosaas)->with('website', $website)->with('resp', $resp)->with('facturas', $facturas)->with('idsuscripcion', $idsuscripcion);
+  }
 } 
 
  public function editarsaas(){

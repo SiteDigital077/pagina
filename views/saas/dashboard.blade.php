@@ -1,13 +1,109 @@
 @extends ('adminsite.layoutsaas')
 
 @section('ContenidoSite-01')
+
+@if(!Auth::user()->saas_id)
+
+<div class="container-fluid">
+    
+
+<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <?php $status=Session::get('status'); ?>
+  @if($status=='ko_datos')
+   <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Los datos de tarjeta ingresados no son validos verifique e intente de nuevo</strong>
+   </div>
+  @endif
+
+  @if($status=='ok_datos')
+   <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Los datos de tarjeta ingresados no son validos verifique e intente de nuevo</strong>
+   </div>
+  @endif
+
+
+<div class="block">
+                <!-- Horizontal Form Title -->
+                <div class="block-title">
+                    <div class="block-options pull-right">
+                        <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="Toggles .form-bordered class">No Borders</a>
+                    </div>
+                    <h2><i class="fa fa-credit-card-alt"></i> <strong>Tarjeta de</strong> crédito</h2>
+                </div>
+                <!-- END Horizontal Form Title -->
+
+                <!-- Horizontal Form Content -->
+                 {{ Form::open(array('method' => 'POST','class' => 'form-horizontal form-bordered','id' => 'defaultForm', 'url' => array('suscripcion/tarjeta'))) }}
+               
+                    <div class="form-group">
+                        <div class="col-md-12">
+                        <label class="col-md-12" for="example-hf-email">Número de tarjeta</label>
+                            <input type="text" name="card_number" class="form-control" value="{{ old('card_number') }}" placeholder="00000000000000000">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                        <label class="col-md-12" for="example-hf-password">Año expiración</label>
+                            <input type="text" name="exp_year" class="form-control" value="{{ old('exp_year') }}" placeholder="0000">
+                        </div>
+                        <div class="col-md-4">
+                        <label class="col-md-12" for="example-hf-password">Mes expiración</label>
+                            <input type="text" name="exp_month" class="form-control" value="{{ old('exp_month') }}" placeholder="00">
+                        </div>
+                        <div class="col-md-4">
+                        <label class="col-md-4" for="example-hf-password">CVC</label>
+                            <input type="text" name="cvc" class="form-control" value="{{ old('cvc') }}" placeholder="000">
+                        </div>
+                    </div>
+
+                    <div class="form-group form-actions">
+                        <div class="col-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-credit-card-alt"></i> Vincular tarjeta</button>
+                            <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Limpiar</button>
+                        </div>
+                    </div>
+                 {{ Form::close() }}
+                <!-- END Horizontal Form Content -->
+            </div>
+
+<a href="/suscripcion/planweb">Crear suscripción</a>
+
+        @foreach($suscripcion as $suscripcion)
+        <li>{{$suscripcion->desde}}</li>
+            <li>{{$suscripcion->hasta}}</li>
+        {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('suscripcion/crearhost'))) }}
+           <input type="text" name="host" class="form-control" value="" placeholder="hostname">
+           <input type="text" name="hasta" class="form-control" value="{{$suscripcion->hasta}}" placeholder="0000">
+           <input type="text" name="plan" class="form-control" value="{{$suscripcion->plan_id}}" placeholder="0000">
+            <input type="text" name="password" class="form-control" value="" placeholder="0000">
+            <button type="submit" class="btn btn-primary btn-md btn-block">Crear hostname</button>
+        {{ Form::close() }}    
+        @endforeach
+</div>
+<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      @foreach($planes as $planes)
+    @if($planes->id_plan == Session::get('suscripcion'))    
+     <div class="panel panel-primary">
+      <div class="panel-heading text-center"><h3 class="text-center">{{$planes->name}}</h3></div>
+       <div class="panel-body center-block">
+       <h3 class="text-center"> ${{number_format($planes->amount,0,",",".")}}/Mensual</h3>
+       <h3 class="text-center text-primary"></h3>
+      <form action="/suscripcioneli/session" method="post">
+       <button type="submit" class="btn btn-danger btn-md center-block">Cancelar suscripción</button>
+      </form>
+      </div>
+    </div>
+@else
+
+            @endif  
+             @endforeach
+</div>
+@else
 @foreach($infosaas as $infosaas)
 @foreach($website as $website)
 <div class="row">
-  
-
-
-
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
   <?php $status=Session::get('status');?>
@@ -153,7 +249,10 @@
 </div>
 </div>
 
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+        @endif
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
    <script src="/adminsite/js/pages/tablesDatatables.js"></script>
         <script>$(function(){ TablesDatatables.init(); });</script>
+</div>
 @stop

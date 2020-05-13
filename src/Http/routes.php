@@ -2,7 +2,9 @@
 
 
 Route::group(['middleware' => ['auths','saas']], function (){
-
+ Route::post('/suscripcion/tarjeta', 'DigitalsiteSaaS\Pagina\Http\UsersaasController@tarjeta');
+  Route::get('/suscripcion/planweb', 'DigitalsiteSaaS\Pagina\Http\UsersaasController@planweb');
+  Route::post('/suscripcion/crearhost', 'DigitalsiteSaaS\Pagina\Http\UsersaasController@create');
  Route::get('saas/sitesaas', 'DigitalsiteSaaS\Pagina\Http\PaginaController@sitesaas');
  Route::get('editar/usuariosaas', 'DigitalsiteSaaS\Pagina\Http\PaginaController@editarsaas');
  Route::post('usuario/actualizar/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@actualizaruser');
@@ -478,6 +480,7 @@ Route::group(['middleware' => ['web']], function (){
   Route::get('/respuesta/error', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@resperror');
   Route::post('respuesta/informacion', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@informacion');
  Route::post('/suscripcion/suscripcion', 'DigitalsiteSaaS\Pagina\Http\UsersaasController@suscripcion');
+
  Route::get('ingresar', 'DigitalsiteSaaS\Pagina\Http\WebController@ingresar');
  Route::resource('ingreso-comunidad', 'DigitalsiteSaaS\Pagina\Http\WebController@ingresarcomunidad');
  Route::post('mensajes/crearmensajeinput', 'DigitalsiteSaaS\Pagina\Http\WebController@crearmensajeinput');

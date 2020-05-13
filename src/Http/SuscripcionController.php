@@ -366,12 +366,22 @@ use Auth;
 
 
   public function formulario(){
+    
+
+    if(!Auth::user()){
+      $pais = DB::table('paises')->get();
     $planes = DB::table('planes')->get();
     $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
     $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
     $subtotal = $this->subtotal();
     $total = $this->total();
-    return view('pagina::suscripcion.formulario')->with('plantilla', $plantilla)->with('menu', $menu)->with('planes', $planes)->with('subtotal', $subtotal)->with('total', $total);
+    return view('pagina::suscripcion.formulario')->with('plantilla', $plantilla)->with('menu', $menu)->with('planes', $planes)->with('subtotal', $subtotal)->with('total', $total)->with('pais', $pais);
+  
+  }else{
+     if(!Auth::user()->rol_id == '5'){
+      return Redirect('/saas/sitesaas');
+    }
+  }
   }
 
 
