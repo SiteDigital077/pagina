@@ -211,11 +211,9 @@
   $id_str = explode(',', $ideman);
   $rols = DB::table('roles_comunidad')->whereIn('id', $id_str)->get();
    }
-  $notas = Content::join('categoria_comunidades', 'contents.contents', '=', 'categoria_comunidades.id')
-   ->where('contents.id', '=' ,$id)->get();
+  
   $posicion = DB::table('posicion')->pluck('posicion');
-  $categoria = DB::table('categoria_comunidades')->where('webtipodev','=','1')->get();
-  $categoriadina = DB::table('categoria_comunidades')->where('webtipodev','=','2')->get();
+
   }else{
   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
   $roles = DB::table('roles_comunidad')->get();
@@ -225,14 +223,12 @@
   $id_str = explode(',', $ideman);
   $rols = DB::table('roles_comunidad')->whereIn('id', $id_str)->get();
    }
-  $notas = \DigitalsiteSaaS\Pagina\Tenant\Content::join('categoria_comunidades', 'contents.contents', '=', 'categoria_comunidades.id')
-   ->where('contents.id', '=' ,$id)->get();
+ 
   $posicion = DB::table('posicion')->pluck('posicion');
-  $categoria = DB::table('categoria_comunidades')->where('webtipodev','=','1')->get();
-  $categoriadina = DB::table('categoria_comunidades')->where('webtipodev','=','2')->get();
+ 
   }
 
-  return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('categoria', $categoria)->with('categoriadina', $categoriadina)->with('notas', $notas)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols);
+  return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols);
  }
 
  public function editarbanner($id){
@@ -1247,17 +1243,8 @@ public function imagenescarousel($id){
   return view('pagina::contenidos/crear-carousel')->with('posicion', $posicion);
  }
 
- public function rondacomunidad($id){
-  $categoria = DB::table('categoria_comunidades')->where('webtipodev','=','1')->get();
-  $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
-  return view('pagina::contenidos/crear-rondacom')->with('posicion', $posicion)->with('categoria', $categoria);
- }
 
- public function rondacomunidadina($id){
-  $categoria = DB::table('categoria_comunidades')->where('webtipodev','=','2')->get();
-  $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
-  return view('pagina::contenidos/crear-rondacomina')->with('posicion', $posicion)->with('categoria', $categoria);
- }
+
 
  public function videoclips($id){
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
