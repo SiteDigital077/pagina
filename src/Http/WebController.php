@@ -273,7 +273,7 @@ public function __construct()
      $contenida = \DigitalsiteSaaS\Pagina\Tenant\Maxi::join('contents','contents.id','=','images.content_id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$user->id)->get();
-     $formulario = Formu::join('contents','inputs.content_id','=','contents.id')
+     $formulario = \DigitalsiteSaaS\Pagina\Tenant\Formu::join('contents','inputs.content_id','=','contents.id')
     ->select('inputs.*', 'inputs.id')
     ->orderBy('id','ASC')
     ->where('contents.page_id', '=' ,$user->id)->get();
@@ -538,7 +538,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
     ->whereBetween('start_old', array($start, $end))
     ->where('class', 'like', '%' . $tipo . '%')
     ->get();
-     $formulario = Formu::join('contents','inputs.content_id','=','contents.id')
+     $formulario = \DigitalsiteSaaS\Pagina\Tenant\Formu::join('contents','inputs.content_id','=','contents.id')
     ->select('inputs.*', 'inputs.id')
     ->orderBy('id','ASC')
     ->where('contents.page_id', '=' ,$post->id)->get();
@@ -777,6 +777,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 	}
 
     public function crearmensajeinput(FormularioFormRequest $request){
+       if(!$this->tenantName){
      $userma = Messagema::create([
 	 'campo1' => Input::get('campo1'),
 	 'campo2' => Input::get('campo2'),
@@ -804,6 +805,36 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 	 'estado' => '0',
 	 'remember_token' => Hash::make('_token'),
      ]);
+    }
+
+         $userma = \DigitalsiteSaaS\Pagina\Tenant\Messagema::create([
+   'campo1' => Input::get('campo1'),
+   'campo2' => Input::get('campo2'),
+   'campo3' => Input::get('campo3'),
+   'campo4' => Input::get('campo4'),
+   'campo5' => Input::get('campo5'),
+   'campo6' => Input::get('campo6'),
+   'campo7' => Input::get('campo7'),
+   'campo8' => Input::get('campo8'),
+   'campo9' => Input::get('campo9'),
+   'campo10' => Input::get('campo10'),
+   'campo11' => Input::get('campo11'),
+   'campo12' => Input::get('campo12'),
+   'campo13' => Input::get('campo13'),
+   'campo14' => Input::get('campo14'),
+   'campo15' => Input::get('campo15'),
+   'campo16' => Input::get('campo16'),
+   'campo17' => Input::get('campo17'),
+   'campo18' => Input::get('campo18'),
+   'campo19' => Input::get('campo19'),
+   'campo20' => Input::get('campo20'),
+   'form_id' => Input::get('form_id'),
+   'email' => Input::get('email'),
+   'radio' => Input::get('radio'),
+   'estado' => '0',
+   'remember_token' => Hash::make('_token'),
+]);
+  
      
      $envio =  Input::get('form_id');
      $redireccion = Input::get('redireccion');
@@ -823,7 +854,11 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
     }
 
   public function estadistica(){
- 	 $user =  DB::table('ips')->where('ip', Input::get('ip'))->first();	
+    if(!$this->tenantName){
+ 	 $user = Ips::where('ip', Input::get('ip'))->first();
+    }else{
+    $user = \DigitalsiteSaaS\Pagina\Tenant\Ips::where('ip', Input::get('ip'))->first();
+    }	
  	 if ($user){} else{
    if(!$this->tenantName){
    $pagina = new Estadistica;
