@@ -1,6 +1,6 @@
  @if($contenido->level == 1)
 
-           @foreach($products as $product)
+           @foreach($productsa as $product)
       
            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 procar">
               <div class="thumb-wrapper">
@@ -15,14 +15,8 @@
                   <h4 data-toggle="tooltip" title="{{$product->name}}">{!!substr($product->name, 0, 22)!!} ...  </h4>
                   @endif   
                   <div class="star-rating text-center">
-                    <ul class="list-inline">
-                      <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                      <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                      <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                      <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                      <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                    </ul>
-                 
+                   
+                
            
                    @if($product->stock == '0')
                    <p class="text-primary text-center"><b>cantidad disponible : ∞</b></p>
