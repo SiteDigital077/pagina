@@ -339,7 +339,7 @@ return Redirect('/saas/sitesaas')->with('status', 'ko_datos')->withInput();
   'token_card' => $xmls['id'],
   'name' => Auth::user()->name,
   'email' => Auth::user()->email,
-  'phone' => Auth::user()->celular,
+  'phone' => '3208525734',
   'default' => 'true',
   ],
  ]);
@@ -348,7 +348,9 @@ return Redirect('/saas/sitesaas')->with('status', 'ko_datos')->withInput();
  DB::table('tarjetas')->insert(
     ['name_card' => $xmls['card']['name'], 'mask' => $xmls['card']['mask'], 'identificador' => $xmls['id'], 'user_id' => Auth::user()->id, 'customerid' => $xmlscus['data']['customerId'], 'name' => $xmlscus['data']['name'],'email' => $xmlscus['data']['email']]);
 
-return Redirect('/saas/sitesaas')->with('status', 'ok_datos');
+ $terjetas = DB::table('tarjetas')->where('email', '=', Auth::user()->email)->get();
+
+return Redirect('/suscripcion/planweb')->with('status', 'ok_datos');
 
 }
 

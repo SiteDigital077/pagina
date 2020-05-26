@@ -6,7 +6,7 @@
     @stop
 
  @section('ContenidoSite-01')
-  <br><br><br><br>
+
  @if(Session::get('suscripcion') == '')
  <h1 class="text-center">No tiene planes seleccionados</h1>
  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -23,15 +23,16 @@
     <strong>Los datos de tarjeta ingresados no son validos verifique e intente de nuevo</strong>
    </div>
   @endif
-		{{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('suscripcion/suscripcion'))) }}
+		
 	
+	<form method="POST" action="{{ route('register') }}" id="defaultForm">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background: #f4f4f4">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 25px">			
 
 			
 		
 			<div class="form-group col-lg-12">
-				<h5 for="" class="text-primary">Información personal</h5>
+				<h5 for="" class="text-primary">Información de registro</h5>
 				<hr>		
 			</div>
 
@@ -47,24 +48,7 @@
 			</div>
 	</div>
 
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-			<div class="form-group col-lg-6">
-				<label for="">Tipo Documento</label>
-				 <select id="tipo" name="tipo" class="form-control">
-                  <option value="" selected>Seleccione tipo documento</option>
-                  <option value="1">Cédula ciudadania</option>
-                  <option value="2">Cédula extranjeria</option>
-                  <option value="4">Tarjeta identidad</option>
-                  <option value="5">Pasaporte</option>
-                 </select>
-			</div>
-
-			<div class="form-group col-lg-6">
-				<label for="">Documento</label>
-				<input type="text" name="documento" class="form-control" value="{{ old('documento') }}" placeholder="Documento">
-			</div>
-	</div>
+	
 
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="form-group col-lg-6">
@@ -79,16 +63,6 @@
 	</div>
 
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="form-group col-lg-6">
-				<label for="">Empresa</label>
-				<input type="text" name="empresa" class="form-control" value="{{ old('phone') }}" placeholder="Teléfono">
-			</div>
-			<div class="form-group col-lg-6">
-				<label for="">NIT</label>
-				<input type="text" name="nit" class="form-control" value="{{ old('nit') }}" placeholder="NIT">
-			</div>
-	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="form-group col-lg-12">
 				<label for="">País</label>
 				 <select id="pais" name="pais" class="form-control">
@@ -98,23 +72,26 @@
                   @endforeach
                  </select>
 			</div>
-			<div class="form-group col-lg-12">
+			<div class="form-group col-lg-6">
 				<label for="">Contraseña</label>
 				<input type="password" name="password" class="form-control" placeholder="Contraseña">
 			</div>
 
-			<div class="form-group col-lg-12">
+			<div class="form-group col-lg-6">
 				<label for="">Confirmar contraeña</label>
 				<input type="password" name="password_confirmation" class="form-control" placeholder="Repetir contraseña">
 			</div>
 		</div>
+		<input type="hidden" name="rol_id" class="form-control" placeholder="Repetir contraseña" value="5">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="form-group col-lg-12">
 			<button type="submit" class="btn btn-primary btn-md btn-block">crear cuenta</button>
 		</div>
 	</div>
+	</div>
 
 	
-		{{ Form::close() }}
+		</form>
 	</div>
 	</div>
 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -139,10 +116,14 @@
 	</div>
 </div>
 
+
+
+
+
+
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 {{ Html::script('modulo-saas/valida.js') }}
   {{ Html::script('//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js') }} 
 @endif
  <br><br>
 @stop
-

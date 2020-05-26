@@ -119,14 +119,11 @@ Route::group(['middleware' => ['auths','administrador']], function (){
   $template = DB::table('colors')->where('template','=',$id)->get();
   return View::make('pagina::configuracion.informacion-editemplate')->with('template', $template);
  });
- Route::get('/gestion/pagina-principal', function(){
-  $roles = DB::table('pages')->orderBy('posti')->get();
-  return View::make('pagina::paginas.pagina-principal')->with('roles', $roles);
- });
- Route::get('/gestion/ordenar-paginas', function(){
-  $rolesa = DB::table('pages')->orderBy('posta','ASC')->get();
-  return View::make('pagina::paginas.ordenar-pagina')->with('rolesa', $rolesa);
- });
+
+ Route::get('/gestion/pagina-principal', 'DigitalsiteSaaS\Pagina\Http\PaginaController@paginaprincipal');
+
+Route::get('/gestion/ordenar-paginas', 'DigitalsiteSaaS\Pagina\Http\PaginaController@paginaordenar');
+ 
 });
 
 
@@ -291,13 +288,10 @@ $inputs = DB::table('inputs')->get();
 
 
 
- Route::get('consulta/formularios', function () {
-  $formulario =  Input::get('formulario') ;
-  $plantilla = DB::table('inputs')->where('content_id','=',$formulario)->orderBy('nombreinput', 'asc')->get();
-  $respuesta = DB::table('mesagema')->where('form_id','=',$formulario)->orderBy('id', 'asc')->get();
-  $contenido = DB::table('contents')->where('type','=','formulas')->get();
-  return View::make('pagina::mercado')->with('plantilla', $plantilla)->with('respuesta', $respuesta)->with('contenido', $contenido);
- });
+
+
+ Route::get('consulta/formularios', 'DigitalsiteSaaS\Pagina\Http\PaginaController@consultaform');
+
  Route::get('gestion/contenidos/editarcontshuffle/{id}', function($id){
   $contenidos = DB::table('shuffle')->where('id', "=", $id)->get();  
   return View::make('pagina::actualizar-contshuffle')->with('contenidos', $contenidos);

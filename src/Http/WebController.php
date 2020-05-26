@@ -371,6 +371,11 @@ $categories = Pais::all();
 	  ->where('contents.page_id', '=' ,$post->id)
 	  ->get();
 
+    $formulario = Formu::join('contents','inputs.content_id','=','contents.id')
+    ->select('inputs.*', 'inputs.id')
+    ->orderBy('id','ASC')
+    ->where('contents.page_id', '=' ,$post->id)->get();
+
 	  $empleos = Empleo::join('contents','contents.id','=','empleos.content_id')
 	  ->orderBy('position','ASC')
 	  ->where('contents.page_id', '=' ,$post->id)

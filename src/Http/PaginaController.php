@@ -2,6 +2,8 @@
 
  namespace DigitalsiteSaaS\Pagina\Http;
  use DigitalsiteSaaS\Pagina\Page;
+ use DigitalsiteSaaS\Pagina\Inputweb;
+  use DigitalsiteSaaS\Pagina\Content;
  use DB;
  use Auth;
  use Zipper;
@@ -9,8 +11,9 @@
  use Storage;
  use DigitalsiteSaaS\Pagina\User;
  use DigitalsiteSaaS\Pagina\Zippera;
+ use DigitalsiteSaaS\Pagina\Messagema;
  use DigitalsiteSaaS\Pagina\Color;
-  use DigitalsiteSaaS\Pagina\Pais;
+ use DigitalsiteSaaS\Pagina\Pais;
  use App\Http\Controllers\Controller;
  use Input;
  use DigitalsiteSaaS\Pagina\Diagrama;
@@ -42,6 +45,8 @@ protected $tenantName = null;
 
  public function index(){
   if(!$this->tenantName){
+
+  $conteo = Messagema::where('estado','=','0')->count();
   $paginas = Page::all();
   $menu = Page::whereNull('page_id')->get();
   $casta = Page::count();
@@ -49,22 +54,28 @@ protected $tenantName = null;
   }
   else{
   $paginas = \DigitalsiteSaaS\Pagina\Tenant\Page::all();
+  $conteo = \DigitalsiteSaaS\Pagina\Tenant\Messagema::where('estado','=','0')->count();
   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->get();
   $casta = \DigitalsiteSaaS\Pagina\Tenant\Page::count();
   $user = \DigitalsiteSaaS\Pagina\Tenant\Page::where('posti','=','1')->count();
   }
-  return view('pagina::paginas.paginas')->with('paginas', $paginas)->with('user', $user)->with('casta', $casta)->with('menu', $menu);
+  return view('pagina::paginas.paginas')->with('paginas', $paginas)->with('user', $user)->with('casta', $casta)->with('menu', $menu)->with('conteo', $conteo);
  
 }
 
 
  public function sitesaas(){
 
+
+$tarjetas = DB::table('tarjetas')->where('email', '=', Auth::user()->email)->get();
+$tarjetascont = DB::table('tarjetas')->where('email', '=', Auth::user()->email)->count();
+$suscripcioncont = DB::table('suscripcion')->where('user_id', '=', Auth::user()->id)->count();
+
 if(!Auth::user()->saas_id){
   $suscripcion = DB::table('suscripcion')->where('user_id','=', Auth::user()->id)->orderby('id','DESC')->take(1)->get();
 
   $planes = DB::table('planes')->get();
- return View('pagina::saas.dashboard')->with('planes', $planes)->with('suscripcion', $suscripcion);
+ return View('pagina::saas.dashboard')->with('planes', $planes)->with('suscripcion', $suscripcion)->with('tarjetas', $tarjetas)->with('tarjetascont', $tarjetascont)->with('suscripcioncont', $suscripcioncont);
 }else{
 
   $number = Auth::user()->id;
@@ -90,7 +101,7 @@ $idsuscripcion = DB::table('trans_payco')->where('email', '=', Auth::user()->ema
 
   }
 
-  return View('pagina::saas.dashboard')->with('number', $number)->with('infosaas', $infosaas)->with('website', $website)->with('resp', $resp)->with('facturas', $facturas)->with('idsuscripcion', $idsuscripcion);
+  return View('pagina::saas.dashboard')->with('number', $number)->with('infosaas', $infosaas)->with('website', $website)->with('resp', $resp)->with('facturas', $facturas)->with('idsuscripcion', $idsuscripcion)->with('tarjetas', $tarjetas);
   }
 } 
 
@@ -146,15 +157,65 @@ public function actualizaruserpass($id){
 
 
  public function show(){
+   if(!$this->tenantName){
   $number = Auth::user()->id;
   $user = Page::where('posti','=','1')->count();
-  return View('pagina::paginas.crear-pagina')->with('user', $user)->with('number', $number);
+  $conteo = Messagema::where('estado','=','0')->count();
+  }else{
+    $number = Auth::user()->id;
+  $user = \DigitalsiteSaaS\Pagina\Tenant\Page::where('posti','=','1')->count();
+  $conteo = \DigitalsiteSaaS\Pagina\Tenant\Messagema::where('estado','=','0')->count();
+  }
+  return View('pagina::paginas.crear-pagina')->with('user', $user)->with('number', $number)->with('conteo', $conteo);
  }
 
  public function registrosaas(){
   $tenantName = $this->tenantName;
   return View('auth.register')->with('tenantName', $tenantName);
  }
+
+public function paginaprincipal(){
+  if(!$this->tenantName){
+  $roles = Page::orderBy('posti')->get();
+  $conteo = Messagema::where('estado','=','0')->count();
+ }else{
+  $roles = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posti')->get();
+  $conteo = \DigitalsiteSaaS\Pagina\Tenant\Messagema::where('estado','=','0')->count();
+ }
+ return View('pagina::paginas.pagina-principal')->with('roles', $roles)->with('conteo', $conteo);
+ }
+
+
+public function paginaordenar(){
+  if(!$this->tenantName){
+  $rolesa =  Page::orderBy('posta','ASC')->get();
+  $conteo = Messagema::where('estado','=','0')->count();
+ }else{
+  $rolesa =  \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta','ASC')->get();
+  $conteo = \DigitalsiteSaaS\Pagina\Tenant\Messagema::where('estado','=','0')->count();
+ }
+ return View('pagina::paginas.ordenar-pagina')->with('rolesa', $rolesa)->with('conteo', $conteo);
+ }
+
+
+public function consultaform(){
+  if(!$this->tenantName){
+  $formulario =  Input::get('formulario') ;
+  $plantilla = Inputweb::where('content_id','=',$formulario)->orderBy('nombreinput', 'asc')->get();
+  $respuesta = Messagema::where('form_id','=',$formulario)->orderBy('id', 'asc')->get();
+  $contenido = Content::where('type','=','formulas')->get();
+  $conteo = Messagema::where('estado','=','0')->count();
+ }else{
+  $formulario =  Input::get('formulario') ;
+  $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Inputweb::where('content_id','=',$formulario)->orderBy('nombreinput', 'asc')->get();
+  $respuesta = \DigitalsiteSaaS\Pagina\Tenant\Messagema::where('form_id','=',$formulario)->orderBy('id', 'asc')->get();
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','formulas')->get();
+  $conteo = \DigitalsiteSaaS\Pagina\Tenant\Messagema::where('estado','=','0')->count();
+ }
+ return View('pagina::mercado')->with('plantilla', $plantilla)->with('respuesta', $respuesta)->with('contenido', $contenido)->with('conteo', $conteo);
+ }
+
+
 
   public function editardiagrama($id){
   if(!$this->tenantName){
@@ -290,8 +351,14 @@ else{
  }
 
  public function subpagina(){
+  if(!$this->tenantName){
   $user = Page::where('posti','=','1')->count();
-  return View('pagina::paginas.crear-subpagina')->with('user', $user);
+  $conteo = Messagema::where('estado','=','0')->count();
+  }else{
+  $user =  \DigitalsiteSaaS\Pagina\Tenant\Page::where('posti','=','1')->count();
+  $conteo = \DigitalsiteSaaS\Pagina\Tenant\Messagema::where('estado','=','0')->count();
+  }
+  return View('pagina::paginas.crear-subpagina')->with('user', $user)->with('conteo', $conteo);
  }
 
  public function eliminar($id){

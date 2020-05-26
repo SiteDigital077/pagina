@@ -16,7 +16,9 @@ class Formu extends Model
 
 	public function contents(){
 
-		return $this->belongsTo('Content');
+		return $this->belongsTo('DigitalsiteSaaS\Pagina\Tenant\Content');
 	}
 
 }
+
+

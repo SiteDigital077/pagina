@@ -25,7 +25,7 @@
        <a href="/gestion/ordenar-paginas"><i class="fa fa-cubes"></i> Ordenar páginas</a>
       </li>
       <li>
-       <a href="/consulta/formularios"><i class="fa fa-commenting-o"></i> Registros <span class="badge">{{DB::table('mesagema')->where('estado','=','0')->count()}}</span></a>
+       <a href="/consulta/formularios"><i class="fa fa-commenting-o"></i> Registros <span class="badge">{{$conteo}}</span></a>
       </li>
      
      </ul>

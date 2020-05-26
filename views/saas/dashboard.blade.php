@@ -2,11 +2,17 @@
 
 @section('ContenidoSite-01')
 
+
+
+
 @if(!Auth::user()->saas_id)
 
 <div class="container-fluid">
     
-
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  
+<h3>Para el siguiete paso usted debe registrar la tarjeta de crédito y luego proceder a la suscripción del plan seleccionado</h3>
+</div>
 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
             <?php $status=Session::get('status'); ?>
   @if($status=='ko_datos')
@@ -67,21 +73,67 @@
                  {{ Form::close() }}
                 <!-- END Horizontal Form Content -->
             </div>
+@if($tarjetascont == 0)
 
-<a href="/suscripcion/planweb">Crear suscripción</a>
+@else
+@if($suscripcioncont == 1)
+@else
+<a class="btn btn-primary btn-block" href="/suscripcion/planweb">Crear suscripción</a>
+@endif
+@endif
+
 
         @foreach($suscripcion as $suscripcion)
         <li>{{$suscripcion->desde}}</li>
             <li>{{$suscripcion->hasta}}</li>
         {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('suscripcion/crearhost'))) }}
+
+
            <input type="text" name="host" class="form-control" value="" placeholder="hostname">
-           <input type="text" name="hasta" class="form-control" value="{{$suscripcion->hasta}}" placeholder="0000">
+           <input type="text" name="hasta" class="form-control" value="{{ \Carbon\Carbon::parse($suscripcion->hasta)->format('Y-m-d')}}" placeholder="0000">
            <input type="text" name="plan" class="form-control" value="{{$suscripcion->plan_id}}" placeholder="0000">
-            <input type="text" name="password" class="form-control" value="" placeholder="0000">
-            <button type="submit" class="btn btn-primary btn-md btn-block">Crear hostname</button>
+           <input type="password" name="password" class="form-control" value="" placeholder="Ingrese contraseña">
+           <button type="submit" class="btn btn-primary btn-md btn-block">Crear hostname</button>
         {{ Form::close() }}    
         @endforeach
 </div>
+
+
+ <div class="col-md-4">
+                                <!-- Horizontal Form Block -->
+                                <div class="block">
+                                    <!-- Horizontal Form Title -->
+                                    <div class="block-title">
+                                        <div class="block-options pull-right">
+                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="Toggles .form-bordered class">No Borders</a>
+                                        </div>
+                                        <h2><strong>Tarjeta</strong> registrada</h2>
+                                    </div>
+                                    <!-- END Horizontal Form Title -->
+
+                                    <!-- Horizontal Form Content -->
+                                    <form action="page_forms_general.html" method="post" class="form-horizontal form-bordered" onsubmit="return false;">
+                                        <div class="form-group text-center">
+                                             <i class="fa fa-credit-card-alt text-primary" style="font-size: 70px"></i>
+                                             @foreach($tarjetas as $tarjetas)
+                                             <h4><b>Nombre tarjeta</b><br>{{$tarjetas->name_card}}</h4>
+                                             <h4><b>Número</b><br>{{$tarjetas->mask}}</h4>
+                                             @endforeach
+                                        </div>
+                                        
+                                        <div class="form-group form-actions">
+                                            <div class="col-md-9 col-md-offset-3">
+                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-user"></i> Eliminar tarjeta</button>
+                                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END Horizontal Form Content -->
+                                </div>
+                              </div>
+
+
+
 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
       @foreach($planes as $planes)
     @if($planes->id_plan == Session::get('suscripcion'))    
@@ -251,8 +303,15 @@
 
 
         @endif
+</div>
+
+
+
+<script src="/adminsite/js/vendor/jquery.min.js"></script>
+ <script src="/adminsite/js/pages/formsWizard.js"></script>
+        <script>$(function(){ FormsWizard.init(); });</script>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
    <script src="/adminsite/js/pages/tablesDatatables.js"></script>
         <script>$(function(){ TablesDatatables.init(); });</script>
-</div>
+
 @stop
