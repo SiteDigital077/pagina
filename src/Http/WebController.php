@@ -106,21 +106,30 @@ public function __construct()
     if(!$this->tenantName){
    $users = DB::table('pages')->where('posti', '1')->get();
 	foreach ($users as $user){
+
+     
+
      $cama = Page::find($user->id);
      $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
      $meta = Page::where('id','=',$user->id)->get();
      $plantilla = Template::all();
      $plantillaes = Template::all();
      $paginations = Page::find($user->id)->Blogs()->paginate(9);
-     $diagramas = Diagrama::where('id', "=", $user->id)->get();
      $temawebs = Template::where('id','=','1')->get();
+     $scroll = Template::where('id',1)->value('scroll');
      foreach($temawebs as $temaweb){
-      $contenido = Content::where('page_id',"=",$user->id)
+       if($scroll == 1){
+      $contenido = Content::all();
+      $diagramas = Diagrama::all();
+      }else{
+        $contenido = Content::where('page_id',"=",$user->id)
       /*->where('template',"=",$temaweb->template)*/
       ->orderBy('nivel','ASC')
       ->get();
+      $diagramas = Diagrama::where('id', "=", $user->id)->get();
+    }
      }
-   
+    
   
      $productsa = Product::inRandomOrder()->get();
 
@@ -202,7 +211,7 @@ public function __construct()
 	  ->where('contents.page_id', '=' ,$user->id)
 	  ->get();
 
-	 return view('desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario);
+	 return view('Templates.sitekonecta.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario);
      }}
 
      $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
