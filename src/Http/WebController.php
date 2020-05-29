@@ -117,15 +117,24 @@ public function __construct()
      $paginations = Page::find($user->id)->Blogs()->paginate(9);
      $temawebs = Template::where('id','=','1')->get();
      $scroll = Template::where('id',1)->value('scroll');
+     $temp = Template::where('id',1)->value('template');
      foreach($temawebs as $temaweb){
        if($scroll == 1){
       $contenido = Content::all();
       $diagramas = Diagrama::all();
+       $formulario = Formu::join('contents','inputs.content_id','=','contents.id')
+    ->select('inputs.*', 'inputs.id')
+    ->orderBy('id','ASC')
+    ->get();
       }else{
         $contenido = Content::where('page_id',"=",$user->id)
       /*->where('template',"=",$temaweb->template)*/
       ->orderBy('nivel','ASC')
       ->get();
+       $formulario = Formu::join('contents','inputs.content_id','=','contents.id')
+    ->select('inputs.*', 'inputs.id')
+    ->orderBy('id','ASC')
+    ->where('contents.page_id', '=' ,$user->id)->get();
       $diagramas = Diagrama::where('id', "=", $user->id)->get();
     }
      }
@@ -163,10 +172,7 @@ public function __construct()
      $contenida = Maxi::join('contents','contents.id','=','images.content_id')
 	  ->orderBy('position','ASC')
 	  ->where('contents.page_id', '=' ,$user->id)->get();
-     $formulario = Formu::join('contents','inputs.content_id','=','contents.id')
-    ->select('inputs.*', 'inputs.id')
-    ->orderBy('id','ASC')
-    ->where('contents.page_id', '=' ,$user->id)->get();
+    
      $cart = session()->get('cart');
      $min_price = Input::has('min_price') ? Input::get('min_price') : 0;
      $max_price = Input::has('max_price') ? Input::get('max_price') : 10000000;
@@ -211,7 +217,7 @@ public function __construct()
 	  ->where('contents.page_id', '=' ,$user->id)
 	  ->get();
 
-	 return view('Templates.sitekonecta.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario);
+	 return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario);
      }}
 
      $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
@@ -799,6 +805,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 	}
 
     public function crearmensajeinput(FormularioFormRequest $request){
+
        if(!$this->tenantName){
      $userma = Messagema::create([
 	 'campo1' => Input::get('campo1'),
@@ -827,6 +834,22 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 	 'estado' => '0',
 	 'remember_token' => Hash::make('_token'),
      ]);
+
+      $envio =  Input::get('form_id');
+     $redireccion = Input::get('redireccion');
+     $ema = Input::get('email');
+      if($ema == ''){
+      return Redirect::to($redireccion)->with('status', 'ok_create');
+     }
+     else{
+      $datas = Content::where('id',$envio)->get();
+       foreach ($datas as $user){
+       Mail::to(Input::get('email'))
+       ->bcc($user->video)
+     ->send(new Mensajema($userma));
+     }
+     return Redirect::to($redireccion)->with('status', 'ok_create');
+   }
     }
 
          $userma = \DigitalsiteSaaS\Pagina\Tenant\Messagema::create([
@@ -856,8 +879,6 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    'estado' => '0',
    'remember_token' => Hash::make('_token'),
 ]);
-  
-     
      $envio =  Input::get('form_id');
      $redireccion = Input::get('redireccion');
      $ema = Input::get('email');
@@ -865,14 +886,15 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       return Redirect::to($redireccion)->with('status', 'ok_create');
      }
      else{
-      $datas = DB::table('contents')->where('id',$envio)->get();
+      $datas =\DigitalsiteSaaS\Pagina\Tenant\Content::where('id',$envio)->get();
        foreach ($datas as $user){
        Mail::to(Input::get('email'))
        ->bcc($user->video)
-	   ->send(new Mensajema($userma));
+     ->send(new Mensajema($userma));
      }
      return Redirect::to($redireccion)->with('status', 'ok_create');
-	 }
+   }
+    
     }
 
   public function estadistica(){
