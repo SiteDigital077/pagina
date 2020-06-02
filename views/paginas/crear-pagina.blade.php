@@ -123,7 +123,12 @@
                                                  '0' => 'No Visible'], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
-
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Posición</label>
+                                            <div class="col-md-9">
+                                                {{Form::number('posicion', '2', array('class' => 'form-control','placeholder'=>'Ingrese palabras clave','maxlength' => '150', 'min' => '0'))}}
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Visualización</label>
                                             <div class="col-md-9">

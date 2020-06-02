@@ -109,6 +109,72 @@
 </div>
 
 
+
+<div class="container">
+    <div class="row">
+                            <div class="col-md-12">
+                                <!-- Basic Form Elements Block -->
+                                <div class="block">
+                                    <!-- Basic Form Elements Title -->
+                                    <div class="block-title">
+                                        <div class="block-options pull-right">
+                                            
+                                        </div>
+                                        <h2><strong>Crear</strong> Sub Página</h2>
+                                    </div>
+                                    <!-- END Form Elements Title -->
+
+                                    <!-- Basic Form Elements Content -->
+                                    {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm1', 'url' => array('gestion/paginas/crearpagina'))) }}
+                                        
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Nombre Página</label>
+                                            <div class="col-md-9">
+                                                {{Form::text('pagina', '', array('class' => 'form-control','placeholder'=>'Ingrese página','maxlength' => '50' ))}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Título</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('titulo', '', array('class' => 'form-control','placeholder'=>'Ingrese título', 'maxlength' => '55'))}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-password-input">Palabras Clave</label>
+                                            <div class="col-md-9">
+                                                {{Form::text('palabras', '', array('class' => 'form-control','placeholder'=>'Ingrese palabras clave','maxlength' => '150'))}}
+                                            </div>
+                                        </div>
+
+                                        {{Form::hidden('posti', '2', array('class' => 'form-control','placeholder'=>'Ingrese la descripción de la página'))}}
+                                        {{Form::hidden('categoria', '0', array('class' => 'form-control','placeholder'=>'Ingrese la descripción de la página'))}}        
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-textarea-input">Descripción</label>
+                                            <div class="col-md-9">
+                                                {{Form::textarea('descripcion', '', array('class' => 'form-control','placeholder'=>'Ingrese descripción', 'maxlength' => '159'))}}
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" name="DNI" id="DNI" value="{{Request::segment(4)}}"/>
+                                        
+                                        <div class="form-group form-actions">
+                                            <div class="col-md-9 col-md-offset-3">
+                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Crear</button>
+                                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Cancelar</button>
+                                            </div>
+                                        </div>
+                                     {{ Form::close() }}
+                                    <!-- END Basic Form Elements Content -->
+                                </div>
+                                <!-- END Basic Form Elements Block -->
+                            </div>
+                          </div>
+
+</div>
+
+
+
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 

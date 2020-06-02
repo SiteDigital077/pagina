@@ -162,7 +162,7 @@ public function actualizaruserpass($id){
   $user = Page::where('posti','=','1')->count();
   $conteo = Messagema::where('estado','=','0')->count();
   }else{
-    $number = Auth::user()->id;
+  $number = Auth::user()->id;
   $user = \DigitalsiteSaaS\Pagina\Tenant\Page::where('posti','=','1')->count();
   $conteo = \DigitalsiteSaaS\Pagina\Tenant\Messagema::where('estado','=','0')->count();
   }
@@ -239,6 +239,7 @@ public function consultaform(){
   $pagina->titulo = Input::get('titulo');
   $pagina->palabras = Input::get('palabras');
   $pagina->posti = Input::get('posti');
+  $pagina->posta = Input::get('posicion');
   $pagina->nivel = Input::get('nivel');
   $pagina->categoria = Input::get('categoria');
   $pagina->sitio = Input::get('sitio');
@@ -331,6 +332,7 @@ public function consultaform(){
   $pagina->description = Input::get('descripcion');
   $pagina->titulo = Input::get('titulo');
   $pagina->nivel = Input::get('nivel');
+  $pagina->posta = Input::get('posicion');
   $pagina->categoria = Input::get('categoria');
   $pagina->sitio = Input::get('sitio');
   $pagina->palabras = Input::get('palabras');	
