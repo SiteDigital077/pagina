@@ -295,8 +295,9 @@
   $input = Input::all();
   if(!$this->tenantName){
   $pagina = Diagrama::find($id);
-  }
+  }else{
   $pagina = \DigitalsiteSaaS\Pagina\Tenant\Diagrama::find($id);
+  }
   $pagina->posicionSD01 = Input::get('posicionsd01');
   $pagina->posicionSD1 = Input::get('posicionsd1');
   $pagina->posicionSD2 = Input::get('posicionsd2');

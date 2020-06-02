@@ -1,666 +1,290 @@
+<style type="text/css">
+
+.pricingTable{
+    text-align: center;
+    background: #fff;
+    margin: 0 -15px;
+    box-shadow: 0 0 10px #ababab;
+    padding-bottom: 40px;
+    border-radius: 10px;
+    color: #cad0de;
+    transform: scale(1);
+    transition: all 0.5s ease 0s;
+}
+.pricingTable:hover{
+    transform: scale(1.05);
+    z-index: 1;
+}
+.pricingTable .pricingTable-header{
+    padding: 40px 0;
+    background: #f5f6f9;
+    border-radius: 10px 10px 50% 50%;
+    transition: all 0.5s ease 0s;
+}
+.pricingTable:hover .pricingTable-header{
+    background: #bb1639;
+}
+.pricingTable .pricingTable-header i{
+    font-size: 50px;
+    color: #858c9a;
+    margin-bottom: 10px;
+    transition: all 0.5s ease 0s;
+}
+.pricingTable .price-value{
+    font-size: 35px;
+    transition: all 0.5s ease 0s;
+}
+.pricingTable .month{
+    display: block;
+    font-size: 14px;
+    color: #cad0de;
+}
+.pricingTable:hover .pricingTable-header i,
+.pricingTable:hover .price-value,
+.pricingTable:hover .month{
+    color: #fff;
+}
+.pricingTable .heading{
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+.pricingTable .pricing-content ul{
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+.pricingTable .pricing-content ul li{
+    line-height: 30px;
+    color: #a7a8aa;
+}
+.pricingTable .pricingTable-signup a{
+    display: inline-block;
+    font-size: 15px;
+    color: #fff;
+    padding: 10px 35px;
+    border-radius: 20px;
+    background: #ffa442;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+}
+.pricingTable .pricingTable-signup a:hover{
+    box-shadow: 0 0 10px #ffa442;
+}
+.pricingTable.blue .price-value,
+.pricingTable.blue .heading{
+    color: #4b64ff;
+}
+.pricingTable.blue:hover .pricingTable-header,
+.pricingTable.blue .pricingTable-signup a{
+    background: #4b64ff;
+}
+.pricingTable.blue .pricingTable-signup a:hover{
+    box-shadow: 0 0 10px #4b64ff;
+}
+.pricingTable.red .price-value,
+.pricingTable.red .heading{
+    color: #ff4b4b;
+}
+.pricingTable.red:hover .pricingTable-header,
+.pricingTable.red .pricingTable-signup a{
+    background: #ff4b4b;
+}
+.pricingTable.red .pricingTable-signup a:hover{
+    box-shadow: 0 0 10px #ff4b4b;
+}
+.pricingTable.green .price-value,
+.pricingTable.green .heading{
+    color: #40c952;
+}
+.pricingTable.green:hover .pricingTable-header,
+.pricingTable.green .pricingTable-signup a{
+    background: #40c952;
+}
+.pricingTable.green .pricingTable-signup a:hover{
+    box-shadow: 0 0 10px #40c952;
+}
+.pricingTable.blue:hover .price-value,
+.pricingTable.red:hover .price-value,
+.pricingTable.green:hover .price-value{
+    color: #fff;
+}
+@media screen and (max-width: 990px){
+    .pricingTable{ margin: 0 0 20px 0; }
+}
+</style>
 
 <style type="text/css">
 
-#generic_price_table{
-
+.toggle-tabs li {float:left;margin:5px;list-style:none;}
+.toggle-tabs li.active-tab {}
+.tabbed-content-wrap {
+  float:left;
+  width:100%;
 }
 
-/*PRICE COLOR CODE START*/
-#generic_price_table .generic_content{
-	background-color: #fff;
+.test {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#generic_price_table .generic_content .generic_head_price{
-	background-color: #f6f6f6;
+ul {
+  list-style: none;
 }
 
-#generic_price_table .generic_content .generic_head_price .generic_head_content .head_bg{
-	border-color: #e4e4e4 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #e4e4e4;
+.test ul li {
+  display: inline-block;
 }
 
-#generic_price_table .generic_content .generic_head_price .generic_head_content .head span{
-	color: #525252;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_price_tag .price .sign{
-    color: #414141;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_price_tag .price .currency{
-    color: #414141;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_price_tag .price .cent{
-    color: #414141;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_price_tag .month{
-    color: #414141;
-}
-
-#generic_price_table .generic_content .generic_feature_list ul li{	
-	color: #a7a7a7;
-}
-
-#generic_price_table .generic_content .generic_feature_list ul li span{
-	color: #414141;
-}
-#generic_price_table .generic_content .generic_feature_list ul li:hover{
-	background-color: #E4E4E4;
-	border-left: 5px solid #55b2ae;
-}
-
-#generic_price_table .generic_content .generic_price_btn a{
-	border: 1px solid #55b2ae; 
-    color: #55b2ae;
-} 
-
-#generic_price_table .generic_content.active .generic_head_price .generic_head_content .head_bg,
-#generic_price_table .generic_content:hover .generic_head_price .generic_head_content .head_bg{
-	border-color: #55b2ae rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #55b2ae;
-	color: #fff;
-}
-
-#generic_price_table .generic_content:hover .generic_head_price .generic_head_content .head span,
-#generic_price_table .generic_content.active .generic_head_price .generic_head_content .head span{
-	color: #fff;
-}
-
-#generic_price_table .generic_content:hover .generic_price_btn a,
-#generic_price_table .generic_content.active .generic_price_btn a{
-	background-color: #55b2ae;
-	color: #fff;
-} 
-#generic_price_table{
-	margin: 50px 0 50px 0;
-    font-family: 'Raleway', sans-serif;
-}
-.row .table{
-    padding: 28px 0;
-}
-
-/*PRICE BODY CODE START*/
-
-#generic_price_table .generic_content{
-	overflow: hidden;
-	position: relative;
-	text-align: center;
-}
-
-#generic_price_table .generic_content .generic_head_price {
-	margin: 0 0 20px 0;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_head_content{
-	margin: 0 0 50px 0;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_head_content .head_bg{
-    border-style: solid;
-    border-width: 90px 1411px 23px 399px;
-	position: absolute;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_head_content .head{
-	padding-top: 40px;
-	position: relative;
-	z-index: 1;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_head_content .head span{
-    font-family: "Raleway",sans-serif;
-    font-size: 22px;
-    font-weight: 400;
-    letter-spacing: 2px;
-    margin: 0;
-    padding: 0;
-    text-transform: uppercase;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_price_tag{
-	padding: 0 0 20px;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_price_tag .price{
-	display: block;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_price_tag .price .sign{
-    display: inline-block;
-    font-family: "Lato",sans-serif;
-    font-size: 28px;
-    font-weight: 400;
-    vertical-align: middle;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_price_tag .price .currency{
-    font-family: "Lato",sans-serif;
-    font-size: 30px;
-    font-weight: 300;
-    letter-spacing: auto;
-    line-height: 60px;
-    padding: 0;
-    vertical-align: middle;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_price_tag .price .cent{
-    display: inline-block;
-    font-family: "Lato",sans-serif;
-    font-size: 24px;
-    font-weight: 400;
-    vertical-align: bottom;
-}
-
-#generic_price_table .generic_content .generic_head_price .generic_price_tag .month{
-    font-family: "Lato",sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    letter-spacing: 3px;
-    vertical-align: bottom;
-}
-
-#generic_price_table .generic_content .generic_feature_list ul{
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-#generic_price_table .generic_content .generic_feature_list ul li{
-	font-family: "Lato",sans-serif;
-	font-size: 18px;
-	padding: 15px 0;
-	transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table .generic_content .generic_feature_list ul li:hover{
-	transition: all 0.3s ease-in-out 0s;
-	-moz-transition: all 0.3s ease-in-out 0s;
-	-ms-transition: all 0.3s ease-in-out 0s;
-	-o-transition: all 0.3s ease-in-out 0s;
-	-webkit-transition: all 0.3s ease-in-out 0s;
-
-}
-#generic_price_table .generic_content .generic_feature_list ul li .fa{
-	padding: 0 10px;
-}
-#generic_price_table .generic_content .generic_price_btn{
-	margin: 20px 0 32px;
-}
-
-#generic_price_table .generic_content .generic_price_btn a{
-    border-radius: 50px;
-	-moz-border-radius: 50px;
-	-ms-border-radius: 50px;
-	-o-border-radius: 50px;
-	-webkit-border-radius: 50px;
-    display: inline-block;
-    font-family: "Lato",sans-serif;
-    font-size: 18px;
-    outline: medium none;
-    padding: 12px 30px;
-    text-decoration: none;
-    text-transform: uppercase;
-}
-
-#generic_price_table .generic_content,
-#generic_price_table .generic_content:hover,
-#generic_price_table .generic_content .generic_head_price .generic_head_content .head_bg,
-#generic_price_table .generic_content:hover .generic_head_price .generic_head_content .head_bg,
-#generic_price_table .generic_content .generic_head_price .generic_head_content .head h2,
-#generic_price_table .generic_content:hover .generic_head_price .generic_head_content .head h2,
-#generic_price_table .generic_content .price,
-#generic_price_table .generic_content:hover .price,
-#generic_price_table .generic_content .generic_price_btn a,
-#generic_price_table .generic_content:hover .generic_price_btn a{
-	transition: all 0.3s ease-in-out 0s;
-	-moz-transition: all 0.3s ease-in-out 0s;
-	-ms-transition: all 0.3s ease-in-out 0s;
-	-o-transition: all 0.3s ease-in-out 0s;
-	-webkit-transition: all 0.3s ease-in-out 0s;
-} 
-@media (max-width: 320px) {	
-}
-
-@media (max-width: 767px) {
-	#generic_price_table .generic_content{
-		margin-bottom:75px;
-	}
-}
-@media (min-width: 768px) and (max-width: 991px) {
-	#generic_price_table .col-md-3{
-		float:left;
-		width:50%;
-	}
-	
-	#generic_price_table .col-md-4{
-		float:left;
-		width:50%;
-	}
-	
-	#generic_price_table .generic_content{
-		margin-bottom:75px;
-	}
-}
-@media (min-width: 992px) and (max-width: 1199px) {
-}
-@media (min-width: 1200px) {
-}
-#generic_price_table_home{
-	 font-family: 'Raleway', sans-serif;
-}
-
-.text-center h1,
-.text-center h1 a{
-	color: #7885CB;
-	font-size: 30px;
-	font-weight: 300;
-	text-decoration: none;
-}
-.demo-pic{
-	margin: 0 auto;
-}
-.demo-pic:hover{
-	opacity: 0.7;
-}
-
-#generic_price_table_home ul{
-	margin: 0 auto;
-	padding: 0;
-	list-style: none;
-	display: table;
-}
-#generic_price_table_home li{
-	float: left;
-}
-#generic_price_table_home li + li{
-	margin-left: 10px;
-	padding-bottom: 10px;
-}
-#generic_price_table_home li a{
-	display: block;
-	width: 50px;
-	height: 50px;
-	font-size: 0px;
-}
-#generic_price_table_home .blue{
-	background: #3498DB;
-	transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .emerald{
-	background: #55b2ae;
-	transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .grey{
-	background: #7F8C8D;
-	transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .midnight{
-	background: #34495E;
-	transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .orange{
-	background: #E67E22;
-	transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .purple{
-	background: #9B59B6;
-	transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .red{
-	background: #E74C3C;
-	transition:all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .turquoise{
-	background: #1ABC9C;
-	transition: all 0.3s ease-in-out 0s;
-}
-
-#generic_price_table_home .blue:hover,
-#generic_price_table_home .emerald:hover,
-#generic_price_table_home .grey:hover,
-#generic_price_table_home .midnight:hover,
-#generic_price_table_home .orange:hover,
-#generic_price_table_home .purple:hover,
-#generic_price_table_home .red:hover,
-#generic_price_table_home .turquoise:hover{
-	border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-	transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .divider{
-	border-bottom: 1px solid #ddd;
-	margin-bottom: 20px;
-	padding: 20px;
-}
-#generic_price_table_home .divider span{
-	width: 100%;
-	display: table;
-	height: 2px;
-	background: #ddd;
-	margin: 50px auto;
-	line-height: 2px;
-}
-#generic_price_table_home .itemname{
-	text-align: center;
-	font-size: 50px ;
-	padding: 50px 0 20px ;
-	border-bottom: 1px solid #ddd;
-	margin-bottom: 40px;
-	text-decoration: none;
-    font-weight: 300;
-}
-#generic_price_table_home .itemnametext{
-    text-align: center;
-    font-size: 20px;
-    padding-top: 5px;
-    text-transform: uppercase;
-    display: inline-block;
-}
-#generic_price_table_home .footer{
-	padding:40px 0;
-}
-
-.price-heading{
-    text-align: center;
-}
-.price-heading h1{
-	color: #666;
-	margin: 0;
-	padding: 0 0 50px 0;
-}
-.demo-button {
-    background-color: #333333;
-    color: #ffffff;
-    display: table;
-    font-size: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    margin-bottom: 50px;
-    outline-color: -moz-use-text-color;
-    outline-style: none;
-    outline-width: medium ;
-    padding: 10px;
-    text-align: center;
-    text-transform: uppercase;
-}
-.bottom_btn{
-	background-color: #333333;
-    color: #ffffff;
-    display: table;
-    font-size: 28px;
-    margin: 60px auto 20px;
-    padding: 10px 25px;
-    text-align: center;
-    text-transform: uppercase;
-}
-.demo-button:hover{
-	background-color: #666;
-	color: #FFF;
-	text-decoration:none;
-	
-}
-.bottom_btn:hover{
-	background-color: #666;
-	color: #FFF;
-	text-decoration:none;
-}
-
+.content-box {display:none;}
+.content-box.active-content-box {display:block;}
 </style>
+<div class="toggle-wrap">
+  <div class="test">
+  <ul class="toggle-tabs center-block">
+    <li class="active-tab btn btn-primary btn-lg">Mensual</li>
+    <li class="btn btn-primary btn-lg">Semestral</li>
+    <li class="btn btn-primary btn-lg">Anual</li>
+  </ul>
+  </div>
+  <div class="tabbed-content-wrap">
+  
+             
+     <div class="content-box active-content-box">
+       @foreach($planessaas as $planessaasm)
+      @if($planessaasm->int_conteo == 1)
+       <div class="col-md-4 col-sm-4">
+                <div class="pricingTable">
+                    <div class="pricingTable-header">
+                        <i class="fa fa-adjust"></i>
+                        <div class="price-value text-primary"> $ {{number_format($planessaasm->amount,0,",",".")}} <span class="month">per month</span> </div>
+                    </div>
+                    <h3 class="heading text-primary">{{$planessaasm->name}}</h3>
+                    <div class="pricing-content">
+                        <ul>
+                            {!!$planessaasm->datos!!}
+                        </ul>
+                    </div>
+                    
 
-<div role="tabpanel">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active">
-            <a href="#mensual" aria-controls="home" role="mensual" data-toggle="tab">Mensual</a>
-        </li>
-        <li role="presentation">
-            <a href="#semestral" aria-controls="tab" role="tab" data-toggle="tab">Semestral</a>
-        </li>
-        <li role="presentation">
-            <a href="#anual" aria-controls="tab" role="tab" data-toggle="tab">Anual</a>
-        </li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="mensual">
-        <div id="generic_price_table">   
-<section>
-       
-        <div class="container">
-            
-            <!--BLOCK ROW START-->
-            <div class="row">
-             @foreach($planessaas as $planessaasm)
-             @if($planessaasm->int_conteo == 1)
-                <div class="col-md-4">
-                
-                    <!--PRICE CONTENT START-->
-                    <div class="generic_content clearfix">
+                    <div class="">
                         
-                        <!--HEAD PRICE DETAIL START-->
-                        <div class="generic_head_price clearfix">
-                        
-                            <!--HEAD CONTENT START-->
-                            <div class="generic_head_content clearfix">
-                            
-                                <!--HEAD START-->
-                                <div class="head_bg"></div>
-                                <div class="head">
-                                    <span><b>{{$planessaasm->name}}</b></span>
-                                </div>
-                                <!--//HEAD END-->
-                                
-                            </div>
-                            <!--//HEAD CONTENT END-->
-                            
-                            <!--PRICE START-->
-                            <div class="generic_price_tag clearfix">    
-                                <span class="price">
-                                 
-                     <span class="currency"><b>$ {{number_format($planessaasm->amount,0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Mes</span></span>
-                                    
-                                    
-                                </span>
-                            </div>
-                            <!--//PRICE END-->
-                            
-                        </div>                            
-                        <!--//HEAD PRICE DETAIL END-->
-                        
-                        <!--FEATURE LIST START-->
-                        <div class="generic_feature_list">
-                         
-                               {!!$planessaasm->datos!!}
-                          
-                        </div>
-                        <!--//FEATURE LIST END-->
-                        
-                        <!--BUTTON START-->
-                        <div class="generic_price_btn clearfix">
-                          <form action="/suscripcion/session" method="post">
+                       <form action="/suscripcion/session" method="post">
                                 <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$planessaasm->id_plan}}" required="required">
                 
 
                             <button type="submit" class="btn btn-primary btn-md">Adquirir plan</button>
                           </form>
-                        </div>
-                        <!--//BUTTON END-->
-                        
                     </div>
-                    <!--//PRICE CONTENT END-->
-                        
                 </div>
-                @else
-                @endif
-                @endforeach
-              
-            
-        </div>
-    </section>             
-
-</div>
-        </div>
-        <div role="tabpanel" class="tab-pane" id="semestral">
-             <div id="generic_price_table">   
-<section>
-       
-        <div class="container">
-            
-            <!--BLOCK ROW START-->
-            <div class="row">
-               @foreach($planessaas as $planessaass)
-             @if($planessaass->int_conteo == 6)
-                <div class="col-md-4">
-                
-                    <!--PRICE CONTENT START-->
-                    <div class="generic_content clearfix">
-                        
-                        <!--HEAD PRICE DETAIL START-->
-                        <div class="generic_head_price clearfix">
-                        
-                            <!--HEAD CONTENT START-->
-                            <div class="generic_head_content clearfix">
-                            
-                                <!--HEAD START-->
-                                <div class="head_bg"></div>
-                                <div class="head">
-                                    <span><b>{{$planessaass->name}}</b></span>
-                                </div>
-                                <!--//HEAD END-->
-                                
-                            </div>
-                            <!--//HEAD CONTENT END-->
-                            
-                            <!--PRICE START-->
-                            <div class="generic_price_tag clearfix">    
-                                <span class="price">
-                                 
-                     <span class="currency"><b>$ {{number_format($planessaass->amount,0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Semestre</span></span>
-                                    
-                                    
-                                </span>
-                            </div>
-                            <!--//PRICE END-->
-                            
-                        </div>                            
-                        <!--//HEAD PRICE DETAIL END-->
-                        
-                        <!--FEATURE LIST START-->
-                        <div class="generic_feature_list">
+            </div>
+       @else
+     @endif
+     @endforeach
+     </div>
+     
+     
+     <div class="content-box">
+      @foreach($planessaas as $planessaasm)
+       @if($planessaasm->int_conteo == 6)
+       <div class="col-md-4 col-sm-4">
+                <div class="pricingTable">
+                    <div class="pricingTable-header">
+                        <i class="fa fa-adjust"></i>
+                        <div class="price-value text-primary"> $ {{number_format($planessaasm->amount,0,",",".")}} <span class="month">per month</span> </div>
+                    </div>
+                    <h3 class="heading text-primary">{{$planessaasm->name}}</h3>
+                    <div class="pricing-content">
+                        <ul>
                             {!!$planessaasm->datos!!}
-                        </div>
-                        <!--//FEATURE LIST END-->
+                        </ul>
+                    </div>
+                    
+
+                    <div class="">
                         
-                        <!--BUTTON START-->
-                        <div class="generic_price_btn clearfix">
-                          <form action="/suscripcion/session" method="post">
-                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$planessaass->id_plan}}" required="required">
+                       <form action="/suscripcion/session" method="post">
+                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$planessaasm->id_plan}}" required="required">
                 
 
                             <button type="submit" class="btn btn-primary btn-md">Adquirir plan</button>
                           </form>
-                        </div>
-                        <!--//BUTTON END-->
-                        
                     </div>
-                    <!--//PRICE CONTENT END-->
-                        
                 </div>
-                @else
-                @endif
-                @endforeach
-              
-            
-        </div>
-    </section>             
-
-</div>
-
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="anual">
-           
-             <div id="generic_price_table">   
-<section>
-       
-        <div class="container">
-            
-            <!--BLOCK ROW START-->
-            <div class="row">
-               @foreach($planessaas as $planessaasa)
-             @if($planessaasa->int_conteo == 12)
-                <div class="col-md-4">
-                
-                    <!--PRICE CONTENT START-->
-                    <div class="generic_content clearfix">
-                        
-                        <!--HEAD PRICE DETAIL START-->
-                        <div class="generic_head_price clearfix">
-                        
-                            <!--HEAD CONTENT START-->
-                            <div class="generic_head_content clearfix">
-                            
-                                <!--HEAD START-->
-                                <div class="head_bg"></div>
-                                <div class="head">
-                                    <span><b>{{$planessaasa->name}}</b></span>
-                                </div>
-                                <!--//HEAD END-->
-                                
-                            </div>
-                            <!--//HEAD CONTENT END-->
-                            
-                            <!--PRICE START-->
-                            <div class="generic_price_tag clearfix">    
-                                <span class="price">
-                                 
-                     <span class="currency"><b>$ {{number_format($planessaasa->amount,0,",",".")}}</b> / <span style="font-size: 20px" class="text-primary">Año</span></span>
-                                    
-                                    
-                                </span>
-                            </div>
-                            <!--//PRICE END-->
-                            
-                        </div>                            
-                        <!--//HEAD PRICE DETAIL END-->
-                        
-                        <!--FEATURE LIST START-->
-                        <div class="generic_feature_list">
+            </div>
+       @else
+     @endif
+      @endforeach
+     </div>
+    
+    <div class="content-box">
+      @foreach($planessaas as $planessaasm)
+       @if($planessaasm->int_conteo == 12)
+       <div class="col-md-4 col-sm-4">
+                <div class="pricingTable">
+                    <div class="pricingTable-header">
+                        <i class="fa fa-adjust"></i>
+                        <div class="price-value text-primary"> $ {{number_format($planessaasm->amount,0,",",".")}} <span class="month">per month</span> </div>
+                    </div>
+                    <h3 class="heading text-primary">{{$planessaasm->name}}</h3>
+                    <div class="pricing-content">
+                        <ul>
                             {!!$planessaasm->datos!!}
-                        </div>
-                        <!--//FEATURE LIST END-->
+                        </ul>
+                    </div>
+                    
+
+                    <div class="">
                         
-                        <!--BUTTON START-->
-                        <div class="generic_price_btn clearfix">
-                          <form action="/suscripcion/session" method="post">
-                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$planessaasa->id_plan}}" required="required">
+                       <form action="/suscripcion/session" method="post">
+                                <input type="hidden" name="id_plan" id="input" class="form-control" value="{{$planessaasm->id_plan}}" required="required">
                 
 
                             <button type="submit" class="btn btn-primary btn-md">Adquirir plan</button>
                           </form>
-                        </div>
-                        <!--//BUTTON END-->
-                        
                     </div>
-                    <!--//PRICE CONTENT END-->
-                        
                 </div>
-                @else
-                @endif
-                @endforeach
-              
-            
-        </div>
-    </section>             
+            </div>
+       @else
+     @endif
+      @endforeach
+     </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+  $(".toggle-tabs li").click(function(){
+ $(this).addClass('active-tab').parents('ul.toggle-tabs').find('li').not($(this)).removeClass('active-tab');
+ var currentTabIndex = $(this).index();
+ $('.content-box:eq('+ currentTabIndex +')').addClass('active-content-box').parents('.tabbed-content-wrap').find('.content-box').not($('.content-box:eq('+ currentTabIndex +')')).removeClass('active-content-box');
+});
+</script>
 
-</div>
-            
-        </div>
-    </div>
-</div>
+<style type="text/css">
+  button {
+  background-color: blue;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+}
+
+ .test .active {
+  background-color: #793644 !important;  
+}
+</style>
+
+
+
+<script type="text/javascript">
+  $(function() {
+  var botones = $(".test li");
+  botones.click(function() {
+    botones.removeClass('active');
+    $(this).addClass('active');
+  });
+});
+</script>
 
 
 
