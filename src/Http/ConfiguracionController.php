@@ -18,6 +18,7 @@ use DigitalsiteSaaS\Pagina\Paiscon;
 use DigitalsiteSaaS\Pagina\Departamentocon;
 use DigitalsiteSaaS\Pagina\Pais;
 use DigitalsiteSaaS\Pagina\Municipio;
+use DigitalsiteSaaS\Pagina\Recaptcha;
 use Excel;
 use GuzzleHttp\Client;
 
@@ -253,6 +254,15 @@ class ConfiguracionController extends Controller
     return View('pagina::configuracion.correo')->with('datos', $datos);
     }
 
+    public function recaptcha(){
+    if(!$this->tenantName){
+    $datos = Recaptcha::where('id','=',1)->get();
+    }else{
+    $datos = \DigitalsiteSaaS\Pagina\Tenant\Recaptcha::where('id','=',1)->get();  
+    }
+    return View('pagina::configuracion.recaptcha')->with('datos', $datos);
+    }
+
     public function logohead(){
     if(!$this->tenantName){ 
     $plantilla = Template::all();
@@ -268,7 +278,7 @@ class ConfiguracionController extends Controller
     if(!$this->tenantName){ 
     $plantilla = Template::all();
     }else{
-    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();   
+    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
     }
     return View('pagina::configuracion.logo-footer')->with('plantilla', $plantilla);
     }
@@ -303,6 +313,19 @@ class ConfiguracionController extends Controller
      $contenido->mensaje = Input::get('mensaje');
      $contenido->save();
      return Redirect('gestion/configurar-correo')->with('status', 'ok_update');
+    }
+
+    public function actualizarrecaptcha(){
+     $input = Input::all();
+     if(!$this->tenantName){ 
+     $contenido = Recaptcha::find(1);
+     }else{
+     $contenido = \DigitalsiteSaaS\Pagina\Tenant\Recaptcha::find(1);  
+     }
+     $contenido->public_key = Input::get('publickey');
+     $contenido->private_key = Input::get('privatekey');
+     $contenido->save();
+     return Redirect('gestion/recaptcha')->with('status', 'ok_update');
     }
 
     public function actualizarventa(){

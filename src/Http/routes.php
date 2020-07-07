@@ -54,8 +54,10 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  Route::post('gestion/contenidos/crearlogo', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@crearlogo');
  Route::post('gestion/contenidos/crearlogofooter', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@crearlogofooter');
  Route::post('gestion/contenidos/actualizarservicio', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@actualizarservicio');
+  Route::post('gestion/contenidos/actualizarrecaptcha', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@actualizarrecaptcha');
  Route::post('gestion/contenidos/actualizarventa', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@actualizarventa');
  Route::post('gestion/contenidos/redes-sociales', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@updatered');
+ Route::get('gestion/recaptcha', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@recaptcha');
  
  
 
@@ -105,13 +107,10 @@ Route::group(['middleware' => ['auths','administrador']], function (){
 
  Route::get('gestion/logo-head', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@logohead');
 
- Route::get('gestion/logo-foooter', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@logohead');
+ Route::get('gestion/logo-footer', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@logofooter');
 
 
- Route::get('/gestion/logo-footer', function(){
-  $plantilla = DB::table('template')->get();  
-  return View::make('pagina::configuracion.logo-footer')->with('plantilla', $plantilla);
- });
+
  Route::get('/gestion/crear-template/{id}', function($id){ 
   return View::make('pagina::informacion-template');
  });
@@ -271,20 +270,10 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  Route::resource('gestion/contenidos/actualizarshuffle', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@actualizarshuffle');
  Route::resource('gestion/contenidos/eliminarshuffle', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@eliminarshuffle');
 
-Route::get('gestion/registro/ver-registro/{id}', function ($id) {
- $mensaje = DB::table('contents')
-->leftJoin('mesagema','contents.id','=','mesagema.form_id')
-->where('mesagema.id','=',$id)
-->get();
-
-$inputs = DB::table('inputs')->get();
-//dd($mensaje);
+Route::get('gestion/registro/ver-registro/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@verregistro');
 
 
-  $user = DB::table('mesagema')->where('id',$id)
-          ->update(['estado' => 1]);
- return View::make('pagina::registros')->with('mensaje', $mensaje)->with('inputs', $inputs);
- }); 
+
 
 
 

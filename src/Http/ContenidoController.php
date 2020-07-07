@@ -6,6 +6,7 @@
  use DigitalsiteSaaS\Pagina\Registro;
  use DigitalsiteSaaS\Pagina\Maxi;
  use DigitalsiteSaaS\Pagina\Maxicar;
+ use DigitalsiteSaaS\Pagina\Messagema;
  use DigitalsiteSaaS\Pagina\Maxo;
  use DigitalsiteSaaS\Pagina\Maxu;
  use DigitalsiteSaaS\Pagina\Maxe;
@@ -1329,6 +1330,32 @@ public function imagenescarousel($id){
   return view('pagina::contenidos/crear-imagenshuffle')->with('posicion', $posicion)->with('categoria', $categoria);
  }
 
-}
+ public function verregistro($id){
+ if(!$this->tenantName){
+ $mensaje = Content::leftJoin('mesagema','contents.id','=','mesagema.form_id')
+ ->where('mesagema.id','=',$id)
+ ->get();
+ 
+ $inputs = Inputweb::all();
 
+ $user = Messagema::where('id',$id)
+          ->update(['estado' => 1]);
+}else{
+
+   $mensaje = \DigitalsiteSaaS\Pagina\Tenant\Content::leftJoin('mesagema','contents.id','=','mesagema.form_id')
+ ->where('mesagema.id','=',$id)
+ ->get();
+ 
+ $inputs = \DigitalsiteSaaS\Pagina\Tenant\Inputweb::all();
+
+ $user = \DigitalsiteSaaS\Pagina\Tenant\Messagema::where('id',$id)
+          ->update(['estado' => 1]);
+
+}
+  return view('pagina::registros')->with('mensaje', $mensaje)->with('inputs', $inputs);
+ }
+
+
+
+}
 

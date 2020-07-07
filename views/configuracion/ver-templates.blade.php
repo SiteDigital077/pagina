@@ -19,6 +19,9 @@
          <li>
        <a href="/gestion/redes-sociales"><i class="hi hi-bullhorn"></i> Redes sociales</a>
       </li>
+          <li>
+       <a href="/gestion/recaptcha"><i class="hi hi-bullhorn"></i> Recaptcha</a>
+      </li>
       </li>
          <li>
        <a href="/gestion/ubicacion"><i class="gi gi-google_maps"></i></i> Ubicación</a>

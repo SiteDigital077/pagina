@@ -7,7 +7,6 @@
  use DigitalsiteSaaS\Pagina\Estadistica;
  use DigitalsiteSaaS\Pagina\Maxo;
  use DigitalsiteSaaS\Pagina\Maxu;
-
  use DigitalsiteSaaS\Pagina\Maxe;
  use DigitalsiteSaaS\Pagina\Maxi;
  use DigitalsiteSaaS\Pagina\Muxu;
@@ -861,7 +860,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    'remember_token' => Hash::make('_token'),
      ]);
 
-      $envio =  Input::get('form_id');
+     $envio =  Input::get('form_id');
      $redireccion = Input::get('redireccion');
      $ema = Input::get('email');
       if($ema == ''){
