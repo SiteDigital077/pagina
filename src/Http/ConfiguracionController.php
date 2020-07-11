@@ -5,9 +5,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use Input;
-use Zipper;
+use Madzipper;
 use File;
 use Auth;
+use Storage;
 use Illuminate\Support\Str;
 use DigitalsiteSaaS\Pagina\Template;
 use DigitalsiteSaaS\Pagina\Zippera;
@@ -46,7 +47,6 @@ class ConfiguracionController extends Controller
     public function index(){
      $tenantName = $this->tenantName;
      $templates = DB::table('templa')
-     ->join('users','users.id','=','templa.user_id')
      ->get();
      return view('pagina::configuracion.ver-templates')->with('templates', $templates)->with('tenantName', $tenantName);
     }
@@ -67,8 +67,8 @@ class ConfiguracionController extends Controller
      $destinoPathsite = public_path().'/Template/'.$url.'/template/';
      $path = base_path() . '/resources/views/Templates/'.$url;
      File::makeDirectory($path, 0777, true);
-     $zipper = new Zipper();
-     Zipper::make($urlenvio)->extractTo('Template');
+     $zipper = new Madzipper();
+     Madzipper::make($urlenvio)->extractTo('Template');
      $zippera = new Zippera;
      $zippera->nombre = $url;
      $zippera->slug = Str::slug($zippera->nombre);
@@ -376,17 +376,21 @@ class ConfiguracionController extends Controller
 
     $user_id = Auth::user()->id;
     $file = Input::file('file');
-    $destinoPath = public_path().'/templatezip';
-    $destinoPathweb = public_path().'/Template/momo';
+    $destinoPath = 'templatezip';
+
     $url_imagen = $file->getClientOriginalName();
     $url = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
     $urlenvio = $destinoPath.'/'.$url_imagen;
     $subir=$file->move($destinoPath,$file->getClientOriginalName());
+    $zipper = new Madzipper();
+    Madzipper::make($urlenvio)->extractTo('Template');
+    $path = '../resources/views/Templates/'.$url;
+    File::makeDirectory($path, 0777, true, true);
     $destinoPathsite = public_path().'/Template/'.$url.'/template/';
-    $path = base_path() . '/resources/views/Templates/'.$url;
-    File::makeDirectory($path, 0777, true);
-    $zipper = new Zipper();
-    Zipper::make($urlenvio)->extractTo('Template');
+    File::copyDirectory($destinoPathsite,$path);
+
+    $zipper = new Madzipper();
+    Madzipper::make($urlenvio)->extractTo('Template');
     $zippera = new Zippera;
     $zippera->nombre = $url;
     $zippera->slug = Str::slug($zippera->nombre);
@@ -398,8 +402,7 @@ class ConfiguracionController extends Controller
     $mema =  base_path().'\new_folders';
 
     File::copyDirectory($destinoPathsite,$path);
- 
-    File::deleteDirectory($destinoPathweb);
+
     
 
         return Redirect('gestor/subir-template')->with('status', 'ok_create');

@@ -104,7 +104,8 @@
                                                {{ Form::select('sitio', [$paginas->sitio => $paginas->sitio,
                                                 '1' => 'Horizontal',
                                                 '2' => 'Vertical',
-                                                '3' => 'Vertical y Horizontal'], null, array('class' => 'form-control')) }}
+                                                '3' => 'Vertical y Horizontal'],
+                                                '4' => 'No visible'], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
                                         @endif

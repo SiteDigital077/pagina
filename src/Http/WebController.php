@@ -290,19 +290,13 @@ public function __construct()
        if($scroll == 1){
       $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::all();
       $diagramas = \DigitalsiteSaaS\Pagina\Tenant\Diagrama::all();
-       $formulario = \DigitalsiteSaaS\Pagina\Tenant\Formu::join('contents','inputs.content_id','=','contents.id')
-    ->select('inputs.*', 'inputs.id')
-    ->orderBy('id','ASC')
-    ->get();
+      
       }else{
         $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::where('page_id',"=",$user->id)
       /*->where('template',"=",$temaweb->template)*/
       ->orderBy('nivel','ASC')
       ->get();
-       $formulario = \DigitalsiteSaaS\Pagina\Tenant\Formu::join('contents','inputs.content_id','=','contents.id')
-    ->select('inputs.*', 'inputs.id')
-    ->orderBy('id','ASC')
-    ->where('contents.page_id', '=' ,$user->id)->get();
+       
       $diagramas = \DigitalsiteSaaS\Pagina\Tenant\Diagrama::where('id', "=", $user->id)->get();
     }
      }
@@ -359,6 +353,19 @@ public function __construct()
     ->where('contents.page_id', '=' ,$user->id)
     ->get();
     $temp = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id',1)->value('template');
+    
+
+if($scroll == 1){
+      $formulario = \DigitalsiteSaaS\Pagina\Tenant\Formu::join('contents','inputs.content_id','=','contents.id')
+    ->select('inputs.*', 'inputs.id')
+    ->orderBy('id','ASC')
+   ->get();
+    }else{
+      $formulario = \DigitalsiteSaaS\Pagina\Tenant\Formu::join('contents','inputs.content_id','=','contents.id')
+    ->select('inputs.*', 'inputs.id')
+    ->orderBy('id','ASC')
+    ->where('contents.page_id', '=' ,$user->id)->get();
+    }
  
     if($resp == 'true'){
    return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario);

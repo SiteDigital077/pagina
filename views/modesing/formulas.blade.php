@@ -51,7 +51,7 @@
 @foreach($formulario as $formulario)
  @include('pagina::formularios.'.$formulario->tipo)
   @endforeach
-   <input type="hidden" name="form_id" id="input" class="form-control" value="{{$formulario->content_id}}">
+   <input type="hidden" name="form_id" id="input" class="form-control" value="{{$contenido->id}}">
    <input type="hidden" name="redireccion" id="input" class="form-control" value="{{Request::url()}}">
 	 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

@@ -5047,11 +5047,11 @@
                                             </div>
                                         </div>
 
-                                           <div class="form-group">
+                                          <div class="form-group">
                                          <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
                                          <div class="col-md-9">
                                           <div class="input-group">
-                                            <input type="text" id="image:label" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <input type="text" id="image_label" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
                                             <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
                                           </div>
                                          </div>
@@ -6719,7 +6719,27 @@
                                                   'fadeInUpBig' => 'fadeUpBig'], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
-                                            
+                                        <hr>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Asunto</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('template', $contenido->template, array('class' => 'form-control','placeholder'=>'Ingrese Asunto del mensaje'))}}
+                                            </div>
+                                        </div> 
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Url</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('FilePath', $contenido->image, array('class' => 'form-control','placeholder'=>'Ingrese URL'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Contenido del Mensaje</label>
+                                            <div class="col-md-9">
+                                                {{Form::textarea('contenidos', $contenido->contents, array('class' => 'ckeditor','id' => 'editor1','placeholder'=>'Ingrese contenido'))}}
+                                            </div>
+                                        </div> 
                           
                                          {{Form::hidden('tipo', $contenido->type, array('class' => 'form-control'))}}
                                          {{Form::hidden('peca', $contenido->id, array('class' => 'form-control'))}}
@@ -6893,6 +6913,11 @@ $(".chosen-select").chosen();
 
 <script>
   CKEDITOR.replace( 'editor', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
+</script>
+
+
+<script>
+  CKEDITOR.replace( 'editor1', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
 </script>
 
 
