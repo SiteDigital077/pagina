@@ -39,6 +39,9 @@
       </li>
       @else
       @endif
+         <li>
+       <a href="/gestion/seo"><i class="gi gi-google_maps"></i></i>Seo</a>
+      </li>
      </ul>
     </div>
 

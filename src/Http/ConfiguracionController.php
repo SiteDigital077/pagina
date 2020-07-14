@@ -22,6 +22,7 @@ use DigitalsiteSaaS\Pagina\Municipio;
 use DigitalsiteSaaS\Pagina\Recaptcha;
 use Excel;
 use GuzzleHttp\Client;
+use DigitalsiteSaaS\Pagina\Seo;
 
 class ConfiguracionController extends Controller
 {
@@ -200,6 +201,27 @@ class ConfiguracionController extends Controller
      return Redirect('gestor/ver-templates')->with('status', 'ok_create');
     }
 
+      public function seo(){
+    if(!$this->tenantName){  
+     $seo = Seo::where('id', '=', '1')->get();
+     }else{
+     $seo = \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id', '=', '1')->get();   
+     }
+     return View('pagina::configuracion.seo')->with('seo', $seo);
+    }
+
+    public function updateseo(){
+     $input = Input::all();
+     if(!$this->tenantName){
+     $contenido = Seo::find(1);
+     }else{
+     $contenido = \DigitalsiteSaaS\Pagina\Tenant\Seo::find(1);
+     }
+     $contenido->robots = Input::get('robot');
+     $contenido->save();
+     return Redirect('gestor/ver-templates')->with('status', 'ok_update');
+    }
+
     public function venta(){
      if(!$this->tenantName){  
      $venta = Venta::where('id', '=', '1')->get();
@@ -373,11 +395,9 @@ class ConfiguracionController extends Controller
     }
 
     public function template(){
-
     $user_id = Auth::user()->id;
     $file = Input::file('file');
     $destinoPath = 'templatezip';
-
     $url_imagen = $file->getClientOriginalName();
     $url = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
     $urlenvio = $destinoPath.'/'.$url_imagen;
@@ -388,13 +408,22 @@ class ConfiguracionController extends Controller
     File::makeDirectory($path, 0777, true, true);
     $destinoPathsite = public_path().'/Template/'.$url.'/template/';
     File::copyDirectory($destinoPathsite,$path);
-
     $zipper = new Madzipper();
     Madzipper::make($urlenvio)->extractTo('Template');
+    if(!$this->tenantName){
     $zippera = new Zippera;
     $zippera->nombre = $url;
     $zippera->slug = Str::slug($zippera->nombre);
+    $zippera->user_id = 'sitek';
     $zippera->save();
+    }else{
+    $website = app(\Hyn\Tenancy\Environment::class)->website();
+    $zippera = new Zippera;
+    $zippera->nombre = $url;
+    $zippera->slug = Str::slug($zippera->nombre);
+    $zippera->user_id = $website->uuid;
+    $zippera->save();
+    }
     $color = new Color;
     $color->template = Str::slug($url);
     $color->save();
