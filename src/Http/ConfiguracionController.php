@@ -217,7 +217,20 @@ class ConfiguracionController extends Controller
      }else{
      $contenido = \DigitalsiteSaaS\Pagina\Tenant\Seo::find(1);
      }
+     $contenido->idioma = Input::get('idioma');
+     $contenido->canonical = Input::get('canonical');
      $contenido->robots = Input::get('robot');
+     $contenido->og_type = Input::get('og_type');
+     $contenido->og_image = Input::get('FilePath');
+     $contenido->og_url = Input::get('og_url');
+     $contenido->og_title = Input::get('og_title');
+     $contenido->og_description = Input::get('og_description');
+     $contenido->twitter_card = Input::get('twitter_card');
+     $contenido->twitter_site = Input::get('twitter_site');
+     $contenido->twitter_creator = Input::get('twitter_creator');
+     $contenido->twitter_title = Input::get('twitter_title');
+     $contenido->twitter_description = Input::get('twitter_description');
+
      $contenido->save();
      return Redirect('gestor/ver-templates')->with('status', 'ok_update');
     }

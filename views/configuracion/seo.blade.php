@@ -79,17 +79,105 @@
                                       {{ Form::open(array('files' => true,'method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('gestion/contenidos/seoupdate'))) }}
                                          
                                       @foreach($seo as $seo)
+
+                                      <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Idioma</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('idioma', $seo->idioma, array('class' => 'form-control', 'placeholder'=>'Ingrese sujeto'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Canonical</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('canonical', $seo->canonical, array('class' => 'form-control', 'placeholder'=>'Ingrese sujeto'))}}
+                                            </div>
+                                        </div> 
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-email-input">Robots</label>
                                             <div class="col-md-9">
                                                  {{Form::textarea('robot', $seo->robots, array('class' => 'form-control','placeholder'=>'Ingrese estrcturacion robot'))}}
                                             </div>
                                         </div>
-                                      @endforeach
+                            
                                        
-                                     		
-                                       		
+                                     	Etiquetas Open Graph
+                                      <hr>
+                                       <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Og:type</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('og_type', $seo->og_type, array('class' => 'form-control', 'placeholder'=>'Ingrese sujeto'))}}
+                                            </div>
+                                        </div>	
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Og:url</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('og_url', $seo->og_url, array('class' => 'form-control', 'placeholder'=>'Ingrese sujeto'))}}
+                                            </div>
+                                        </div>  
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Og:title</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('og_title', $seo->og_title, array('class' => 'form-control', 'placeholder'=>'Ingrese sujeto'))}}
+                                            </div>
+                                        </div>  
                                        
+                                       <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Og:description</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('og_description', $seo->og_description, array('class' => 'form-control', 'placeholder'=>'Ingrese sujeto'))}}
+                                            </div>
+                                        </div>  
+                                       
+                                        <div class="form-group">
+                                          <label class="col-md-3 control-label" for="example-password-input">Og:imagen</label>
+                                          <div class="col-md-9">
+                                           <div class="input-group">
+                                            <input type="text" id="image_label" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$seo->og_image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                           </div>
+                                          </div>
+                                         </div>
+                                        Etiquetas Twitter Card
+                                        <hr>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Twitter:card</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('twitter_card', $seo->twitter_card, array('class' => 'form-control', 'placeholder'=>'Ingrese sujeto'))}}
+                                            </div>
+                                        </div> 
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Twitter:site</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('twitter_site', $seo->twitter_site, array('class' => 'form-control', 'placeholder'=>'Ingrese sujeto'))}}
+                                            </div>
+                                        </div> 
+
+                                      <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Twitter:creator</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('twitter_creator', $seo->twitter_creator, array('class' => 'form-control', 'placeholder'=>'Ingrese sujeto'))}}
+                                            </div>
+                                        </div> 
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Twitter:title</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('twitter_title', $seo->twitter_title, array('class' => 'form-control', 'placeholder'=>'Ingrese sujeto'))}}
+                                            </div>
+                                        </div> 
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Twitter:description</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('twitter_description', $seo->twitter_description, array('class' => 'form-control', 'placeholder'=>'Ingrese sujeto'))}}
+                                            </div>
+                                        </div> 
 
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-3">
@@ -97,7 +185,9 @@
                                                 <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
                                             </div>
                                         </div>
-                                    
+
+                                        
+                                     @endforeach
                                       {{ Form::close() }} 
                                    
 
@@ -119,7 +209,21 @@
  
   {{ Html::script('//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js') }}
   {{ Html::script('//cdn.datatables.net/plug-ins/be7019ee387/integration/bootstrap/3/dataTables.bootstrap.js') }}
-    
+  
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('button-image').addEventListener('click', (event) => {
+      event.preventDefault();
+      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
+    });
+  });
+  // set file link
+  function fmSetLink($url) {
+    document.getElementById('image_label').value = $url;
+  }
+</script>
 
   <script>
      $(document).ready (function () {
