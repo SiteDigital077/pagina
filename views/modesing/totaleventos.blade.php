@@ -31,7 +31,7 @@
         <h4 class="modal-title">{{$totaleventos->title}}</h4>
       </div>
       <div class="modal-body">
-        <img src="{{$totaleventos->imagen}}" class="img-responsive" alt="Image">
+        <img src="{{$totaleventos->imagen}}" class="img-responsive" title="{{$contenido->title}}" title="{{$contenido->title}}">
         <hr>
         <b>Descripción:</b> <br>
         <p class="text-justify">{{$totaleventos->body}}</p> 

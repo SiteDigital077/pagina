@@ -4,7 +4,7 @@
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 wow {{$fichone->animacion}}">
      @if($fichone->level == 1)
 	<div class="thumbnail">
-		<img src="fichaimg/clientes/{{$fichone->usuario_id}}/{!!$fichone->image!!}" alt="">
+		<img src="fichaimg/clientes/{{$fichone->usuario_id}}/{!!$fichone->image!!}" title="{{$contenido->title}}" alt="{{$contenido->title}}">
 		<div class="caption">
 			<h3>{!!$fichone->title!!}</h3>
 			<p class="text-justify">

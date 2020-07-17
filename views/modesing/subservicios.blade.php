@@ -4,7 +4,7 @@
 
 	<div class="thumbnail">
 		@if($contenido->image == '')
-		<img src="{{$contenido->image}}" class="img-responsive center-block" alt="Image">
+		<img src="{{$contenido->image}}" class="img-responsive center-block" alt="{{$contenido->title}}" title="{{$contenido->title}}">
 		@else
 		 <i class="{{$contenido->image}}" aria-hidden="true"></i>
 		@endif

@@ -224,12 +224,14 @@ class ConfiguracionController extends Controller
      $contenido->og_image = Input::get('FilePath');
      $contenido->og_url = Input::get('og_url');
      $contenido->og_title = Input::get('og_title');
+     $contenido->og_name = Input::get('og_name');
      $contenido->og_description = Input::get('og_description');
      $contenido->twitter_card = Input::get('twitter_card');
      $contenido->twitter_site = Input::get('twitter_site');
      $contenido->twitter_creator = Input::get('twitter_creator');
      $contenido->twitter_title = Input::get('twitter_title');
      $contenido->twitter_description = Input::get('twitter_description');
+     $contenido->twitter_image = Input::get('FilePatha');
 
      $contenido->save();
      return Redirect('gestor/ver-templates')->with('status', 'ok_update');

@@ -14,7 +14,7 @@
                             <div class="thumb-wrapper">
                                 <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                 <div class="img-box">
-                                    <img src="{{$products->image}}" class="img-responsive img-fluid center-block" alt="">                                 
+                                    <img src="{{$products->image}}" class="img-responsive img-fluid center-block" alt="{{$contenido->title}}" title="{{$contenido->title}}">                                 
                                 </div>
                                 <div class="thumb-content">
                                     <h4>{{$products->name}}</h4>
@@ -50,7 +50,7 @@
                             <div class="thumb-wrapper">
                                 <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                 <div class="img-box">
-                                    <img src="{{$products->image}}" class="img-responsive img-fluid center-block" alt="">
+                                    <img src="{{$products->image}}" class="img-responsive img-fluid center-block" alt="{{$contenido->title}}" title="{{$contenido->title}}">
                                 </div>
                                 <div class="thumb-content">
                                     <h4>{{$products->name}}</h4>

@@ -41,7 +41,7 @@
   @else
   <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 {{$contenidonu->posicion}}">
   @endif
-      <img src="{!!$contenidonu->imagecl!!}" class="img-responsive center-block" alt="Image">
+      <img src="{!!$contenidonu->imagecl!!}" class="img-responsive center-block" alt="{{$contenido->title}}" title="{{$contenido->title}}">
     </div>
      @if($contenido->content == '0')
 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 col-lg-offset-3">

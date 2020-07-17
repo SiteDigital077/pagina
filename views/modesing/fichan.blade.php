@@ -5,7 +5,7 @@
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 wow {{$contenidonuma->animacion}}">
     @if($contenidonuma->level == 1)
 	<div class="thumbnail">
-		<img src="fichaimg/clientes/{{$contenidonuma->usuario_id}}/{!!$contenidonuma->image!!}" alt="">
+		<img src="fichaimg/clientes/{{$contenidonuma->usuario_id}}/{!!$contenidonuma->image!!}" alt="{{$contenido->title}}" title="{{$contenido->title}}">
 		<div class="caption">
 			<h3>{!!$contenidonuma->title!!}</h3>
 			<p class="text-justify">

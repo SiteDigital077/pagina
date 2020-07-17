@@ -3,8 +3,6 @@
 
     <link href="vendors/vimeo/dist/css/jquery.mb.vimeo_player.min.css" media="all" rel="stylesheet" type="text/css">
 
-   
- 
 
 
   <div id="customElement" style="height: {{$contenido->url}}vh;">   

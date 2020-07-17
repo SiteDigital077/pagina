@@ -6,7 +6,7 @@
               <div class="thumb-wrapper">
                 <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                 <div class="img-box">
-                  <img src="{{$product->image}}" class="img-responsive img-fluid center-block" alt="" style="height: 140px">                 
+                  <img src="{{$product->image}}" class="img-responsive img-fluid center-block" title="{{$contenido->title}}" alt="{{$contenido->title}}" style="height: 140px">                 
                 </div>
                 <div class="thumb-content">
                   @if(strlen($product->name) < 22)

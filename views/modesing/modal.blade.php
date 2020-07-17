@@ -6,7 +6,7 @@
 </button>
 @else
 
-<img src="{{$contenido->image}}" data-toggle="modal" data-target="#{{$contenido->slugcon}}" class="img-responsive {{$contenido->imageal}}" alt="Image" style="width:{{$contenido->contents}}px;height:{{$contenido->contents}}px;">
+<img src="{{$contenido->image}}" data-toggle="modal" data-target="#{{$contenido->slugcon}}" class="img-responsive {{$contenido->imageal}}" alt="{{$contenido->title}}" title="{{$contenido->title}}" style="width:{{$contenido->contents}}px;height:{{$contenido->contents}}px;">
 
 
 

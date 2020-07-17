@@ -1,7 +1,7 @@
  @if($contenido->level == 1)
 <div class="grid desing">
  <figure class="effect-zoe">
-  <img src="{{$contenido->image}}" class="img-responsive" alt="img25"/>
+  <img src="{{$contenido->image}}" class="img-responsive" alt="{{$contenido->title}}" title="{{$contenido->title}}"/>
    <figcaption>
 	<h2>Creative <span>Zoe</span></h2>
 	 <p class="icon-links">

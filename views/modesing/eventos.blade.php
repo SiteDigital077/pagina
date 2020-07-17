@@ -47,7 +47,7 @@
         <h4 class="modal-title">{{$eventos->title}}</h4>
       </div>
       <div class="modal-body">
-        <img src="{{$eventos->imagen}}" class="img-responsive" alt="Image">
+        <img src="{{$eventos->imagen}}" class="img-responsive" alt="{{$contenido->title}}" title="{{$contenido->title}}">
         <hr>
         <b>Descripción:</b> <br>
         <p class="text-justify">{{$eventos->body}}</p> 
@@ -133,7 +133,7 @@
         <h4 class="modal-title">{{$totaleventos->title}}</h4>
       </div>
       <div class="modal-body">
-        <img src="{{$totaleventos->imagen}}" class="img-responsive" alt="Image">
+        <img src="{{$totaleventos->imagen}}" class="img-responsive" alt="{{$contenido->title}}" title="{{$contenido->title}}">
         <hr>
         <b>Descripción:</b> <br>
         <p class="text-justify">{{$totaleventos->body}}</p> 

@@ -6,7 +6,7 @@
  
   <div class="thumbnail desing">
    @if($contenido->imageal == '')
-    <img src="{{$contenido->image}}" alt="{{$contenido->description}}" title="{{$contenido->title}}">
+    <img src="{{$contenido->image}}" alt="{{$contenido->description}}" alt="{{$contenido->title}}" title="{{$contenido->title}}">
    @else
  	  <i class="{{$contenido->imageal}}" aria-hidden="true"></i>
    @endif
@@ -29,7 +29,7 @@
  <div class="grid">
   @if($contenido->imageal == '')
   <figure class="effect-{{$contenido->contents}}">
-   <a href="{{$contenido->url}}"><img src="{{$contenido->image}}" class="img-responsive" alt="{{$contenido->title}}">
+   <a href="{{$contenido->url}}"><img src="{{$contenido->image}}" class="img-responsive" alt="{{$contenido->title}}" title="{{$contenido->title}}">
     <figcaption>
      <h2>{{$contenido->title}}</h2>
      <p>{{$contenido->description}}</p>

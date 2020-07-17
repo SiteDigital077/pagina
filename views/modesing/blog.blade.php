@@ -4,7 +4,7 @@
 	  <div class="caption">
 	  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	  	
- <img src="{!!$pagination->image!!}" alt="{!!$pagination->description!!}" title="{!!$pagination->title!!}" class="img-responsive center-block">
+ <img src="{!!$pagination->image!!}" alt="{!!$pagination->description!!}" title="{!!$pagination->title!!}" title="{{$contenido->title}}" class="img-responsive center-block">
  <br>
  	  	</div>
 </div>
