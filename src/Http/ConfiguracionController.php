@@ -232,6 +232,8 @@ class ConfiguracionController extends Controller
      $contenido->twitter_title = Input::get('twitter_title');
      $contenido->twitter_description = Input::get('twitter_description');
      $contenido->twitter_image = Input::get('FilePatha');
+     $contenido->ico = Input::get('FilePathb');
+     $contenido->icoapple = Input::get('FilePathc');
 
      $contenido->save();
      return Redirect('gestor/ver-templates')->with('status', 'ok_update');

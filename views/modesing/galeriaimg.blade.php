@@ -14,7 +14,7 @@
   <div class="carousel-inner">
     @foreach($galeria as $contenido)
     <div class="item {{$contenido->state}} animated {{$contenido->animacionsd}} ">
-      <img title="{{$contenido->titlesd}}" class="img-responsive" style="visibility:hidden" alt="{{$contenido->titlesd}}" src="http://dummyimage.com/{{$contenido->url}}x{{$contenido->imagesd}}/000/fff">
+      <img title="{{$contenido->descriptionsd}}" class="img-responsive" style="visibility:hidden" alt="{{$contenido->descriptionsd}}" src="http://dummyimage.com/{{$contenido->url}}x{{$contenido->imagesd}}/000/fff">
       <div class="container">
         <div class="carousel-caption">
           <p>{!!$contenido->contentsd!!}</p>
@@ -41,15 +41,16 @@
 
 
  <div class="item {{$contenido->state}}">
-        <img src="{{$contenido->imagesd}}" alt="First slide"  class="img-responsive">
+        <img src="{{$contenido->imagesd}}" alt="{{$contenido->descriptionsd}}" title="{{$contenido->descriptionsd}}" class="img-responsive">
       <div class="container">
         <div class="carousel-caption">
                 <hgroup class="zoomInDown animated center-block">
                      <h1 class="fadeInLeft animated">{!!$contenido->titlesd!!}</h1>
           <h4 class="slideInRight animated">{!!$contenido->contentsd!!}</h4>
+          </hgroup>
           @if($contenido->urlsd == '')
           @else
-          <p>
+         
             @if($contenido->urlsd == '')
             @else
             <a class="btn btn-primary slideInLeft animated" href="{{$contenido->urlsd}}" role="button">{{$contenido->boton}}</a>
@@ -58,9 +59,9 @@
             @else
             <a class="btn btn-default slideInRight animated" href="{{$contenido->urlsduno}}" role="button">{{$contenido->botonuno}}</a>
             @endif
-          </p>
+
           @endif
-            </hgroup>
+            
 
 
 

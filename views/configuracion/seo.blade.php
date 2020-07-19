@@ -144,7 +144,7 @@
                                           <div class="col-md-9">
                                            <div class="input-group">
                                             <input type="text" id="image_label" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$seo->og_image}}">
-                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen de </button></span>
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen </button></span>
                                            </div>
                                           </div>
                                          </div>
@@ -182,7 +182,29 @@
                                            </div>
                                           </div>
                                          </div> 
+                                         Imagenes ICO
+                                         <hr>
+                                         <div class="form-group">
+                                          <label class="col-md-3 control-label" for="example-password-input">Ico</label>
+                                          <div class="col-md-9">
+                                           <div class="input-group">
+                                            <input type="text" id="image_labelb" class="form-control" name="FilePathb" placeholder="Ingresar imagen ico" aria-label="Image" aria-describedby="button-image" value="{{$seo->ico}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-imageb">Seleccionar imagen</button></span>
+                                           </div>
+                                          </div>
+                                         </div> 
 
+                                         <div class="form-group">
+                                          <label class="col-md-3 control-label" for="example-password-input">Ico apple</label>
+                                          <div class="col-md-9">
+                                           <div class="input-group">
+                                            <input type="text" id="image_labelb" class="form-control" name="FilePathc" placeholder="Ingresar imagen ico apple" aria-label="Image" aria-describedby="button-image" value="{{$seo->icoapple}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-imagec">Seleccionar imagen</button></span>
+                                           </div>
+                                          </div>
+                                         </div> 
+
+                                  
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-3">
                                                 <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Editar</button>
@@ -242,6 +264,32 @@
   // set file link
   function fmSetLink($url) {
     document.getElementById('image_labela').value = $url;
+  }
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('button-imageb').addEventListener('click', (event) => {
+      event.preventDefault();
+      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
+    });
+  });
+  // set file link
+  function fmSetLink($url) {
+    document.getElementById('image_labelb').value = $url;
+  }
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('button-imagec').addEventListener('click', (event) => {
+      event.preventDefault();
+      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
+    });
+  });
+  // set file link
+  function fmSetLink($url) {
+    document.getElementById('image_labelc').value = $url;
   }
 </script>
   <script>
