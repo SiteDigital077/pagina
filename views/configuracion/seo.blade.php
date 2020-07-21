@@ -10,7 +10,7 @@
 
  <div class="content-header">
       <ul class="nav-horizontal text-center">
-      <li> 
+      <li>
        <a href="/gestor/ver-templates"><i class="fa fa-desktop"></i> Ver templates</a>
       </li>
       <li>
@@ -73,7 +73,7 @@
                                         <h2><strong>Posicionamiento</strong> SEO</h2>
                                     </div>
                                     <!-- END Form Elements Title -->
-                            
+                           
                                     <!-- Basic Form Elements Content -->
                                    
                                       {{ Form::open(array('files' => true,'method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('gestion/contenidos/seoupdate'))) }}
@@ -92,7 +92,7 @@
                                             <div class="col-md-9">
                                                  {{Form::text('canonical', $seo->canonical, array('class' => 'form-control', 'placeholder'=>'Ingrese URL canonical'))}}
                                             </div>
-                                        </div> 
+                                        </div>
 
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-email-input">Robots</label>
@@ -100,9 +100,9 @@
                                                  {{Form::textarea('robot', $seo->robots, array('class' => 'form-control','placeholder'=>'Ingrese estrcturación robot'))}}
                                             </div>
                                         </div>
-                            
+                           
                                        
-                                     	Etiquetas Open Graph
+                                      Etiquetas Open Graph
                                       <hr>
                                       <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-email-input">Og:name</label>
@@ -115,7 +115,7 @@
                                             <div class="col-md-9">
                                                  {{Form::text('og_type', $seo->og_type, array('class' => 'form-control', 'placeholder'=>'Ingrese el tipo de sitio'))}}
                                             </div>
-                                        </div>	
+                                        </div>
 
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-email-input">Og:url</label>
@@ -156,32 +156,32 @@
                                             <div class="col-md-9">
                                                  {{Form::text('twitter_card', $seo->twitter_card, array('class' => 'form-control', 'placeholder'=>'Ingrese twitter card'))}}
                                             </div>
-                                        </div> 
+                                        </div>
 
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-email-input">Twitter:site</label>
                                             <div class="col-md-9">
                                                  {{Form::text('twitter_site', $seo->twitter_site, array('class' => 'form-control', 'placeholder'=>'Ingrese su sitio de twitter'))}}
                                             </div>
-                                        </div> 
+                                        </div>
 
                                       <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-email-input">Twitter:creator</label>
                                             <div class="col-md-9">
                                                  {{Form::text('twitter_creator', $seo->twitter_creator, array('class' => 'form-control', 'placeholder'=>'Ingrese el creador del sitio en twitter'))}}
                                             </div>
-                                        </div> 
+                                        </div>
 
                                    
                                         <div class="form-group">
                                           <label class="col-md-3 control-label" for="example-password-input">Twitter:image</label>
                                           <div class="col-md-9">
                                            <div class="input-group">
-                                            <input type="text" id="image_labela" class="form-control" name="FilePatha" placeholder="Ingresar imagen twitter" aria-label="Image" aria-describedby="button-image" value="{{$seo->twitter_image}}">
+                                            <input type="text" id="image_labela" class="form-control" name="FilePatha" placeholder="Ingresar imagen twitter" aria-label="Imagea" aria-describedby="button-imagea" value="{{$seo->twitter_image}}">
                                             <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-imagea">Seleccionar imagen</button></span>
                                            </div>
                                           </div>
-                                         </div> 
+                                         </div>
                                          Imagenes ICO
                                          <hr>
                                          <div class="form-group">
@@ -192,19 +192,19 @@
                                             <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-imageb">Seleccionar imagen</button></span>
                                            </div>
                                           </div>
-                                         </div> 
+                                         </div>
 
                                          <div class="form-group">
                                           <label class="col-md-3 control-label" for="example-password-input">Ico apple</label>
                                           <div class="col-md-9">
                                            <div class="input-group">
-                                            <input type="text" id="image_labelb" class="form-control" name="FilePathc" placeholder="Ingresar imagen ico apple" aria-label="Image" aria-describedby="button-image" value="{{$seo->icoapple}}">
+                                            <input type="text" id="image_labelc" class="form-control" name="FilePathc" placeholder="Ingresar imagen ico apple" aria-label="Image" aria-describedby="button-image" value="{{$seo->icoapple}}">
                                             <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-imagec">Seleccionar imagen</button></span>
                                            </div>
                                           </div>
-                                         </div> 
+                                         </div>
 
-                                  
+                                 
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-3">
                                                 <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Editar</button>
@@ -212,11 +212,11 @@
                                             </div>
                                         </div>
 
-                                      
+                                     
 
-                                        
+                                       
                                      @endforeach
-                                      {{ Form::close() }} 
+                                      {{ Form::close() }}
                                    
 
                                  
@@ -224,7 +224,7 @@
                                 <!-- END Basic Form Elements Block -->
                             </div>
                           </div>
-                          
+                         
                       </div>
 
 
@@ -233,101 +233,66 @@
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
   {{ Html::script('Usuario/js/valida.js') }}
-  {{ Html::script('//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js') }} 
+  {{ Html::script('//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js') }}
  
   {{ Html::script('//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js') }}
   {{ Html::script('//cdn.datatables.net/plug-ins/be7019ee387/integration/bootstrap/3/dataTables.bootstrap.js') }}
-  
+ 
+
+
+
 
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
+
     document.getElementById('button-image').addEventListener('click', (event) => {
       event.preventDefault();
-      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
+
+      inputId = 'image_label';
+
+      window.open('/file-manager/fm-button', 'fm', 'width=1400,height=800');
     });
-  });
-  // set file link
-  function fmSetLink($url) {
-    document.getElementById('image_label').value = $url;
-  }
-</script>
 
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('button-imagea').addEventListener('click', (event) => {
       event.preventDefault();
-      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
-    });
-  });
-  // set file link
-  function fmSetLink($url) {
-    document.getElementById('image_labela').value = $url;
-  }
-</script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
+      inputId = 'image_labela';
+
+      window.open('/file-manager/fm-button', 'fm', 'width=1400,height=800');
+    });
+
+    // second button
     document.getElementById('button-imageb').addEventListener('click', (event) => {
       event.preventDefault();
-      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
-    });
-  });
-  // set file link
-  function fmSetLink($url) {
-    document.getElementById('image_labelb').value = $url;
-  }
-</script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
+      inputId = 'image_labelb';
+
+      window.open('/file-manager/fm-button', 'fm', 'width=1400,height=800');
+    });
+
     document.getElementById('button-imagec').addEventListener('click', (event) => {
       event.preventDefault();
-      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
+
+      inputId = 'image_labelc';
+
+      window.open('/file-manager/fm-button', 'fm', 'width=1400,height=800');
     });
+
   });
+
+  // input
+  let inputId = '';
+
   // set file link
   function fmSetLink($url) {
-    document.getElementById('image_labelc').value = $url;
+    document.getElementById(inputId).value = $url;
   }
 </script>
-  <script>
-     $(document).ready (function () {
-   $('.nodelete').click (function () {
-     alert("No puede eliminar todas las paginas del site si desea eliminar esta pagina debe crear una nueva");
-   });});
-</script>
 
-  
-  <script type="text/javascript" language="javascript" class="init">
-   $(document).ready(function() {
-   $('#example').dataTable();} );
-  </script>
 
-  <script>
-   $(document).ready (function () {
-   $('.delete').click (function () {
-   if (confirm("¿ Está seguro de que desea eliminar ?")) {
-   var id = $(this).attr ("title");
-   document.location.href='paginas/delete/'+id;}});});
-  </script> 
 
-  <script type="text/javascript">
-$(document).on("click", ".open-Modal", function () {
-var myDNI = $(this).data('id');
-$(".modal-body #DNI").val( myDNI );
-});
-</script>
 
-<SCRIPT language="JavaScript" type="text/javascript"> 
-
-function contador (campo, cuentacampo, limite) { 
-if (campo.value.length > limite) campo.value = campo.value.substring(0, limite); 
-else cuentacampo.value = limite - campo.value.length; 
-} 
-
-</script>
 
 
 @stop

@@ -92,9 +92,9 @@
                                             <label class="col-md-3 control-label" for="example-select">Alineación botón</label>
                                             <div class="col-md-9">
                                                 {{ Form::select('imageal', [
-                                                   'center-block' => 'Centrado',
-                                                   'pull-right' => 'Derecha',
-                                                   'pull-left' => 'Izquierda'], null, array('class' => 'form-control')) }}
+                                                   'text-center' => 'Centrado',
+                                                   'text-right' => 'Derecha',
+                                                   'text-left' => 'Izquierda'], null, array('class' => 'form-control')) }}
                                              </div>
                                         </div>
 
