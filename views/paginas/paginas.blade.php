@@ -93,6 +93,8 @@
 
        <tbody>
         @foreach($menu as $paga)
+        @if($paga->robot == 1)
+        @else
          <tr data-toggle="collapse" data-target="#{{$paga->id}}" class="accordion-toggle">
           <td><button class="btn btn-default btn-xs"><i class="fa fa-eye"></i></button></td>
           <td>{{$paga->page}}</td>
@@ -151,7 +153,7 @@
             @endforeach
            </td>
           </tr>
-       
+        @endif
          @endforeach
   
        

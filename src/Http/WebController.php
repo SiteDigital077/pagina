@@ -696,6 +696,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 
     public function ingresar(){
       if(!$this->tenantName){
+    $seo = Seo::where('id','=',1)->get(); 
    $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
    $cart = session()->get('cart');
    $total = $this->total();
@@ -703,7 +704,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $colors = DB::table('colors')->get();
    $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
   }else{
-
+       $seo =  \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get(); 
        $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $cart = session()->get('cart');
    $total = $this->total();
@@ -712,7 +713,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
 
   }
-   return view('auth.logina')->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('total', $total)->with('subtotal', $subtotal)->with('colors', $colors);
+   return view('auth.logina')->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('total', $total)->with('subtotal', $subtotal)->with('colors', $colors)->with('seo', $seo);
   }
 
 
