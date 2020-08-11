@@ -18,7 +18,7 @@
                                       
 
                                           <div class="form-group">
-                                            <label class="col-md-12 control-label" for="example-password-input">Busqueda por palabra {{session::get('bustext')}} </label>
+                                            <label class="col-md-12 control-label" for="example-password-input">Busqueda por palabra {{Session::get('bustext')}} </label>
                                             <div class="col-md-12">
                                               @if(session::get('bustext') == '')
                                                 {{Form::text('q', '', array('class' => 'form-control','placeholder'=>'Ingresar palabra','maxlength' => '50' ))}}

@@ -138,8 +138,6 @@ public function __construct()
     }
      }
     
-  
-     $productsa = Product::inRandomOrder()->get();
 
      $eventos = DB::table('events')->orderBy('start_old', 'desc')->get();
      $start =  session()->get('start') ? session()->get('start') : 0;
@@ -149,7 +147,7 @@ public function __construct()
     ->whereBetween('start_old', array($start, $end))
     ->where('class', 'like', '%' . $tipo . '%')
     ->get();
-   $productse = Product::inRandomOrder()->get();
+
      $stock = DB::table('products')
       //->leftJoin('order_items', 'order_items.product_id', '=', 'products.id')
       //->select(DB::raw('SUM(quantity) as cantidad'),DB::raw('(products.id) as product'),DB::raw('(product_id) as productse'))
@@ -175,17 +173,21 @@ public function __construct()
      $cart = session()->get('cart');
      $min_price = Input::has('min_price') ? Input::get('min_price') : 0;
      $max_price = Input::has('max_price') ? Input::get('max_price') : 10000000;
-     $clientes =  Input::get('clientes');
-     $areafil = Input::get('area');
-     $parametrofil = Input::get('parametro');
-     $autorfil = Input::get('autor');
-     $subcategoriafil = Input::get('subcategoria');
-   $products = DB::table('products')
+     $clientes =  session()->get('clientes');
+     $areafil = session()->get('areafil');
+     $bustext = session()->get('bustext');
+     $parametrofil = session()->get('parametro');
+     $autorfil = session()->get('autor');
+     $subcategoriafil = session()->get('subcategoria');
+      $products = DB::table('products')
       ->whereBetween('precio', array($min_price, $max_price))
       ->where('category_id', 'like', '%' . $clientes . '%')
-      ->where('parametro_id', 'like', '%' . $parametrofil . '%')
+     /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
       ->where('autor_id', 'like', '%' . $autorfil . '%')
-      ->where('category_id', 'like', '%' . $subcategoriafil . '%')
+      ->where('categoriapro_id', 'like', '%' . $subcategoriafil . '%')
+      ->where('name','like','%'.$bustext.'%')->Where('description','like','%'.$bustext.'%')
+      ->where('visible','=','1')
+      ->orderByRaw("RAND()")
       ->paginate(12);
       //dd($products);
    $total = $this->total();
@@ -216,7 +218,7 @@ public function __construct()
     ->where('contents.page_id', '=' ,$user->id)
     ->get();
 
-   return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo);
+   return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo);
      }}
 
      $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();

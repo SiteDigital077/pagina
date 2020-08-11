@@ -24,6 +24,7 @@
  use DigitalsiteSaaS\Pagina\Diagrama;
  use DigitalsiteSaaS\Pagina\Carousel;
  use DigitalsiteSaaS\Pagina\Empleo;
+ use DigitalsiteSaaS\Carrito\Categoria;
  use DigitalsiteSaaS\Pagina\Shuffleweb;
  use App\Http\Requests\FichaCreateRequest;
  use App\Http\Requests\FichaUpdateRequest;
@@ -205,6 +206,7 @@
  public function editar($id){
   if(!$this->tenantName){
   $contenido = Content::find($id);
+  $categoria = Categoria::all();
   $roles = DB::table('roles_comunidad')->get();
   $notador = Content::where('id','=',$id)->get();
   foreach ($notador as $notadores){
@@ -216,6 +218,7 @@
   $posicion = DB::table('posicion')->pluck('posicion');
 
   }else{
+  $categoria = \DigitalsiteSaaS\Carrito\Tenant\Categoria::all();
   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
   $roles = DB::table('roles_comunidad')->get();
   $notador = \DigitalsiteSaaS\Pagina\Tenant\Content::where('id','=',$id)->get();
@@ -229,7 +232,7 @@
  
   }
 
-  return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols);
+  return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols)->with('categoria', $categoria);
  }
 
  public function editarbanner($id){
@@ -1203,17 +1206,20 @@ public function imagenescarousel($id){
  }
 
  public function productos($id){
-  $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
     if(!$this->tenantName){
+      $categoria = Categoria::all();
+  $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
     $plan = 0;
-   }{
+   }else{
+  $categoria = \DigitalsiteSaaS\Carrito\Tenant\Categoria::all();
+  $posicion = \DigitalsiteSaaS\Pagina\Tenant\Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
    $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
         if ($hostname){
             $plan = $hostname->plan_id;
           
         }
     }
-  return view('pagina::contenidos/crear-productos')->with('posicion', $posicion)->with('plan', $plan);
+  return view('pagina::contenidos/crear-productos')->with('posicion', $posicion)->with('plan', $plan)->with('categoria', $categoria);
  }
 
  public function filtros($id){

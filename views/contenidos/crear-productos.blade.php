@@ -38,7 +38,32 @@
                                                  {{Form::text('descripcion', '', array('class' => 'form-control','placeholder'=>'Ingrese descripción'))}}
                                             </div>
                                         </div>
-   
+                                        
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Cataegria</label>
+                                            <div class="col-md-9">
+                                                 <select name="contenidos" id="inputContenidos" class="form-control" required="required">
+                                                  <option selected disabled>Seleccione categoria</option>
+                                                  <option value="">Sin categoria</option>
+                                                  @foreach($categoria as $categoria)
+                                                   <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                                                  @endforeach
+                                                 </select>
+                                            </div>
+                                        </div>
+
+
+                                          <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Tipo visualización</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('filePath', [
+                                                   '1' => 'Siteuno',
+                                                   '2' => 'Sitedos'], null, array('class' => 'form-control')) }}
+                                             </div>
+                                        </div>
+
+                                        
+
 
                                          <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Posición</label>
@@ -46,6 +71,7 @@
                                               {{Form::select('posicion', $posicion,null, array('class' => 'form-control'))}}
                                             </div>
                                         </div>
+
 
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
