@@ -1,5 +1,5 @@
 @if($contenido->level == 1)
-@if($contenido->image == 'siteone')
+@if($contenido->image == '1')
 
 <style type="text/css">
   .product-grid{
@@ -117,7 +117,7 @@
                 </a>
                 <ul class="product-links">
                     <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-        
+       
                     <li><a href="#"><i class="fa fa-search"></i></a></li>
                 </ul>
             </div>
@@ -129,16 +129,42 @@
                   <p class="item-price text-center text-primary"><b>${{number_format($product->precioinivafin,0,",",".")}}</b></p>
                   @else
                   <p class="item-price text-center"><strike>${{number_format($product->precioivafin,0,",",".")}}</strike> <b><span class="text-primary">${{number_format($product->precioinivafin,0,",",".")}}</span></b></p>
-                  @endif 
+                  @endif
                 </span></div>
             </div>
         </div>
     </div>
-    @else
+    @elseif($contenido->contents == NULL OR $contenido->contents == '')
+    <div class="col-md-3 col-sm-6">
+        <div class="product-grid">
+            <div class="product-image">
+                <a href="#" class="image">
+                    <img class="pic-1" src="{{$product->image}}">
+                    <img class="pic-2" src="{{$product->image}}">
+                </a>
+                <ul class="product-links">
+                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+       
+                    <li><a href="#"><i class="fa fa-search"></i></a></li>
+                </ul>
+            </div>
+            <div class="product-content">
+               
+                <h3 class="title text-center"><a href="#">{!!substr($product->name, 0, 22)!!}</a></h3>
+                <div class="price"><span class="text-primary">
+                 @if($product->precioivafin == $product->precioinivafin)
+                  <p class="item-price text-center text-primary"><b>${{number_format($product->precioinivafin,0,",",".")}}</b></p>
+                  @else
+                  <p class="item-price text-center"><strike>${{number_format($product->precioivafin,0,",",".")}}</strike> <b><span class="text-primary">${{number_format($product->precioinivafin,0,",",".")}}</span></b></p>
+                  @endif
+                </span></div>
+            </div>
+        </div>
+    </div>
     @endif
 @endforeach
 
-@elseif($contenido->image == 'sitetwo')
+@elseif($contenido->image == '2')
 
 <style type="text/css">
   .product-grid{
@@ -269,7 +295,24 @@
                 </div>
             </div>
         </div>
-        @else
+       @elseif($contenido->contents == NULL OR $contenido->contents == '')
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#" class="image">
+                        <img class="pic-1 img-responsive" src="{{$product->image}}">
+                    </a>
+                    <ul class="social">
+                        <li><a href="{{ route('cart-add', $product->slug)}}"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="{{ route('cart-add', $product->slug)}}"><i class="fa fa-search"></i></a></li>
+                    </ul>
+                </div>
+                <div class="product-content">
+                    <h3 class="title text-primary"><a class="text-primary" href="#"><span class="text-primary">{{$product->name}}</span></a></h3>
+                    <div class="price">${{number_format($product->precioinivafin,0,",",".")}}</div>
+                </div>
+            </div>
+        </div>
         @endif
             @endforeach
 
@@ -279,7 +322,6 @@
 
 @else
 @endif
-
 
 
 

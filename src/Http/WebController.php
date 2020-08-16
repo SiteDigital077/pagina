@@ -179,8 +179,8 @@ public function __construct()
      $parametrofil = session()->get('parametro');
      $autorfil = session()->get('autor');
      $subcategoriafil = session()->get('subcategoria');
-      $products = DB::table('products')
-      ->whereBetween('precio', array($min_price, $max_price))
+      $products = Product::
+      whereBetween('precio', array($min_price, $max_price))
       ->where('category_id', 'like', '%' . $clientes . '%')
      /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
       ->where('autor_id', 'like', '%' . $autorfil . '%')
@@ -195,7 +195,7 @@ public function __construct()
    $carousel = DB::table('contents')
    ->join('carousel','contents.id','=','carousel.content_id')
    ->get();
-   $carouselimg = DB::table('carousel_image')->get();
+   $carouselimg = Carousel::all();
    $filtros = DB::table('categoriessd')->get();
    $subcategoria = DB::table('categoriapro')->get();
    $parametro = DB::table('parametro')->get();
@@ -319,10 +319,10 @@ public function __construct()
      $parametrofil = Input::get('parametro');
      $autorfil = Input::get('autor');
      $subcategoriafil = Input::get('subcategoria');
-   $products = DB::table('products')
-      ->whereBetween('precio', array($min_price, $max_price))
+   $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
+        whereBetween('precio', array($min_price, $max_price))
       ->where('category_id', 'like', '%' . $clientes . '%')
-      ->where('parametro_id', 'like', '%' . $parametrofil . '%')
+      ->orWhere('parametro_id', 'like', '%' . $parametrofil . '%')
       ->where('autor_id', 'like', '%' . $autorfil . '%')
       ->where('category_id', 'like', '%' . $subcategoriafil . '%')
       ->paginate(12);
@@ -332,7 +332,7 @@ public function __construct()
    $carousel = DB::table('contents')
    ->join('carousel','contents.id','=','carousel.content_id')
    ->get();
-   $carouselimg = DB::table('carousel_image')->get();
+   $carouselimg = \DigitalsiteSaaS\Pagina\Tenant\Carousel::all();
    $filtros = DB::table('categoriessd')->get();
    $subcategoria = DB::table('categoriapro')->get();
    $parametro = DB::table('parametro')->get();
@@ -503,7 +503,7 @@ $categories = Pais::all();
    $carousel = DB::table('contents')
    ->join('carousel','contents.id','=','carousel.content_id')
    ->get();
-   $carouselimg = DB::table('carousel_image')->get();
+   $carouselimg = Carousel::all();;
    $colors = DB::table('colors')->get();
    $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
      //dd($arr_ip);
@@ -653,7 +653,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $carousel = DB::table('contents')
    ->join('carousel','contents.id','=','carousel.content_id')
    ->get();
-   $carouselimg = DB::table('carousel_image')->get();
+   $carouselimg = \DigitalsiteSaaS\Pagina\Tenant\Carousel::all();;
    $colors = DB::table('colors')->get();
    $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
      //dd($arr_ip);

@@ -203,9 +203,14 @@
   return Redirect('gestion/contenidos/digitales/'.$contenido->page_id)->with('status', 'ok_create');
  }
 
+
+
  public function editar($id){
   if(!$this->tenantName){
   $contenido = Content::find($id);
+  $contenidoweb = Categoria::join('contents','contents.contents','=','categoriapro.id')
+  ->where('contents.id', $id)
+  ->get();
   $categoria = Categoria::all();
   $roles = DB::table('roles_comunidad')->get();
   $notador = Content::where('id','=',$id)->get();
@@ -220,6 +225,9 @@
   }else{
   $categoria = \DigitalsiteSaaS\Carrito\Tenant\Categoria::all();
   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
+  $contenidoweb = \DigitalsiteSaaS\Pagina\Tenant\Categoria::join('contents','contents.contents','=','categoriapro.id')
+  ->where('contents.id', $id)
+  ->get();
   $roles = DB::table('roles_comunidad')->get();
   $notador = \DigitalsiteSaaS\Pagina\Tenant\Content::where('id','=',$id)->get();
   foreach ($notador as $notadores){
@@ -232,7 +240,7 @@
  
   }
 
-  return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols)->with('categoria', $categoria);
+  return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols)->with('categoria', $categoria)->with('contenidoweb', $contenidoweb);
  }
 
  public function editarbanner($id){

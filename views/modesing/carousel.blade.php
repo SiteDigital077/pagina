@@ -122,9 +122,9 @@
 
 <style type="text/css">
     .carousel-wrap {
-  margin: 90px auto;
-  padding: 0 5%;
-  width: 80%;
+  margin: 30px auto;
+  padding: 0 0%;
+  width: 100%;
   position: relative;
 }
 
@@ -190,7 +190,7 @@
       items: 3
     },
     1000: {
-      items: 6
+      items: 4
     }
   }
 })

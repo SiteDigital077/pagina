@@ -6800,11 +6800,14 @@
                                             <label class="col-md-3 control-label" for="example-email-input">Cataegria</label>
                                             <div class="col-md-9">
                                                  <select name="contenidos" id="inputContenidos" class="form-control" required="required">
-                                                  <option selected disabled>Seleccione categoria</option>
-                                                  <option value="{{$contenido->contents}}">{{$contenido->contents}}</option>
+                                                    @foreach($contenidoweb as $contenidoweb)
+                                                  <option value="{{$contenidoweb->contents}}" selected>{{$contenidoweb->nombre}}</option>
+                                                  @endforeach
+                                                 
                                                   @foreach($categoria as $categoria)
                                                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                                                   @endforeach
+                                                  <option value="">Sin categoria</option>
                                                  </select>
                                             </div>
                                         </div>

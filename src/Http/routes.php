@@ -158,7 +158,7 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  Route::resource('gestion/contenidos/jumbotron', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@jumbotron');
  Route::get('gestion/contenidos/mapa/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@mapa');
  Route::get('gestion/contenidos/mailing/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@mailing');
- Route::resource('gestion/contenidos/mediaobject', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@mediaobject');
+ Route::get('gestion/contenidos/mediaobject/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@mediaobject');
  Route::get('gestion/contenidos/subservicios/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@subservicios');
  Route::get('gestion/contenidos/clientes/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@clientes');
  Route::resource('gestion/contenidos/titulo', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@titulo');
