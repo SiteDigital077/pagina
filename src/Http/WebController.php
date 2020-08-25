@@ -284,8 +284,8 @@ public function __construct()
    $contenidonu = \DigitalsiteSaaS\Pagina\Tenant\Maxu::join('contents','contents.id','=','tabs.content_id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$user->id)->get();
-   $contenidonumas =  DB::table('ficha')->where('responsive', $user->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');  
-  
+   $contenidonumas =  \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('responsive', $user->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');  
+
  $scroll = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id',1)->value('scroll');
      $temp = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id',1)->value('template');
      foreach($temawebs as $temaweb){
@@ -574,7 +574,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$post->id)
     ->get();
-   $contenidonumas = DB::table('ficha')->where('responsive', $post->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');
+   $contenidonumas = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('responsive', $post->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');
 
     
      $paginations = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Blogs()->paginate(9);

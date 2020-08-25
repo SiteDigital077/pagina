@@ -1,31 +1,26 @@
+
+
  @if($contenido->level == 1)
 
-@foreach($contenidonumas as $contenidonuma)
-  @if($contenidonuma->imageal =='fichan')
-   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 wow {{$contenidonuma->animacion}}">
-    @if($contenidonuma->level == 1)
-	<div class="thumbnail">
-		<img src="fichaimg/clientes/{{$contenidonuma->usuario_id}}/{!!$contenidonuma->image!!}" alt="{{$contenido->title}}" title="{{$contenido->title}}">
-		<div class="caption">
-			<h3>{!!$contenidonuma->title!!}</h3>
-			<p class="text-justify">
-				{!!substr($contenidonuma->position, 0, 200)!!}...
-			</p>
-			<p>
-				<a href="empresa/{!!$contenidonuma->slug!!}" class="btn btn-primary btn-md" role="button">Ver Empresa</a>
-		
-			</p>
-		</div>
-	</div>
-@else
-@endif 
-   </div>
-  @endif 
- @endforeach     
- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-  {{$contenidonumas->links()}}
- </div>
 
+
+
+
+ <div class="col-xs-8 col-sm-8 col-md-8 col-lg-10" style="border: 1px solid;padding: 15px; margin-top: 15px">
+ 	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+ 		<br>
+ 		<img src="https://www.abogados.com.co/site/company/a9/340213/logo/lex-colombia-abogados_li1.png" class="img-responsive" alt="Image">
+ 	</div>
+ 	<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+ 		<h3>Lex Colombia Abogados {{$contenidonuma->id}}</h3>
+ <p>28 Recomendaciones</p>
+ <p><b>Tiene 5 sedes Kennedy (Bogotá Suroccidente), Puente Aranda (Bogotá Oc</b></p>
+ </div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<br>
+	 <p class="text-justify">En Lex Colombia Abogados trabajamos con los mejores profesionales que cuentan con una amplia experiencia en el área del derecho de familia, y nos especializamos en una atención, personalizada, oportuna y efectiva para todos nuestros clientes.Podemos ayudarlo en...</p>
+</div>
+ </div>
 
 @else
 @endif
