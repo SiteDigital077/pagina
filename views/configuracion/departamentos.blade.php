@@ -82,7 +82,7 @@
 <a href="{{ URL::to('gestion/departamentos/downloadExcel/csv') }}"><button class="btn btn-success">Descargar departamentos CSV</button></a>
 <a class="btn btn-primary" data-toggle="modal" href='#modal-id'>Importar departamentos</a>
 
-<a href="/gestion/crear-departamento/{{Request::segment(4)}}" class="btn btn-primary pull-right">Crear Departamento</a>
+<a href="/gestion/crear-departamentos/{{Request::segment(4)}}" class="btn btn-primary pull-right">Crear Departamento</a>
 <br>
 <br>
 <br>

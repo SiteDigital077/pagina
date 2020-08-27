@@ -272,7 +272,7 @@ class ConfiguracionController extends Controller
     }
 
     public function verubicacion(){
-    $pais = DigitalsiteSaaS\Pagina\Paiscon::all();
+    $pais = \DigitalsiteSaaS\Pagina\Paiscon::all();
     return View('pagina::configuracion.paises')->with('pais',$pais);
     }
 

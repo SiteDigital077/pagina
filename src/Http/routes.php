@@ -84,7 +84,7 @@ Route::get('gestion/seo', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@s
   Route::get('gestion/eliminardepartamento/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@eliminardepartamento');
   
 
-  Route::get('gestion/crear-departamento/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@creardepartamento');
+  Route::get('gestion/crear-departamentos/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@creardepartamentos');
   
   
 
