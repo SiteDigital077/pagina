@@ -606,7 +606,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      if(DB::table('venta')->where('id', '1')->value('comunidad') == 1)
    $products = \DigitalsiteSaaS\Pagina\Tenant\Product::whereBetween('precio', array($min_price, $max_price))
       ->where('category_id', 'like', '%' . $clientes . '%')
-      ->where('parametro_id', 'like', '%' . $parametrofil . '%')
+      ->orWhere('parametro_id', 'like', '%' . $parametrofil . '%')
       ->where('autor_id', 'like', '%' . $autorfil . '%')
       ->where('categoriapro_id', 'like', '%' . $subcategoriafil . '%')
       ->where('name','like','%'.$bustext.'%')->Where('description','like','%'.$bustext.'%')

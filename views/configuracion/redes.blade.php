@@ -112,6 +112,27 @@
                                                  {{Form::text('google', $plantilla->google, array('class' => 'form-control','placeholder'=>'Ingrese url'))}}
                                             </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-password-input">Pinterest</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('pinterest', $plantilla->pinterest, array('class' => 'form-control','placeholder'=>'Ingrese url'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-password-input">Whatsapp</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('whatsapp', $plantilla->whatsapp, array('class' => 'form-control','placeholder'=>'Ingrese url'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-password-input">Google</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('google', $plantilla->google, array('class' => 'form-control','placeholder'=>'Ingrese url'))}}
+                                            </div>
+                                        </div>
                                                 {{Form::hidden('template', $plantilla->template, array('class' => 'form-control','placeholder'=>'Ingrese url'))}}
 
                                         <h4 class="text-primary"><b>Datos Template</b></h4>

@@ -107,7 +107,7 @@
 </style>
 
 @foreach($products as $product)
- @if($product->category_id == $contenido->contents)
+ @if($product->categoriapro_id == $contenido->contents)
     <div class="col-md-3 col-sm-6">
         <div class="product-grid">
             <div class="product-image">
@@ -286,7 +286,7 @@
                     </a>
                     <ul class="social">
                         <li><a href="{{ route('cart-add', $product->slug)}}"><i class="fa fa-shopping-bag"></i></a></li>
-                        <li><a href="{{ route('cart-add', $product->slug)}}"><i class="fa fa-search"></i></a></li>
+                        <li><a href="{{ route('product-detail', $product->slug)}}"><i class="fa fa-search"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -304,7 +304,7 @@
                     </a>
                     <ul class="social">
                         <li><a href="{{ route('cart-add', $product->slug)}}"><i class="fa fa-shopping-bag"></i></a></li>
-                        <li><a href="{{ route('cart-add', $product->slug)}}"><i class="fa fa-search"></i></a></li>
+                        <li><a href="{{ route('product-detail', $product->slug)}}"><i class="fa fa-search"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
