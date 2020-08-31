@@ -278,16 +278,14 @@
 
        @foreach($products as $product)
         @if($product->category_id == $contenido->contents)
+        @if($product->position == '1')
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-                    <a href="#" class="image">
-                        <img class="pic-1 img-responsive" src="{{$product->image}}">
-                    </a>
-                    <ul class="social">
-                        <li><a href="{{ route('cart-add', $product->slug)}}"><i class="fa fa-shopping-bag"></i></a></li>
-                        <li><a href="{{ route('product-detail', $product->slug)}}"><i class="fa fa-search"></i></a></li>
-                    </ul>
+                 
+                        <img class="pic-1 img-responsive" src="/{{$product->image}}">
+                        <span style="margin-top:-190px; position: absolute; margin-left:0px; text-align: center; color: #000; font-weight:bold; background: white; padding: 20px 100px">AGOTADO</span>
+                   
                 </div>
                 <div class="product-content">
                     <h3 class="title text-primary"><a class="text-primary" href="#"><span class="text-primary">{{$product->name}}</span></a></h3>
@@ -295,7 +293,7 @@
                 </div>
             </div>
         </div>
-       @elseif($contenido->contents == NULL OR $contenido->contents == '')
+        @else
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
@@ -314,6 +312,42 @@
             </div>
         </div>
         @endif
+       @elseif($contenido->contents == NULL OR $contenido->contents == '')
+       @if($product->position == '1')
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                 
+                        <img class="pic-1 img-responsive" src="/{{$product->image}}">
+                        <span style="margin-top:-190px; position: absolute; margin-left:0px; text-align: center; color: #000; font-weight:bold; background: white; padding: 20px 100px">AGOTADO</span>
+                   
+                </div>
+                <div class="product-content">
+                    <h3 class="title text-primary"><a class="text-primary" href="#"><span class="text-primary">{{$product->name}}</span></a></h3>
+                    <div class="price">${{number_format($product->precioinivafin,0,",",".")}}</div>
+                </div>
+            </div>
+        </div>
+        @else
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#" class="image">
+                        <img class="pic-1 img-responsive" src="{{$product->image}}">
+                    </a>
+                    <ul class="social">
+                        <li><a href="{{ route('cart-add', $product->slug)}}"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="{{ route('product-detail', $product->slug)}}"><i class="fa fa-search"></i></a></li>
+                    </ul>
+                </div>
+                <div class="product-content">
+                    <h3 class="title text-primary"><a class="text-primary" href="#"><span class="text-primary">{{$product->name}}</span></a></h3>
+                    <div class="price">${{number_format($product->precioinivafin,0,",",".")}}</div>
+                </div>
+            </div>
+        </div>
+        @endif
+        @endif
             @endforeach
 
 
@@ -322,10 +356,3 @@
 
 @else
 @endif
-
-
-
-
-
-
-

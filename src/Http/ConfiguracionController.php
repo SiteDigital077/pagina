@@ -400,6 +400,8 @@ class ConfiguracionController extends Controller
      $contenido->instagram = Input::get('instagram');
      $contenido->vimeo = Input::get('vimeo');
      $contenido->google = Input::get('google');
+     $contenido->pinterest = Input::get('pinterest');
+     $contenido->whatsapp = Input::get('whatsapp');
      $contenido->direccion = Input::get('direccion');
      $contenido->telefono = Input::get('telefono');
      $contenido->horario = Input::get('horario');
