@@ -28,6 +28,7 @@
  use DigitalsiteSaaS\Pagina\Diagrama;
  use DigitalsiteSaaS\Pagina\Formu;
  use DigitalsiteSaaS\Pagina\Seo;
+  use DigitalsiteSaaS\Pagina\User;
  use Mail;
  use DB;
  use Hash;
@@ -38,7 +39,7 @@
  use App\Http\Requests\FicusuarioCreateRequest;
  use Input;
  use Illuminate\Support\Str;
- use Request;
+use Illuminate\Http\Request;
  use App\Mail\Mensaje;
  use App\Mail\Mensajeficha;
  use App\Mail\Registro;
@@ -818,6 +819,17 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      array(
      'valid' => $isAvailable
      )); 
+    }
+
+    public function autocomplete(Request $request)
+    {
+      if(!$this->tenantName){
+        $data = Product::select("name as name","image as img","name as desc")->where("name","LIKE","%{$request->input('query')}%")->get();
+        return response()->json($data);
+      }else{
+        $data = \DigitalsiteSaaS\Pagina\Tenant\Product::select("name as name","image as img","name as desc")->where("name","LIKE","%{$request->input('query')}%")->get();
+        return response()->json($data);
+      }
     }
 
     public function checkUsernameAvailabilitydocument(){
