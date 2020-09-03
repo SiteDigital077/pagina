@@ -335,7 +335,7 @@ public function __construct()
    ->get();
    $carouselimg = \DigitalsiteSaaS\Pagina\Tenant\Carousel::all();
    $filtros = DB::table('categoriessd')->get();
-   $subcategoria = DB::table('categoriapro')->get();
+   $subcategoria = \DigitalsiteSaaS\Pagina\Tenant\Categoria::all();
    $parametro = DB::table('parametro')->get();
    $autor = DB::table('autor')->get();
    $area = DB::table('areas')->get();

@@ -1,5 +1,125 @@
      <script type="text/javascript" src="/validaciones/vendor/jquery/jquery.min.js"></script>
  @if($contenido->level == 1)
+
+<style type="text/css">
+ 
+
+.range-slider {
+  width: 100%;
+ 
+  text-align: center;
+  position: relative;
+  .rangeValues {
+    display: block;
+  }
+}
+
+input[type=range] {
+ -webkit-appearance: none;
+    border: 1px solid white;
+    width: 96%;
+    position: absolute;
+    left: 2%;
+
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 96%;
+  height: 5px;
+  background: #ddd;
+  border: none;
+  border-radius: 3px;
+
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #21c1ff;
+  margin-top: -4px;
+    cursor: pointer;
+      position: relative;
+    z-index: 1;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ccc;
+}
+
+input[type=range]::-moz-range-track {
+  width: 96%;
+    left: 4%;
+  height: 5px;
+  background: #ddd;
+  border: none;
+  border-radius: 3px;
+}
+
+input[type=range]::-moz-range-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #21c1ff;
+  
+}
+
+
+/*hide the outline behind the border*/
+
+input[type=range]:-moz-focusring {
+  outline: 1px solid white;
+  outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+  width: 300px;
+  height: 5px;
+  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+  background: transparent;
+  /*leave room for the larger thumb to overflow with a transparent border */
+  border-color: transparent;
+  border-width: 6px 0;
+  /*remove default tick marks*/
+  color: transparent;
+    z-index: -4;
+
+}
+
+input[type=range]::-ms-fill-lower {
+  background: #777;
+  border-radius: 10px;
+}
+
+input[type=range]::-ms-fill-upper {
+  background: #ddd;
+  border-radius: 10px;
+}
+
+input[type=range]::-ms-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #21c1ff;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+  background: #888;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+  background: #ccc;
+}
+
+ </style>
 {{session()->get('autor')}}
   <div class="row filtrado">
                             <div class="col-md-12">
@@ -16,7 +136,7 @@
                                  <form action="/web/session/filtro" role="form" method="post">
                                  
                                       
-
+                                   <!--
                                           <div class="form-group">
                                             <label class="col-md-12 control-label" for="example-password-input">Busqueda por palabra {{Session::get('bustext')}} </label>
                                             <div class="col-md-12">
@@ -27,7 +147,7 @@
                                                 @endif
                                             </div>
                                         </div>
-
+                                       
 
                                         <div class="form-group">
                                             <label class="col-md-12 control-label" for="example-password-input">Precio Desde {{session::get('min_price')}} </label>
@@ -42,6 +162,10 @@
                                                    {{Form::text('max_price', '', array('class' => 'form-control','placeholder'=>'Ingrese max','maxlength' => '50' ))}}
                                             </div>
                                         </div>
+
+                                        -->
+                                
+                                          
                                         <?php 
                                         $subcategoriawe = Input::has('subcategoria') ?  Input::get('subcategoria'):[];
                                         $clientewe = Input::has('clientes') ?  Input::get('clientes'):[];
@@ -94,10 +218,11 @@
                                               @endforeach                                            
                                               </select>
                                             </div>
-                                        </div>
-
+                                          </div>
                                         
+                                    
 
+                                      <!-- 
                                         <div class="form-group">
                                             <label class="col-md-12 control-label" for="example-text-input">Autor</label>
                                             <div class="col-md-12">
@@ -163,7 +288,21 @@
                                               </select>
                                             </div>
                                         </div>
+                                        -->
+ <span style="color:white">></span> 
+                                        <div class="form-group">
+                                         
+                                            <label class="col-md-12 control-label" for="example-text-input">Precio</label>
+                         
 
+                                   
+                                          <div class="range-slider" style="margin-top: 0px">
+                                         <span style="margin-left: 18px;" class="rangeValues"></span>
+                                         <input name="min_price" value="{{session::get('min_price')}}" min="1000" max="150000" step="500" type="range" value="{{session::get('min_price')}}">
+                                         <input name="max_price" min="1000" max="150000" step="500" type="range" value="{{session::get('max_price')}}">
+                                    
+                                      </div>
+                                    </div>
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                         <div class="form-group form-actions">
@@ -179,7 +318,10 @@
                                 <!-- END Basic Form Elements Block -->
                             </div>
                           </div>
-                          
+
+
+
+                                            
 @else
 @endif
 
@@ -198,4 +340,44 @@
             });
         });
       });
-   </script>   
+   </script>  
+
+   <script type="text/javascript">
+     function getVals(){
+  // Get slider values
+  let parent = this.parentNode;
+  let slides = parent.getElementsByTagName("input");
+    let slide1 = parseFloat( slides[0].value );
+    let slide2 = parseFloat( slides[1].value );
+  // Neither slider will clip the other, so make sure we determine which is larger
+  if( slide1 > slide2 ){ let tmp = slide2; slide2 = slide1; slide1 = tmp; }
+  
+  let displayElement = parent.getElementsByClassName("rangeValues")[0];
+      displayElement.innerHTML = "$" + slide1 + " - $" + slide2;
+}
+
+window.onload = function(){
+  // Initialize Sliders
+  let sliderSections = document.getElementsByClassName("range-slider");
+      for( let x = 0; x < sliderSections.length; x++ ){
+        let sliders = sliderSections[x].getElementsByTagName("input");
+        for( let y = 0; y < sliders.length; y++ ){
+          if( sliders[y].type ==="range" ){
+            sliders[y].oninput = getVals;
+            // Manually trigger event first time to display values
+            sliders[y].oninput();
+          }
+        }
+      }
+}
+   </script> 
+
+
+
+
+
+
+
+
+
+
