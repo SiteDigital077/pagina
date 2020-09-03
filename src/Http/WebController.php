@@ -313,20 +313,32 @@ public function __construct()
     ->orderBy('id','ASC')
     ->where('contents.page_id', '=' ,$user->id)->get();
      $cart = session()->get('cart');
-     $min_price = Input::has('min_price') ? Input::get('min_price') : 0;
-     $max_price = Input::has('max_price') ? Input::get('max_price') : 10000000;
-     $clientes =  Input::get('clientes');
-     $areafil = Input::get('area');
-     $parametrofil = Input::get('parametro');
-     $autorfil = Input::get('autor');
-     $subcategoriafil = Input::get('subcategoria');
-   $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
-        whereBetween('precio', array($min_price, $max_price))
-      ->where('category_id', 'like', '%' . $clientes . '%')
-      ->orWhere('parametro_id', 'like', '%' . $parametrofil . '%')
-      ->where('autor_id', 'like', '%' . $autorfil . '%')
-      ->where('category_id', 'like', '%' . $subcategoriafil . '%')
-      ->paginate(12);
+     $min_price = session()->get('min_price');
+     $max_price = session()->get('max_price');
+     $clientes = session()->get('clientes');
+     $bustext = session()->get('bustext');
+     $areafil = session()->get('area');
+     $parametrofil = session()->get('parametro');
+     $autorfil = session()->get('autor');
+     $subcategoriafil = session()->get('subcategoria');
+     if($min_price = ''){
+     $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
+     whereBetween('precio', array($min_price, $max_price))
+     ->where('visible', '=', '1')
+     ->paginate(12);
+     }else{
+     $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
+     whereBetween('precio', array($min_price, $max_price))
+     ->where('category_id', 'like', '%' . $clientes . '%')
+     ->where('parametro_id', 'like', '%' . $parametrofil . '%')
+     ->where('autor_id', 'like', '%' . $autorfil . '%')
+     ->where('categoriapro_id', 'like', '%' . $subcategoriafil . '%')
+     ->where('name', 'like', '%' . $bustext . '%')
+     ->where('name', 'like', '%' . $description . '%')
+     ->where('visible', '=', '1')
+     ->orderByRaw("RAND()")
+     ->paginate(12);
+     }
       //dd($products);
    $total = $this->total();
    $subtotal = $this->subtotal();

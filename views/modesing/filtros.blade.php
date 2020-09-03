@@ -244,13 +244,14 @@ input[type=range]:focus::-ms-fill-upper {
                                               </select>
                                             </div>
                                         </div>
+                                        -->
 
                                          <div class="form-group">
-                                            <label class="col-md-12 control-label" for="example-text-input">Grado</label>
+                                            <label class="col-md-12 control-label" for="example-text-input">Tamaño</label>
                                             <div class="col-md-12">
                                              <select class="selectpicker col-xs-12 col-sm-12 col-md-12 col-lg-12 form-control input-small" data-show-subtext="true" data-live-search="true" name="parametro">
                                               @if(session()->get('parametro') == '')
-                                              <option value="" selected disabled hidden>Seleccione Grado</option>
+                                              <option value="" selected disabled hidden>Seleccione Tamaño</option>
                                               @else
                                               @foreach($parametro as $parametrosd)
                                               @if($parametrosd->id == session()->get('parametro'))
@@ -266,7 +267,7 @@ input[type=range]:focus::-ms-fill-upper {
                                               </select>
                                             </div>
                                         </div>
-
+                                      <!--
                                           <div class="form-group">
                                             <label class="col-md-12 control-label" for="example-text-input">Área</label>
                                             <div class="col-md-12">
@@ -298,8 +299,9 @@ input[type=range]:focus::-ms-fill-upper {
                                    
                                           <div class="range-slider" style="margin-top: 0px">
                                          <span style="margin-left: 18px;" class="rangeValues"></span>
-                                         <input name="min_price" value="{{session::get('min_price')}}" min="1000" max="150000" step="500" type="range" value="{{session::get('min_price')}}">
-                                         <input name="max_price" min="1000" max="150000" step="500" type="range" value="{{session::get('max_price')}}">
+  <input name="min_price" value="{{session::get('min_price')}}" min="1000" max="150000" step="500" type="range">
+                                         
+  <input name="max_price" min="1000" max="150000" step="500" type="range" value="{{session::get('max_price')}}">
                                     
                                       </div>
                                     </div>
