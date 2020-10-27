@@ -277,7 +277,7 @@
 
 
        @foreach($products as $product)
-        @if($product->category_id == $contenido->contents)
+        @if($product->categoriapro_id == $contenido->contents)
         @if($product->position == '1')
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">

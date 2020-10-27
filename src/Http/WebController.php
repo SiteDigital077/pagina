@@ -321,11 +321,9 @@ public function __construct()
      $parametrofil = session()->get('parametro');
      $autorfil = session()->get('autor');
      $subcategoriafil = session()->get('subcategoria');
-     if($min_price = ''){
+     if($min_price == null){
      $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
-     whereBetween('precio', array($min_price, $max_price))
-     ->where('visible', '=', '1')
-     ->paginate(12);
+     paginate(12);
      }else{
      $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
      whereBetween('precio', array($min_price, $max_price))
@@ -333,9 +331,7 @@ public function __construct()
      ->where('parametro_id', 'like', '%' . $parametrofil . '%')
      ->where('autor_id', 'like', '%' . $autorfil . '%')
      ->where('categoriapro_id', 'like', '%' . $subcategoriafil . '%')
-     ->where('name', 'like', '%' . $bustext . '%')
-     ->where('name', 'like', '%' . $description . '%')
-     ->where('visible', '=', '1')
+     ->orWhere('name', 'like', '%' . $bustext . '%')
      ->orderByRaw("RAND()")
      ->paginate(12);
      }
@@ -348,7 +344,7 @@ public function __construct()
    $carouselimg = \DigitalsiteSaaS\Pagina\Tenant\Carousel::all();
    $filtros = DB::table('categoriessd')->get();
    $subcategoria = \DigitalsiteSaaS\Pagina\Tenant\Categoria::all();
-   $parametro = DB::table('parametro')->get();
+   $parametro = \DigitalsiteSaaS\Carrito\Tenant\Parametro::all();
    $autor = DB::table('autor')->get();
    $area = DB::table('areas')->get();
    $selectores = DB::table('selectors')->get();
@@ -381,6 +377,7 @@ if($scroll == 1){
     ->orderBy('id','ASC')
     ->where('contents.page_id', '=' ,$user->id)->get();
     }
+
  
     if($resp == 'true'){
    return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario)->with('seo', $seo);
@@ -525,6 +522,7 @@ $categories = Pais::all();
      $pais = $arr_ip['country'];
      $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
      $temp = Template::where('id',1)->value('template');
+     
    return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo);
    }
       $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();

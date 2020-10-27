@@ -7,7 +7,7 @@
    <label class="control-label" for="example-email-input"></label>
    @else
    @endif
-    <input type="{{$formulario->tipo}}" name="{{$formulario->nombreinput}}" value="{{$formulario->nombre}}" placeholder="{{$formulario->nombre}}">
+    <input type="{{$formulario->tipo}}" name="{{$formulario->nombreinput}}" id="{{$formulario->nombreinput}}" value="{{$formulario->nombre}}" placeholder="{{$formulario->nombre}}">
     {{$formulario->nombre}}
   </div>
  </div>
@@ -22,7 +22,7 @@
    <label class="control-label" for="example-email-input"> <span style="color:red">*</span></label>
    @else
    @endif
-    <input type="{{$formulario->tipo}}" name="{{$formulario->nombreinput}}" value="{{$formulario->nombre}}" required="required" placeholder="{{$formulario->nombre}}">
+    <input type="{{$formulario->tipo}}" name="{{$formulario->nombreinput}}" id="{{$formulario->nombreinput}}" value="{{$formulario->nombre}}" required="required" placeholder="{{$formulario->nombre}}">
   {{$formulario->nombre}}
   </div>
  </div>

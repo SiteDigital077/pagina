@@ -4,7 +4,7 @@
                                <div class="form-group col-md-12">
                                 <label class="checkbox-inline">
                                   <div class="col-md-12">
-                                     <input type="checkbox" id="terms" name="{{$formulario->nombreinput}}">Aceptar términos y condiciones <a data-toggle="modal" href='#modal-id'>Ver términos y condiciones</a> </label>
+                                     <input type="checkbox" id="terms" name="{{$formulario->nombreinput}}" id="{{$formulario->nombreinput}}">Aceptar términos y condiciones <a data-toggle="modal" href='#modal-id'>Ver términos y condiciones</a> </label>
                                   </div>
                                </div>
                               <div class="modal fade" id="modal-id">
@@ -36,7 +36,7 @@
                                <div class="form-group col-md-12">
                                 <label class="checkbox-inline">
                                   <div class="col-md-12">
-                                     <input type="checkbox" id="terms" name="{{$formulario->nombreinput}}" required="required">Aceptar términos y condiciones <a data-toggle="modal" href='#modal-id'>Ver términos y condiciones</a> </label>
+                                     <input type="checkbox" id="terms" name="{{$formulario->nombreinput}}" required="required" id="{{$formulario->nombreinput}}">Aceptar términos y condiciones <a data-toggle="modal" href='#modal-id'>Ver términos y condiciones</a> </label>
                                   </div>
                                </div>
                               <div class="modal fade" id="modal-id">

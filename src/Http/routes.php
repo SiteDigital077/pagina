@@ -1,6 +1,4 @@
 <?php
-
-
 Route::group(['middleware' => ['auths','saas']], function (){
  Route::post('/suscripcion/tarjeta', 'DigitalsiteSaaS\Pagina\Http\UsersaasController@tarjeta');
   Route::get('/suscripcion/planweb', 'DigitalsiteSaaS\Pagina\Http\UsersaasController@planweb');

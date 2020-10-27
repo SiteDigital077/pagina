@@ -80,14 +80,12 @@ use RegistersUsers;
 
     protected function create(Request $request)
     {
+
       
-      $fqdns = Input::get('host');
+      $fqdns = Input::get('fqdn');
       $periodo = Input::get('hasta');
       $plan = Input::get('plan');
       $password = Input::get('password');
-
-
-
 
         $fqdn = sprintf('%s.%s', $fqdns, env('APP_DOMAIN'));
        
@@ -114,7 +112,7 @@ use RegistersUsers;
          $website = DB::table($mihost.'users')->where('id', '1')
          ->update(['password' => $pass]);
 
-        return Redirect('/saas/sitesaas')->with('status', 'ok_create');
+        return Redirect('/gestion/registrosaas')->with('status', 'ok_create');
     }
 
  

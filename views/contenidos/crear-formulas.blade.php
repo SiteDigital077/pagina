@@ -3,8 +3,7 @@
 
     @section('cabecera')
     @parent
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
-    <script src="/vendors/ckeditor/ckeditor.js"></script>  
+   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
     @stop
 
 @section('ContenidoSite-01')
@@ -125,7 +124,28 @@
                                                   'fadeInUpBig' => 'fadeUpBig'], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
-                                            
+                                        
+                                        <hr>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Asunto</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('template', '', array('class' => 'form-control','placeholder'=>'Ingrese Asunto del mensaje'))}}
+                                            </div>
+                                        </div> 
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Url</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('FilePath', '', array('class' => 'form-control','placeholder'=>'Ingrese URL'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Contenido del Mensaje</label>
+                                            <div class="col-md-9">
+                                                {{Form::textarea('contenidos', '', array('class' => 'ckeditor','id' => 'editor1','placeholder'=>'Ingrese contenido'))}}
+                                            </div>
+                                        </div> 
                   
                                         {{Form::hidden('tipo', 'formulas', array('class' => 'form-control'))}}
                                         {{Form::hidden('num', '7', array('class' => 'form-control'))}}
@@ -147,11 +167,27 @@
 </div>
 
 
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('button-image').addEventListener('click', (event) => {
+      event.preventDefault();
+      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
+    });
+  });
+  // set file link
+  function fmSetLink($url) {
+    document.getElementById('image_label').value = $url;
+  }
+</script>
+
+
 <script src="https://cdn.ckeditor.com/4.11.2/full/ckeditor.js"></script>
 
 <script>
   CKEDITOR.replace( 'editor', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
+</script>
+<script>
+  CKEDITOR.replace( 'editor1', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
 </script>
 @else
 @endif

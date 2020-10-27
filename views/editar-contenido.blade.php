@@ -1523,6 +1523,13 @@
                                         </div>
 
                                          <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Contenido</label>
+                                            <div class="col-md-9">
+                                                {{Form::textarea('contenido', $contenido->content, array('class' => 'ckeditor','id' => 'editor','placeholder'=>'Ingrese contenido'))}}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Posición</label>
                                             <div class="col-md-9">
                                                  {{ Form::select('posicion', [$contenido->position => $contenido->position,

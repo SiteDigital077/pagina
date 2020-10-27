@@ -7,7 +7,7 @@
    <label class="control-label" for="example-email-input">{{$formulario->nombre}}</label>
    @else
    @endif
-   <select name="{{$formulario->nombreinput}}" id="input" class="form-control" placeholder="{{$formulario->nombre}}">
+   <select name="{{$formulario->nombreinput}}" id="{{$formulario->nombreinput}}" class="form-control" placeholder="{{$formulario->nombre}}">
        <option value="" disabled selected>Seleccionar {{$formulario->nombre}}</option> 
    	@foreach($selectores as $selectores)
    	@if($formulario->id == $selectores->input_id)
@@ -29,7 +29,7 @@
    <label class="control-label" for="example-email-input">{{$formulario->nombre}}</label>
    @else
    @endif
-   <select name="{{$formulario->nombreinput}}" id="input" class="form-control" required="required" placeholder="{{$formulario->nombre}}">
+   <select name="{{$formulario->nombreinput}}" id="{{$formulario->nombreinput}}" class="form-control" required="required" placeholder="{{$formulario->nombre}}">
      <option value="" disabled selected>Seleccionar {{$formulario->nombre}}</option>
 	@foreach($selectores as $selectores)
 	@if($formulario->id == $selectores->input_id)

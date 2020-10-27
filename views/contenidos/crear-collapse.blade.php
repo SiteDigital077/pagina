@@ -3,7 +3,7 @@
 
     @section('cabecera')
     @parent
-  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
     @stop
 
 @section('ContenidoSite-01')
@@ -37,6 +37,13 @@
                                             <label class="col-md-3 control-label" for="example-email-input">Descripción</label>
                                             <div class="col-md-9">
                                                  {{Form::text('descripcion', '', array('class' => 'form-control','placeholder'=>'Ingrese descripción'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Contenido</label>
+                                            <div class="col-md-9">
+                                                {{Form::textarea('contenido', '', array('class' => 'ckeditor','id' => 'editor','placeholder'=>'Ingrese contenido'))}}
                                             </div>
                                         </div>
 
@@ -120,7 +127,25 @@
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 
-    
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('button-image').addEventListener('click', (event) => {
+      event.preventDefault();
+      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
+    });
+  });
+  // set file link
+  function fmSetLink($url) {
+    document.getElementById('image_label').value = $url;
+  }
+</script>
+
+
+<script src="https://cdn.ckeditor.com/4.11.2/full/ckeditor.js"></script>
+
+<script>
+  CKEDITOR.replace( 'editor', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
+</script>
 
 
 @stop
