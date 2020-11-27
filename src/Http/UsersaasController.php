@@ -92,7 +92,7 @@ use RegistersUsers;
         $website = new Website;
         $website->uuid = Str::random(10);
         $path = public_path() . '/saas/'.$website->uuid;
-        File::makeDirectory($path, 0777, true);
+        File::makeDirectory($path, 0777, true, true);
         app(WebsiteRepository::class)->create($website);
         $hostname = new Hostname();
         $hostname->fqdn = $fqdn;
