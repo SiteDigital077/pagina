@@ -59,92 +59,84 @@ use GuzzleHttp\Client;
 
 
 
- class WebController extends Controller {
-
-
+class WebController extends Controller {
 
  protected $tenantName = null;
 
-public function __construct()
-    {
-        $this->middleware('web');
-
-        $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
-        if ($hostname){
-            $fqdn = $hostname->fqdn;
-            $this->tenantName = explode(".", $fqdn)[0];
-        }
-      
-    }
+ public function __construct()
+ {
+  $this->middleware('web');
+  $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
+  if ($hostname){
+   $fqdn = $hostname->fqdn;
+   $this->tenantName = explode(".", $fqdn)[0];
+   }
+  }
 
   private function total(){
    $cart = session()->get('cart');
    $total = 0;
    if($cart == null){}
    else{
-  foreach ($cart as $item) {
-   $total += $item->precioinivafin * $item->quantity;
-   }}
-   return $total;
-  }
+    foreach ($cart as $item) {
+     $total += $item->precioinivafin * $item->quantity;
+     }}
+    return $total;
+   }
 
-  private function subtotal(){
-   $cart = session()->get('cart');
-   $subtotal = 0;
-   if($cart == null){}
-   else{
-  foreach($cart as $item){
-   $subtotal += $item->preciodescfin * $item->quantity;
-   }}
-   return $subtotal;
-  }
+   private function subtotal(){
+    $cart = session()->get('cart');
+    $subtotal = 0;
+    if($cart == null){}
+    else{
+    foreach($cart as $item){
+    $subtotal += $item->preciodescfin * $item->quantity;
+    }}
+    return $subtotal;
+   }
 
   public function index(){
-
-    $planessaas = DB::table('planes')->get();
-
-
-    if(!$this->tenantName){
+  
+  $planessaas = DB::table('planes')->get();
+  
+  if(!$this->tenantName){
    $users = DB::table('pages')->where('posti', '1')->get();
-  foreach ($users as $user){
-
+  
+    foreach ($users as $user){
+    $contenido = Content::where('page_id',"=",$user->id)
+    ->orderBy('nivel','ASC')
+    ->get();
      $seo = Seo::where('id','=',1)->get(); 
-     $cama = Page::find($user->id);
      $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
      $meta = Page::where('id','=',$user->id)->get();
      $plantilla = Template::all();
-     $plantillaes = Template::all();
      $paginations = Page::find($user->id)->Blogs()->paginate(9);
-     $temawebs = Template::where('id','=','1')->get();
      $scroll = Template::where('id',1)->value('scroll');
      $temp = Template::where('id',1)->value('template');
+
+     $temawebs = Template::where('id','=','1')->get();
      foreach($temawebs as $temaweb){
-       if($scroll == 1){
+      if($scroll == 1){
       $contenido = Content::all();
       $diagramas = Diagrama::all();
-       $formulario = Formu::join('contents','inputs.content_id','=','contents.id')
-    ->select('inputs.*', 'inputs.id')
-    ->orderBy('id','ASC')
-    ->get();
-      }else{
-        $contenido = Content::where('page_id',"=",$user->id)
-      /*->where('template',"=",$temaweb->template)*/
-      ->orderBy('nivel','ASC')
+      $formulario = Formu::join('contents','inputs.content_id','=','contents.id')
+      ->select('inputs.*', 'inputs.id')
+      ->orderBy('id','ASC')
       ->get();
-       $formulario = Formu::join('contents','inputs.content_id','=','contents.id')
-    ->select('inputs.*', 'inputs.id')
-    ->orderBy('id','ASC')
-    ->where('contents.page_id', '=' ,$user->id)->get();
+      }else{
+      $formulario = Formu::join('contents','inputs.content_id','=','contents.id')
+      ->select('inputs.*', 'inputs.id')
+      ->orderBy('id','ASC')
+      ->where('contents.page_id', '=' ,$user->id)->get();
       $diagramas = Diagrama::where('id', "=", $user->id)->get();
-    }
+      }
      }
     
-
      $eventos = DB::table('events')->orderBy('start_old', 'desc')->get();
      $start =  session()->get('start') ? session()->get('start') : 0;
-   $end = session()->get('end') ? session()->get('end') : 100000000000000;
-   $tipo = session()->get('tipo');
-   $totaleventos = DB::table('events')
+     $end = session()->get('end') ? session()->get('end') : 100000000000000;
+     $tipo = session()->get('tipo');
+     $totaleventos = DB::table('events')
     ->whereBetween('start_old', array($start, $end))
     ->where('class', 'like', '%' . $tipo . '%')
     ->get();
@@ -155,11 +147,11 @@ public function __construct()
       //->groupBy('products.id')
       ->get();
       $terminos = \DigitalsiteSaaS\Pagina\Template::all();
-    $categories = Pais::all();
-     $banners = Page::find($user->id)->Banners()->orderByRaw("RAND()")->take(1)->get();
-     $bannersback = Page::find($user->id)->Banners()->orderByRaw("RAND()")->take(1)->get();
-     $fichones = Page::find($user->id)->Fichas()->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'fichones');
-     $contenidona = Maxo::join('contents','contents.id','=','collapse.content_id')
+      $categories = Pais::all();
+      $banners = Page::find($user->id)->Banners()->orderByRaw("RAND()")->take(1)->get();
+      $bannersback = Page::find($user->id)->Banners()->orderByRaw("RAND()")->take(1)->get();
+      $fichones = Page::find($user->id)->Fichas()->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'fichones');
+      $contenidona = Maxo::join('contents','contents.id','=','collapse.content_id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$user->id)->get();
    $contenidonu = Maxu::join('contents','contents.id','=','tabs.content_id')
@@ -219,7 +211,7 @@ public function __construct()
     ->where('contents.page_id', '=' ,$user->id)
     ->get();
 
-   return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo);
+   return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('contenidu', $contenido)->with('plantilla', $plantilla)->with('meta', $meta)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo);
      }}
 
      $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
@@ -380,7 +372,7 @@ if($scroll == 1){
 
  
     if($resp == 'true'){
-   return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario)->with('seo', $seo);
+   return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('contenidu', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario)->with('seo', $seo);
     }else{
       dd('No ha pagado');
      }
@@ -412,8 +404,9 @@ if($scroll == 1){
 
    $diagramas = Diagrama::where('id',"=",$post->id)->get();
    $fichones = Page::find($post->id)->Fichas()->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'fichones');
+
    
-   $contenido = Content::where('page_id',"=",$post->id)
+   $contenidos = Content::where('page_id',"=",$post->id)
       /*->where('template',"=",$temaweb->template)*/
       ->orderBy('nivel','ASC')
       ->get();
@@ -439,7 +432,7 @@ $categories = Pais::all();
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$post->id)
     ->get();
-   $contenidonumas = DB::table('ficha')->where('responsive', $post->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');
+   $contenidonumas = Fichaje::where('responsive', $post->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');
 
    
      $paginations = Page::find($post->id)->Blogs()->paginate(9);
@@ -523,7 +516,7 @@ $categories = Pais::all();
      $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
      $temp = Template::where('id',1)->value('template');
      
-   return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo);
+   return view('Templates.'.$temp.'.desing')->with('contenidos', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo);
    }
       $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
   $infosaas = DB::table('tenancy.hostnames')
@@ -564,7 +557,7 @@ $categories = Pais::all();
    $diagramas = \DigitalsiteSaaS\Pagina\Tenant\Diagrama::where('id',"=",$post->id)->get();
    $fichones = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Fichas()->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'fichones');
    
-   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::where('page_id',"=",$post->id)
+   $contenidos = \DigitalsiteSaaS\Pagina\Tenant\Content::where('page_id',"=",$post->id)
       /*->where('template',"=",$temaweb->template)*/
       ->orderBy('nivel','ASC')
       ->get();
@@ -674,7 +667,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
      $temp = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id',1)->value('template');
      if($resp == 'true'){
-     return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenido)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario)->with('seo', $seo);
+     return view('Templates.'.$temp.'.desing')->with('contenidos', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenidos)->with('pasto', $contenidos)->with('casual', $contenidos)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenidos)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario)->with('seo', $seo);
  }else{
   dd('No ha pagaf');
  }
@@ -736,12 +729,12 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $plantilla = Template::all();
    $subtotal = $this->subtotal();
    $total = $this->total();
-   $contenido = Bloguero::where('slug','=',$id)->get(); 
+   $contenidos = Bloguero::where('slug','=',$id)->get(); 
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
-   return view('pagina::blog')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot);
+   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot);
   }
 
     public function crearusuario(){

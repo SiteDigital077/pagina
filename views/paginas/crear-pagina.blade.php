@@ -135,7 +135,8 @@
                                                 {{ Form::select('sitio', [
                                                  '1' => 'Horizontal',
                                                  '2' => 'Vertical',
-                                                 '3' => 'Vertical y Horizontal'
+                                                 '3' => 'Vertical y Horizontal',
+                                                 '4' => 'No visible'
                                                  ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
