@@ -246,7 +246,7 @@ return confirm( mensaje );}
   <?php $name=Session::get('name');?>
    <div class="block full">
     <div class="block-title">
-     <h2><strong>Gestión</strong> contenidos</h2>
+     <h2><strong>Gestión</strong> contenidosdf</h2>
     </div>
                             
     <div class="table-responsive">

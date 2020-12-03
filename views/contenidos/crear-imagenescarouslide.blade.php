@@ -65,9 +65,9 @@
                                                 {{Form::text('url', '', array('class' => 'form-control','placeholder'=>'Ingrese estado'))}}
                                             </div>
                                         </div>
-
-                                        <input type="hidden" name="page_id" value="{{str_replace(str_split('\\/:*?"[]|'), ' ', DB::table('contents')->where('id',Request::segment(4))->pluck('page_id'))}}"></input>
-                                         
+                                        @foreach($identificador as $identificador)
+                                        <input type="hidden" name="page_id" value="{{$identificador->page_id}}"></input>
+                                         @endforeach
                                           <input type="hidden" name="content_id" value="{{Request::segment(4)}}"></input>
 
                                         <div class="form-group form-actions">

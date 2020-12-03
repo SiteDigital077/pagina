@@ -1146,8 +1146,15 @@ public function imagenescarousel($id){
  }  
 
   public function imagencarouslide($id){
+
+  if(!$this->tenantName){
+  $identificador = Content::where('id', '=', $id)->get();
+  }else{
+  $identificador = \DigitalsiteSaaS\Pagina\Tenant\Content::where('id', '=', $id)->get();
+  }
+
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
-  return view('pagina::contenidos/crear-imagenescarouslide')->with('posicion', $posicion);
+  return view('pagina::contenidos/crear-imagenescarouslide')->with('posicion', $posicion)->with('identificador', $identificador);
  }  
 
  public function formu($id){
