@@ -580,7 +580,6 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
     ->get();
    $contenidonumas = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('responsive', $post->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');
 
-    
      $paginations = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Blogs()->paginate(9);
    $contenida = \DigitalsiteSaaS\Pagina\Tenant\Maxi::join('contents','contents.id','=','images.content_id')
     ->orderBy('position','ASC')
@@ -855,6 +854,49 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $contenido->save();
      return Redirect($contenido->redireccion)->with('status', 'ok_create');
   }
+
+   public function mensajeficha(){
+
+        if(!$this->tenantName){   
+      $userma = Message::create([
+      'nombre' => Input::get('nombre'),
+      'sujeto' => Input::get('sujeto'),
+      'cargo' => Input::get('cargo'),
+      'email' => Input::get('email'),
+      'interes' => Input::get('interes'),
+      'datos' => Input::get('datos'),
+      'mensaje' => Input::get('mensaje'),
+      'empresa' => Input::get('empresa'),
+      'remember_token' => Input::get('_token'),
+          ]);
+      }else{
+        $userma = \DigitalsiteSaaS\Pagina\Tenant\Message::create([
+      'nombre' => Input::get('nombre'),
+      'sujeto' => Input::get('sujeto'),
+      'cargo' => Input::get('cargo'),
+      'email' => Input::get('email'),
+      'interes' => Input::get('interes'),
+      'datos' => Input::get('datos'),
+      'mensaje' => Input::get('mensaje'),
+      'empresa' => Input::get('empresa'),
+      'remember_token' => Input::get('_token'),
+          ]);
+      }
+        $redireccion = Input::get('redireccion');
+        $ema = Input::get('ema');
+
+      $datas = DB::table('datos')->where('id','1')->get();
+      foreach ($datas as $user){
+        Mail::to(Input::get('email'))
+          ->bcc($user->correo)
+          ->cc($ema)
+        ->send(new Mensajeficha($userma));
+
+      }
+  
+    return Redirect::to($redireccion)->with('status', 'ok_create');
+}
+
 
     public function crearmensajeinput(FormularioFormRequest $request){
 
