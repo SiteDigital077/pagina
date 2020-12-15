@@ -16,7 +16,7 @@ class Message extends Model
     ];
 
 	protected $table = 'mesage';
-	public $timestamps = false;
+	public $timestamps = true;
 
 	
 }
