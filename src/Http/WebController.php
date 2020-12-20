@@ -46,6 +46,7 @@ use Illuminate\Http\Request;
  use App\Mail\Mensajema;
  use App\Mail\SendMailable;
  use Validator;
+ use Response;
 
  use App\Http\Requests\FormularioFormRequest;
  use Auth;
@@ -782,6 +783,23 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $zippera->nombre = $url;
    $zippera->slug = Str::slug($zippera->nombre);
    $zippera->save();
+    }
+
+    public function memo(){
+  $cat_id = Input::get('cat_id');
+  if(!$this->tenantName){
+  $subcategories = Page::where('page_id', '=', $cat_id)->orderBy('page', 'DESC')->get();
+    }else{
+    $subcategories = \DigitalsiteSaaS\Pagina\Tenant\Page::where('page_id', '=', $cat_id)->orderBy('page', 'ASC')->get();
+    }
+  return Response::json($subcategories);
+}
+
+
+    public function filtrohome(){
+     $category = Input::get('category');
+     $subcategory = Input::get('subcategory');
+     return Redirect($subcategory)->with('status', 'ok_create');
     }
 
     public function installHellovista(){
