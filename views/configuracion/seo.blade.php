@@ -204,6 +204,16 @@
                                           </div>
                                          </div>
 
+                                         Google Analytics
+                                         <hr>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Código seguimiento</label>
+                                            <div class="col-md-9">
+                                                 {{Form::textarea('analitica', $seo->analitica, array('class' => 'form-control','placeholder'=>'Ingrese código de seguimiento de Google Analytics'))}}
+                                            </div>
+                                        </div>
+
                                  
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-3">

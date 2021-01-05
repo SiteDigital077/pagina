@@ -73,7 +73,6 @@ class WebController extends Controller {
    $this->tenantName = explode(".", $fqdn)[0];
    }
   }
-
   private function total(){
    $cart = session()->get('cart');
    $total = 0;
