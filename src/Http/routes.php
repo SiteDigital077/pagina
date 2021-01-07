@@ -101,10 +101,8 @@ Route::get('gestion/seo', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@s
  
 
  Route::get('gestion/configurar-correo', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@configcorreo');
- 
- 
- 
 
+ 
  Route::get('gestion/logo-head', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@logohead');
 
  Route::get('gestion/logo-footer', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@logofooter');
@@ -460,6 +458,7 @@ Route::get('/ubicacion/ajax-subcatweb',function(){
 
 
 Route::group(['middleware' => ['web']], function (){
+   Route::get('robotsa.txt', 'DigitalsiteSaaS\Pagina\Http\WebController@robot');
   Route::get('autocomplete/web',array('as'=>'autocomplete/web','uses'=>'DigitalsiteSaaS\Pagina\Http\WebController@autocomplete'));
   Route::get('/respuesta/error', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@resperror');
   Route::post('respuesta/informacion', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@informacion');

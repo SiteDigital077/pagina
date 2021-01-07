@@ -195,6 +195,29 @@
                                             </div>
                                         </div>
 
+                                         <h4 class="text-primary"><b>Configuración email</b></h4>
+                                        <hr>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-password-input">Color Head</label>
+                                            <div class="col-md-9">
+                                                 {{Form::color('head', $plantilla->head, array('class' => 'form-control','placeholder'=>'Ingrese url'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-password-input">Color Footer</label>
+                                            <div class="col-md-9">
+                                                 {{Form::color('footer', $plantilla->footer, array('class' => 'form-control','placeholder'=>'Ingrese url'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-password-input">Nombre Empresa</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('empresa', $plantilla->empresa, array('class' => 'form-control','placeholder'=>'Nombre Empresa'))}}
+                                            </div>
+                                        </div>
                                        
 
                                         {{Form::hidden('terminos', $plantilla->terminos, array('class' => 'form-control','placeholder'=>'Ingrese horario'))}}

@@ -410,6 +410,9 @@ class ConfiguracionController extends Controller
      $contenido->suscribete = Input::get('suscribete');
      $contenido->descripcion = Input::get('descripcion');
      $contenido->terminos = Input::get('terminos');
+     $contenido->head = Input::get('head');
+     $contenido->footer = Input::get('footer');
+     $contenido->empresa = Input::get('empresa');
      $contenido->save();
      return Redirect('gestion/redes-sociales')->with('status', 'ok_update');
     }
@@ -589,6 +592,7 @@ public function paiseditar($id) {
     $departamento->save();
      return Redirect('/gestion/ubicacion/departamentos/'.$departamento->pais_id)->with('status', 'ok_create');
     }
+
 
     public function departamentoeditar($id) {
 

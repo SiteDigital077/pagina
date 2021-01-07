@@ -873,6 +873,11 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      return Redirect($contenido->redireccion)->with('status', 'ok_create');
   }
 
+    public function robot()
+    {
+    dd('holasa');
+    }
+
    public function mensajeficha(){
 
         if(!$this->tenantName){   
