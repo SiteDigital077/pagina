@@ -425,7 +425,7 @@ if($scroll == 1){
      $contenido = Content::where('page_id',"=",$post->id)
     ->orderBy('nivel','ASC')
     ->get();
-    $mediamini = Content::where('page_id',"=",$user->id)
+    $mediamini = Content::where('page_id',"=",$post->id)
     ->orderBy('nivel','ASC')
     ->get();
    $banners = Page::find($post->id)->Banners()->orderByRaw("RAND()")->take(1)->get();
@@ -578,7 +578,7 @@ $categories = Pais::all();
       /*->where('template',"=",$temaweb->template)*/
       ->orderBy('nivel','ASC')
       ->get();
-      $mediamini = \DigitalsiteSaaS\Pagina\Tenant\Content::where('page_id',"=",$user->id)
+      $mediamini = \DigitalsiteSaaS\Pagina\Tenant\Content::where('page_id',"=",$post->id)
     ->orderBy('nivel','ASC')
     ->get();
 $productsa = \DigitalsiteSaaS\Pagina\Tenant\Product::inRandomOrder()->get();
