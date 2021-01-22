@@ -2927,6 +2927,16 @@
                                          </div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Tipo</label>
+                                            <div class="col-md-9">
+                                                 {{ Form::select('contenidos', [$contenido->contents => $contenido->contents,
+                                                '0' => 'Indivudual',
+                                                '1'  => 'Tres Columnas'], null, array('class' => 'form-control')) }}
+                                             </div>
+                                        </div>
+
+
                                          <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Visualización</label>
                                             <div class="col-md-9">
@@ -5062,6 +5072,16 @@
                                             <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
                                           </div>
                                          </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Columna</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('video', [$contenido->video => $contenido->video,
+                                                '0' => 'Sin Columna',
+                                                '1' => 'Columna A',
+                                                '2' => 'Columna B'], null, array('class' => 'form-control')) }}
+                                             </div>
                                         </div>
 
 

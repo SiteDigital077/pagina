@@ -48,6 +48,7 @@
                                             </div>
                                         </div>
 
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -63,6 +64,15 @@
                                             <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
                                            </div>
                                           </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Tipo</label>
+                                            <div class="col-md-9">
+                                                 {{ Form::select('contenidos', [
+                                                '0' => 'Individual',
+                                                '1' => 'Tres Columnas'], null, array('class' => 'form-control')) }}
+                                             </div>
                                         </div>
 
                                          <div class="form-group">

@@ -77,6 +77,15 @@
                                           </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Columna</label>
+                                            <div class="col-md-9">
+                                                 {{ Form::select('video', [
+                                                '0' => 'Sin Columna',
+                                                '1' => 'Columna A',
+                                                '2' => 'Columna B'], null, array('class' => 'form-control')) }}
+                                             </div>
+                                        </div>
                                        
 
                                              <div class="form-group">
