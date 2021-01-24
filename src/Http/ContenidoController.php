@@ -891,8 +891,8 @@ public function editarempleo($id){
   $contenida = Img::where('content_id', '=' ,$id)->get();
   $conteni = Content::find($id);
  }else{
-  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id)->Images;
-  $contenida = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id)->Images;
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Img::where('content_id', '=' ,$id)->get();
+  $contenida = \DigitalsiteSaaS\Pagina\Tenant\Img::where('content_id', '=' ,$id)->get();
   $conteni = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
  }
   return view('pagina::modulo-galeria')->with('contenido', $contenido)->with('contenida', $contenida)->with('amour', $contenido)->with('conteni', $conteni)->with('face', $contenido);
