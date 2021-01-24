@@ -10,7 +10,7 @@ class Maxi extends Model
 {
 
 
-	protected $table = 'Contents';
+	protected $table = 'contents';
 	public $timestamps = false;
 
 	public function images(){

@@ -6,20 +6,13 @@ use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Maxi extends Model
+class Img extends Model
 
 {
 	use UsesTenantConnection;
 
-	protected $table = 'contents';
+	protected $table = 'images';
 	public $timestamps = false;
 
-	public function images(){
-
-		return $this->belongsTo('Image');
-	}
-
+	
 }
-
-
-

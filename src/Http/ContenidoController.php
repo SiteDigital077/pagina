@@ -24,6 +24,7 @@
  use DigitalsiteSaaS\Pagina\Diagrama;
  use DigitalsiteSaaS\Pagina\Carousel;
  use DigitalsiteSaaS\Pagina\Empleo;
+  use DigitalsiteSaaS\Pagina\Img;
  use DigitalsiteSaaS\Carrito\Categoria;
  use DigitalsiteSaaS\Pagina\Shuffleweb;
  use App\Http\Requests\FichaCreateRequest;
@@ -555,9 +556,9 @@
  public function actualizargaleria($id){
   $input = Input::all();
   if(!$this->tenantName){
-  $contenido = Maxi::find($id);
+  $contenido = Img::find($id);
   }else{
-  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Maxi::find($id);
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Img::find($id);
   }
   $contenido->state = Input::get('estado');
   $contenido->titlesd = Input::get('titulo');
@@ -699,9 +700,9 @@
 
  public function editargaleria($id){
   if(!$this->tenantName){
-  $contenido = Maxi::find($id);
+  $contenido = Img::find($id);
   }else{
-  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Maxi::find($id); 
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Img::find($id); 
   }
   return view('pagina::editar-galeria')->with('contenido', $contenido);
  }
@@ -886,8 +887,8 @@ public function editarempleo($id){
 
  public function imagenesgaleria($id){
   if(!$this->tenantName){
-  $contenido = Content::find($id)->Images;
-  $contenida = Content::find($id)->Images;
+  $contenido = Img::where('content_id', '=' ,$id)->get();
+  $contenida = Img::where('content_id', '=' ,$id)->get();
   $conteni = Content::find($id);
  }else{
   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id)->Images;
