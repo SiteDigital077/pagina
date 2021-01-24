@@ -168,8 +168,8 @@ class WebController extends Controller {
     ->where('contents.page_id', '=' ,$user->id)->get();
    $contenidonumas =  DB::table('ficha')->where('responsive', $user->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');  
     
-     $contenida = Maxi::join('contents','contents.id','=','images.content_id')
-    ->orderBy('position','ASC')
+     $contenida = Maxi::join('images','images.content_id','=','contents.id')
+
     ->where('contents.page_id', '=' ,$user->id)->get();
     
      $cart = session()->get('cart');
@@ -309,7 +309,7 @@ class WebController extends Controller {
      }
 
   
-     $contenida = \DigitalsiteSaaS\Pagina\Tenant\Maxi::join('contents','contents.id','=','images.content_id')
+     $contenida = \DigitalsiteSaaS\Pagina\Tenant\Maxi::join('images','images.content_id','=','contents.id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$user->id)->get();
      $formulario = \DigitalsiteSaaS\Pagina\Tenant\Formu::join('contents','inputs.content_id','=','contents.id')
@@ -453,7 +453,7 @@ $categories = Pais::all();
 
    
      $paginations = Page::find($post->id)->Blogs()->paginate(9);
-   $contenida = Maxi::join('contents','contents.id','=','images.content_id')
+   $contenida =Maxi::join('images','images.content_id','=','contents.id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$post->id)->get();
     
@@ -601,7 +601,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $contenidonumas = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('responsive', $post->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');
 
      $paginations = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Blogs()->paginate(9);
-   $contenida = \DigitalsiteSaaS\Pagina\Tenant\Maxi::join('contents','contents.id','=','images.content_id')
+   $contenida = \DigitalsiteSaaS\Pagina\Tenant\Maxi::join('images','images.content_id','=','contents.id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$post->id)->get();
    

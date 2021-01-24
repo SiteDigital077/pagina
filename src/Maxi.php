@@ -10,12 +10,12 @@ class Maxi extends Model
 {
 
 
-	protected $table = 'images';
+	protected $table = 'Contents';
 	public $timestamps = false;
 
-	public function contents(){
+	public function images(){
 
-		return $this->belongsTo('Content');
+		return $this->belongsTo('Image');
 	}
 
 }
