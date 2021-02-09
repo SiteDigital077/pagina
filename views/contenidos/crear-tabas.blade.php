@@ -56,6 +56,13 @@
                                              </div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
+                                            <div class="col-md-9">
+                                                 {{Form::number('nivelpos', '1', array('class' => 'form-control','placeholder'=>'Ingrese responsive'))}}
+                                            </div>
+                                        </div>
+
                                            <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Visualización</label>
                                             <div class="col-md-9">

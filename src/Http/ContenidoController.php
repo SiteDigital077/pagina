@@ -5,6 +5,7 @@
  use DigitalsiteSaaS\Pagina\Inputweb;
  use DigitalsiteSaaS\Pagina\Registro;
  use DigitalsiteSaaS\Pagina\Maxi;
+  use DigitalsiteSaaS\Pagina\Maxima;
  use DigitalsiteSaaS\Pagina\Maxicar;
  use DigitalsiteSaaS\Pagina\Messagema;
  use DigitalsiteSaaS\Pagina\Maxo;
@@ -394,9 +395,9 @@
 
  public function creargaleria(){
   if(!$this->tenantName){
-  $contenido = new Maxi;
+  $contenido = new Maxima;
   }else{
-  $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Maxi;
+  $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Maxima;
   }
   $contenido->titlesd = Input::get('titulo');
   $contenido->imagesd = Input::get('FilePath');
