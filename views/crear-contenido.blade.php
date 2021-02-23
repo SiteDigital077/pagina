@@ -591,6 +591,18 @@ Crear Nuevo Contenido
                                     </div>
                                 </a>
                             </div> 
+
+<div class="col-sm-6 col-lg-3">
+                                <a href="/gestion/contenidos/empresas/{{Request::segment(4)}}" class="widget widget-hover-effect1 themed-background">
+                                    <div class="widget-simple">
+                                        <img src="/adminsite/img/placeholders/avatars/avatar12.jpg" alt="avatar" class="widget-image img-circle pull-left">
+                                        <h4 class="widget-content widget-content-light">
+                                            <strong>Empresas</strong>
+                                            <small>Web Designer</small>
+                                        </h4>
+                                    </div>
+                                </a>
+                            </div> 
 <div class="col-sm-6 col-lg-3">
                                 <a href="/gestion/contenidos/ficha/{{Request::segment(4)}}" class="widget widget-hover-effect1 themed-background">
                                     <div class="widget-simple">

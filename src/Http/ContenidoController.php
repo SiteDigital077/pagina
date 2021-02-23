@@ -1263,6 +1263,12 @@ public function imagenescarousel($id){
   return view('pagina::contenidos/crear-ronda')->with('posicion', $posicion);
  }
 
+  public function empresas($id){
+  $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
+  return view('pagina::contenidos/crear-empresa')->with('posicion', $posicion);
+ }
+
+
   public function carousel($id){
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
   return view('pagina::contenidos/crear-carousel')->with('posicion', $posicion);

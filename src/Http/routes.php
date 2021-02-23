@@ -27,7 +27,6 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  
 
 Route::get('gestion/contenidos/diagrama/update/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@editardiagrama');
-
 });
 
 Route::group(['middleware' => ['auths','administrador']], function (){
@@ -173,6 +172,7 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  Route::get('gestion/contenidos/filtros/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@filtros');
  Route::get('gestion/contenidos/filtrosdinami/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@filtrosdinami');
  Route::get('gestion/contenidos/rondaproductos/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@rondaproductos');
+ Route::get('gestion/contenidos/empresas/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@empresas');
  Route::get('gestion/contenidos/carousel/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@carousel');
  Route::get('gestion/contenidos/rondacomunidad/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@rondacomunidad');
  Route::get('gestion/contenidos/rondacomunidadina/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@rondacomunidadina');
