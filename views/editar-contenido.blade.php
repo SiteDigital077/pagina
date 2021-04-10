@@ -2759,6 +2759,35 @@
                                             </div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Descripción</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('descripcion', $contenido->description, array('class' => 'form-control','placeholder'=>'Ingrese descripción'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Contenido A</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('contenido', $contenido->content, array('class' => 'form-control','placeholder'=>'Ingrese contenido A'))}}
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Contenido B</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('contenidos', $contenido->contents, array('class' => 'form-control','placeholder'=>'Ingrese contenido B'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Url</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('enlace', $contenido->url, array('class' => 'form-control','placeholder'=>'Ingrese URL'))}}
+                                            </div>
+                                        </div>
+
                                          <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Posición</label>
                                             <div class="col-md-9">
@@ -2794,12 +2823,7 @@
                                          </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-password-input">Tamaño Imagen</label>
-                                            <div class="col-md-9">
-                                                {{Form::text('contenidos', $contenido->contents, array('class' => 'form-control','placeholder'=>'Ingrese Tamaño'))}}
-                                            </div>
-                                        </div>
+                                        
 
                                            <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Visualización</label>

@@ -167,8 +167,8 @@ class WebController extends Controller {
    $contenidonu = Maxu::join('contents','contents.id','=','tabs.content_id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$user->id)->get();
-   $contenidonumas =  DB::table('ficha')->where('responsive', $user->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');  
-    
+   $contenidonumas =  Fichaje::where('responsive', $user->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');
+   
      $contenida = Maxi::join('images','images.content_id','=','contents.id')
 
     ->where('contents.page_id', '=' ,$user->id)->get();
@@ -452,7 +452,6 @@ $categories = Pais::all();
     ->where('contents.page_id', '=' ,$post->id)
     ->get();
    $contenidonumas = Fichaje::where('responsive', $post->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');
-
    
      $paginations = Page::find($post->id)->Blogs()->paginate(9);
    $contenida =Maxi::join('images','images.content_id','=','contents.id')
@@ -814,6 +813,33 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
     }
   return Response::json($subcategories);
 }
+
+  public function detallempresa($page){
+  if(!$this->tenantName){
+   $plantilla = Template::all();
+   $plantillaes = Template::find(1);
+   $contenido = Fichaje::where('slug','=',$page)->get();
+   $contenida = Fichaje::where('slug','=',$page)->get();
+   $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+   return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
+  
+   }else{
+
+     $plantilla = DigitalsiteSaaS\Pagina\Tenant\Template::all();
+   $plantillaes = DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
+   $contenido = DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
+   $contenida = DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
+   $menu = DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+   $blogfoot = DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+   return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
+  
+    }
+  return Response::json($subcategories);
+}
+
+
+
 
 
     public function filtrohome(){
