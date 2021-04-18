@@ -233,6 +233,7 @@ class ConfiguracionController extends Controller
      $contenido->twitter_description = Input::get('twitter_description');
      $contenido->twitter_image = Input::get('FilePatha');
      $contenido->analitica = Input::get('analitica');
+     $contenido->ads = Input::get('ads');
      $contenido->ico = Input::get('FilePathb');
      $contenido->icoapple = Input::get('FilePathc');
 
