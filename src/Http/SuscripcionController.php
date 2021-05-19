@@ -115,14 +115,14 @@ use Auth;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    'public_key' =>  $credencialesw->public_key,
+    'private_key' => $credencialesw->private_key,
      ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
     $token = $xml['bearer_token'];
     $tok = "Bearer"." ".$token;
-    $responsed = $client->get('https://api.secure.payco.co/recurring/v1/plans/public_key/', [
+    $responsed = $client->get('https://api.secure.payco.co/recurring/v1/plans', [
     'headers' => [
     'Authorization' =>  $tok,
     'Content-Type' => 'application/json',
@@ -146,8 +146,8 @@ use Auth;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    'public_key' =>  $credencialesw->public_key,
+    'private_key' => $credencialesw->private_key,
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -183,8 +183,8 @@ use Auth;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    'public_key' =>  $credencialesw->public_key,
+    'private_key' => $credencialesw->private_key,
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -213,8 +213,8 @@ use Auth;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    'public_key' =>  $credencialesw->public_key,
+    'private_key' => $credencialesw->private_key,
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -244,8 +244,8 @@ use Auth;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    'public_key' =>  $credencialesw->public_key,
+    'private_key' => $credencialesw->private_key,
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
@@ -260,12 +260,13 @@ use Auth;
     ],
     ]);
     $xmls = json_decode($responsed->getBody()->getContents(), true);
-    dd($xmls);
+
     return view('pagina::suscripcion.suscripciones')->with('xmls', $xmls);
   }
 
 
   public function crearplan(Request $request){
+
     $credenciales = Credencial::where('id', 1)->get();
     foreach ($credenciales as $credencialesw) {
         $public_key = $credencialesw->public_key;
@@ -283,11 +284,12 @@ use Auth;
     $client = new Client(['http_errors' => false]);
     $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
     'form_params' => [
-    'public_key' => '00183a3712a6c49a93ebe60d06613558',
-    'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+    'public_key' =>  $credencialesw->public_key,
+    'private_key' => $credencialesw->private_key,
     ],
     ]);
     $xml = json_decode($response->getBody()->getContents(), true);
+
     $token = $xml['bearer_token'];
     $tok = "Bearer"." ".$token;
     $responsed = $client->post('https://api.secure.payco.co/recurring/v1/plan/create', [
@@ -311,6 +313,7 @@ use Auth;
     $xmls = json_decode($responsed->getBody()->getContents(), true);
 
      $respuesta = $xmls['status'];
+
      if($respuesta == 'true'){
      $plan = new Planes;
      $plan->name = Input::get('name');
@@ -420,8 +423,8 @@ use Auth;
        $client = new Client(['http_errors' => false]);
        $response = $client->post('https://api.secure.payco.co/v1/auth/login', [
        'form_params' => [
-       'public_key' => '00183a3712a6c49a93ebe60d06613558',
-       'private_key' => 'b536c266cd1705b261e9b76a7f44660f',
+       'public_key' =>  $credencialesw->public_key,
+       'private_key' => $credencialesw->private_key,
         ],
        ]);
        $xml = json_decode($response->getBody()->getContents(), true);

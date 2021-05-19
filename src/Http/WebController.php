@@ -28,7 +28,8 @@
  use DigitalsiteSaaS\Pagina\Diagrama;
  use DigitalsiteSaaS\Pagina\Formu;
  use DigitalsiteSaaS\Pagina\Seo;
-  use DigitalsiteSaaS\Pagina\User;
+ use DigitalsiteSaaS\Pagina\User;
+ use DigitalsiteSaaS\Pagina\Planes;
  use Mail;
  use DB;
  use Hash;
@@ -98,8 +99,9 @@ class WebController extends Controller {
   public function index(){
   
   $avanzacat = Page::where('categoria', '=', 1)->get();
-  $planessaas = DB::table('planes')->get();
-  
+
+  $planessaas = Planes::all();
+
   if(!$this->tenantName){
    $users = DB::table('pages')->where('posti', '1')->get();
   
@@ -124,6 +126,7 @@ class WebController extends Controller {
      $temawebs = Template::where('id','=','1')->get();
      foreach($temawebs as $temaweb){
       if($scroll == 1){
+      $contenido = Content::orderBy('nivel','ASC')->get();
       $contenido = Content::all();
       $diagramas = Diagrama::all();
       $formulario = Formu::join('contents','inputs.content_id','=','contents.id')
@@ -261,7 +264,7 @@ class WebController extends Controller {
     ->get();
      }
     
-    
+      $planessaas = \DigitalsiteSaaS\Pagina\Tenant\Planes::all();
 
        $avanzacat = \DigitalsiteSaaS\Pagina\Tenant\Page::where('categoria', '=', 1)->get(); 
      $productsa = \DigitalsiteSaaS\Pagina\Tenant\Product::inRandomOrder()->get();
@@ -297,7 +300,7 @@ class WebController extends Controller {
      $temp = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id',1)->value('template');
      foreach($temawebs as $temaweb){
        if($scroll == 1){
-      $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::all();
+      $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::orderBy('nivel','ASC')->get();
       $diagramas = \DigitalsiteSaaS\Pagina\Tenant\Diagrama::all();
       
       }else{
@@ -396,7 +399,7 @@ if($scroll == 1){
 
     public function paginas($page){
    $avanzacat = Page::where('categoria', '=', 1)->get(); 
-   $planessaas = DB::table('planes')->get();
+    $planessaas = Planes::all();
    if(!$this->tenantName){
      $plantilla = Template::all();
    $plantillaes = Template::all();
@@ -571,7 +574,8 @@ $categories = Pais::all();
       ->get();
      
   
-   
+   $planessaas = \DigitalsiteSaaS\Pagina\Tenant\Planes::all();
+
    $diagramas = \DigitalsiteSaaS\Pagina\Tenant\Diagrama::where('id',"=",$post->id)->get();
    $fichones = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Fichas()->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'fichones');
    $empresas = \DigitalsiteSaaS\Avanza\Tenant\Avanzaempresa::orderBy(DB::raw('RAND()'))->paginate(6);
