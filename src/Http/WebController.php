@@ -762,13 +762,18 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
   }
 
     public function crearusuario(){
-   $price = DB::table('users')->max('id');
-   $suma = $price + 1;
-   $path = public_path() . '/fichaimg/clientes/'.$suma;
-   File::makeDirectory($path, 0777, true);
-   $passwordwe = Input::get('password');
-   $remember = Input::get('_token');
-     $userma = Usuario::create([
+    if(!$this->tenantName){
+    $price = User::max('id');
+    }else{
+    $price = \App\Tenant\User::max('id');
+    }
+    $suma = $price + 1;
+    $path = public_path() . '/fichaimg/clientes/'.$suma;
+    File::makeDirectory($path, 0777, true);
+    $passwordwe = Input::get('password');
+    $remember = Input::get('_token');
+    if(!$this->tenantName){ 
+    $userma = User::create([
     'compania' => Input::get('compania'),
     'tipo_documento' => Input::get('tdocumento'),
     'documento' => Input::get('documento'),
@@ -777,20 +782,36 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
     'phone' => Input::get('phone'),
     'celular' => Input::get('celular'),
     'address' => Input::get('address'),
-    'pais' => Input::get('pais'),
+    'pais_id' => Input::get('pais'),
     'ciudad' => Input::get('ciudad'),
     'rol_id' => Input::get('rol'),
     'remember_token' => Hash::make($remember),
     'password' => Hash::make($passwordwe),
      ]);
-
+     }else{
+      $userma = \App\Tenant\User::create([
+    'compania' => Input::get('compania'),
+    'tipo_documento' => Input::get('tdocumento'),
+    'documento' => Input::get('documento'),
+    'name' => Input::get('name'),
+    'email' => Input::get('email'),
+    'phone' => Input::get('phone'),
+    'celular' => Input::get('celular'),
+    'address' => Input::get('address'),
+    'pais_id' => Input::get('pais'),
+    'ciudad' => Input::get('ciudad'),
+    'rol_id' => Input::get('rol'),
+    'remember_token' => Hash::make($remember),
+    'password' => Hash::make($passwordwe),
+     ]);
+     }
     
-    $datas = DB::table('datos')->where('id','1')->get();
+   /* $datas = DB::table('datos')->where('id','1')->get();
      foreach ($datas as $user){
       Mail::to(Input::get('email'))
       ->bcc($user->correo)
     ->send(new Registro($userma));
-   }
+   }*/
    return Redirect('/login')->with('status', 'ok_create');
     }
 
@@ -830,12 +851,12 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
   
    }else{
 
-     $plantilla = DigitalsiteSaaS\Pagina\Tenant\Template::all();
-   $plantillaes = DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
-   $contenido = DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
-   $contenida = DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
-   $menu = DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
-   $blogfoot = DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+     $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+   $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
+   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
+   $contenida = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
    return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
   
     }

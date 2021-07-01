@@ -24,7 +24,7 @@
                                     <!-- END Form Elements Title -->
                                     
                                     <!-- Basic Form Elements Content -->
-                                     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('gestion/contenidos/crearblog'))) }}
+                                     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('gestion/contenidos/creargrafico'))) }}
 
                                         
                                         <div class="form-group">

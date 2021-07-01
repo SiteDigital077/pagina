@@ -389,10 +389,8 @@ foreach ($data as $datas) {
  ]);
 $xmlstok = json_decode($responsedtok->getBody()->getContents(), true);
 
-
 DB::table('suscripcion')->insert(
     ['creada' => $xmlstok['created'], 'desde' => $xmlstok['current_period_start'], 'hasta' => $xmlstok['current_period_end'],'estado' => $xmlstok['status_subscription'], 'user_id' => Auth::user()->id, 'plan_id' => Session::get('suscripcion')]);
-
 
 
 
@@ -417,7 +415,7 @@ DB::table('suscripcion')->insert(
  ]);
 $xmlscob = json_decode($responsecob->getBody()->getContents(), true);
 }
-
+dd($xmlscob);
 
 $referencia = $xmlscob['data']['ref_payco'];
 $valor = $xmlscob['data']['valor'];

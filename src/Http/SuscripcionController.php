@@ -30,8 +30,19 @@ use DigitalsiteSaaS\Pagina\Planes;
 use GuzzleHttp\Client;
 use Auth;
 
- class SuscripcionController extends Controller
+ class SuscripcionController extends Controller{
+
+  protected $tenantName = null;
+
+ public function __construct()
  {
+  $this->middleware('web');
+  $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
+  if ($hostname){
+   $fqdn = $hostname->fqdn;
+   $this->tenantName = explode(".", $fqdn)[0];
+   }
+  }
   
     private function subtotal(){
    $cart = session()->get('cart');
@@ -371,13 +382,20 @@ use Auth;
   public function formulario(){
      
     if(!Auth::user()){
+
     $pais = DB::table('paises')->get();
     $planes = DB::table('planes')->get();
+    if(!$this->tenantName){
     $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
     $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+    }
+   else{
+    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+    }
     $subtotal = $this->subtotal();
     $total = $this->total();
-
+   
     return view('pagina::suscripcion.formulario')->with('plantilla', $plantilla)->with('menu', $menu)->with('planes', $planes)->with('subtotal', $subtotal)->with('total', $total)->with('pais', $pais);
   
   }else{

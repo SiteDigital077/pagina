@@ -12,10 +12,13 @@
  <a class="btn btn-primary" href="/">regresar al sitio</a>
  </div>
  @else
+<br><br><br>
 <div class="container">
-	 
- 	<div class="col-lg-8">
- 		<?php $status=Session::get('status'); ?>
+ <div class="row">
+
+  <div class="col-lg-8 mt-5">
+
+ <?php $status=Session::get('status'); ?>
   @if($status=='ko_datos')
    <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -23,77 +26,75 @@
    </div>
   @endif
 		
+
+
+
+<form method="POST" action="{{ route('register') }}" id="defaultForm">
+ <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background: #f4f4f4">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 25px">			
+   
+   <div class="form-group col-lg-12">
+	<h5 for="" class="text-primary">Información de registro</h5>
+	<hr>		
+   </div>
+
+   <div class="form-group col-lg-12">
+	<label for="">Nombre</label>
+	 <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" placeholder="Nombre">
+   </div>
+
+   <div class="form-group col-lg-12">
+    <label for="">Apellido</label>
+	 <input type="text" name="last_name" id="last_name" class="form-control" value="{{ old('last_name') }}" placeholder="Apellido">
+   </div>
+
+   <div class="form-group col-lg-12">
+	<label for="">Email</label>
+	 <input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email">
+   </div>
+
+   <div class="form-group col-lg-12">
+	<label for="">Número contacto</label>
+	 <input type="text" name="numero" class="form-control" value="{{ old('numero') }}" placeholder="Número de contacto">
+   </div>
+
+   <div class="form-group col-lg-12">
+	<label for="">País</label>
+	 <select id="pais" name="pais" class="form-control form-control-xs">
+      <option value="" selected>Seleccione país</option>
+      @foreach($pais as $pais)
+      <option value="{{$pais->id}}">{{$pais->pais}}</option>
+      @endforeach
+     </select>
+   </div>
 	
-	<form method="POST" action="{{ route('register') }}" id="defaultForm">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background: #f4f4f4">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 25px">			
+   <div class="form-group col-lg-12">
+	<label for="">Contraseña</label>
+	 <input type="password" name="password" class="form-control" placeholder="Contraseña">
+   </div>
 
-			
-		
-			<div class="form-group col-lg-12">
-				<h5 for="" class="text-primary">Información de registro</h5>
-				<hr>		
-			</div>
+   <div class="form-group col-lg-12">
+	<label for="">Confirmar contraeña</label>
+	 <input type="password" name="password_confirmation" class="form-control" placeholder="Repetir contraseña">
+   </div>
 
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="form-group col-lg-6">
-				<label for="">Nombre</label>
-				<input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" placeholder="Nombre">
-			</div>
-
-			<div class="form-group col-lg-6">
-				<label for="">Apellido</label>
-				<input type="text" name="last_name" id="last_name" class="form-control" value="{{ old('last_name') }}" placeholder="Apellido">
-			</div>
-	</div>
-
+   <input type="hidden" name="_token" value="{{ csrf_token() }}">
+   <input type="hidden" name="rol_id" class="form-control" placeholder="Repetir contraseña" value="5">
 	
 
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="form-group col-lg-6">
-				<label for="">Email</label>
-				<input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email">
-			</div>
-
-			<div class="form-group col-lg-6">
-				<label for="">Número contacto</label>
-				<input type="text" name="numero" class="form-control" value="{{ old('numero') }}" placeholder="Número de contacto">
-			</div>
+	<div class="form-group col-lg-12">
+	 <button type="submit" class="btn btn-primary btn-md btn-block">crear cuenta</button>
 	</div>
 
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="form-group col-lg-12">
-				<label for="">País</label>
-				 <select id="pais" name="pais" class="form-control">
-                  <option value="" selected>Seleccione país</option>
-                  @foreach($pais as $pais)
-                  <option value="{{$pais->id}}">{{$pais->pais}}</option>
-                  @endforeach
-                 </select>
-			</div>
-			<div class="form-group col-lg-6">
-				<label for="">Contraseña</label>
-				<input type="password" name="password" class="form-control" placeholder="Contraseña">
-			</div>
+  </div>
+ </div>
+</form>
 
-			<div class="form-group col-lg-6">
-				<label for="">Confirmar contraeña</label>
-				<input type="password" name="password_confirmation" class="form-control" placeholder="Repetir contraseña">
-			</div>
-		</div>
-		<input type="hidden" name="rol_id" class="form-control" placeholder="Repetir contraseña" value="5">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="form-group col-lg-12">
-			<button type="submit" class="btn btn-primary btn-md btn-block">crear cuenta</button>
-		</div>
-	</div>
-	</div>
+</div>
 
-	
-		</form>
-	</div>
-	</div>
-	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+
+<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mt-5">
 
    @foreach($planes as $planes)
 	@if($planes->id_plan == Session::get('suscripcion'))	
@@ -103,22 +104,20 @@
 	   <h3 class="text-center"> ${{number_format($planes->amount,0,",",".")}}/Mensual</h3>
 	   <h3 class="text-center text-primary"></h3>
 	  <form action="/suscripcioneli/session" method="post">
-       <button type="submit" class="btn btn-danger btn-md center-block">Cancelar suscripción</button>
+	  	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	  	<div class="text-center">
+       <button type="submit" class="btn btn-danger btn-md">Cancelar suscripción</button>
+       </div>
       </form>
       </div>
 	</div>
-@else
-
-			@endif 	
-			 @endforeach
+    @else
+   @endif 	
+  @endforeach
 
 	</div>
 </div>
-
-
-
-
-
+</div>
 
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 {{ Html::script('modulo-saas/valida.js') }}
