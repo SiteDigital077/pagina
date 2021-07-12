@@ -3200,6 +3200,24 @@
                                              </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Posición</label>
+                                            <div class="col-md-9">
+                                                 {{ Form::select('posicion', [$contenido->position => $contenido->position,
+                                                 'posicionSD1' => 'posicionSD1',
+                                                 'posicionSD2' => 'posicionSD2',
+                                                 'posicionSD3' => 'posicionSD3',
+                                                 'posicionSD4' => 'posicionSD4',
+                                                 'posicionSD5' => 'posicionSD5',
+                                                 'posicionSD6' => 'posicionSD6',
+                                                 'posicionSD7' => 'posicionSD7',
+                                                 'posicionSD8' => 'posicionSD8',
+                                                 'posicionSD9' => 'posicionSD9',
+      
+                                                  ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Responsive</label>
                                             <div class="col-md-9">

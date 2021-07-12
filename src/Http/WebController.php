@@ -748,13 +748,12 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 
 
 
-
     public function blog($id){
   if(!$this->tenantName){
    $plantilla = Template::all();
    $subtotal = $this->subtotal();
    $total = $this->total();
-   $contenidos = Bloguero::where('slug','=',$id)->get(); 
+   $contenidos = Content::where('slugcon','=',$id)->get(); 
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
@@ -763,7 +762,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $subtotal = $this->subtotal();
    $total = $this->total();
-   $contenidos = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::where('slug','=',$id)->get(); 
+   $contenidos = \DigitalsiteSaaS\Pagina\Tenant\Content::where('slugcon','=',$id)->get(); 
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
@@ -771,6 +770,35 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    }
    return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot);
   }
+
+  public function oferta($id){
+  if(!$this->tenantName){
+   $plantilla = Template::all();
+   $ofertas = Empleo::where('titulo_empslug', '=', $id)->get();
+   $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+   $menu = Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+   $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
+   $ip = $arr_ip['ip'];
+   $ciudad = $arr_ip['city'];
+   $pais = $arr_ip['country'];
+   }else{
+   $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
+   $ofertas = \DigitalsiteSaaS\Pagina\Bloguero::where('titulo_empslug', '=', $id)->get();
+   $blogfoot = \DigitalsiteSaaS\Pagina\Bloguero::inRandomOrder()->take(6)->get();
+   $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+   $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
+   $ip = $arr_ip['ip'];
+   $ciudad = $arr_ip['city'];
+   $pais = $arr_ip['country'];
+   }
+   return view('pagina::vista-empleos')->with('ofertas', $ofertas)->with('plantilla', $plantilla)->with('menu', $menu)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('blogfoot', $blogfoot);
+  }
+
+
+
+
+
+
 
     public function crearusuario(){
     if(!$this->tenantName){

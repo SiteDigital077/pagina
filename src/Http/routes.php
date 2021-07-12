@@ -478,17 +478,10 @@ Route::group(['middleware' => ['web']], function (){
 
   Route::get('suscripcion/servicio', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@formulario');
  
- Route::get('/oferta/{id}', function($id){
-  $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
- $ofertas = DB::table('empleos')->where('titulo_empslug', '=', $id)->get();
- $blogfoot = \DigitalsiteSaaS\Pagina\Bloguero::inRandomOrder()->take(6)->get();
- $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
- $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
- $ip = $arr_ip['ip'];
- $ciudad = $arr_ip['city'];
- $pais = $arr_ip['country'];
- return View::make('pagina::vista-empleos')->with('ofertas', $ofertas)->with('plantilla', $plantilla)->with('menu', $menu)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('blogfoot', $blogfoot);
- });
+
+Route::get('oferta/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@oferta');
+
+
 });
 
 
