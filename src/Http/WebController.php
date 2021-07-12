@@ -750,6 +750,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 
 
     public function blog($id){
+  if(!$this->tenantName){
    $plantilla = Template::all();
    $subtotal = $this->subtotal();
    $total = $this->total();
@@ -758,6 +759,16 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+   }else{
+   $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+   $subtotal = $this->subtotal();
+   $total = $this->total();
+   $contenidos = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::where('slug','=',$id)->get(); 
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $cart = session()->get('cart');
+   $colors = DB::table('colors')->get();
+   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get(); 
+   }
    return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot);
   }
 
