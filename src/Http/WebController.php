@@ -783,7 +783,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $pais = $arr_ip['country'];
    }else{
    $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
-   $ofertas = \DigitalsiteSaaS\Pagina\Bloguero::where('titulo_empslug', '=', $id)->get();
+   $ofertas = \DigitalsiteSaaS\Pagina\Empleo::where('titulo_empslug', '=', $id)->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Bloguero::inRandomOrder()->take(6)->get();
    $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
