@@ -85,7 +85,7 @@
                                               {{Form::select('posicion', $posicion,null, array('class' => 'form-control'))}}
                                             </div>
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Responsive</label>
                                             <div class="col-md-9">
@@ -116,7 +116,7 @@
                                         </div>
                                           {{Form::hidden('imageal', Auth::user()->name, array('class' => 'form-control'))}}
                                           {{Form::hidden('tipo', 'blog', array('class' => 'form-control'))}}
-                                          {{Form::hidden('num', '3', array('class' => 'form-control'))}}
+                                          {{Form::hidden('num', '1', array('class' => 'form-control'))}}
                                           <input type="hidden" name="peca" value="{{Request::segment(4)}}"></input>
                                           <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-3">

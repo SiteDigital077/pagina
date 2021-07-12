@@ -5,7 +5,7 @@
 
 
    <div class="row">
-      @foreach($contenido as $contenido)
+      @foreach($contenidos as $contenido)
       <div class="container">
           
      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
