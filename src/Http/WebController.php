@@ -700,7 +700,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 
 
     public function gestion($page){
-
+      if(!$this->tenantName){
       $plantilla = Template::all();
       $collapse = DB::table('contents')
       ->where('type','=','carousel')
@@ -712,6 +712,19 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $gestioncarta = Carousel::get();
       $colors = DB::table('colors')->get();
       $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+      }else{
+      $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+      $collapse = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','carousel')->get();
+      $identificador = DB::table('carousel_image')->where('slug_car','=',$page)->get();
+      $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+      $gestion = DB::table('carousel_image')->where('slug_car','=',$page)->get();
+      $gestioncar = \DigitalsiteSaaS\Pagina\Tenant\Carousel::inRandomOrder()->take(6)->get();
+      $gestioncarta = \DigitalsiteSaaS\Pagina\Tenant\Carousel::get();
+      $colors = DB::table('colors')->get();
+      $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+      }
+
+
        $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
      //dd($arr_ip);
      $ip = $arr_ip['ip'];

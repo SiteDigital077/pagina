@@ -2,7 +2,7 @@
 
 
 
-    @section('ContenidoSite-01')
+ @section('ContenidoSite-01')
 
 
 <div class="container">
@@ -10,11 +10,7 @@
 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 	<h4><strong>TRABAJA CON NOSOTROS</strong></h4>
 
-<a href="/crear-hoja-de-vida" style="width:100%;margin-bottom:5px" type="button" class="btn btn-primary">Crear Hoja de Vida</a>
-<a href="/crear-hoja-de-vida" style="width:100%;margin-bottom:5px" type="button" class="btn btn-primary">Actualizar Hoja de Vida</a>
-<a href="/ofertas-laborales" style="width:100%;margin-bottom:5px" type="button" class="btn btn-primary">Ofertas laborales</a>
-<a href="/terminos-trabaje" style="width:100%;margin-bottom:5px" type="button" class="btn btn-primary">Términos y condiciones</a>
-<a href="/trabaje-contacto" style="width:100%;margin-bottom:5px" type="button" class="btn btn-primary">Contacto</a>
+
 
 </div>
 
