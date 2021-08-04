@@ -40,7 +40,7 @@
  use App\Http\Requests\FicusuarioCreateRequest;
  use Input;
  use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+ use Illuminate\Http\Request;
  use App\Mail\Mensaje;
  use App\Mail\Mensajeficha;
  use App\Mail\Registro;
@@ -48,15 +48,15 @@ use Illuminate\Http\Request;
  use App\Mail\SendMailable;
  use Validator;
  use Response;
-use DigitalsiteSaaS\Avanza\Avanzaempresa;
+ use DigitalsiteSaaS\Avanza\Avanzaempresa;
  use App\Http\Requests\FormularioFormRequest;
  use Auth;
-use Carbon\Carbon;
+ use Carbon\Carbon;
  use Hyn\Tenancy\Models\Hostname;
-use Hyn\Tenancy\Models\Website;
-use Hyn\Tenancy\Repositories\HostnameRepository;
-use Hyn\Tenancy\Repositories\WebsiteRepository;
-use GuzzleHttp\Client;
+ use Hyn\Tenancy\Models\Website;
+ use Hyn\Tenancy\Repositories\HostnameRepository;
+ use Hyn\Tenancy\Repositories\WebsiteRepository;
+ use GuzzleHttp\Client;
 
 
 
@@ -705,9 +705,9 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $collapse = DB::table('contents')
       ->where('type','=','carousel')
       ->get();
-      $identificador = DB::table('carousel_image')->where('slug_car','=',$page)->get();
+      $identificador = Carousel::where('slug_car','=',$page)->get();
       $menu = Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
-      $gestion = DB::table('carousel_image')->where('slug_car','=',$page)->get();
+      $gestion = Carousel::where('slug_car','=',$page)->get();
       $gestioncar = Carousel::inRandomOrder()->take(6)->get();
       $gestioncarta = Carousel::get();
       $colors = DB::table('colors')->get();
@@ -715,9 +715,9 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       }else{
       $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
       $collapse = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','carousel')->get();
-      $identificador = DB::table('carousel_image')->where('slug_car','=',$page)->get();
+      $identificador = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
       $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
-      $gestion = DB::table('carousel_image')->where('slug_car','=',$page)->get();
+      $gestion = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
       $gestioncar = \DigitalsiteSaaS\Pagina\Tenant\Carousel::inRandomOrder()->take(6)->get();
       $gestioncarta = \DigitalsiteSaaS\Pagina\Tenant\Carousel::get();
       $colors = DB::table('colors')->get();
@@ -910,6 +910,30 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
    return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
+  
+    }
+  return Response::json($subcategories);
+}
+
+
+
+ public function infoempresa($page){
+  if(!$this->tenantName){
+   $plantilla = Template::all();
+   $plantillaes = Template::find(1);
+   $contenido = Avanzaempresa::where('slug','=',$page)->get();
+   $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+   return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
+  
+   }else{
+
+   $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+   $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
+   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Avanzaempresa::where('slug','=',$page)->get();
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+   return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
   
     }
   return Response::json($subcategories);
