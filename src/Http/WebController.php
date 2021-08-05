@@ -930,7 +930,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
-   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Avanzaempresa::where('slug','=',$page)->get();
+   $contenido = \DigitalsiteSaaS\Avanza\Tenant\Avanzaempresa::where('slug','=',$page)->get();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
    return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
