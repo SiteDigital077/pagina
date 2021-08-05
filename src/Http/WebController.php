@@ -924,7 +924,12 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $contenido = Avanzaempresa::where('slug','=',$page)->get();
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
-   return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
+   $usuario = Auth::user()->id;
+   $identificador = Avanzaempresa::where('usuario_id', '=', $usuario)->get();
+   foreach ($identificador as $identificador){
+   $productos = Fichaje::where('identificador','=',$identificador->id)->get();
+   }
+   return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('productos', $productos);
   
    }else{
 
@@ -933,7 +938,12 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $contenido = \DigitalsiteSaaS\Avanza\Tenant\Avanzaempresa::where('slug','=',$page)->get();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
-   return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
+   $usuario = Auth::user()->id;
+   $identificador = Avanzaempresa::where('usuario_id', '=', $usuario)->get();
+   foreach ($identificador as $identificador){
+   $productos =  \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('identificador','=',$identificador->id)->get();
+   }
+   return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('productos', $productos);
   
     }
   return Response::json($subcategories);
