@@ -478,31 +478,8 @@ $categories = Pais::all();
      $parametrofil = session()->get('parametro');
      $autorfil = session()->get('autor');
      $subcategoriafil = session()->get('subcategoria');
-     if(DB::table('venta')->where('id', '1')->value('comunidad') == 1)
-   $products = DB::table('products')
-      ->whereBetween('precio', array($min_price, $max_price))
-      ->where('category_id', 'like', '%' . $clientes . '%')
-      ->where('parametro_id', 'like', '%' . $parametrofil . '%')
-      ->where('autor_id', 'like', '%' . $autorfil . '%')
-      ->where('categoriapro_id', 'like', '%' . $subcategoriafil . '%')
-      ->where('name','like','%'.$bustext.'%')->Where('description','like','%'.$bustext.'%')
-      ->where('visible','=','1')
-      ->orderByRaw("RAND()")
-      ->paginate(12);
-      else
-         $products = DB::table('products')
-      ->whereBetween('precio', array($min_price, $max_price))
-      ->where('category_id', 'like', '%' . $clientes . '%')
-      //->where('area_id', 'like', '%' . $areafil . '%')
-      //->where('parametro_id', 'like', '%' . $parametrofil . '%')
-      ->where('autor_id', 'like', '%' . $autorfil . '%')
-      ->where('categoriapro_id', 'like', '%' . $subcategoriafil . '%')
-      ->where('name','like','%'.$bustext.'%')->Where('description','like','%'.$bustext.'%')
-      ->where('visible','=','1')
-      ->orderByRaw("RAND()")
-      ->paginate(12);
-
-      //dd($products);
+     $products = Product::all();
+     
      $areadinamizador =  session()->get('areadina');
      $gradodinamizador = session()->get('gradodina');
      $campodinamizador = session()->get('campodina');
@@ -688,7 +665,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      $ip = $arr_ip['ip'];
      $ciudad = $arr_ip['city'];
      $pais = $arr_ip['country'];
-     $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+     $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
      $temp = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id',1)->value('template');
      if($resp == 'true'){
      return view('Templates.'.$temp.'.desing')->with('contenidos', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenidos)->with('pasto', $contenidos)->with('casual', $contenidos)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenidos)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario)->with('planessaas', $planessaas)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('mediamini', $mediamini)->with('empresas', $empresas);
