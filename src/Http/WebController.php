@@ -57,6 +57,7 @@
  use Hyn\Tenancy\Repositories\HostnameRepository;
  use Hyn\Tenancy\Repositories\WebsiteRepository;
  use GuzzleHttp\Client;
+ use DigitalsiteSaaS\Elearning\Cursos;
 
 
 
@@ -103,6 +104,7 @@ class WebController extends Controller {
   $planessaas = Planes::all();
 
   if(!$this->tenantName){
+    $cursos = Cursos::all();
    $users = DB::table('pages')->where('posti', '1')->get();
   
     foreach ($users as $user){
@@ -313,7 +315,7 @@ class WebController extends Controller {
     }
      }
 
-  
+     $cursos = \DigitalsiteSaaS\Elearning\Tenant\Cursos::all();
      $contenida = \DigitalsiteSaaS\Pagina\Tenant\Maxi::join('images','images.content_id','=','contents.id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$user->id)->get();
@@ -398,6 +400,7 @@ if($scroll == 1){
     }
 
     public function paginas($page){
+      $cursos = Cursos::all();
    $avanzacat = Page::where('categoria', '=', 1)->get(); 
     $planessaas = Planes::all();
    if(!$this->tenantName){
@@ -531,7 +534,7 @@ $categories = Pais::all();
   $resp = 'false'; 
   }
 }
-
+$cursos = \DigitalsiteSaaS\Elearning\Tenant\Cursos::all();
     $avanzacat = \DigitalsiteSaaS\Pagina\Tenant\Page::where('categoria', '=', 1)->get(); 
     $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
@@ -665,7 +668,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      $ip = $arr_ip['ip'];
      $ciudad = $arr_ip['city'];
      $pais = $arr_ip['country'];
-     $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+     $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
      $temp = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id',1)->value('template');
      if($resp == 'true'){
      return view('Templates.'.$temp.'.desing')->with('contenidos', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('galeria', $contenida)->with('mascar', $contenidos)->with('pasto', $contenidos)->with('casual', $contenidos)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('meta', $meta)->with('contenidu', $contenidos)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario)->with('planessaas', $planessaas)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('mediamini', $mediamini)->with('empresas', $empresas);
