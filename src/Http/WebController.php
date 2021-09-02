@@ -118,7 +118,7 @@ class WebController extends Controller {
     ->orderBy('nivel','ASC')
     ->get();
      $seo = Seo::where('id','=',1)->get(); 
-     $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+     $menu = Page::orderBy('posta', 'asc')->get();
      $meta = Page::where('id','=',$user->id)->get();
      $plantilla = Template::all();
      $paginations = Page::find($user->id)->Blogs()->paginate(9);
@@ -248,7 +248,7 @@ class WebController extends Controller {
     
   foreach ($users as $user){
      $cama = \DigitalsiteSaaS\Pagina\Tenant\Page::find($user->id);
-     $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+     $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
      $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=',$user->id)->get();
      $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
     
@@ -408,7 +408,7 @@ if($scroll == 1){
    $plantillaes = Template::all();
    $post = Page::where('slug','=',$page)->first();
    $meta = Page::where('slug','=',$page)->get();
-   $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $menu = Page::orderBy('posta', 'asc')->get();
    $masa = DB::table('pages')->count('page_id');
    $cama = Page::find($post->id);
    $seo =  Seo::where('id','=',1)->get();  
@@ -540,7 +540,7 @@ $cursos = \DigitalsiteSaaS\Elearning\Tenant\Cursos::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $post = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->first();
    $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->get();
-   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
    $masa = \DigitalsiteSaaS\Pagina\Tenant\Page::count('page_id');
    $cama = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id);
   
@@ -686,7 +686,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       ->where('type','=','carousel')
       ->get();
       $identificador = Carousel::where('slug_car','=',$page)->get();
-      $menu = Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+      $menu = Page::orderBy('posta', 'desc')->get();
       $gestion = Carousel::where('slug_car','=',$page)->get();
       $gestioncar = Carousel::inRandomOrder()->take(6)->get();
       $gestioncarta = Carousel::get();
@@ -696,7 +696,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
       $collapse = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','carousel')->get();
       $identificador = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
-      $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+      $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
       $gestion = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
       $gestioncar = \DigitalsiteSaaS\Pagina\Tenant\Carousel::inRandomOrder()->take(6)->get();
       $gestioncarta = \DigitalsiteSaaS\Pagina\Tenant\Carousel::get();
@@ -725,7 +725,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $total = $this->total();
    $subtotal = $this->subtotal();
    $colors = DB::table('colors')->get();
-   $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $menu = \DigitalsiteSaaS\Pagina\Page::orderBy('posta', 'asc')->get();
   }else{
        $seo =  \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get(); 
        $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
@@ -733,7 +733,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $total = $this->total();
    $subtotal = $this->subtotal();
    $colors = DB::table('colors')->get();
-   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
 
   }
    return view('Templates.rayo.carrito.logina')->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('total', $total)->with('subtotal', $subtotal)->with('colors', $colors)->with('seo', $seo);
@@ -747,7 +747,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $subtotal = $this->subtotal();
    $total = $this->total();
    $contenidos = Content::where('slugcon','=',$id)->get(); 
-   $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $menu = Page::orderBy('posta', 'asc')->get();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
@@ -756,7 +756,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $subtotal = $this->subtotal();
    $total = $this->total();
    $contenidos = \DigitalsiteSaaS\Pagina\Tenant\Content::where('slugcon','=',$id)->get(); 
-   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get(); 
@@ -769,7 +769,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $plantilla = Template::all();
    $ofertas = Empleo::where('titulo_empslug', '=', $id)->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
-   $menu = Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+   $menu = Page::orderBy('posta', 'desc')->get();
    $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
    $ip = $arr_ip['ip'];
    $ciudad = $arr_ip['city'];
@@ -778,7 +778,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $ofertas = \DigitalsiteSaaS\Pagina\Tenant\Empleo::where('titulo_empslug', '=', $id)->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
-   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
    $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
    $ip = $arr_ip['ip'];
    $ciudad = $arr_ip['city'];
@@ -877,7 +877,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $plantillaes = Template::find(1);
    $contenido = Fichaje::where('slug','=',$page)->get();
    $contenida = Fichaje::where('slug','=',$page)->get();
-   $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $menu = Page::orderBy('posta', 'asc')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
    return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
   
@@ -887,7 +887,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
    $contenido = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
    $contenida = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
-   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
    return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
   
@@ -902,7 +902,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $plantilla = Template::all();
    $plantillaes = Template::find(1);
    $contenido = Avanzaempresa::where('slug','=',$page)->get();
-   $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $menu = Page::orderBy('posta', 'asc')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
  
    $identificador = Avanzaempresa::where('slug', '=', $page)->get();
@@ -916,7 +916,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
    $contenido = \DigitalsiteSaaS\Avanza\Tenant\Avanzaempresa::where('slug','=',$page)->get();
-   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
 
    $identificador = \DigitalsiteSaaS\Avanza\Tenant\Avanzaempresa::where('slug', '=', $page)->get();
