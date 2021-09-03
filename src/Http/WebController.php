@@ -188,8 +188,7 @@ class WebController extends Controller {
      $parametrofil = session()->get('parametro');
      $autorfil = session()->get('autor');
      $subcategoriafil = session()->get('subcategoria');
-      $products = Product::
-      whereBetween('precio', array($min_price, $max_price))
+      $products = Product::whereBetween('precio', array($min_price, $max_price))
       ->where('category_id', 'like', '%' . $clientes . '%')
      /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
       ->where('autor_id', 'like', '%' . $autorfil . '%')
@@ -476,15 +475,23 @@ $categories = Pais::all();
     ->where('class', 'like', '%' . $tipo . '%')
     ->get();
      $cart = session()->get('cart');
-   $min_price = Input::has('min_price') ? Input::get('min_price') : 0;
+     $min_price = Input::has('min_price') ? Input::get('min_price') : 0;
      $max_price = Input::has('max_price') ? Input::get('max_price') : 10000000;
      $clientes =  session()->get('clientes');
      $bustext =  session()->get('bustext');
      $areafil = session()->get('area');
      $parametrofil = session()->get('parametro');
-     $autorfil = session()->get('autor');
      $subcategoriafil = session()->get('subcategoria');
-     $products = Product::all();
+     $products = Product::whereBetween('precio', array($min_price, $max_price))
+      ->where('category_id', 'like', '%' . session()->get('categoria') . '%')
+     /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
+      ->where('autor_id', 'like', '%' . session()->get('autor') . '%')
+      ->where('categoriapro_id', 'like', '%' . session()->get('categoria') . '%')
+      ->where('name','like','%'.session()->get('palabra').'%')->Where('description','like','%'.session()->get('palabra').'%')
+      ->where('visible','=','1')
+      ->orderByRaw("RAND()")
+      ->paginate(12);
+     // dd($products);
      
      $areadinamizador =  session()->get('areadina');
      $gradodinamizador = session()->get('gradodina');
