@@ -484,7 +484,7 @@ $categories = Pais::all();
      $subcategoriafil = session()->get('subcategoria');
      $products = Product::whereBetween('precio', array($min_price, $max_price))
       ->where('category_id', 'like', '%' . session()->get('categoria') . '%')
-     /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
+      /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
       ->where('autor_id', 'like', '%' . session()->get('autor') . '%')
       ->where('categoriapro_id', 'like', '%' . session()->get('categoria') . '%')
       ->where('name','like','%'.session()->get('palabra').'%')->Where('description','like','%'.session()->get('palabra').'%')
