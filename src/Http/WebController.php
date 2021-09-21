@@ -409,10 +409,16 @@ if($scroll == 1){
    $plantillaes = Template::all();
    $post = Page::where('slug','=',$page)->first();
    $meta = Page::where('slug','=',$page)->get();
+   $metas = Page::where('slug','=',$page)->count();
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   
+    if($metas == '0'){
+    return response()->view('errors.404', [], 404);
+   }
    $menufoot = Page::orderBy('posta', 'asc')->get();
    $masa = DB::table('pages')->count('page_id');
    $cama = Page::find($post->id);
+
    $seo =  Seo::where('id','=',1)->get();  
    $filtros = DB::table('categoriessd')->get();
    $productsa = Product::inRandomOrder()->get();
@@ -550,6 +556,11 @@ $cursos = \DigitalsiteSaaS\Elearning\Tenant\Cursos::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $post = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->first();
    $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->get();
+   $metas = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->count();
+
+      if($metas == '0'){
+    return response()->view('errors.404', [], 404);
+   }
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
    $masa = \DigitalsiteSaaS\Pagina\Tenant\Page::count('page_id');
@@ -700,13 +711,18 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $identificador = Carousel::where('slug_car','=',$page)->get();
       $menu = Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
       $menufoot = Page::orderBy('posta', 'desc')->get();
+      $seo = Seo::where('id','=',1)->get(); 
       $gestion = Carousel::where('slug_car','=',$page)->get();
       $gestioncar = Carousel::inRandomOrder()->take(6)->get();
       $gestioncarta = Carousel::get();
       $colors = DB::table('colors')->get();
       $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+      $cart = session()->get('cart');
+      $subtotal = $this->subtotal();
+      $total = $this->total();
       }else{
       $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+      $seo = \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get(); 
       $collapse = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','carousel')->get();
       $identificador = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
       $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
@@ -716,6 +732,9 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $gestioncarta = \DigitalsiteSaaS\Pagina\Tenant\Carousel::get();
       $colors = DB::table('colors')->get();
       $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+      $cart = session()->get('cart');
+      $subtotal = $this->subtotal();
+      $total = $this->total();
       }
 
 
@@ -726,7 +745,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      $ciudad = $arr_ip['city'];
         
      $pais = $arr_ip['country'];
-      return view('pagina::gestion')->with('gestion', $gestion)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('gestioncar', $gestioncar)->with('colors', $colors)->with('collapse', $collapse)->with('blogfoot', $blogfoot)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('gestioncarta', $gestioncarta)->with('identificador', $identificador);
+      return view('pagina::gestion')->with('gestion', $gestion)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('gestioncar', $gestioncar)->with('colors', $colors)->with('collapse', $collapse)->with('blogfoot', $blogfoot)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('gestioncarta', $gestioncarta)->with('identificador', $identificador)->with('seo', $seo)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total);
 
       }
 

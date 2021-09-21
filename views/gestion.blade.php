@@ -1,5 +1,40 @@
 @extends ('LayoutsSD.Layout')
 
+ @section('cabecera')
+   
+   @foreach($gestion as $gestions)
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{$gestions->descripcion_car}}">
+    <meta name="keywords" content="">
+    <meta name="tile" content="{{$gestions->titulo_car}}">
+    <meta name="author" content="Site Digital">
+    <meta http-equiv="Cache-control" content="public">
+    <title>{{$gestions->titulo_car}}</title>
+   @endforeach
+
+    @foreach($seo as $seo)
+    <link rel="canonical" href="{{$seo->canonical}}{{Request::getRequestUri()}}"/>
+    <meta property="og:locale" content="{{$seo->idioma}}">
+    <meta property="og:type" content="{{$seo->og_type}}">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="{{$seo->og_url}}">
+    <meta property="og:site_name" content="{{$seo->og_name}}">
+    <meta property="og:image" content="{{$seo->canonical}}/{{$seo->og_image}}">
+    <meta name="twitter:card" content="{{$seo->twitter_card}}"/>
+    <meta name="twitter:site" content="{{$seo->twitter_site}}" />
+    <meta name="twitter:creator" content="{{$seo->twitter_creator}}" />
+    <meta name="twitter:title" content="{{$seo->twitter_title}}" />
+    <meta name="twitter:description" content="{{$seo->twitter_description}}" />
+    <meta name="twitter:image" content="{{$seo->twitter_image}}" />
+    <link rel="shortcut icon" href="{{$seo->ico}}" type="image/icon">
+    <link rel="apple-touch-icon" href="{{$seo->icoapple}}" />
+    @endforeach
+ 
+  @stop
+
 @section('ContenidoSite-01')
 <style>
   .card-header{
