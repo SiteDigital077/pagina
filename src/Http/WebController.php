@@ -571,6 +571,17 @@ $cursos = \DigitalsiteSaaS\Elearning\Tenant\Cursos::all();
    }
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
 
+   foreach ($menu as $menus) {
+    $menusa = $menus->slug;
+
+    if(strcmp($menusa, $page) == 0)
+  dd('Página No Encontrada'); 
+    return response()->view('errors.404', [], 404);
+     }
+     $post = Page::where('slug','=',$menusa)->first();
+     $meta = Page::where('slug','=',$menusa)->get();
+     $metas = Page::where('slug','like', $menusa)->count(); 
+   
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
    $masa = \DigitalsiteSaaS\Pagina\Tenant\Page::count('page_id');
    $cama = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id);
