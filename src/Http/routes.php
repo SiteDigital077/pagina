@@ -479,7 +479,7 @@ Route::group(['middleware' => ['web']], function (){
   Route::get('suscripcion/servicio', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@formulario');
  
 
-Route::get('oferta/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@oferta');
+Route::get('/oferta/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@oferta');
 
 
 });

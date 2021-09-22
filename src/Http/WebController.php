@@ -401,20 +401,28 @@ if($scroll == 1){
     }
 
     public function paginas($page){
+
+
       $cursos = Cursos::all();
    $avanzacat = Page::where('categoria', '=', 1)->get(); 
     $planessaas = Planes::all();
    if(!$this->tenantName){
      $plantilla = Template::all();
    $plantillaes = Template::all();
-   $post = Page::where('slug','=',$page)->first();
-   $meta = Page::where('slug','=',$page)->get();
-   $metas = Page::where('slug','=',$page)->count();
+
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
-   
-    if($metas == '0'){
+   foreach ($menu as $menus) {
+    $menusa = $menus->slug;
+
+    if(strcmp($menusa, $page) == 0)
+ 
     return response()->view('errors.404', [], 404);
-   }
+     }
+     $post = Page::where('slug','=',$menusa)->first();
+     $meta = Page::where('slug','=',$menusa)->get();
+     $metas = Page::where('slug','like', $menusa)->count(); 
+   
+   
    $menufoot = Page::orderBy('posta', 'asc')->get();
    $masa = DB::table('pages')->count('page_id');
    $cama = Page::find($post->id);
@@ -562,6 +570,7 @@ $cursos = \DigitalsiteSaaS\Elearning\Tenant\Cursos::all();
     return response()->view('errors.404', [], 404);
    }
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
    $masa = \DigitalsiteSaaS\Pagina\Tenant\Page::count('page_id');
    $cama = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id);
