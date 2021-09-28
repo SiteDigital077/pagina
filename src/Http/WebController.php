@@ -715,7 +715,6 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
     public function gestion($page){
       if(!$this->tenantName){
         $gestiona = Carousel::where('slug_car','=',$page)->count();
-        dd($gestiona);
       if($gestiona == 0){
         dd('No existe');
       }
