@@ -1,6 +1,16 @@
 @extends ('LayoutsSD.Layout')
 
+ @section('cabecera')
+   
 
+@foreach($ofertas as $ofertasa)
+    <title>{{$ofertasa->titulo_emp}}</title>
+    @endforeach
+
+
+
+ 
+  @stop
 
  @section('ContenidoSite-01')
 

@@ -118,7 +118,7 @@ class WebController extends Controller {
     ->orderBy('nivel','ASC')
     ->get();
      $seo = Seo::where('id','=',1)->get(); 
-     $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+     $menu = Page::orderBy('posta', 'asc')->get();
      $menufoot = Page::orderBy('posta', 'asc')->get();
      $meta = Page::where('id','=',$user->id)->get();
      $plantilla = Template::all();
@@ -248,7 +248,7 @@ class WebController extends Controller {
     
   foreach ($users as $user){
      $cama = \DigitalsiteSaaS\Pagina\Tenant\Page::find($user->id);
-     $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+     $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
      $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
      $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=',$user->id)->get();
      $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
@@ -410,7 +410,7 @@ if($scroll == 1){
      $plantilla = Template::all();
    $plantillaes = Template::all();
 
-   $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $menu = Page::orderBy('posta', 'asc')->get();
    foreach ($menu as $menus) {
     $menusa = $menus->slug;
 
@@ -563,25 +563,15 @@ $cursos = \DigitalsiteSaaS\Elearning\Tenant\Cursos::all();
     $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $post = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->first();
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get(); 
    $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->get();
-   $metas = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->count();
-
-      if($metas == '0'){
-    return response()->view('errors.404', [], 404);
-   }
-   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
-
-   foreach ($menu as $menus) {
-    $menusa = $menus->slug;
-
-    if(strcmp($menusa, $page) == 0)
-  dd('Página No Encontrada'); 
+  
+   foreach ($meta as $metas) {
+    $metasa = $metas->slug;
+    if(strcmp($metasa, $page) !== 0)
+ 
     return response()->view('errors.404', [], 404);
      }
-     $post = Page::where('slug','=',$menusa)->first();
-     $meta = Page::where('slug','=',$menusa)->get();
-     $metas = Page::where('slug','like', $menusa)->count(); 
-   
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
    $masa = \DigitalsiteSaaS\Pagina\Tenant\Page::count('page_id');
    $cama = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id);
@@ -724,14 +714,19 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 
     public function gestion($page){
       if(!$this->tenantName){
+        $gestiona = Carousel::where('slug_car','=',$page)->count();
+        dd($gestiona);
+      if($gestiona == 0){
+        dd('No existe');
+      }
       $plantilla = Template::all();
       $collapse = DB::table('contents')
       ->where('type','=','carousel')
       ->get();
       $identificador = Carousel::where('slug_car','=',$page)->get();
-      $menu = Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+      $menu = Page::orderBy('posta', 'desc')->get();
       $menufoot = Page::orderBy('posta', 'desc')->get();
-      $seo = Seo::where('id','=',1)->get(); 
+      $seo = Seo::where('id','=',1)->get();
       $gestion = Carousel::where('slug_car','=',$page)->get();
       $gestioncar = Carousel::inRandomOrder()->take(6)->get();
       $gestioncarta = Carousel::get();
@@ -741,13 +736,23 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $subtotal = $this->subtotal();
       $total = $this->total();
       }else{
+          $gestiona = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->count();
+        dd($gestiona);
+      if($gestiona == 0){
+        dd('No existe');
+      }
       $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
       $seo = \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get(); 
       $collapse = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','carousel')->get();
       $identificador = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
       $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
       $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
-      $gestion = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
+      $gestion = \DigitalsiteSaaS\Pagina\Tenant\Carousel::find(1);
+      foreach ($gestion as $gestions) {
+       $gestiona = $gestiona->slug_car;
+        if(strcmp($metasa, $page) !== 0) 
+        return response()->view('errors.404', [], 404);
+       }
       $gestioncar = \DigitalsiteSaaS\Pagina\Tenant\Carousel::inRandomOrder()->take(6)->get();
       $gestioncarta = \DigitalsiteSaaS\Pagina\Tenant\Carousel::get();
       $colors = DB::table('colors')->get();
@@ -818,7 +823,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $colors = DB::table('colors')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get(); 
    }
-   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot);
+   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot)->with('menufoot', $menufoot);
   }
 
   public function oferta($id){
