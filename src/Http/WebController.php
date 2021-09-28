@@ -736,7 +736,6 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $total = $this->total();
       }else{
           $gestiona = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->count();
-        dd($gestiona);
       if($gestiona == 0){
         dd('No existe');
       }
@@ -746,12 +745,12 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $identificador = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
       $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
       $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
-      $gestion = \DigitalsiteSaaS\Pagina\Tenant\Carousel::find(1);
-      foreach ($gestion as $gestions) {
-       $gestiona = $gestiona->slug_car;
-        if(strcmp($metasa, $page) !== 0) 
-        return response()->view('errors.404', [], 404);
-       }
+      $gestion = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
+      //foreach ($gestion as $gestions) {
+       //$gestiona = $gestions->slug_car;
+        //if(strcmp($metasa, $page) !== 0) 
+        //return response()->view('errors.404', [], 404);
+       //}
       $gestioncar = \DigitalsiteSaaS\Pagina\Tenant\Carousel::inRandomOrder()->take(6)->get();
       $gestioncarta = \DigitalsiteSaaS\Pagina\Tenant\Carousel::get();
       $colors = DB::table('colors')->get();
@@ -1077,9 +1076,13 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      return Redirect($contenido->redireccion)->with('status', 'ok_create');
   }
 
-    public function robot()
-    {
-    dd('holasa');
+    public function robot(){
+    if(!$this->tenantName){
+      $seo = Seo::where('id','=',1)->get(); 
+    }else{
+      $seo = \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get(); 
+    }
+    return view('pagina::configuracion/robots')->with('seo', $seo);
     }
 
    public function mensajeficha(){

@@ -458,7 +458,7 @@ Route::get('/ubicacion/ajax-subcatweb',function(){
 
 
 Route::group(['middleware' => ['web']], function (){
-   Route::get('robotsa.txt', 'DigitalsiteSaaS\Pagina\Http\WebController@robot');
+     Route::get('robots.txt', 'DigitalsiteSaaS\Pagina\Http\WebController@robot');
   Route::get('autocomplete/web',array('as'=>'autocomplete/web','uses'=>'DigitalsiteSaaS\Pagina\Http\WebController@autocomplete'));
   Route::get('/respuesta/error', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@resperror');
   Route::post('respuesta/informacion', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@informacion');
@@ -477,7 +477,7 @@ Route::group(['middleware' => ['web']], function (){
 
 
   Route::get('suscripcion/servicio', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@formulario');
- 
+
 
 
 
