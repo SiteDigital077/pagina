@@ -118,7 +118,7 @@ class WebController extends Controller {
     ->orderBy('nivel','ASC')
     ->get();
      $seo = Seo::where('id','=',1)->get(); 
-     $menu = Page::orderBy('posta', 'asc')->get();
+     $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
      $menufoot = Page::orderBy('posta', 'asc')->get();
      $meta = Page::where('id','=',$user->id)->get();
      $plantilla = Template::all();
@@ -248,7 +248,7 @@ class WebController extends Controller {
     
   foreach ($users as $user){
      $cama = \DigitalsiteSaaS\Pagina\Tenant\Page::find($user->id);
-     $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
+     $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
      $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
      $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=',$user->id)->get();
      $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
@@ -410,7 +410,7 @@ if($scroll == 1){
      $plantilla = Template::all();
    $plantillaes = Template::all();
 
-   $menu = Page::orderBy('posta', 'asc')->get();
+   $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    foreach ($menu as $menus) {
     $menusa = $menus->slug;
 
@@ -563,7 +563,7 @@ $cursos = \DigitalsiteSaaS\Elearning\Tenant\Cursos::all();
     $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $post = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->first();
-   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get(); 
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get(); 
    $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->get();
   
    foreach ($meta as $metas) {
@@ -723,7 +723,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       ->where('type','=','carousel')
       ->get();
       $identificador = Carousel::where('slug_car','=',$page)->get();
-      $menu = Page::orderBy('posta', 'desc')->get();
+      $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
       $menufoot = Page::orderBy('posta', 'desc')->get();
       $seo = Seo::where('id','=',1)->get();
       $gestion = Carousel::where('slug_car','=',$page)->get();
@@ -743,7 +743,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $seo = \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get(); 
       $collapse = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','carousel')->get();
       $identificador = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
-      $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+      $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
       $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
       $gestion = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
       //foreach ($gestion as $gestions) {
