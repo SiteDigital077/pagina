@@ -775,17 +775,23 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 
     public function ingresar(){
       if(!$this->tenantName){
-    $seo = Seo::where('id','=',1)->get(); 
+   $seo = Seo::where('id','=',1)->get(); 
    $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
+   foreach ($plantilla as $plantillas) {
+   $templateweb = $plantillas->template;
+   }
    $cart = session()->get('cart');
    $total = $this->total();
    $subtotal = $this->subtotal();
    $colors = DB::table('colors')->get();
    $menu = \DigitalsiteSaaS\Pagina\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Page::orderBy('posta', 'asc')->get();
-  }else{
-       $seo =  \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get(); 
-       $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+   }else{
+   $seo =  \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get(); 
+   $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+   foreach ($plantilla as $plantillas) {
+   $templateweb = $plantillas->template;
+   }
    $cart = session()->get('cart');
    $total = $this->total();
    $subtotal = $this->subtotal();
@@ -794,7 +800,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
 
   }
-   return view('Templates.rayo.carrito.logina')->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('cart', $cart)->with('total', $total)->with('subtotal', $subtotal)->with('colors', $colors)->with('seo', $seo);
+   return view('Templates.'.$templateweb.'.carrito.logina')->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('cart', $cart)->with('total', $total)->with('subtotal', $subtotal)->with('colors', $colors)->with('seo', $seo);
   }
 
 
@@ -1054,6 +1060,29 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
         return response()->json($data);
       }
     }
+
+
+     public function contador($id)
+    {
+      if(!$this->tenantName){
+       $url = Content::where('id',$id)->pluck('url');
+       Content::where('id',$id)->limit(1)->update(['content'=> DB::raw('content + 1')]);
+      }else{
+        $url = \DigitalsiteSaaS\Pagina\Tenant\Content::where('id',$id)->pluck('url');
+        \DigitalsiteSaaS\Pagina\Tenant\Content::where('id',$id)->limit(1)->update(['content'=> DB::raw('content + 1')]);
+      }
+
+      foreach ($url as $url){
+
+return redirect($url);
+}
+    }
+
+
+
+
+
+
 
     public function checkUsernameAvailabilitydocument(){
      $user = DB::table('clientes')->where('documento', Input::get('documento'))->count();
