@@ -75,6 +75,7 @@ Route::get('gestion/seo', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@s
   Route::post('gestion/paises/importExcel', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@importExcelmun');
 
    Route::post('gestion/creardepartamento', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@creardepartamento'); 
+   Route::post('gestion/crearwhats', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@crearwhats'); 
   Route::get('gestion/ubicacion/departamentos/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@departamentos');
   Route::get('gestion/departamento-editar/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@departamentoeditar');
   Route::post('gestion/actualizardepartamento/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@actualizardepartamento');
@@ -82,7 +83,7 @@ Route::get('gestion/seo', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@s
   
 
   Route::get('gestion/crear-departamentos/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@creardepartamentos');
-  
+  Route::get('gestion/crear-whatsapp', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@crearwhatsapp');
   
 
 
@@ -99,7 +100,7 @@ Route::get('gestion/seo', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@s
    Route::get('gestion/crear-municipio/{id}', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@creamunicipio');
  
 
- Route::get('gestion/configurar-correo', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@configcorreo');
+ Route::get('gestion/whatsapp', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@configwhatsapp');
 
  
  Route::get('gestion/logo-head', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@logohead');

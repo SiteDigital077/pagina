@@ -20,6 +20,7 @@ use DigitalsiteSaaS\Pagina\Departamentocon;
 use DigitalsiteSaaS\Pagina\Pais;
 use DigitalsiteSaaS\Pagina\Municipio;
 use DigitalsiteSaaS\Pagina\Recaptcha;
+use DigitalsiteSaaS\Pagina\Whatsapp;
 use Excel;
 use GuzzleHttp\Client;
 use DigitalsiteSaaS\Pagina\Seo;
@@ -282,9 +283,28 @@ class ConfiguracionController extends Controller
      return View('pagina::configuracion.crear-departamento');
     }
 
+    public function crearwhatsapp(){
+        if(!$this->tenantName){
+    $whatsapp = Whatsapp::all();
+    }else{
+    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();  
+    }
+     return View('pagina::configuracion.crear-whatsapp')->with('whatsapp', $whatsapp);
+    }
+
     public function creamunicipio($id){
     return View('pagina::configuracion.crear-municipio');
     }
+
+    public function configwhatsapp(){
+    if(!$this->tenantName){
+    $whatsapp = Whatsapp::all();
+    }else{
+    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();  
+    }
+    return View('pagina::configuracion.whatsapp')->with('whatsapp', $whatsapp);
+    }
+
 
     public function configcorreo(){
     if(!$this->tenantName){
@@ -593,6 +613,31 @@ public function paiseditar($id) {
     $departamento->save();
      return Redirect('/gestion/ubicacion/departamentos/'.$departamento->pais_id)->with('status', 'ok_create');
     }
+
+
+
+    public function crearwhats(){
+  if(!$this->tenantName){
+  $contenido = new Whatsapp;
+  }else{
+  $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Whatsapp;  
+  }
+  $contenido->bienvenida = Input::get('bienvenida');
+  $contenido->numero = Input::get('numero');
+  $contenido->principal = Input::get('principal');
+  $contenido->secundario = Input::get('secundario');
+  $contenido->llamado = Input::get('llamado');
+  $contenido->imagen = Input::get('imagen');
+  $contenido->estado = Input::get('estado');
+  $contenido->presentacion = Input::get('presentacion');
+  $contenido->accion = Input::get('accion');
+  $contenido->empresa = Input::get('empresa');
+  $contenido->save();
+  return Redirect('gestion/whatsapp')->with('status', 'ok_create');
+ }
+
+
+
 
 
     public function departamentoeditar($id) {

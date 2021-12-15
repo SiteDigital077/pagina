@@ -14,7 +14,7 @@
        <a href="/gestion/logo-footer"><i class="fa fa-arrow-circle-down"></i> Logo pie página</a>
       </li>
       <li>
-       <a href="/gestion/configurar-correo"><i class="fa fa-envelope"></i> Configurar correo</a>
+       <a href="/gestion/whatsapp"><i class="fa fa-envelope"></i> Whatsapp</a>
       </li>
          <li>
        <a href="/gestion/redes-sociales"><i class="hi hi-bullhorn"></i> Redes sociales</a>
