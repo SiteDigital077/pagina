@@ -582,7 +582,12 @@ public function paiseditar($id) {
 
 public function whatsappeditar($id) {
 
-    $whatsapp = Whatsapp::where('id','=',$id)->get();
+    if(!$this->tenantName){
+     $whatsapp = Whatsapp::where('id','=',$id)->get();
+     }else{
+     $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::where('id','=',$id)->get();
+     }
+
     return view('pagina::configuracion.whatsapp-editar')->with('whatsapp',$whatsapp);
 }
 
