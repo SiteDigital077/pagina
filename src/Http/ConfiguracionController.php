@@ -646,6 +646,7 @@ public function whatsappeditar($id) {
   $contenido->presentacion = Input::get('presentacion');
   $contenido->accion = Input::get('accion');
   $contenido->empresa = Input::get('empresa');
+  $contenido->visualizacion = Input::get('visualizacion');
   $contenido->save();
   return Redirect('gestion/whatsapp')->with('status', 'ok_create');
  }
@@ -669,6 +670,7 @@ public function whatsappeditar($id) {
      $contenido->presentacion = Input::get('presentacion');
      $contenido->accion = Input::get('accion');
      $contenido->empresa = Input::get('empresa');
+     $contenido->visualizacion = Input::get('visualizacion');
      $contenido->save();
      return Redirect('/gestion/whatsapp')->with('status', 'ok_update');
     }
