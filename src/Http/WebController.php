@@ -727,6 +727,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       ->get();
       $identificador = Carousel::where('slug_car','=',$page)->get();
       $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+      $whatsapp = Whatsapp::all();
       $menufoot = Page::orderBy('posta', 'desc')->get();
       $seo = Seo::where('id','=',1)->get();
       $gestion = Carousel::where('slug_car','=',$page)->get();
@@ -743,7 +744,8 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
         dd('No existe');
       }
       $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
-      $seo = \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get(); 
+      $seo = \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get();
+      $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
       $collapse = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','carousel')->get();
       $identificador = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
       $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
@@ -771,7 +773,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      $ciudad = $arr_ip['city'];
         
      $pais = $arr_ip['country'];
-      return view('pagina::gestion')->with('gestion', $gestion)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('gestioncar', $gestioncar)->with('colors', $colors)->with('collapse', $collapse)->with('blogfoot', $blogfoot)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('gestioncarta', $gestioncarta)->with('identificador', $identificador)->with('seo', $seo)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total);
+      return view('pagina::gestion')->with('gestion', $gestion)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('gestioncar', $gestioncar)->with('colors', $colors)->with('collapse', $collapse)->with('blogfoot', $blogfoot)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('gestioncarta', $gestioncarta)->with('identificador', $identificador)->with('seo', $seo)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('whatsapp', $whatsapp);
 
       }
 
@@ -811,6 +813,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
     public function blog($id){
   if(!$this->tenantName){
    $plantilla = Template::all();
+   $whatsapp =  Whatsapp::all();
    $subtotal = $this->subtotal();
    $total = $this->total();
    $contenidos = Content::where('slugcon','=',$id)->get(); 
@@ -823,14 +826,15 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $subtotal = $this->subtotal();
    $total = $this->total();
-   $contenidos = \DigitalsiteSaaS\Pagina\Tenant\Content::where('slugcon','=',$id)->get(); 
+   $contenidos = \DigitalsiteSaaS\Pagina\Tenant\Content::where('slugcon','=',$id)->get();
+   $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get(); 
    }
-   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot)->with('menufoot', $menufoot);
+   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot)->with('menufoot', $menufoot)->with('whatsapp', $whatsapp);
   }
 
   public function oferta($id){
@@ -841,6 +845,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $menu = Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $menufoot = Page::orderBy('posta', 'desc')->get();
    $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
+   $whatsapp = Whatsapp::all();
    $ip = $arr_ip['ip'];
    $ciudad = $arr_ip['city'];
    $pais = $arr_ip['country'];
@@ -850,12 +855,13 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
+   $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
    $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
    $ip = $arr_ip['ip'];
    $ciudad = $arr_ip['city'];
    $pais = $arr_ip['country'];
    }
-   return view('pagina::vista-empleos')->with('ofertas', $ofertas)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('blogfoot', $blogfoot);
+   return view('pagina::vista-empleos')->with('ofertas', $ofertas)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('blogfoot', $blogfoot)->with('whatsapp', $whatsapp);
   }
 
 
@@ -963,7 +969,8 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
-   return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('contenida', $contenida)->with('whatsapp', $whatsapp)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
+   $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
+   return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('contenida', $contenida)->with('whatsapp', $whatsapp)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('whatsapp', $whatsapp);
   
     }
   return Response::json($subcategories);

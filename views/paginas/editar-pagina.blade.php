@@ -108,6 +108,20 @@
                                                 {{Form::textarea('descripcion', $paginas->description, array('class' => 'form-control','placeholder'=>'Ingrese descripción', 'maxlength' => '159'))}}
                                             </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-textarea-input">Código Seguimiento Google Analytics</label>
+                                            <div class="col-md-9">
+                                                {{Form::textarea('seguimiento', '', array('class' => 'form-control','placeholder'=>'Ingrese código Seguimiento google analytics', 'maxlength' => '159'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-textarea-input">Pixel Facebook</label>
+                                            <div class="col-md-9">
+                                                {{Form::textarea('pixel', '', array('class' => 'form-control','placeholder'=>'Ingrese pixel facebook', 'maxlength' => '159'))}}
+                                            </div>
+                                        </div>
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-3">
                                                 <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Editar</button>
