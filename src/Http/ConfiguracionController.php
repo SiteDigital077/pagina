@@ -285,9 +285,10 @@ class ConfiguracionController extends Controller
 
     public function crearwhatsapp(){
         if(!$this->tenantName){
-    $whatsapp = Whatsapp::all();
+    $whatsapp = Whatsapp::count();
+    
     }else{
-    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();  
+    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::count();  
     }
      return View('pagina::configuracion.crear-whatsapp')->with('whatsapp', $whatsapp);
     }
@@ -375,6 +376,7 @@ class ConfiguracionController extends Controller
      $contenido->save();
      return Redirect('gestion/configurar-correo')->with('status', 'ok_update');
     }
+
 
     public function actualizarrecaptcha(){
      $input = Input::all();
@@ -577,6 +579,13 @@ public function paiseditar($id) {
     return view('pagina::configuracion.pais-editar')->with('pais',$pais);
 }
 
+
+public function whatsappeditar($id) {
+
+    $whatsapp = Whatsapp::where('id','=',$id)->get();
+    return view('pagina::configuracion.whatsapp-editar')->with('whatsapp',$whatsapp);
+}
+
      public function actualizarpais($id){
     $input = Input::all();
     $pais = Pais::find($id);
@@ -638,13 +647,36 @@ public function paiseditar($id) {
 
 
 
+  public function editarwhatsapp($id){
+     $input = Input::all();
+     if(!$this->tenantName){ 
+     $contenido = Whatsapp::find($id);
+     }else{
+     $contenido = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::find($id);  
+     }
+     $contenido->bienvenida = Input::get('bienvenida');
+     $contenido->numero = Input::get('numero');
+     $contenido->principal = Input::get('principal');
+     $contenido->secundario = Input::get('secundario');
+     $contenido->llamado = Input::get('llamado');
+     $contenido->imagen = Input::get('imagen');
+     $contenido->estado = Input::get('estado');
+     $contenido->presentacion = Input::get('presentacion');
+     $contenido->accion = Input::get('accion');
+     $contenido->empresa = Input::get('empresa');
+     $contenido->save();
+     return Redirect('/gestion/whatsapp')->with('status', 'ok_update');
+    }
+
+ 
+
+
 
 
     public function departamentoeditar($id) {
-
     $departamento = Departamentocon::where('id','=',$id)->get();
     return view('pagina::configuracion.departamento-editar')->with('departamento',$departamento);
-}
+    }
 
 
 
@@ -707,5 +739,15 @@ public function actualizarmunicipio($id){
         
         return Redirect('/gestion/municipios/'.$municipio->departamento_id)->with('status', 'ok_delete');
     }
+
+     public function eliminarwhatsapp($id){
+  if(!$this->tenantName){
+  $contenido = Whatsapp::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::find($id);  
+  }
+  $contenido->delete();
+  return Redirect('gestion/whatsapp')->with('status', 'ok_delete');
+ }
 
 }

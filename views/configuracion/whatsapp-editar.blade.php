@@ -83,7 +83,7 @@
                                         <div class="block-options pull-right">
                                             
                                         </div>
-                                        <h2><strong>Crear</strong> Whatsapp</h2>
+                                        <h2><strong>Editar</strong> Whatsapp</h2>
                                     </div>
                                     <!-- END Form Elements Title -->
                 
@@ -91,26 +91,25 @@
 
                                     <!-- Basic Form Elements Content -->
                                      
-                                    
-                                     {{ Form::open(array('files' => true,'method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/gestion/crearwhats'))) }}
-
-                                       
-
-                                     @if($whatsapp == 0)
-
+               @foreach($whatsapp as $whatsapp)                     
+            {{ Form::open(array('files' => true,'method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/gestion/editwhats',$whatsapp->id))) }}
+                      
+                                      
+                                      @if($whatsapp->id == 1)
                                       <h6><b>Datos Generales</b></h6>
                                        <hr>
                                        <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-text-input">Mensaje Head</label>
                                             <div class="col-md-9">
-                                                {{Form::text('bienvenida', '', array('class' => 'form-control','placeholder'=>'Ingrese Mensaje head','required' => 'required'))}}
+                                                {{Form::text('bienvenida', $whatsapp->bienvenida, array('class' => 'form-control','placeholder'=>'Ingrese Mensaje head','required' => 'required'))}}
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Visualización whatsapp</label>
                                             <div class="col-md-9">
-                                                {{ Form::select('estado', [
+                                                {{ Form::select('visualizacion', [
+                                                 $whatsapp->visualizacion =>  $whatsapp->visualizacion,
                                                  '1' => 'Visible',
                                                  '0' => 'No Visible'], null, array('class' => 'form-control')) }}
                                             </div>
@@ -119,52 +118,53 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-text-input">Mensaje Etiqueta</label>
                                             <div class="col-md-9">
-                                                {{Form::text('accion', '', array('class' => 'form-control','placeholder'=>'Ingrese etiqueta','required' => 'required'))}}
+                                                {{Form::text('accion', $whatsapp->accion, array('class' => 'form-control','placeholder'=>'Ingrese etiqueta','required' => 'required'))}}
                                             </div>
                                         </div>
-
+                                        
                                         <div class="form-group">
                                           <label class="col-md-3 control-label" for="example-password-input">Imagen Empresa</label>
                                           <div class="col-md-9">
                                            <div class="input-group">
-                                        <input type="text" id="image_labela" class="form-control" name="empresa" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="">
+                                        <input type="text" id="image_labela" class="form-control" name="empresa" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$whatsapp->empresa}}">
                                             <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-imagea">Seleccionar imagen</button></span>
                                            </div>
                                           </div>
                                          </div>
 
                                         <hr>
-                                        @else
-                                        @endif
+                                       
+                                      @else
+                                      @endif
+
                                       
-                                      
-                                        
+                                
 
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-text-input">Número Whatsapp</label>
                                             <div class="col-md-9">
-                                                {{Form::text('numero', '', array('class' => 'form-control','placeholder'=>'Ingrese número whatsapp','required' => 'required'))}}
+                                                {{Form::text('numero', $whatsapp->numero, array('class' => 'form-control','placeholder'=>'Ingrese número whatsapp','required' => 'required'))}}
                                             </div>
                                         </div>
 
                                          <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-text-input">Cargo o Área</label>
                                             <div class="col-md-9">
-                                                {{Form::text('principal', '', array('class' => 'form-control','placeholder'=>'Ingrese cargo o área','required' => 'required'))}}
+                                                {{Form::text('principal', $whatsapp->principal, array('class' => 'form-control','placeholder'=>'Ingrese cargo o área','required' => 'required'))}}
                                             </div>
                                         </div>
 
                                          <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-text-input">Nombre Asesor</label>
                                             <div class="col-md-9">
-                                                {{Form::text('secundario', '', array('class' => 'form-control','placeholder'=>'Ingrese nombre asesor','required' => 'required'))}}
+                                                {{Form::text('secundario', $whatsapp->secundario, array('class' => 'form-control','placeholder'=>'Ingrese nombre asesor','required' => 'required'))}}
                                             </div>
                                         </div>
 
                                          <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-text-input">Mensaje Precarga</label>
                                             <div class="col-md-9">
-                                                {{Form::text('llamado', '', array('class' => 'form-control','placeholder'=>'Ingrese mensaje precarga','required' => 'required'))}}
+                                                {{Form::text('llamado', $whatsapp->llamado, array('class' => 'form-control','placeholder'=>'Ingrese mensaje precarga','required' => 'required'))}}
                                             </div>
                                         </div>
 
@@ -174,6 +174,7 @@
                                             <label class="col-md-3 control-label" for="example-select">Visualización Canal</label>
                                             <div class="col-md-9">
                                                 {{ Form::select('estado', [
+                                                 $whatsapp->estado =>  $whatsapp->estado,
                                                  '1' => 'Visible',
                                                  '0' => 'No Visible'], null, array('class' => 'form-control')) }}
                                             </div>
@@ -183,7 +184,7 @@
                                           <label class="col-md-3 control-label" for="example-password-input">Imagen Asesor</label>
                                           <div class="col-md-9">
                                            <div class="input-group">
-                                            <input type="text" id="image_label" class="form-control" name="imagen" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="">
+                                            <input type="text" id="image_label" class="form-control" name="imagen" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$whatsapp->imagen}}">
                                             <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen </button></span>
                                            </div>
                                           </div>
@@ -193,12 +194,12 @@
 
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-3">
-                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Crear</button>
+                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Editar</button>
                                                 <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Cancelar</button>
                                             </div>
                                         </div>
                                     {{ Form::close() }}
-                      
+                      @endforeach
                                 </div>
                                 <!-- END Basic Form Elements Block -->
                             </div>
@@ -266,8 +267,3 @@
 </script>
 
   @stop
-
-
-
-
-

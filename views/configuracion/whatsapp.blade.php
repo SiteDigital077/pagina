@@ -40,21 +40,21 @@
   @if($status=='ok_create')
    <div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>País Registrado Con Éxito</strong> CMS...
+    <strong>Whatsapp Registrado Con Éxito</strong> CMS...
    </div>
   @endif
 
   @if($status=='ok_delete')
    <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>País Eliminado Con Éxito</strong> CMS...
+    <strong>Whatsapp Eliminado Con Éxito</strong> CMS...
    </div>
   @endif
 
   @if($status=='ok_update')
    <div class="alert alert-warning">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>País Actualizado Con Éxito</strong> CMS...
+    <strong>Whatsapp Actualizado Con Éxito</strong> CMS...
    </div>
   @endif
 
@@ -62,7 +62,7 @@
     @if($status=='ok_import')
    <div class="alert alert-warning">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>País Importados Con Éxito</strong> CMS...
+    <strong>Whatsapp Importados Con Éxito</strong> CMS...
    </div>
   @endif
 
@@ -139,9 +139,12 @@
                                            </td>
                                             <td class="text-center">
                                                 <div class="btn-group">
-                                                  <a href="<?=URL::to('gestion/ubicacion/departamentos/');?>/"><span  id="tip" data-toggle="tooltip" data-placement="left" title="Ver Ciudades" class="btn btn-warning"><i class="fa fa-eye"></i></span></a>
-                                                   <a href="<?=URL::to('gestion/pais-editar/');?>/"><span  id="tip" data-toggle="tooltip" data-placement="top" title="Editar País" class="btn btn-primary"><i class="fa fa-pencil-square-o sidebar-nav-icon"></i></span></a>
-                                                  <a href="<?=URL::to('gestion/eliminarpais/');?>/" onclick="return confirm('¿Está seguro que desea eliminar el registro?')"><button ="button" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Eliminar País"><i class="hi hi-trash sidebar-nav-icon"></i></button></a>
+                                                
+                                                   <a href="<?=URL::to('gestion/whatsapp-editar/');?>/{{$whatsapp->id}}"><span  id="tip" data-toggle="tooltip" data-placement="top" title="Editar Whatsapp" class="btn btn-primary"><i class="fa fa-pencil-square-o sidebar-nav-icon"></i></span></a>
+                                                   @if($whatsapp->id == 1)
+                                                   @else
+                                                  <a href="<?=URL::to('gestion/eliminarwhatsapp/');?>/{{$whatsapp->id}}" onclick="return confirm('¿Está seguro que desea eliminar el registro?')"><button ="button" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Eliminar Whatsapp"><i class="hi hi-trash sidebar-nav-icon"></i></button></a>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>
