@@ -44,25 +44,24 @@
                                             <div class="col-md-9">
                                                  <select name="contenidos" id="inputContenidos" class="form-control" required="required">
                                                   <option selected disabled>Seleccione categoria</option>
+                                                  <option value="">Sin categoria</option>
                                                   @foreach($categoria as $categoria)
                                                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                                                   @endforeach
-                                                  <option value="">Sin categoria</option>
                                                  </select>
                                             </div>
                                         </div>
 
-
+                                         
                                           <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Tipo visualización</label>
                                             <div class="col-md-9">
-                                                {{ Form::select('FilePath', [
-                                                   '1' => 'Siteuno',
-                                                   '2' => 'Sitedos'], null, array('class' => 'form-control')) }}
+                                        
+                                                   {{ Form::select('FilePath', [
+                                                   '1' => 'Productos Slide',
+                                                   '2' => 'Productos Grid'], null, array('class' => 'form-control')) }}
                                              </div>
                                         </div>
-
-                                        
 
 
                                          <div class="form-group">
