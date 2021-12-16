@@ -7005,14 +7005,13 @@
                                             <label class="col-md-3 control-label" for="example-select">Tipo visualización</label>
                                             <div class="col-md-9">
                                         
-                                                   {{ Form::select('FilePath', [
-                                                   $contenido->imagen => $contenido->imagen,
+                                                   {{ Form::select('FilePath', [$contenido->image => $contenido->image,
                                                    '1' => 'Productos Slide',
                                                    '2' => 'Productos Grid'], null, array('class' => 'form-control')) }}
                                              </div>
                                         </div>
                                        
-                                       
+        
                                          <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Posición</label>
                                             <div class="col-md-9">
