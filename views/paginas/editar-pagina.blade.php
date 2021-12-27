@@ -112,14 +112,14 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-textarea-input">Código Seguimiento Google Analytics</label>
                                             <div class="col-md-9">
-                                                {{Form::textarea('seguimiento', '', array('class' => 'form-control','placeholder'=>'Ingrese código Seguimiento google analytics', 'maxlength' => '159'))}}
+                                                {{Form::textarea('seguimiento', $paginas->seguimiento, array('class' => 'form-control','placeholder'=>'Ingrese código Seguimiento google analytics', 'maxlength' => '159'))}}
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-textarea-input">Pixel Facebook</label>
                                             <div class="col-md-9">
-                                                {{Form::textarea('pixel', '', array('class' => 'form-control','placeholder'=>'Ingrese pixel facebook', 'maxlength' => '159'))}}
+                                                {{Form::textarea('pixel', $paginas->pixel, array('class' => 'form-control','placeholder'=>'Ingrese pixel facebook', 'maxlength' => '159'))}}
                                             </div>
                                         </div>
                                         <div class="form-group form-actions">

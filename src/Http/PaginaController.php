@@ -244,6 +244,8 @@ public function consultaform(){
   $pagina->nivel = Input::get('nivel');
   $pagina->categoria = Input::get('categoria');
   $pagina->sitio = Input::get('sitio');
+  $pagina->seguimiento = Input::get('seguimiento');
+  $pagina->pixel = Input::get('pixel');
   $pagina->page_id = Input::get('DNI');
   $pagina->save();
   $diagrama = new Diagrama;
@@ -287,6 +289,8 @@ public function consultaform(){
   $pagina->robot = '1';
   $pagina->categoria = Input::get('categoria');
   $pagina->sitio = Input::get('sitio');
+  $pagina->seguimiento = Input::get('seguimiento');
+  $pagina->pixel = Input::get('pixel');
   $pagina->page_id = Input::get('DNI');
   $pagina->save();
   $diagrama = new \DigitalsiteSaaS\Pagina\Tenant\Diagrama;
@@ -339,6 +343,8 @@ public function consultaform(){
   $pagina->categoria = Input::get('categoria');
   $pagina->sitio = Input::get('sitio');
   $pagina->palabras = Input::get('palabras');	
+  $pagina->seguimiento = Input::get('seguimiento');
+  $pagina->pixel = Input::get('pixel');
   $pagina->save();
   return Redirect('gestion/paginas')->with('status', 'ok_update');
  }
