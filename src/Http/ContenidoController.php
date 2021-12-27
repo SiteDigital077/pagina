@@ -846,9 +846,9 @@ public function editarempleo($id){
 
  public function eliminargaleria($id){
   if(!$this->tenantName){
-  $contenido = Maxi::find($id);
+  $contenido = Img::find($id);
   }else{
-  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Maxi::find($id);
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Img::find($id);
   }
   $contenido->delete();
   return Redirect('gestion/contenidos/imagenesgaleria/'.$contenido->content_id)->with('status', 'ok_delete');
