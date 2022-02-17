@@ -737,7 +737,6 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
       $cart = session()->get('cart');
       $subtotal = $this->subtotal();
-      $meta = Page::where('id','=',1)->get();
       $total = $this->total();
       }else{
           $gestiona = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->count();
@@ -745,7 +744,6 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
         dd('No existe');
       }
       $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
-      $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=',1)->get();
       $seo = \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get();
       $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
       $collapse = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','carousel')->get();
@@ -775,7 +773,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      $ciudad = $arr_ip['city'];
         
      $pais = $arr_ip['country'];
-      return view('pagina::gestion')->with('gestion', $gestion)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('gestioncar', $gestioncar)->with('colors', $colors)->with('collapse', $collapse)->with('blogfoot', $blogfoot)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('gestioncarta', $gestioncarta)->with('identificador', $identificador)->with('seo', $seo)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('whatsapp', $whatsapp)->with('neta', $meta);
+      return view('pagina::gestion')->with('gestion', $gestion)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('gestioncar', $gestioncar)->with('colors', $colors)->with('collapse', $collapse)->with('blogfoot', $blogfoot)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('gestioncarta', $gestioncarta)->with('identificador', $identificador)->with('seo', $seo)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('whatsapp', $whatsapp);
 
       }
 
@@ -827,7 +825,6 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
-   $meta = Page::where('id','=',1)->get();
    }else{
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $subtotal = $this->subtotal();
@@ -838,10 +835,9 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
-   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
-   $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=',1)->get();
+   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get(); 
    }
-   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot)->with('menufoot', $menufoot)->with('whatsapp', $whatsapp)->with('meta', $meta);
+   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot)->with('menufoot', $menufoot)->with('whatsapp', $whatsapp);
   }
 
   public function oferta($id){

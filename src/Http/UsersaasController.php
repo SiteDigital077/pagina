@@ -83,11 +83,13 @@ use RegistersUsers;
 
       
       $fqdns = Input::get('fqdn');
-      $periodo = Input::get('hasta');
+      $periodo = Input::get('periodo');
+      $fecha_actual = date("Y-m-d");
+      $final = date("Y-m-d",strtotime($fecha_actual."+".$periodo."month"));
       $plan = Input::get('plan');
       $password = Input::get('password');
 
-        $fqdn = sprintf('%s.%s', $fqdns, env('APP_DOMAIN'));
+      $fqdn = sprintf('%s.%s', $fqdns, env('APP_DOMAIN'));
        
         $website = new Website;
         $website->uuid = Str::random(10);
@@ -104,7 +106,7 @@ use RegistersUsers;
             ->update(['saas_id' => $hostname->id,]);
 
          $updatedate = DB::table('tenancy.hostnames')->where('id', $hostname->id)
-            ->update(['presentacion' => $periodo,'plan_id' => $plan]);
+            ->update(['presentacion' => $final,'plan_id' => $plan]);
         
         $pass = Hash::make($password);
 
