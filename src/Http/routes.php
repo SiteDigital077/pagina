@@ -273,6 +273,7 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  Route::resource('gestion/contenidos/eliminarshuffle', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@eliminarshuffle');
 
 Route::get('gestion/registro/ver-registro/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@verregistro');
+Route::get('gestion/registro/eliminar-registro/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@eliminarregistro');
 
 
 

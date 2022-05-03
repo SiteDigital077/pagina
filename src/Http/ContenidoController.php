@@ -876,6 +876,18 @@ public function editarempleo($id){
   return Redirect('gestion/contenidos/shuffle-crear/'.$contenido->shuffle_id)->with('status', 'ok_delete');
  }
 
+  public function eliminarregistro($id){
+  if(!$this->tenantName){
+  $contenido = Messagema::find($id);
+  $contenido->delete();
+  }else{
+   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Messagema::find($id);
+  $contenido->delete(); 
+  }
+  return Redirect('/consulta/formularios')->with('status', 'ok_delete');
+ }
+
+
  public function show(){
   $roles = DB::table('pages')->orderBy('posti')->get();
   $rolesa = DB::table('pages')->orderBy('posta')->get();
