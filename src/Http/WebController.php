@@ -775,7 +775,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      $ciudad = $arr_ip['city'];
         
      $pais = $arr_ip['country'];
-      return view('pagina::gestion')->with('gestion', $gestion)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('gestioncar', $gestioncar)->with('colors', $colors)->with('collapse', $collapse)->with('blogfoot', $blogfoot)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('gestioncarta', $gestioncarta)->with('identificador', $identificador)->with('seo', $seo)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('whatsapp', $whatsapp);
+      return view('pagina::gestion')->with('gestion', $gestion)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('gestioncar', $gestioncar)->with('colors', $colors)->with('collapse', $collapse)->with('blogfoot', $blogfoot)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('gestioncarta', $gestioncarta)->with('identificador', $identificador)->with('seo', $seo)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('whatsapp', $whatsapp)->with('meta', $meta);
 
       }
 
@@ -841,7 +841,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $colors = DB::table('colors')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get(); 
    }
-   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot)->with('menufoot', $menufoot)->with('whatsapp', $whatsapp);
+   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot)->with('menufoot', $menufoot)->with('whatsapp', $whatsapp)->with('meta', $meta);
   }
 
   public function oferta($id){
@@ -966,7 +966,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
       $menufoot = Page::orderBy('posta', 'asc')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
-   return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
+   return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('meta', $meta);
   
    }else{
 
