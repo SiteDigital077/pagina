@@ -737,6 +737,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
       $cart = session()->get('cart');
       $subtotal = $this->subtotal();
+      $meta = Page::where('id','=','1')->get();
       $total = $this->total();
       }else{
           $gestiona = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->count();
@@ -751,6 +752,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
       $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
       $gestion = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
+      $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=','1')->get();
       //foreach ($gestion as $gestions) {
        //$gestiona = $gestions->slug_car;
         //if(strcmp($metasa, $page) !== 0) 
@@ -825,11 +827,13 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+   $meta = Page::where('id','=','1')->get();
    }else{
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $subtotal = $this->subtotal();
    $total = $this->total();
    $contenidos = \DigitalsiteSaaS\Pagina\Tenant\Content::where('slugcon','=',$id)->get();
+   $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=','1')->get();
    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
@@ -958,6 +962,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $whatsapp = Whatsapp::all();
    $contenido = Fichaje::where('slug','=',$page)->get();
    $contenida = Fichaje::where('slug','=',$page)->get();
+   $meta = Page::where('id','=','1')->get();
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
       $menufoot = Page::orderBy('posta', 'asc')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
@@ -967,6 +972,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
 
      $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
+   $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=','1')->get();
    $contenido = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
    $contenida = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
