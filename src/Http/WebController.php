@@ -993,22 +993,30 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
   if(!$this->tenantName){
    $plantilla = Template::all();
    $plantillaes = Template::find(1);
+   $whatsapp = Whatsapp::all();
    $contenido = Avanzaempresa::where('slug','=',$page)->get();
+   $promociones = Avanzaempresa::join('promociones','avanza_empresa.usuario_id','=','promociones.user_id')->where('slug','=',$page)->get();
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
     $menufoot = Page::orderBy('posta', 'asc')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
- 
+    $meta = Page::where('id','=','1')->get();
    $identificador = Avanzaempresa::where('slug', '=', $page)->get();
    foreach ($identificador as $identificador){
    $productos = Fichaje::where('identificador','=',$identificador->id)->get();
    }
-   return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('productos', $productos);
+   return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('productos', $productos)->with('meta', $meta)->with('whatsapp', $whatsapp)->with('promociones', $promociones);
   
    }else{
-
+    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+        foreach ($plantilla as $plantillas) {
+        $templateweb = $plantillas->template;
+        }
+    $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=','1')->get();
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+   $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
    $contenido = \DigitalsiteSaaS\Avanza\Tenant\Avanzaempresa::where('slug','=',$page)->get();
+   $promociones = \DigitalsiteSaaS\Avanza\Tenant\Avanzaempresa::join('promociones','avanza_empresa.usuario_id','=','promociones.user_id')->where('slug','=',$page)->get();  
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
@@ -1017,7 +1025,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    foreach ($identificador as $identificador){
    $productos =  \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('identificador','=',$identificador->id)->get();
    }
-   return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('productos', $productos);
+   return view('Templates.'.$templateweb.'.empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('productos', $productos)->with('meta', $meta)->with('whatsapp', $whatsapp)->with('promociones', $promociones);
   
     }
   return Response::json($subcategories);
