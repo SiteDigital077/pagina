@@ -746,7 +746,7 @@ if(!$this->tenantName){
     if(!$this->tenantName){ 
     $municipios = Municipio::where('departamento_id','=', $id)->get();
     }else{
-    $municipios = DigitalsiteSaaS\Pagina\Tenant\Municipio::where('departamento_id','=', $id)->get();  
+    $municipios = \DigitalsiteSaaS\Pagina\Tenant\Municipio::where('departamento_id','=', $id)->get();  
     }
     return view('pagina::configuracion.municipios')->with('municipios',$municipios);
 }
