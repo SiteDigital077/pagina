@@ -710,7 +710,7 @@ if(!$this->tenantName){
         if(!$this->tenantName){ 
     $departamento = Departamentocon::where('id','=',$id)->get();
    }else{
-    $departamento = DigitalsiteSaaS\Pagina\Tenant\Departamentocon::where('id','=',$id)->get();
+    $departamento = \DigitalsiteSaaS\Pagina\Tenant\Departamentocon::where('id','=',$id)->get();
    }
     return view('pagina::configuracion.departamento-editar')->with('departamento',$departamento);
     }
@@ -723,7 +723,7 @@ if(!$this->tenantName){
                      ->update(['departamento' => Input::get('departamento'),
                                'pais_id' => Input::get('pais_id')]);
 }else{
-    $departamento = DigitalsiteSaaS\Pagina\Tenant\Departamentocon::where('id','=',$id)
+    $departamento = \DigitalsiteSaaS\Pagina\Tenant\Departamentocon::where('id','=',$id)
                      ->update(['departamento' => Input::get('departamento'),
                                'pais_id' => Input::get('pais_id')]);
 }
@@ -735,7 +735,7 @@ if(!$this->tenantName){
         if(!$this->tenantName){ 
         $departamento = Departamentocon::find($id);
      }else{
-        $departamento = DigitalsiteSaaS\Pagina\Tenant\Departamentocon::find($id);
+        $departamento = \DigitalsiteSaaS\Pagina\Tenant\Departamentocon::find($id);
      }
         $departamento->delete();
         
@@ -755,7 +755,7 @@ if(!$this->tenantName){
      if(!$this->tenantName){       
     $departamento = new Municipio;
      }else{
-        $departamento = new DigitalsiteSaaS\Pagina\Tenant\Municipio; 
+        $departamento = new \DigitalsiteSaaS\Pagina\Tenant\Municipio; 
      }
     $departamento->municipio = Input::get('municipio');
     $departamento->departamento_id = Input::get('departamento_id');
