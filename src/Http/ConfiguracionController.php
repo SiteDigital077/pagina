@@ -572,8 +572,11 @@ class ConfiguracionController extends Controller
 
 
     public function departamentos($id) {
-
+    if(!$this->tenantName){
     $departamentos = Departamentocon::where('pais_id','=', $id)->get();
+    }else{
+        $departamentos = \DigitalsiteSaaS\Pagina\Tenant\Departamentocon::where('pais_id','=', $id)->get(); 
+    }
     return view('pagina::configuracion.departamentos')->with('departamentos',$departamentos);
 }
 
