@@ -769,7 +769,7 @@ if(!$this->tenantName){
     if(!$this->tenantName){ 
     $departamento = Municipio::where('id','=',$id)->get();
     }else{
-     $departamento = DigitalsiteSaaS\Pagina\Tenant\Municipio::where('id','=',$id)->get();   
+     $departamento = \DigitalsiteSaaS\Pagina\Tenant\Municipio::where('id','=',$id)->get();   
     }
     return view('pagina::configuracion.municipios-editar')->with('departamento',$departamento);
 }
@@ -781,7 +781,7 @@ if(!$this->tenantName){
                                'departamento_id' => Input::get('departamento_id'),
                                'p_municipio' => Input::get('p_municipio')]);
 }else{
-    $departamento = DigitalsiteSaaS\Pagina\Tenant\Municipio::where('id','=',$id)
+    $departamento = \DigitalsiteSaaS\Pagina\Tenant\Municipio::where('id','=',$id)
                      ->update(['municipio' => Input::get('municipio'),
                                'departamento_id' => Input::get('departamento_id'),
                                'p_municipio' => Input::get('p_municipio')]);
@@ -794,7 +794,7 @@ if(!$this->tenantName){
 if(!$this->tenantName){ 
         $municipio = Municipio::find($id);
     }else{
-        $municipio = DigitalsiteSaaS\Pagina\Tenant\Municipio::find($id);
+        $municipio = \DigitalsiteSaaS\Pagina\Tenant\Municipio::find($id);
     }
         $municipio->delete();
         
