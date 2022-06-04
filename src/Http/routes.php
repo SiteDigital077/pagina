@@ -441,21 +441,21 @@ $user = DB::table('tenancy.hostnames')->where('fqdn', $fqdn)->count();
 Route::get('/ciudad/ajax-subcatweb',function(){
 
         $cat_id = Input::get('cat_id');
-        $subcategories = DigitalsiteSaaS\Pagina\Ciudad::where('pais_id', '=', $cat_id)->get();
+        $subcategories = DigitalsiteSaaS\Pagina\Tenant\Ciudad::where('pais_id', '=', $cat_id)->get();
         return Response::json($subcategories);
 });
 
 Route::get('/ubicacionciudad/ajax-subcatweb',function(){
 
     $cat_id = Input::get('cat_id');
-    $subcategories = DigitalsiteSaaS\Pagina\Departamentocon::where('pais_id', '=', $cat_id)->get();
+    $subcategories = DigitalsiteSaaS\Pagina\Tenant\Departamentocon::where('pais_id', '=', $cat_id)->get();
     return Response::json($subcategories);
 });
 
 Route::get('/ubicacion/ajax-subcatweb',function(){
 
         $cat_id = Input::get('cat_id');
-        $subcategories = DigitalsiteSaaS\Carrito\Municipio::where('departamento_id', '=', $cat_id)->get();
+        $subcategories = DigitalsiteSaaS\Carrito\Tenant\Municipio::where('departamento_id', '=', $cat_id)->get();
         return Response::json($subcategories);
 });
 
