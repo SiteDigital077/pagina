@@ -578,8 +578,11 @@ class ConfiguracionController extends Controller
 }
 
 public function paiseditar($id) {
-
+     if(!$this->tenantName){ 
     $pais = Pais::where('id','=',$id)->get();
+    }else{
+    $pais = \DigitalsiteSaaS\Pagina\Tenant\Pais::where('id','=',$id)->get(); 
+    }
     return view('pagina::configuracion.pais-editar')->with('pais',$pais);
 }
 
@@ -597,40 +600,56 @@ public function whatsappeditar($id) {
 
      public function actualizarpais($id){
     $input = Input::all();
+    if(!$this->tenantName){
     $pais = Pais::find($id);
+    }else{
+     $pais = \DigitalsiteSaaS\Pagina\Tenant\Pais::find($id);   
+    }
     $pais->pais = Input::get('pais');
 
     $pais->save();
     return Redirect('gestion/ubicacion')->with('status', 'ok_update');
     }
 
-  public function crearpais()
-    {
-
-
+  public function crearpais(){
+   if(!$this->tenantName){
     $pais = new Pais;
+    }
+    else{
+    $pais = new \DigitalsiteSaaS\Pagina\Tenant\Pais;
+    }
     $pais->pais = Input::get('pais');
     $pais->save();
        return Redirect('/gestion/ubicacion')->with('status', 'ok_create');
     }
 
       public function eliminarpais($id){
-
+if(!$this->tenantName){
         $pais = Pais::find($id);
+    }else{
+         $pais = \DigitalsiteSaaS\Pagina\Tenant\Pais::find($id);
+    }
         $pais->delete();
         
         return Redirect('/gestion/ubicacion')->with('status', 'ok_delete');
     }
 
 
-       public function creardepartamento()
-    {
+       public function creardepartamento(){
+    if(!$this->tenantName){
     $departamento = new Departamentocon;
     $departamento->departamento = Input::get('departamento');
     $departamento->pais_id = Input::get('pais_id');
     $departamento->save();
+   }else{
+    $departamento = new \DigitalsiteSaaS\Pagina\Tenant\Departamentocon;
+    $departamento->departamento = Input::get('departamento');
+    $departamento->pais_id = Input::get('pais_id');
+    $departamento->save();
+   }
      return Redirect('/gestion/ubicacion/departamentos/'.$departamento->pais_id)->with('status', 'ok_create');
-    }
+   }
+  
 
 
 
@@ -685,39 +704,56 @@ public function whatsappeditar($id) {
 
 
     public function departamentoeditar($id) {
+        if(!$this->tenantName){ 
     $departamento = Departamentocon::where('id','=',$id)->get();
+   }else{
+    $departamento = DigitalsiteSaaS\Pagina\Tenant\Departamentocon::where('id','=',$id)->get();
+   }
     return view('pagina::configuracion.departamento-editar')->with('departamento',$departamento);
     }
 
 
 
       public function actualizardepartamento($id){
-
+if(!$this->tenantName){ 
     $departamento = Departamentocon::where('id','=',$id)
                      ->update(['departamento' => Input::get('departamento'),
                                'pais_id' => Input::get('pais_id')]);
-
+}else{
+    $departamento = DigitalsiteSaaS\Pagina\Tenant\Departamentocon::where('id','=',$id)
+                     ->update(['departamento' => Input::get('departamento'),
+                               'pais_id' => Input::get('pais_id')]);
+}
 
     return Redirect('/gestion/ubicacion/departamentos/'.Input::get('pais_id'))->with('status', 'ok_update');
     }
 
     public function eliminardepartamento($id){
-
+        if(!$this->tenantName){ 
         $departamento = Departamentocon::find($id);
+     }else{
+        $departamento = DigitalsiteSaaS\Pagina\Tenant\Departamentocon::find($id);
+     }
         $departamento->delete();
         
         return Redirect('/gestion/ubicacion/departamentos/'.$departamento->pais_id)->with('status', 'ok_delete');
     }
 
     public function municipios($id) {
-
+    if(!$this->tenantName){ 
     $municipios = Municipio::where('departamento_id','=', $id)->get();
+    }else{
+    $municipios = DigitalsiteSaaS\Pagina\Tenant\Municipio::where('departamento_id','=', $id)->get();  
+    }
     return view('pagina::configuracion.municipios')->with('municipios',$municipios);
 }
     
-        public function crearmunicipio()
-    {
+        public function crearmunicipio(){
+     if(!$this->tenantName){       
     $departamento = new Municipio;
+     }else{
+        $departamento = new DigitalsiteSaaS\Pagina\Tenant\Municipio; 
+     }
     $departamento->municipio = Input::get('municipio');
     $departamento->departamento_id = Input::get('departamento_id');
     $departamento->p_municipio = Input::get('p_municipio');
@@ -727,25 +763,36 @@ public function whatsappeditar($id) {
 
 
     public function municipioeditar($id) {
-
+    if(!$this->tenantName){ 
     $departamento = Municipio::where('id','=',$id)->get();
+    }else{
+     $departamento = DigitalsiteSaaS\Pagina\Tenant\Municipio::where('id','=',$id)->get();   
+    }
     return view('pagina::configuracion.municipios-editar')->with('departamento',$departamento);
 }
 
 public function actualizarmunicipio($id){
-
+if(!$this->tenantName){ 
     $departamento = Municipio::where('id','=',$id)
                      ->update(['municipio' => Input::get('municipio'),
                                'departamento_id' => Input::get('departamento_id'),
                                'p_municipio' => Input::get('p_municipio')]);
-
+}else{
+    $departamento = DigitalsiteSaaS\Pagina\Tenant\Municipio::where('id','=',$id)
+                     ->update(['municipio' => Input::get('municipio'),
+                               'departamento_id' => Input::get('departamento_id'),
+                               'p_municipio' => Input::get('p_municipio')]);
+}
 
     return Redirect('gestion/municipios/'.Input::get('departamento_id'))->with('status', 'ok_update');
     }
 
     public function eliminarmunicipio($id){
-
+if(!$this->tenantName){ 
         $municipio = Municipio::find($id);
+    }else{
+        $municipio = DigitalsiteSaaS\Pagina\Tenant\Municipio::find($id);
+    }
         $municipio->delete();
         
         return Redirect('/gestion/municipios/'.$municipio->departamento_id)->with('status', 'ok_delete');
