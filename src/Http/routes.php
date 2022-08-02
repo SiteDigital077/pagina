@@ -409,6 +409,7 @@ Route::get('gestor/validacion/pagina', function () {
 
 Route::get('gestor/validacion/emailsaas', function () {
           $user = DB::table('users')->where('email', Input::get('email'))->count();
+    
     if($user > 0) {
         $isAvailable = FALSE;
     } else {
