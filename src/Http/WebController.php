@@ -31,6 +31,9 @@
  use DigitalsiteSaaS\Pagina\User;
  use DigitalsiteSaaS\Pagina\Planes;
  use DigitalsiteSaaS\Pagina\Whatsapp;
+ use DigitalsiteSaaS\Avanza\Promocion;
+ use DigitalsiteSaaS\Pagina\Departamentocon;
+ use DigitalsiteSaaS\Pagina\Municipio;
  use Mail;
  use DB;
  use Hash;
@@ -103,6 +106,8 @@ class WebController extends Controller {
   $avanzacat = Page::where('categoria', '=', 1)->get();
   $whatsapp = Whatsapp::all();
   $planessaas = Planes::all();
+  $departamentos = Departamentocon::all();
+  $municipios = Municipio::all();
 
   if(!$this->tenantName){
     $cursos = Cursos::all();
@@ -212,6 +217,7 @@ class WebController extends Controller {
    $area = DB::table('areas')->get();
    $selectores = DB::table('selectors')->get();
    $eventodig = DB::table('tipo_evento')->get();  
+   $promos = Promocion::all();  
    $venta = DB::table('venta')->get();  
    $colors = DB::table('colors')->get();  
    $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
@@ -227,7 +233,7 @@ class WebController extends Controller {
     ->where('contents.page_id', '=' ,$user->id)
     ->get();
 
-   return view('Templates.'.$temp.'.desing')->with('contenido', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('menufoot', $menufoot)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('contenidu', $contenido)->with('whatsapp', $whatsapp)->with('plantilla', $plantilla)->with('meta', $meta)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('mediamini', $mediamini)->with('empresas', $empresas)->with('cursos', $cursos);
+   return view('Templates.'.$temp.'.desing')->with('contenido', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('menufoot', $menufoot)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('contenidu', $contenido)->with('whatsapp', $whatsapp)->with('plantilla', $plantilla)->with('meta', $meta)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('mediamini', $mediamini)->with('empresas', $empresas)->with('cursos', $cursos)->with('promos', $promos)->with('departamentos',$departamentos)->with('municipios', $municipios);
      }}
 
      $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
@@ -248,6 +254,8 @@ class WebController extends Controller {
      $users = DB::table('pages')->where('posti', '1')->get();
     
   foreach ($users as $user){
+     $departamentos = \DigitalsiteSaaS\Pagina\Tenant\Departamentocon::all();
+     $municipios = \DigitalsiteSaaS\Pagina\Tenant\Municipio::all();
      $cama = \DigitalsiteSaaS\Pagina\Tenant\Page::find($user->id);
      $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
      $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
@@ -392,9 +400,10 @@ if($scroll == 1){
     ->where('contents.page_id', '=' ,$user->id)->get();
     }
 
+    $promos = \DigitalsiteSaaS\Avanza\Tenant\Promocion::all();  
  
     if($resp == 'true'){
-   return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('menufoot', $menufoot)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('contenidu', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('planessaas', $planessaas)->with('mediamini', $mediamini)->with('empresas', $empresas)->with('cursos', $cursos);
+   return view('Templates.'.$temp.'.desing')->with('contenido', $contenido)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('menufoot', $menufoot)->with('galeria', $contenida)->with('mascar', $contenido)->with('pasto', $contenido)->with('casual', $contenido)->with('contenidu', $contenido)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('productse', $productse)->with('total', $total)->with('subtotal', $subtotal)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('stock', $stock)->with('filtros', $filtros)->with('eventodig', $eventodig)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('planessaas', $planessaas)->with('mediamini', $mediamini)->with('empresas', $empresas)->with('cursos', $cursos)->with('promos', $promos)->with('municipios',$municipios)->with('departamentos',$departamentos);
     }else{
       dd('No ha pagado');
      }
@@ -404,7 +413,8 @@ if($scroll == 1){
 
     public function paginas($page){
 
-
+    $departamentos = Departamentocon::all();
+     $municipios = Municipio::all();
       $cursos = Cursos::all();
    $avanzacat = Page::where('categoria', '=', 1)->get(); 
     $planessaas = Planes::all();
@@ -412,6 +422,7 @@ if($scroll == 1){
      $plantilla = Template::all();
    $plantillaes = Template::all();
    $whatsapp = Whatsapp::all();
+   $promos = Promocion::all();  
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    foreach ($menu as $menus) {
     $menusa = $menus->slug;
@@ -543,7 +554,7 @@ $categories = Pais::all();
      $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
      $temp = Template::where('id',1)->value('template');
      
-   return view('Templates.'.$temp.'.desing')->with('contenidos', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('menufoot', $menufoot)->with('galeria', $contenida)->with('plantilla', $plantilla)->with('mascar', $contenido)->with('plantillaes', $plantillaes)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('mediamini', $mediamini)->with('empresas', $empresas)->with('cursos', $cursos);
+   return view('Templates.'.$temp.'.desing')->with('contenidos', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('menufoot', $menufoot)->with('galeria', $contenida)->with('plantilla', $plantilla)->with('mascar', $contenido)->with('plantillaes', $plantillaes)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('mediamini', $mediamini)->with('empresas', $empresas)->with('cursos', $cursos)->with('promos', $promos)->with('departamentos',$departamentos)->with('municipios',$municipios);
    }
       $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
   $infosaas = DB::table('tenancy.hostnames')
@@ -568,7 +579,8 @@ $cursos = \DigitalsiteSaaS\Elearning\Tenant\Cursos::all();
    $post = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->first();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get(); 
    $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$page)->get();
-  
+  $departamentos = \DigitalsiteSaaS\Pagina\Tenant\Departamentocon::all();
+     $municipios = \DigitalsiteSaaS\Pagina\Tenant\Municipio::all();
    foreach ($meta as $metas) {
     $metasa = $metas->slug;
     if(strcmp($metasa, $page) !== 0)
@@ -706,8 +718,9 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      $pais = $arr_ip['country'];
      $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
      $temp = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id',1)->value('template');
+     $promos = \DigitalsiteSaaS\Avanza\Tenant\Promocion::all();  
      if($resp == 'true'){
-     return view('Templates.'.$temp.'.desing')->with('contenidos', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('menufoot', $menufoot)->with('galeria', $contenida)->with('mascar', $contenidos)->with('pasto', $contenidos)->with('casual', $contenidos)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('contenidu', $contenidos)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario)->with('planessaas', $planessaas)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('mediamini', $mediamini)->with('empresas', $empresas)->with('cursos', $cursos);
+     return view('Templates.'.$temp.'.desing')->with('contenidos', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('menufoot', $menufoot)->with('galeria', $contenida)->with('mascar', $contenidos)->with('pasto', $contenidos)->with('casual', $contenidos)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('contenidu', $contenidos)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario)->with('planessaas', $planessaas)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('mediamini', $mediamini)->with('empresas', $empresas)->with('cursos', $cursos)->with('promos', $promos)->with('departamentos',$departamentos)->with('municipios',$municipios);
  }else{
   dd('No ha pagaf');
  }
@@ -737,6 +750,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
       $cart = session()->get('cart');
       $subtotal = $this->subtotal();
+      $meta = Page::where('id','=','1')->get();
       $total = $this->total();
       }else{
           $gestiona = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->count();
@@ -751,6 +765,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
       $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
       $gestion = \DigitalsiteSaaS\Pagina\Tenant\Carousel::where('slug_car','=',$page)->get();
+      $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=','1')->get();
       //foreach ($gestion as $gestions) {
        //$gestiona = $gestions->slug_car;
         //if(strcmp($metasa, $page) !== 0) 
@@ -773,7 +788,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      $ciudad = $arr_ip['city'];
         
      $pais = $arr_ip['country'];
-      return view('pagina::gestion')->with('gestion', $gestion)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('gestioncar', $gestioncar)->with('colors', $colors)->with('collapse', $collapse)->with('blogfoot', $blogfoot)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('gestioncarta', $gestioncarta)->with('identificador', $identificador)->with('seo', $seo)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('whatsapp', $whatsapp);
+      return view('pagina::gestion')->with('gestion', $gestion)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('gestioncar', $gestioncar)->with('colors', $colors)->with('collapse', $collapse)->with('blogfoot', $blogfoot)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('gestioncarta', $gestioncarta)->with('identificador', $identificador)->with('seo', $seo)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('whatsapp', $whatsapp)->with('meta', $meta);
 
       }
 
@@ -782,6 +797,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       if(!$this->tenantName){
         $whatsapp = Whatsapp::all();
    $seo = Seo::where('id','=',1)->get(); 
+   $meta = Page::where('id','=','1')->get();
    $plantilla = \DigitalsiteSaaS\Pagina\Template::all();
    foreach ($plantilla as $plantillas) {
    $templateweb = $plantillas->template;
@@ -806,9 +822,10 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
+   $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=','1')->get();
 
   }
-   return view('Templates.'.$templateweb.'.carrito.logina')->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('cart', $cart)->with('total', $total)->with('subtotal', $subtotal)->with('colors', $colors)->with('seo', $seo)->with('whatsapp', $whatsapp);
+   return view('Templates.'.$templateweb.'.carrito.logina')->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('cart', $cart)->with('total', $total)->with('subtotal', $subtotal)->with('colors', $colors)->with('seo', $seo)->with('whatsapp', $whatsapp)->with('meta', $meta);
   }
 
 
@@ -825,11 +842,13 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+   $meta = Page::where('id','=','1')->get();
    }else{
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $subtotal = $this->subtotal();
    $total = $this->total();
    $contenidos = \DigitalsiteSaaS\Pagina\Tenant\Content::where('slugcon','=',$id)->get();
+   $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=','1')->get();
    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
@@ -837,7 +856,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $colors = DB::table('colors')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get(); 
    }
-   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot)->with('menufoot', $menufoot)->with('whatsapp', $whatsapp);
+   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot)->with('menufoot', $menufoot)->with('whatsapp', $whatsapp)->with('meta', $meta);
   }
 
   public function oferta($id){
@@ -958,22 +977,24 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $whatsapp = Whatsapp::all();
    $contenido = Fichaje::where('slug','=',$page)->get();
    $contenida = Fichaje::where('slug','=',$page)->get();
+   $meta = Page::where('id','=','1')->get();
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
       $menufoot = Page::orderBy('posta', 'asc')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
-   return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot);
+   return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('meta', $meta);
   
    }else{
 
      $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
+   $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=','1')->get();
    $contenido = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
    $contenida = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
-   return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('contenida', $contenida)->with('whatsapp', $whatsapp)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('whatsapp', $whatsapp);
+   return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('contenida', $contenida)->with('whatsapp', $whatsapp)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('whatsapp', $whatsapp)->with('meta', $meta);
   
     }
   return Response::json($subcategories);
@@ -985,22 +1006,30 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
   if(!$this->tenantName){
    $plantilla = Template::all();
    $plantillaes = Template::find(1);
+   $whatsapp = Whatsapp::all();
    $contenido = Avanzaempresa::where('slug','=',$page)->get();
-   $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
-    $menufoot = Page::orderBy('posta', 'asc')->get();
+   $promociones = Avanzaempresa::join('promociones','avanza_empresa.usuario_id','=','promociones.user_id')->where('slug','=',$page)->get();
+   $menu = Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
+    $menufoot = Page::orderBy('posta', 'desc')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
- 
+    $meta = Page::where('id','=','1')->get();
    $identificador = Avanzaempresa::where('slug', '=', $page)->get();
    foreach ($identificador as $identificador){
    $productos = Fichaje::where('identificador','=',$identificador->id)->get();
    }
-   return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('productos', $productos);
+   return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('productos', $productos)->with('meta', $meta)->with('whatsapp', $whatsapp)->with('promociones', $promociones);
   
    }else{
-
+    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+        foreach ($plantilla as $plantillas) {
+        $templateweb = $plantillas->template;
+        }
+    $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=','1')->get();
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+   $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
    $contenido = \DigitalsiteSaaS\Avanza\Tenant\Avanzaempresa::where('slug','=',$page)->get();
+   $promociones = \DigitalsiteSaaS\Avanza\Tenant\Avanzaempresa::join('promociones','avanza_empresa.usuario_id','=','promociones.user_id')->where('slug','=',$page)->get();  
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
@@ -1009,7 +1038,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    foreach ($identificador as $identificador){
    $productos =  \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('identificador','=',$identificador->id)->get();
    }
-   return view('avanza::fichaje/empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('productos', $productos);
+   return view('Templates.'.$templateweb.'.empresa')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('productos', $productos)->with('meta', $meta)->with('whatsapp', $whatsapp)->with('promociones', $promociones);
   
     }
   return Response::json($subcategories);

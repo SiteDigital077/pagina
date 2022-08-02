@@ -210,7 +210,13 @@
   @else
   <td><span class="label label-success">Visto</span></td>
   @endif
-  <td class="text-center"><a href="/gestion/registro/ver-registro/{{$respuesta->id}}"><span id="tip" data-toggle="tooltip" data-placement="right" title="Ver registro" class="btn btn-success"><i class="gi gi-eye_open"></i></span></a></td>
+  <td class="text-center"><a href="/gestion/registro/ver-registro/{{$respuesta->id}}"><span id="tip" data-toggle="tooltip" data-placement="right" title="Ver registro" class="btn btn-success"><i class="gi gi-eye_open"></i></span></a>
+    <script language="JavaScript">
+                 function confirmar ( mensaje ) {
+                 return confirm( mensaje );}
+                 </script>
+  <a href="/gestion/registro/eliminar-registro/{{$respuesta->id}}" onclick="return confirmar('¿Está seguro que desea eliminar el registro?')"><span id="tip" data-toggle="tooltip" data-placement="right" title="Ver registro" class="btn btn-danger"><i class="gi gi-eye_open"></i></span></a>
+  </td>
   </tr>
 
   @endforeach
@@ -312,7 +318,13 @@
  }
  }
 </script>
-
+ <script>
+   $(document).ready (function () {
+   $('.delete').click (function () {
+   if (confirm("¿ Está seguro de que desea eliminar ?")) {
+   var id = $(this).attr ("title");
+   document.location.href='paginas/delete/'+id;}});});
+  </script> 
 
   @stop
 
