@@ -1093,6 +1093,28 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      )); 
     }
 
+
+        public function checkUsernameAvailabilityinputcrm($id){
+      if(!$this->tenantName){
+     $user = Formu::orWhere('content_id','=', $id)->where('nombreinputcrm', Input::get('nombreinputcrm'))->count();
+     }
+     else{
+       $user = \DigitalsiteSaaS\Pagina\Tenant\Formu::orWhere('content_id','=', $id)->where('nombreinputcrm', Input::get('nombreinputcrm'))->count();
+   
+     }
+
+
+     if($user > 0){
+      $isAvailable = FALSE;
+     }else{
+      $isAvailable = TRUE;
+     }
+     echo json_encode(
+     array(
+     'valid' => $isAvailable
+     )); 
+    }
+
     public function autocomplete(Request $request)
     {
       if(!$this->tenantName){
@@ -1200,7 +1222,7 @@ return redirect($url);
 }
 
 
-    public function crearmensajeinput(FormularioFormRequest $request){
+    public function crearmensajeinput(){
 
        if(!$this->tenantName){
      $userma = Messagema::create([
@@ -1248,7 +1270,7 @@ return redirect($url);
    }
     }
 
-         $userma = \DigitalsiteSaaS\Pagina\Tenant\Messagema::create([
+    $userma = \DigitalsiteSaaS\Pagina\Tenant\Messagema::create([
    'campo1' => Input::get('campo1'),
    'campo2' => Input::get('campo2'),
    'campo3' => Input::get('campo3'),
@@ -1275,7 +1297,37 @@ return redirect($url);
    'estado' => '0',
    'remember_token' => Hash::make('_token'),
 ]);
-     $envio =  Input::get('form_id');
+
+/*
+    $usermacrm = \DigitalsiteSaaS\Gestion\Tenant\Gestion::create([
+   'nombre' => Input::get('campo1'),
+   'email' => Input::get('campo2'),
+   'numero' => Input::get('campo3'),
+   'campo4' => Input::get('campo4'),
+   'campo5' => Input::get('campo5'),
+   'campo6' => Input::get('campo6'),
+   'campo7' => Input::get('campo7'),
+   'campo8' => Input::get('campo8'),
+   'campo9' => Input::get('campo9'),
+   'campo10' => Input::get('campo10'),
+   'campo11' => Input::get('campo11'),
+   'campo12' => Input::get('campo12'),
+   'campo13' => Input::get('campo13'),
+   'campo14' => Input::get('campo14'),
+   'campo15' => Input::get('campo15'),
+   'campo16' => Input::get('campo16'),
+   'campo17' => Input::get('campo17'),
+   'campo18' => Input::get('campo18'),
+   'campo19' => Input::get('campo19'),
+   'campo20' => Input::get('campo20'),
+   'form_id' => Input::get('form_id'),
+   'email' => Input::get('email'),
+   'radio' => Input::get('radio'),
+   'estado' => '0',
+   'remember_token' => Hash::make('_token'),
+]);
+
+  */   $envio =  Input::get('form_id');
      $redireccion = Input::get('redireccion');
      $ema = Input::get('email');
       if($ema == ''){

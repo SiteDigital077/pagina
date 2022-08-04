@@ -166,6 +166,7 @@
   $contenido->content_id = Input::get('content_id');
   $contenido->respon = Input::get('responsive');
   $contenido->nombreinput = Input::get('nombreinput');
+  $contenido->nombreinputcrm = Input::get('nombreinputcrm');
   $contenido->requerido = Input::get('requerido');
   $contenido->save();
   return Redirect('gestion/contenidos/camposformulario/'.$contenido->content_id)->with('status', 'ok_create');
@@ -620,6 +621,7 @@
   $contenido->nombre = Input::get('nombre');
   $contenido->respon = Input::get('responsive');
   $contenido->nombreinput = Input::get('nombreinput');
+  $contenido->nombreinputcrm = Input::get('nombreinputcrm');
   $contenido->requerido = Input::get('requerido');
   $contenido->save();
   return Redirect('gestion/contenidos/camposformulario/'.$contenido->content_id)->with('status', 'ok_update');
