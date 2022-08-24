@@ -1882,12 +1882,25 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                         <div class="col-md-9">
+                                          <div class="input-group">
+                                            <input type="text" id="image_label" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image" value="{{$contenido->image}}">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                          </div>
+                                         </div>
+                                        </div>
+
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Enlace</label>
                                             <div class="col-md-9">
                                                  {{Form::text('enlace', $contenido->url, array('class' => 'form-control','placeholder'=>'Ingrese URL'))}}
                                             </div>
                                         </div>
+
+
 
                                          <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Posición</label>
@@ -1950,6 +1963,23 @@
                                                   'fadeInUp' => 'fadeUp',
                                                   'fadeInUpBig' => 'fadeUpBig'], null, array('class' => 'form-control')) }}
                                             </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label class="col-md-3 control-label" for="example-select">ID Formulario 
+                                        </label>
+                                          <div class="col-md-9">
+                                            <select name="contenidos" id="contenidos" class="form-control">
+
+                                             @foreach($formularios as $formularios)
+                                             @if($contenido->contents == $formularios->id)
+                                             <option value="{{$formularios->id}}" selected>{{$formularios->title}}</option>
+                                             @else
+                                              <option value="{{$formularios->id}}">{{$formularios->title}}</option>
+                                              @endif
+                                             @endforeach
+                                            </select>
+                                          </div>
                                         </div>
 
                                            {{Form::hidden('tipo', $contenido->type, array('class' => 'form-control'))}}

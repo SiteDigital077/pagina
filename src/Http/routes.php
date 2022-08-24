@@ -154,13 +154,13 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  Route::get('gestion/contenidos/thumbail/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@thumbail');
  Route::get('gestion/contenidos/parallax/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@parallax');
  Route::get('gestion/contenidos/blog/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@blog');
- Route::resource('gestion/contenidos/jumbotron', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@jumbotron');
+ Route::get('gestion/contenidos/jumbotron/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@jumbotron');
  Route::get('gestion/contenidos/mapa/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@mapa');
  Route::get('gestion/contenidos/mailing/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@mailing');
  Route::get('gestion/contenidos/mediaobject/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@mediaobject');
  Route::get('gestion/contenidos/subservicios/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@subservicios');
  Route::get('gestion/contenidos/clientes/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@clientes');
- Route::resource('gestion/contenidos/titulo', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@titulo');
+ Route::get('gestion/contenidos/titulo/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@titulo');
  Route::resource('gestion/contenidos/shuffleweb', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@shuffleweb');
  Route::get('gestion/contenidos/hover/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@hover');
  Route::resource('gestion/contenidos/video', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@video');

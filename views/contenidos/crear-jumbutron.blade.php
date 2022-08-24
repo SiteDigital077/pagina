@@ -46,6 +46,16 @@
                                         </div>
 
                                         <div class="form-group">
+                                         <label class="col-md-3 control-label" for="example-password-input">Imagen</label>
+                                          <div class="col-md-9">
+                                           <div class="input-group">
+                                            <input type="text" id="image_label" class="form-control" name="FilePath" placeholder="Seleccionar imagen" aria-label="Image" aria-describedby="button-image">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="button" id="button-image">Seleccionar imagen</button></span>
+                                           </div>
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Enlace</label>
                                             <div class="col-md-9">
                                                  {{Form::text('enlace', '', array('class' => 'form-control','placeholder'=>'Ingrese URL'))}}
@@ -105,6 +115,41 @@
                                             </div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Animación</label>
+                                            <div class="col-md-9">
+                                                  {{ Form::select('animacion', ['' => '-- Seleccione animación --',
+                                                  '$formularios->id' => '$formularios->title',
+                                                  'bounceIn' => 'bounceIn',
+                                                  'bounceInDown' => 'bounceDown',
+                                                  'bounceInLeft' => 'bounceLeft',
+                                                  'bounceInRight' => 'bounceRight',
+                                                  'bounceInUp' => 'bounceUp',
+                                                  'fadeIn' => 'fadeIn',
+                                                  'fadeInDown' => 'fadeDown',
+                                                  'fadeInDownBig' => 'fadeDownBig',
+                                                  'fadeInLeft' => 'fadeLeft',
+                                                  'fadeInLeftBig' => 'fadeLeftBig',
+                                                  'fadeInRight' => 'fadeRight',
+                                                  'fadeInRightBig' => 'fadeRightBig',
+                                                  'fadeInUp' => 'fadeUp',
+                                                  'fadeInUpBig' => 'fadeUpBig'], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div class="form-group">
+                                          <label class="col-md-3 control-label" for="example-select">ID Formulario</label>
+                                          <div class="col-md-9">
+                                            <select name="contenidos" id="contenidos" class="form-control">
+                                             @foreach($formularios as $formularios)
+                                              <option value="{{$formularios->id}}">{{$formularios->title}}</option>
+                                             @endforeach
+                                            </select>
+                                          </div>
+                                        </div>
+      
+
                                          {{Form::hidden('tipo', 'jumbotron', array('class' => 'form-control'))}}
                                          {{Form::hidden('num', '1', array('class' => 'form-control'))}}
                                          <input type="hidden" name="peca" value="{{Request::segment(4)}}"></input>
@@ -134,5 +179,24 @@
 </script>
 
 
+<footer>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('button-image').addEventListener('click', (event) => {
+      event.preventDefault();
+      window.open('/file-manager/fm-button', 'fm', 'width=900,height=500');
+    });
+  });
+  // set file link
+  function fmSetLink($url) {
+    document.getElementById('image_label').value = $url;
+  }
+</script>
+
+
+</footer>
 
 @stop
