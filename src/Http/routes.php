@@ -300,6 +300,7 @@ Route::get('gestion/registro/eliminar-registro/{id}', 'DigitalsiteSaaS\Pagina\Ht
 
 
 Route::get('/gestor/validacionesinput/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@checkUsernameAvailabilityinput');
+Route::get('/gestor/validacionesinputcrm/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@checkUsernameAvailabilityinputcrm');
 
 
 /*

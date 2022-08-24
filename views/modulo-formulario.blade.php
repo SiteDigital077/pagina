@@ -26,7 +26,7 @@
                                     <!-- Normal Form Content -->
                                      {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('gestion/contenidos/crearinput'))) }}
                 
-                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                         <div class="form-group">
                                           <div class="col-md-12">
                                              <label class="control-label" for="example-email-input">Tipo</label>
@@ -48,7 +48,7 @@
                                         </div>
                                        </div>
 
-                                       <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                       <div class="col-xs-12 col-sm-12 col-md-2 col-lg-4">
                                           <div class="form-group">
                                           <div class="col-md-12">
                                              <label class="control-label" for="example-email-input">Nombre</label>
@@ -66,7 +66,7 @@
                                         </div>
                                         </div>
 
-                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                         <div class="form-group">
                                           <div class="col-md-12">
                                              <label class="control-label" for="example-email-input">Tipo</label>
@@ -95,7 +95,23 @@
                                         </div>
                                        </div>
 
-                                       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-2">
+                                       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                          <div class="col-md-12">
+                                             <label class="control-label" for="example-email-input">CRM</label>
+                                            {{ Form::select('nombreinputcrm', ['' => '-- Seleccione --',
+                                                  'nombre' => 'nombre',
+                                                  'apellido' => 'apellido',
+                                                  'empresa' => 'empresa',
+                                                  'direccion' => 'direccion',
+                                                  'email' => 'email',
+                                                  'numero' => 'numero'
+                                                  ], null, array('class' => 'form-control')) }}
+                                          </div>
+                                        </div>
+                                       </div>
+
+                                       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                         <div class="form-group">
                                           <div class="col-md-12">
                                              <label class="control-label" for="example-email-input">Requerido</label>
@@ -167,7 +183,8 @@
                                             <th class="text-center">Título</th>
                                             <th class="text-center">Descripción</th>
                                             <th>Imagen</th>
-                                            <th>Url</th>
+                                            <th>Campo</th>
+                                            <th>CampoCRM</th>
                                             <th>Estado</th>
                                             <th class="text-center">Tarea</th>
                                         </tr>
@@ -180,6 +197,7 @@
                                           <td>{{$contenido->nombre}}</td>
                                           <td>{{$contenido->respon}}</td>
                                           <td>{{$contenido->nombreinput}}</td>
+                                          <td>{{$contenido->nombreinputcrm}}</td>
                                           @if($contenido->requerido == 1)
                                           <td>No Requerido</td>
                                           @else
@@ -273,6 +291,21 @@ $(document).ready(function() {
                 }
             },
 
+              nombreinputcrm: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo requerido'
+                    },
+                    remote: {
+                        type: 'GET',
+                        url: '/gestor/validacionesinputcrm/{{Request::segment(4)}}',
+                        message: 'Este campo ya esta registrado',
+                        delay: 2000
+                    }
+                }
+            },
+
+            
              titulo: {
                 message: 'The username is not valid',
                 validators: {
