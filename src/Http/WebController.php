@@ -31,7 +31,7 @@
  use DigitalsiteSaaS\Pagina\User;
  use DigitalsiteSaaS\Pagina\Planes;
  use DigitalsiteSaaS\Pagina\Whatsapp;
- use DigitalsiteSaaS\Avanza\Promocion;
+ use DigitalsiteSaaS\Pagina\Promocion;
  use DigitalsiteSaaS\Pagina\Departamentocon;
  use DigitalsiteSaaS\Pagina\Municipio;
  use Mail;
@@ -1253,6 +1253,26 @@ return redirect($url);
    'remember_token' => Hash::make('_token'),
      ]);
 
+     
+    $usermacrm = Gestion::create([
+   'nombre' => Input::get('campo1'),
+   'apellido' => Input::get('campo2'),
+   'email' => Input::get('campo3'),
+   'numero' => Input::get('campo4'),
+   'direccion' => Input::get('campo5'),
+   'empresa' => Input::get('campo6'),
+   'nit' => '1',
+   'interes' => '1',
+   'sector_id' => '1',
+   'cantidad_id' => '1',
+   'referido_id' => '1',
+   'pais_id' => '1',
+   'ciudad_id' => '1',
+   'comentarios' => '1',
+   'tipo' => '1',
+   'remember_token' => Hash::make('_token'),
+]);
+
      $envio =  Input::get('form_id');
      $redireccion = Input::get('redireccion');
      $ema = Input::get('email');
@@ -1298,36 +1318,53 @@ return redirect($url);
    'remember_token' => Hash::make('_token'),
 ]);
 
-/*
+    if(Input::get('campo1') == '')
+    $campo1 = '0';
+    else
+    $campo1 = Input::get('campo1');
+    if(Input::get('campo2') == '')
+    $campo2 = '0';
+    else
+    $campo2 = Input::get('campo2');
+  if(Input::get('email') == '')
+    $campo3 = '0';
+    else
+    $campo3 = Input::get('email');
+    if(Input::get('campo4') == '')
+    $campo4 = '0';
+    else
+    $campo4 = Input::get('campo4');
+  if(Input::get('campo5') == '')
+    $campo5 = '0';
+    else
+    $campo5 = Input::get('campo5');
+    if(Input::get('campo6') == '')
+    $campo6 = '0';
+    else
+    $campo6 = Input::get('campo6');
+    
+
+
     $usermacrm = \DigitalsiteSaaS\Gestion\Tenant\Gestion::create([
-   'nombre' => Input::get('campo1'),
-   'email' => Input::get('campo2'),
-   'numero' => Input::get('campo3'),
-   'campo4' => Input::get('campo4'),
-   'campo5' => Input::get('campo5'),
-   'campo6' => Input::get('campo6'),
-   'campo7' => Input::get('campo7'),
-   'campo8' => Input::get('campo8'),
-   'campo9' => Input::get('campo9'),
-   'campo10' => Input::get('campo10'),
-   'campo11' => Input::get('campo11'),
-   'campo12' => Input::get('campo12'),
-   'campo13' => Input::get('campo13'),
-   'campo14' => Input::get('campo14'),
-   'campo15' => Input::get('campo15'),
-   'campo16' => Input::get('campo16'),
-   'campo17' => Input::get('campo17'),
-   'campo18' => Input::get('campo18'),
-   'campo19' => Input::get('campo19'),
-   'campo20' => Input::get('campo20'),
-   'form_id' => Input::get('form_id'),
-   'email' => Input::get('email'),
-   'radio' => Input::get('radio'),
-   'estado' => '0',
+   'nombre' => $campo1,
+   'apellido' => $campo2,
+   'email' => $campo3,
+   'numero' => $campo4,
+   'direccion' => $campo5,
+   'empresa' => $campo6,
+   'nit' => '1',
+   'interes' => '1',
+   'sector_id' => '1',
+   'cantidad_id' => '1',
+   'referido_id' => '1',
+   'pais_id' => '1',
+   'ciudad_id' => '1',
+   'comentarios' => '1',
+   'tipo' => '1',
    'remember_token' => Hash::make('_token'),
 ]);
 
-  */   $envio =  Input::get('form_id');
+  $envio =  Input::get('form_id');
      $redireccion = Input::get('redireccion');
      $ema = Input::get('email');
       if($ema == ''){
