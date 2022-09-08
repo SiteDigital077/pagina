@@ -1326,10 +1326,16 @@ return redirect($url);
     $campo2 = '0';
     else
     $campo2 = Input::get('campo2');
-  if(Input::get('email') == '')
+
+      if(Input::get('campo3') == '')
     $campo3 = '0';
     else
-    $campo3 = Input::get('email');
+    $campo3 = Input::get('campo3');
+
+  if(Input::get('email') == '')
+    $email = '0';
+    else
+    $email = Input::get('email');
     if(Input::get('campo4') == '')
     $campo4 = '0';
     else
@@ -1348,10 +1354,10 @@ return redirect($url);
     $usermacrm = \DigitalsiteSaaS\Gestion\Tenant\Gestion::create([
    'nombre' => $campo1,
    'apellido' => $campo2,
-   'email' => $campo3,
-   'numero' => $campo4,
-   'direccion' => $campo5,
-   'empresa' => $campo6,
+   'email' => $email,
+   'numero' => $campo3,
+   'direccion' => $campo4,
+   'empresa' => $campo5,
    'nit' => '1',
    'interes' => '1',
    'sector_id' => '1',
