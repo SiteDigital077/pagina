@@ -1357,10 +1357,7 @@ return redirect($url);
     else
     $utm_crm = Input::get('utm_crm');
 
-    
-
-
-    $usermacrm = \DigitalsiteSaaS\Gestion\Tenant\Gestion::create([
+   $usermacrm = \DigitalsiteSaaS\Gestion\Tenant\Gestion::create([
    'nombre' => $campo1,
    'apellido' => $campo2,
    'email' => $email,
@@ -1368,10 +1365,10 @@ return redirect($url);
    'direccion' => $campo4,
    'empresa' => $campo5,
    'nit' => '1',
-   'interes' => '1',
+   'interes' => $interes,
    'sector_id' => '1',
    'cantidad_id' => '1',
-   'referido_id' => '1',
+   'referido_id' => $utm_crm,
    'pais_id' => '1',
    'ciudad_id' => '1',
    'comentarios' => '1',
