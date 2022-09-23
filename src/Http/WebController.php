@@ -1348,6 +1348,15 @@ return redirect($url);
     $campo6 = '0';
     else
     $campo6 = Input::get('campo6');
+  if(Input::get('producto') == '')
+    $interes = '0';
+    else
+    $interes = Input::get('producto');
+  if(Input::get('utm_crm') == '')
+    $utm_crm = '0';
+    else
+    $utm_crm = Input::get('utm_crm');
+
     
 
 
@@ -1379,6 +1388,8 @@ return redirect($url);
      else{
       $datas =\DigitalsiteSaaS\Pagina\Tenant\Content::where('id',$envio)->get();
        foreach ($datas as $user){
+        $for = ['darioma07@hotmail.com','dario.martinez@unionsoluciones.com.co','dario.martinez@sitedigital.com.co'];
+        $id_str = explode(',', $user->video);
        Mail::to(Input::get('email'))
        ->bcc($user->video)
      ->send(new Mensajema($userma));

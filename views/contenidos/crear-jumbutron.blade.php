@@ -148,6 +148,17 @@
                                             </select>
                                           </div>
                                         </div>
+
+                                        <div class="form-group">
+                                          <label class="col-md-3 control-label" for="example-select">Producto CRM</label>
+                                          <div class="col-md-9">
+                                            <select name="video" id="contenidos" class="form-control">
+                                             @foreach($producto as $producto)
+                                              <option value="{{$producto->id}}">{{$producto->producto}}</option>
+                                             @endforeach
+                                            </select>
+                                          </div>
+                                        </div>
       
 
                                          {{Form::hidden('tipo', 'jumbotron', array('class' => 'form-control'))}}

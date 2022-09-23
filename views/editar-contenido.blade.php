@@ -1982,6 +1982,23 @@
                                           </div>
                                         </div>
 
+                                                      <div class="form-group">
+                                          <label class="col-md-3 control-label" for="example-select">Producto CRM 
+                                        </label>
+                                          <div class="col-md-9">
+                                            <select name="video" id="contenidos" class="form-control">
+
+                                             @foreach($producto as $producto)
+                                             @if($contenido->video == $producto->id)
+                                             <option value="{{$producto->id}}" selected>{{$producto->producto}} {{$contenido->video}}</option>
+                                             @else
+                                              <option value="{{$producto->id}}">{{$producto->producto}}</option>
+                                              @endif
+                                             @endforeach
+                                            </select>
+                                          </div>
+                                        </div>
+
                                            {{Form::hidden('tipo', $contenido->type, array('class' => 'form-control'))}}
                                          {{Form::hidden('peca', $contenido->id, array('class' => 'form-control'))}}
 

@@ -25,7 +25,8 @@
  use DigitalsiteSaaS\Pagina\Diagrama;
  use DigitalsiteSaaS\Pagina\Carousel;
  use DigitalsiteSaaS\Pagina\Empleo;
-  use DigitalsiteSaaS\Pagina\Img;
+ use DigitalsiteSaaS\Pagina\Img;
+ use DigitalsiteSaaS\Gestion\Producto;
  use DigitalsiteSaaS\Carrito\Categoria;
  use DigitalsiteSaaS\Pagina\Shuffleweb;
  use App\Http\Requests\FichaCreateRequest;
@@ -212,6 +213,7 @@
   if(!$this->tenantName){
     $formularios = Content::where('type','=','formulas')->get();
   $contenido = Content::find($id);
+  $producto = Producto::all();
   $contenidoweb = Categoria::join('contents','contents.contents','=','categoriapro.id')
   ->where('contents.id', $id)
   ->get();
@@ -229,6 +231,7 @@
   }else{
   $formularios = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','formulas')->get();
   $categoria = \DigitalsiteSaaS\Carrito\Tenant\Categoria::all();
+  $producto = \DigitalsiteSaaS\Gestion\Tenant\Producto::all();
   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
   $contenidoweb = \DigitalsiteSaaS\Pagina\Tenant\Categoria::join('contents','contents.contents','=','categoriapro.id')
   ->where('contents.id', $id)
@@ -245,7 +248,7 @@
  
   }
 
-  return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols)->with('categoria', $categoria)->with('contenidoweb', $contenidoweb)->with('formularios', $formularios);
+  return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols)->with('categoria', $categoria)->with('contenidoweb', $contenidoweb)->with('formularios', $formularios)->with('producto', $producto);
  }
 
  public function editarbanner($id){
@@ -1067,11 +1070,13 @@ public function imagenescarousel($id){
   if(!$this->tenantName){
   $formularios = Content::where('page_id','=',$id)->where('type','=','formulas')->get();
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
+  $producto = Producto::all();
   }else{
   $formularios = \DigitalsiteSaaS\Pagina\Tenant\Content::where('page_id','=',$id)->where('type','=','formulas')->get();
-  $posicion = \DigitalsiteSaaS\Pagina\Tenant\Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion'); 
+  $posicion = \DigitalsiteSaaS\Pagina\Tenant\Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
+  $producto = \DigitalsiteSaaS\Gestion\Tenant\Producto::all(); 
   }
-  return view('pagina::contenidos/crear-jumbutron')->with('posicion', $posicion)->with('formularios', $formularios);
+  return view('pagina::contenidos/crear-jumbutron')->with('posicion', $posicion)->with('formularios', $formularios)->with('producto', $producto);
  }
 
  public function mapa($id){
