@@ -100,12 +100,13 @@
                                           <div class="col-md-12">
                                              <label class="control-label" for="example-email-input">CRM</label>
                                             {{ Form::select('nombreinputcrm', ['' => '-- Seleccione --',
-                                                  'nombre' => 'nombre',
-                                                  'apellido' => 'apellido',
-                                                  'empresa' => 'empresa',
-                                                  'direccion' => 'direccion',
-                                                  'email' => 'email',
-                                                  'numero' => 'numero'
+                                                  'nombre' => 'nombre (Campo1)',
+                                                  'apellido' => 'apellido (Campo2)',
+                                                  'numero' => 'numero (Campo3)',
+                                                  'direccion' => 'direccion (Campo4)',
+                                                  'empresa' => 'empresa (Campo5)',
+                                                  'email' => 'email (Email)'
+                  
                                                   ], null, array('class' => 'form-control')) }}
                                           </div>
                                         </div>
