@@ -35,6 +35,7 @@
  use DigitalsiteSaaS\Pagina\Departamentocon;
  use DigitalsiteSaaS\Pagina\Municipio;
  use Mail;
+
  use DB;
  use Hash;
  use File;
@@ -62,7 +63,7 @@
  use Hyn\Tenancy\Repositories\WebsiteRepository;
  use GuzzleHttp\Client;
  use DigitalsiteSaaS\Elearning\Cursos;
-
+use App\Http\ConnectionsHelper;
 
 
 
@@ -1144,7 +1145,32 @@ return redirect($url);
     }
 
 
+    public function autoCompletea()
+    {
+        return view('autocomplete');
+    }
+    
+    public function autoCompleteAjax(Request $request)
+    {
+        $search=  $request->term;
+        
+        $posts = \DigitalsiteSaaS\Carrito\Tenant\Product::where('name','LIKE',"%{$search}%")
+                       ->orderBy('created_at','DESC')->limit(5)->get();
 
+        if(!$posts->isEmpty())
+        {
+            foreach($posts as $post)
+            {
+                
+                $new_row['name']= $post->name;
+                $new_row['image']= $post->image;
+                $new_row['slug']= url('blog/'.$post->slug);
+                $row_set[] = $new_row; //build an array
+            }
+        }
+        
+        echo json_encode($row_set); 
+    }
 
 
 
@@ -1341,7 +1367,7 @@ return redirect($url);
     else
     $campo4 = Input::get('campo4');
   if(Input::get('campo5') == '')
-    $campo5 = '0';
+    $campo5 = 'Sin Informacion';
     else
     $campo5 = Input::get('campo5');
     if(Input::get('campo6') == '')

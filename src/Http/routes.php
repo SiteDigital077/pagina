@@ -486,7 +486,8 @@ Route::group(['middleware' => ['web']], function (){
 
   Route::get('suscripcion/servicio', 'DigitalsiteSaaS\Pagina\Http\SuscripcionController@formulario');
 
-
+Route::get('demos/autocomplete','DigitalsiteSaaS\Pagina\Http\WebController@autoCompletea');  
+Route::get('demos/autocompleteajax','DigitalsiteSaaS\Pagina\Http\WebController@autoCompleteAjax');
 });
 
 
