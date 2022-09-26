@@ -1164,14 +1164,13 @@ return redirect($url);
                 
                 $new_row['name']= $post->name;
                 $new_row['image']= $post->image;
-                $new_row['slug']= url('blog/'.$post->slug);
+                $new_row['slug']= url('product/detail/'.$post->slug);
                 $row_set[] = $new_row; //build an array
             }
         }
         
         echo json_encode($row_set); 
     }
-
 
 
 
