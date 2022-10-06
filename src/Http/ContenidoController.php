@@ -343,6 +343,15 @@
   $pagina->bloqueSD7 = Input::get('bloquesd7');
   $pagina->bloqueSD8 = Input::get('bloquesd8');
   $pagina->bloqueSD9 = Input::get('bloquesd9');
+  $pagina->sectionSD1 = Input::get('sectionsd1');
+  $pagina->sectionSD2 = Input::get('sectionsd2');
+  $pagina->sectionSD3 = Input::get('sectionsd3');
+  $pagina->sectionSD4 = Input::get('sectionsd4');
+  $pagina->sectionSD5 = Input::get('sectionsd5');
+  $pagina->sectionSD6 = Input::get('sectionsd6');
+  $pagina->sectionSD7 = Input::get('sectionsd7');
+  $pagina->sectionSD8 = Input::get('sectionsd8');
+  $pagina->sectionSD9 = Input::get('sectionsd9');
   $pagina->save();
   return Redirect('gestion/paginas')->with('status', 'ok_create');
  }
