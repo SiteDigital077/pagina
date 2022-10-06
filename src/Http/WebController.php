@@ -34,8 +34,8 @@
  use DigitalsiteSaaS\Pagina\Promocion;
  use DigitalsiteSaaS\Pagina\Departamentocon;
  use DigitalsiteSaaS\Pagina\Municipio;
+ use DigitalsiteSaaS\Pagina\Categoria;
  use Mail;
-
  use DB;
  use Hash;
  use File;
@@ -63,7 +63,7 @@
  use Hyn\Tenancy\Repositories\WebsiteRepository;
  use GuzzleHttp\Client;
  use DigitalsiteSaaS\Elearning\Cursos;
-use App\Http\ConnectionsHelper;
+ use App\Http\ConnectionsHelper;
 
 
 
