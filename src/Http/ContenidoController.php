@@ -183,7 +183,11 @@
  }
 
  public function crearselector(){
+  if(!$this->tenantName){
   $contenido = new Select;
+  }else{
+$contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
+  }
   $contenido->nombre = Input::get('nombre');
   $contenido->input_id = Input::get('input_id');
   $contenido->save();
@@ -643,7 +647,11 @@
 
  public function actualizarselector($id){
   $input = Input::all();
+  if(!$this->tenantName){
   $contenido = Select::find($id);
+  }else{
+  $contenido = \DigitalsiteSaaS\Pagina\Tenant\Select::find($id);  
+  }
   $contenido->nombre = Input::get('nombre');
   $contenido->input_id = Input::get('input_id');
   $contenido->save();
@@ -724,6 +732,19 @@
   return view('pagina::editar-galeria')->with('contenido', $contenido);
  }
 
+ public function consultaselector($id){
+  if(!$this->tenantName){
+   $selectores = Select::where('input_id', '=', $id)->get();
+  }else{
+  $selectores = \DigitalsiteSaaS\Pagina\Tenant\Select::where('input_id', '=', $id)->get();
+  }
+  return view('pagina::crear-selector')->with('selectores', $selectores);
+ }
+
+
+
+
+
   public function editarcarousel($id){
   $contenido = Maxicar::find($id);
   return view('pagina::editar-carousel')->with('contenido', $contenido);
@@ -748,7 +769,11 @@
  }
 
  public function editarselector($id){
+  if(!$this->tenantName){
   $contenido = Select::find($id);
+   }else{
+$contenido = \DigitalsiteSaaS\Pagina\Tenant\Select::find($id);
+   }
   return view('pagina::editar-selector')->with('contenido', $contenido);
  }
 
@@ -817,7 +842,11 @@ public function editarempleo($id){
  }
 
  public function eliminarselector($id){
+    if(!$this->tenantName){
   $contenido = Select::find($id);
+}else{
+   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Select::find($id); 
+}
   $contenido->delete();
   return Redirect('gestion/contenidos/selectores/'.$contenido->input_id)->with('status', 'ok_delete');
  }

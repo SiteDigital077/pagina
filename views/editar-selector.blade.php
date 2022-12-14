@@ -23,7 +23,7 @@
                                     <!-- END Normal Form Title -->
 
                                     <!-- Normal Form Content -->
-                                     {{ Form::open(array('method' => 'GET','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('gestion/contenidos/actualizarselector',$contenido->id))) }}
+                                     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('gestion/contenidos/actualizarselector',$contenido->id))) }}
                 
                        
                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

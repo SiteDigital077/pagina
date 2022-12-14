@@ -194,13 +194,13 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  Route::get('gestion/contenidos/galeriavideo/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@galeriavideo');
  Route::post('gestion/contenidos/creargrafico', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@creargrafico');
  Route::post('gestion/contenidos/crearinput', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@crearinput');
- Route::resource('gestion/contenidos/crearselector', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@crearselector');
+ Route::post('gestion/contenidos/crearselector', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@crearselector');
  Route::post('gestion/contenidos/crearbaner', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@crearbaner');
  Route::get('gestion/contenidos/eliminar/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@eliminar');
  Route::post('gestion/contenidos/crearblog', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@crearblog');
  Route::get('gestion/contenidos/eliminarblog/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@eliminarblog');
  Route::get('gestion/contenidos/eliminarinput/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@eliminarinput');
- Route::resource('gestion/contenidos/eliminarselector', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@eliminarselector');
+ Route::get('gestion/contenidos/eliminarselector/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@eliminarselector');
  Route::get('gestion/contenidos/eliminarbanner/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@eliminarbanner');
  Route::get('gestion/contenidos/imagenesgaleria/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@imagenesgaleria');
  Route::get('gestion/contenidos/imagenescarousel/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@imagenescarousel');
@@ -224,8 +224,8 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  Route::resource('gestion/contenidos/editarcarousel', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@editarcarousel');
  Route::get('gestion/contenidos/editarcarouselimg/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@editarcarouselimg');
  Route::get('gestion/contenidos/editarinput/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@editarinput');
- Route::resource('gestion/contenidos/editarselector', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@editarselector');
- Route::resource('gestion/contenidos/actualizarselector', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@actualizarselector');
+ Route::get('gestion/contenidos/editarselector/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@editarselector');
+ Route::post('gestion/contenidos/actualizarselector/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@actualizarselector');
  Route::post('gestion/contenidos/actualizargaleria/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@actualizargaleria');
  Route::resource('gestion/contenidos/actualizarcarousel', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@actualizarcarousel');
  Route::post('gestion/contenidos/actualizarcarouselimg/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@actualizarcarouselimg');
@@ -288,10 +288,10 @@ Route::get('gestion/registro/eliminar-registro/{id}', 'DigitalsiteSaaS\Pagina\Ht
   $contenidos = DB::table('shuffle')->where('id', "=", $id)->get();  
   return View::make('pagina::actualizar-contshuffle')->with('contenidos', $contenidos);
  });
- Route::get('/gestion/contenidos/selectores/{id}', function($id){
-  $selectores = DB::table('selectors')->where('input_id', '=', $id)->get();
-  return View::make('pagina::crear-selector')->with('selectores', $selectores);
- });
+
+
+Route::get('gestion/contenidos/selectores/{id}', 'DigitalsiteSaaS\Pagina\Http\ContenidoController@consultaselector');
+
 });
 
 // Esta información es abierta
