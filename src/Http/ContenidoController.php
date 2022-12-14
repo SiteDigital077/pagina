@@ -1274,8 +1274,16 @@ public function imagenescarousel($id){
  }
 
  public function formulas($id){
+ if(!$this->tenantName){
+  $formularios = Content::where('page_id','=',$id)->where('type','=','formulas')->get();
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
-   if(!$this->tenantName){
+  $producto = Producto::all();
+  }else{
+  $formularios = \DigitalsiteSaaS\Pagina\Tenant\Content::where('page_id','=',$id)->where('type','=','formulas')->get();
+  $posicion = \DigitalsiteSaaS\Pagina\Tenant\Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
+  $producto = \DigitalsiteSaaS\Gestion\Tenant\Producto::all(); 
+  }
+if(!$this->tenantName){
     $plan = 0;
    }{
    $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
@@ -1284,8 +1292,9 @@ public function imagenescarousel($id){
           
         }
     }
-  return view('pagina::contenidos/crear-formulas')->with('posicion', $posicion)->with('plan', $plan);
+  return view('pagina::contenidos/crear-formulas')->with('posicion', $posicion)->with('formularios', $formularios)->with('producto', $producto)->with('plan', $plan);
  }
+
 
  public function productos($id){
     if(!$this->tenantName){
