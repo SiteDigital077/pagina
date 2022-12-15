@@ -6975,41 +6975,6 @@
                                                 {{Form::textarea('contenidos', $contenido->contents, array('class' => 'ckeditor','id' => 'editor1','placeholder'=>'Ingrese contenido'))}}
                                             </div>
                                         </div> 
-
-                                          <div class="form-group">
-                                          <label class="col-md-3 control-label" for="example-select">ID Formulario 
-                                        </label>
-                                          <div class="col-md-9">
-                                            <select name="contenidos" id="contenidos" class="form-control">
-
-                                             @foreach($formularios as $formularios)
-                                             @if($contenido->contents == $formularios->id)
-                                             <option value="{{$formularios->id}}" selected>{{$formularios->title}}</option>
-                                             @else
-                                              <option value="{{$formularios->id}}">{{$formularios->title}}</option>
-                                              @endif
-                                             @endforeach
-                                            </select>
-                                          </div>
-                                        </div>
-
-                                                      <div class="form-group">
-                                          <label class="col-md-3 control-label" for="example-select">Producto CRM 
-                                        </label>
-                                          <div class="col-md-9">
-                                            <select name="video" id="contenidos" class="form-control">
-
-                                             @foreach($producto as $producto)
-                                             @if($contenido->video == $producto->id)
-                                             <option value="{{$producto->id}}" selected>{{$producto->producto}} {{$contenido->video}}</option>
-                                             @else
-                                              <option value="{{$producto->id}}">{{$producto->producto}}</option>
-                                              @endif
-                                             @endforeach
-                                            </select>
-                                          </div>
-                                        </div>
-
                           
                                          {{Form::hidden('tipo', $contenido->type, array('class' => 'form-control'))}}
                                          {{Form::hidden('peca', $contenido->id, array('class' => 'form-control'))}}

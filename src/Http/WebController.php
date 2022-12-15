@@ -370,7 +370,7 @@ class WebController extends Controller {
    $parametro = \DigitalsiteSaaS\Carrito\Tenant\Parametro::all();
    $autor = DB::table('autor')->get();
    $area = DB::table('areas')->get();
-   $selectores = \DigitalsiteSaaS\Pagina\Tenant\Select::all();
+   $selectores = DB::table('selectors')->get();
    $eventodig = DB::table('tipo_evento')->get();  
    $venta = DB::table('venta')->get();  
    $colors = DB::table('colors')->get();  
@@ -678,7 +678,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
       ->where('autor_id', 'like', '%' . session()->get('autor') . '%')
       ->where('categoriapro_id', 'like', '%' . session()->get('categoria') . '%')
-      ->where('name','like','%' . session()->get('palabra').'%')
+      ->where('name','like','%'. session()->get('palabra').'%')
       ->Where('description','like','%' . session()->get('palabra').'%')
       ->where('visible','=','1')
       ->orderByRaw("RAND()")
@@ -695,8 +695,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
     
   
    
-     $selectores = \DigitalsiteSaaS\Pagina\Tenant\Select::all();
-
+     $selectores = DB::table('selectors')->get();
    $total = $this->total();
    $subtotal = $this->subtotal();
    $filtros = DB::table('categoriessd')->where('categoriapro_id','=',$subcategoriafil)->get();
