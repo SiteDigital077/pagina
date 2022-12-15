@@ -216,7 +216,7 @@ class WebController extends Controller {
    $parametro = DB::table('parametro')->get();
    $autor = DB::table('autor')->get();
    $area = DB::table('areas')->get();
-   $selectores = DB::table('selectors')->get();
+    $selectores = Select::all();
    $eventodig = DB::table('tipo_evento')->get();  
    $promos = Promocion::all();  
    $venta = DB::table('venta')->get();  
@@ -370,7 +370,7 @@ class WebController extends Controller {
    $parametro = \DigitalsiteSaaS\Carrito\Tenant\Parametro::all();
    $autor = DB::table('autor')->get();
    $area = DB::table('areas')->get();
-   $selectores = DB::table('selectors')->get();
+    $selectores = \DigitalsiteSaaS\Pagina\Tenant\Select::all();
    $eventodig = DB::table('tipo_evento')->get();  
    $venta = DB::table('venta')->get();  
    $colors = DB::table('colors')->get();  
@@ -529,7 +529,7 @@ $categories = Pais::all();
      $casa =  session()->get('casa');
     
    
-     $selectores = DB::table('selectors')->get();
+   $selectores = Select::all();
    $total = $this->total();
    $subtotal = $this->subtotal();
    $filtros = DB::table('categoriessd')->where('categoriapro_id','=',$subcategoriafil)->get();
@@ -695,7 +695,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
     
   
    
-     $selectores = DB::table('selectors')->get();
+      $selectores = \DigitalsiteSaaS\Pagina\Tenant\Select::all();
    $total = $this->total();
    $subtotal = $this->subtotal();
    $filtros = DB::table('categoriessd')->where('categoriapro_id','=',$subcategoriafil)->get();
