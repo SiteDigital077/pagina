@@ -28,6 +28,7 @@
  use DigitalsiteSaaS\Pagina\Img;
  use DigitalsiteSaaS\Gestion\Producto;
  use DigitalsiteSaaS\Carrito\Categoria;
+ use DigitalsiteSaaS\Carrito\Category;
  use DigitalsiteSaaS\Pagina\Shuffleweb;
  use App\Http\Requests\FichaCreateRequest;
  use App\Http\Requests\FichaUpdateRequest;
@@ -221,6 +222,10 @@ $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
   $contenidoweb = Categoria::join('contents','contents.contents','=','categoriapro.id')
   ->where('contents.id', $id)
   ->get();
+
+  $contenidowebs = Category::join('contents','contents.imageal','=','categoriessd.id')
+  ->where('contents.id', $id)
+  ->get();
   $categoria = Categoria::all();
   $roles = DB::table('roles_comunidad')->get();
   $notador = Content::where('id','=',$id)->get();
@@ -240,6 +245,9 @@ $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
   $contenidoweb = \DigitalsiteSaaS\Pagina\Tenant\Categoria::join('contents','contents.contents','=','categoriapro.id')
   ->where('contents.id', $id)
   ->get();
+  $contenidowebs = \DigitalsiteSaaS\Pagina\Tenant\Category::join('contents','contents.imageal','=','categoriessd.id')
+  ->where('contents.id', $id)
+  ->get();
   $roles = DB::table('roles_comunidad')->get();
   $notador = \DigitalsiteSaaS\Pagina\Tenant\Content::where('id','=',$id)->get();
   foreach ($notador as $notadores){
@@ -252,7 +260,7 @@ $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
  
   }
 
-  return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols)->with('categoria', $categoria)->with('contenidoweb', $contenidoweb)->with('formularios', $formularios)->with('producto', $producto);
+  return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols)->with('categoria', $categoria)->with('contenidoweb', $contenidoweb)->with('formularios', $formularios)->with('producto', $producto)->with('contenidowebs', $contenidowebs);
  }
 
  public function editarbanner($id){
@@ -1299,10 +1307,12 @@ if(!$this->tenantName){
  public function productos($id){
     if(!$this->tenantName){
       $categoria = Categoria::all();
+      $category = Category::all();
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
     $plan = 0;
    }else{
   $categoria = \DigitalsiteSaaS\Carrito\Tenant\Categoria::all();
+  $category = \DigitalsiteSaaS\Carrito\Tenant\Category::all();
   $posicion = \DigitalsiteSaaS\Pagina\Tenant\Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
    $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
         if ($hostname){
@@ -1310,7 +1320,7 @@ if(!$this->tenantName){
           
         }
     }
-  return view('pagina::contenidos/crear-productos')->with('posicion', $posicion)->with('plan', $plan)->with('categoria', $categoria);
+  return view('pagina::contenidos/crear-productos')->with('posicion', $posicion)->with('plan', $plan)->with('categoria', $categoria)->with('category', $category);
  }
 
  public function filtros($id){

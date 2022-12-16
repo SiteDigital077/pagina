@@ -52,6 +52,19 @@
                                             </div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Cataegria</label>
+                                            <div class="col-md-9">
+                                                 <select name="imageal" id="inputContenidos" class="form-control" required="required">
+                                                  <option selected disabled>Seleccione Subcategoria</option>
+                                                  <option value="">Sin subcategoria</option>
+                                                  @foreach($category as $category)
+                                                   <option value="{{$category->id}}">{{$category->name}}</option>
+                                                  @endforeach
+                                                 </select>
+                                            </div>
+                                        </div>
+
                                          
                                           <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Tipo visualización</label>
