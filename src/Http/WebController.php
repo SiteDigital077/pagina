@@ -203,7 +203,7 @@ class WebController extends Controller {
       ->where('name','like','%'.$bustext.'%')->Where('description','like','%'.$bustext.'%')
       ->where('visible','=','1')
       ->orderByRaw("RAND()")
-      ->paginate(1000);
+      ->paginate(16);
       //dd($products);
    $total = $this->total();
    $subtotal = $this->subtotal();
@@ -356,7 +356,7 @@ class WebController extends Controller {
      ->where('categoriapro_id', 'like', '%' . $subcategoriafil . '%')
      ->orWhere('name', 'like', '%' . $bustext . '%')
      ->orderByRaw("RAND()")
-     ->paginate(1000);
+     ->paginate(16);
      }
       //dd($products);
    $total = $this->total();
@@ -519,7 +519,7 @@ $categories = Pais::all();
       ->where('description', 'like', '%' . session()->get('palabra').'%')
       ->where('visible','=','1')
       ->orderByRaw("RAND()")
-      ->paginate(1000);
+      ->paginate(16);
      // dd($products);
      
      $areadinamizador =  session()->get('areadina');
@@ -670,7 +670,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       ->Where('description','like','%' . session()->get('palabra').'%')
       ->where('visible','=','1')
       ->orderByRaw("RAND()")
-      ->paginate(1000);
+      ->paginate(16);
       else
     
       $products =  \DigitalsiteSaaS\Pagina\Tenant\Product::whereBetween('precio', array($min_price, $max_price))
@@ -682,7 +682,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       ->Where('description','like','%' . session()->get('palabra').'%')
       ->where('visible','=','1')
       ->orderByRaw("RAND()")
-      ->paginate(1000);
+      ->paginate(16);
      // dd($products);
 
       //dd($products);
