@@ -216,7 +216,8 @@ $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
 
  public function editar($id){
   if(!$this->tenantName){
-    $formularios = Content::where('type','=','formulas')->get();
+ $formularios = Content::where('type','=','formulas')->get();
+ $category = Category::all();
   $contenido = Content::find($id);
   $producto = Producto::all();
   $contenidoweb = Categoria::join('contents','contents.contents','=','categoriapro.id')
@@ -242,6 +243,7 @@ $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
   $categoria = \DigitalsiteSaaS\Carrito\Tenant\Categoria::all();
   $producto = \DigitalsiteSaaS\Gestion\Tenant\Producto::all();
   $contenido = \DigitalsiteSaaS\Pagina\Tenant\Content::find($id);
+  $category = \DigitalsiteSaaS\Carrito\Tenant\Category::all();
   $contenidoweb = \DigitalsiteSaaS\Pagina\Tenant\Categoria::join('contents','contents.contents','=','categoriapro.id')
   ->where('contents.id', $id)
   ->get();
@@ -260,7 +262,7 @@ $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
  
   }
 
-  return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols)->with('categoria', $categoria)->with('contenidoweb', $contenidoweb)->with('formularios', $formularios)->with('producto', $producto)->with('contenidowebs', $contenidowebs);
+  return view('pagina::editar-contenido')->with('contenido', $contenido)->with('posicion', $posicion)->with('notador', $notador)->with('roles', $roles)->with('rols', $rols)->with('categoria', $categoria)->with('contenidoweb', $contenidoweb)->with('formularios', $formularios)->with('producto', $producto)->with('contenidowebs', $contenidowebs)->with('category', $category);
  }
 
  public function editarbanner($id){
