@@ -245,7 +245,7 @@ $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
   $contenidoweb = \DigitalsiteSaaS\Pagina\Tenant\Categoria::join('contents','contents.contents','=','categoriapro.id')
   ->where('contents.id', $id)
   ->get();
-  $contenidowebs = \DigitalsiteSaaS\Pagina\Tenant\Category::join('contents','contents.imageal','=','categoriessd.id')
+  $contenidowebs = \DigitalsiteSaaS\Carrito\Tenant\Category::join('contents','contents.imageal','=','categoriessd.id')
   ->where('contents.id', $id)
   ->get();
   $roles = DB::table('roles_comunidad')->get();
