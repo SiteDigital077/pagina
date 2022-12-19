@@ -346,7 +346,7 @@ class WebController extends Controller {
      $subcategoriafil = session()->get('subcategoria');
      if($min_price == null){
      $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
-     paginate(1000);
+     paginate(16);
      }else{
      $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
      whereBetween('precio', array($min_price, $max_price))
