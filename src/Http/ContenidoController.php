@@ -1345,8 +1345,15 @@ if(!$this->tenantName){
  }
 
  public function rondaproductos($id){
+  if(!$this->tenantName){
+  $categoria = Categoria::all();
+  $category =  Category::all();
+  }else{
+  $categoria = \DigitalsiteSaaS\Carrito\Tenant\Categoria::all();
+  $category = \DigitalsiteSaaS\Carrito\Tenant\Category::all();
+  }
   $posicion = Conte::Orderby('id', 'asc')->take(10)->pluck('posicion','posicion');
-  return view('pagina::contenidos/crear-ronda')->with('posicion', $posicion);
+  return view('pagina::contenidos/crear-ronda')->with('posicion', $posicion)->with('categoria', $categoria)->with('category', $category);
  }
 
   public function empresas($id){

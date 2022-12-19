@@ -5944,6 +5944,39 @@
                                             </div>
                                         </div> 
 
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Cataegria</label>
+                                            <div class="col-md-9">
+                                                 <select name="contenidos" id="inputContenidos" class="form-control" required="required">
+                                                    @foreach($contenidoweb as $contenidoweb)
+                                                  <option value="{{$contenidoweb->contents}}" selected>{{$contenidoweb->nombre}}</option>
+                                                  @endforeach
+                                                 
+                                                  @foreach($categoria as $categoria)
+                                                   <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                                                  @endforeach
+                                                  <option value="">Sin categoria</option>
+                                                 </select>
+                                            </div>
+                                        </div>
+
+                                           <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-email-input">Cataegria</label>
+                                            <div class="col-md-9">
+                                                 <select name="imageal" id="inputContenidos" class="form-control" required="required">
+                                                    @foreach($contenidowebs as $contenidowebs)
+                                                  <option value="{{$contenidowebs->imageal}}" selected>{{$contenidowebs->name}}</option>
+                                                  @endforeach
+                                                 
+                                                  @foreach($category as $category)
+                                                   <option value="{{$category->id}}">{{$category->name}}</option>
+                                                  @endforeach
+                                                  <option value="">Sin sub categoria</option>
+                                                 </select>
+                                            </div>
+                                        </div>
+
+
                                          <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Posición</label>
                                             <div class="col-md-9">
@@ -6014,7 +6047,7 @@
                                             </div>
                                         </div>
                                             
-                                        {{Form::hidden('imageal', 'rondaproductos', array('class' => 'form-control'))}}
+                                        <!-- {{Form::hidden('imageal', 'rondaproductos', array('class' => 'form-control'))}} -->
                                          {{Form::hidden('tipo', $contenido->type, array('class' => 'form-control'))}}
                                          {{Form::hidden('peca', $contenido->id, array('class' => 'form-control'))}}
 
