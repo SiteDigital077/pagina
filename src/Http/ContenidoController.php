@@ -227,6 +227,7 @@ $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
   $contenidowebs = Category::join('contents','contents.imageal','=','categoriessd.id')
   ->where('contents.id', $id)
   ->get();
+
   $categoria = Categoria::all();
   $roles = DB::table('roles_comunidad')->get();
   $notador = Content::where('id','=',$id)->get();
@@ -250,6 +251,7 @@ $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
   $contenidowebs = \DigitalsiteSaaS\Carrito\Tenant\Category::join('contents','contents.imageal','=','categoriessd.id')
   ->where('contents.id', $id)
   ->get();
+
   $roles = DB::table('roles_comunidad')->get();
   $notador = \DigitalsiteSaaS\Pagina\Tenant\Content::where('id','=',$id)->get();
   foreach ($notador as $notadores){

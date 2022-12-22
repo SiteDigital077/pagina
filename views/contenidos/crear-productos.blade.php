@@ -45,6 +45,7 @@
                                                  <select name="contenidos" id="inputContenidos" class="form-control" required="required">
                                                   <option selected disabled>Seleccione categoria</option>
                                                   <option value="">Sin categoria</option>
+                                                  <option value="all">Todos los Productos</option>
                                                   @foreach($categoria as $categoria)
                                                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                                                   @endforeach

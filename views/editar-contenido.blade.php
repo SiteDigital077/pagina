@@ -5948,14 +5948,25 @@
                                             <label class="col-md-3 control-label" for="example-email-input">Cataegria</label>
                                             <div class="col-md-9">
                                                  <select name="contenidos" id="inputContenidos" class="form-control" required="required">
-                                                    @foreach($contenidoweb as $contenidoweb)
-                                                  <option value="{{$contenidoweb->contents}}" selected>{{$contenidoweb->nombre}}</option>
-                                                  @endforeach
+                                                  
+                                                 
+
+                                                  @if($contenido->contents == '')
+                                                  <option value="" selected>Sin Categoria</option>
+                                                  @elseif($contenido->contents == 'all')
+                                                  <option value="all" selected>Todos los Productos</option>
+                                                  @else
+                                                  @foreach($contenidoweb as $contenidoweb)
+                                                 <option value="{{$contenidoweb->contents}}" selected>{{$contenidoweb->
+                                                nombre}}</option>         
+                                                @endforeach                                         
+                                                @endif
                                                  
                                                   @foreach($categoria as $categoria)
                                                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                                                   @endforeach
-                                                  <option value="">Sin categoria</option>
+                                                  <option value="">Sin Categoria</option>
+                                                  <option value="all">Todos los Productos</option>
                                                  </select>
                                             </div>
                                         </div>
@@ -5964,14 +5975,18 @@
                                             <label class="col-md-3 control-label" for="example-email-input">Cataegria</label>
                                             <div class="col-md-9">
                                                  <select name="imageal" id="inputContenidos" class="form-control" required="required">
-                                                    @foreach($contenidowebs as $contenidowebs)
+                                                 @if($contenido->imageal == '')
+                                                 <option value="" selected>Sin sub Categoria</option>
+                                                 @else
+                                                 @foreach($contenidowebs as $contenidowebs)
                                                   <option value="{{$contenidowebs->imageal}}" selected>{{$contenidowebs->name}}</option>
-                                                  @endforeach
+                                                 @endforeach
+                                                 @endif
                                                  
                                                   @foreach($category as $category)
                                                    <option value="{{$category->id}}">{{$category->name}}</option>
                                                   @endforeach
-                                                  <option value="">Sin sub categoria</option>
+                                                <option value="" >Sin sub Categoria</option>
                                                  </select>
                                             </div>
                                         </div>

@@ -46,6 +46,7 @@
                                                  <select name="contenidos" id="inputContenidos" class="form-control" required="required">
                                                   <option selected disabled>Seleccione categoria</option>
                                                   <option value="">Sin categoria</option>
+                                                  <option value="all">Todos los Productos</option>
                                                   @foreach($categoria as $categoria)
                                                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                                                   @endforeach
@@ -119,7 +120,7 @@
                                             </div>
                                         </div>
                                             
-                                        {{Form::hidden('imageal', 'rondaproductos', array('class' => 'form-control'))}}
+                                       
                                         {{Form::hidden('tipo', 'rondaproductos', array('class' => 'form-control'))}}
                                         {{Form::hidden('num', '1', array('class' => 'form-control'))}}
                                         <input type="hidden" name="peca" value="{{Request::segment(4)}}"></input>

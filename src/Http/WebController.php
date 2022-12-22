@@ -346,18 +346,20 @@ class WebController extends Controller {
      $subcategoriafil = session()->get('subcategoria');
      if($min_price == null){
      $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
-     paginate(16);
+     paginate(1000);
      }else{
-     $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
-     whereBetween('precio', array($min_price, $max_price))
-     ->where('category_id', 'like', '%' . $clientes . '%')
-     ->where('parametro_id', 'like', '%' . $parametrofil . '%')
-     ->where('autor_id', 'like', '%' . $autorfil . '%')
-     ->where('categoriapro_id', 'like', '%' . $subcategoriafil . '%')
-     ->orWhere('name', 'like', '%' . $bustext . '%')
-     ->orderByRaw("RAND()")
-     ->paginate(16);
-     }
+     $products =  \DigitalsiteSaaS\Pagina\Tenant\Product::leftjoin('contents','products.categoriapro_id','=','contents.contents')
+     ->whereBetween('precio', array($min_price, $max_price))
+      ->where('category_id', 'like', '%' . session()->get('categoria') . '%')
+      /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
+      ->where('autor_id', 'like', '%' . session()->get('autor') . '%')
+      ->where('categoriapro_id', 'like', '%' . session()->get('categoria') . '%')
+      ->where('name','like','%' . session()->get('palabra').'%')
+      ->Where('products.description','like','%' . session()->get('palabra').'%')
+      ->where('visible','=','1')
+      ->orderByRaw("RAND()")
+      ->paginate(16);
+    }
       //dd($products);
    $total = $this->total();
    $subtotal = $this->subtotal();
@@ -510,17 +512,17 @@ $categories = Pais::all();
      $areafil = session()->get('area');
      $parametrofil = session()->get('parametro');
      $subcategoriafil = session()->get('subcategoria');
-     $products = Product::whereBetween('precio', array($min_price, $max_price))
+      $products =  Product::leftjoin('contents','products.categoriapro_id','=','contents.contents')
+     ->whereBetween('precio', array($min_price, $max_price))
       ->where('category_id', 'like', '%' . session()->get('categoria') . '%')
       /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
       ->where('autor_id', 'like', '%' . session()->get('autor') . '%')
       ->where('categoriapro_id', 'like', '%' . session()->get('categoria') . '%')
-      ->where('name', 'like', '%' . session()->get('palabra').'%')
-      ->where('description', 'like', '%' . session()->get('palabra').'%')
+      ->where('name','like','%' . session()->get('palabra').'%')
+      ->Where('products.description','like','%' . session()->get('palabra').'%')
       ->where('visible','=','1')
       ->orderByRaw("RAND()")
       ->paginate(16);
-     // dd($products);
      
      $areadinamizador =  session()->get('areadina');
      $gradodinamizador = session()->get('gradodina');
@@ -660,32 +662,19 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      $parametrofil = session()->get('parametro');
      $autorfil = session()->get('autor');
      $subcategoriafil = session()->get('subcategoria');
-     if(DB::table('venta')->where('id', '1')->value('comunidad') == 1)
-    $products =  \DigitalsiteSaaS\Pagina\Tenant\Product::whereBetween('precio', array($min_price, $max_price))
+    
+  $products =  \DigitalsiteSaaS\Pagina\Tenant\Product::leftjoin('contents','products.categoriapro_id','=','contents.contents')
+     ->whereBetween('precio', array($min_price, $max_price))
       ->where('category_id', 'like', '%' . session()->get('categoria') . '%')
       /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
       ->where('autor_id', 'like', '%' . session()->get('autor') . '%')
       ->where('categoriapro_id', 'like', '%' . session()->get('categoria') . '%')
       ->where('name','like','%' . session()->get('palabra').'%')
-      ->Where('description','like','%' . session()->get('palabra').'%')
+      ->Where('products.description','like','%' . session()->get('palabra').'%')
       ->where('visible','=','1')
       ->orderByRaw("RAND()")
       ->paginate(16);
-      else
-    
-      $products =  \DigitalsiteSaaS\Pagina\Tenant\Product::whereBetween('precio', array($min_price, $max_price))
-      ->where('category_id', 'like', '%' . session()->get('categoria') . '%')
-      /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
-      ->where('autor_id', 'like', '%' . session()->get('autor') . '%')
-      ->where('categoriapro_id', 'like', '%' . session()->get('categoria') . '%')
-      ->where('name','like','%'. session()->get('palabra').'%')
-      ->Where('description','like','%' . session()->get('palabra').'%')
-      ->where('visible','=','1')
-      ->orderByRaw("RAND()")
-      ->paginate(16);
-     // dd($products);
-
-      //dd($products);
+ 
      $areadinamizador =  session()->get('areadina');
      $gradodinamizador = session()->get('gradodina');
      $campodinamizador = session()->get('campodina');
