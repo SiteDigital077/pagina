@@ -663,17 +663,40 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
      $autorfil = session()->get('autor');
      $subcategoriafil = session()->get('subcategoria');
     
-  $products =  \DigitalsiteSaaS\Pagina\Tenant\Product::leftjoin('contents','products.categoriapro_id','=','contents.contents')
-     ->whereBetween('precio', array($min_price, $max_price))
+     $idpage = \DigitalsiteSaaS\Pagina\Tenant\Content::leftjoin('pages','contents.page_id','=','pages.id')
+     ->where('type','=', 'productos')
+     ->where('slug','=', $page)
+    ->pluck('contents');
+    $idpagecount = \DigitalsiteSaaS\Pagina\Tenant\Content::leftjoin('pages','contents.page_id','=','pages.id')
+     ->where('type','=', 'productos')
+     ->where('slug','=', $page)
+    ->count();
+  
+    if($idpagecount == 0){
+     $products =  \DigitalsiteSaaS\Pagina\Tenant\Product::whereBetween('precio', array($min_price, $max_price))
       ->where('category_id', 'like', '%' . session()->get('categoria') . '%')
       /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
       ->where('autor_id', 'like', '%' . session()->get('autor') . '%')
       ->where('categoriapro_id', 'like', '%' . session()->get('categoria') . '%')
       ->where('name','like','%' . session()->get('palabra').'%')
-      ->Where('products.description','like','%' . session()->get('palabra').'%')
+      ->Where('description','like','%' . session()->get('palabra').'%')
       ->where('visible','=','1')
+      ->whereNull('categoriapro_id','=',$idpage)
       ->orderByRaw("RAND()")
       ->paginate(16);
+   }else{
+      $products =  \DigitalsiteSaaS\Pagina\Tenant\Product::whereBetween('precio', array($min_price, $max_price))
+      ->where('category_id', 'like', '%' . session()->get('categoria') . '%')
+      /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
+      ->where('autor_id', 'like', '%' . session()->get('autor') . '%')
+      ->where('categoriapro_id', 'like', '%' . session()->get('categoria') . '%')
+      ->where('name','like','%' . session()->get('palabra').'%')
+      ->Where('description','like','%' . session()->get('palabra').'%')
+      ->where('visible','=','1')
+      ->where('categoriapro_id','=',$idpage)
+      ->orderByRaw("RAND()")
+      ->paginate(16);
+   }
  
      $areadinamizador =  session()->get('areadina');
      $gradodinamizador = session()->get('gradodina');
