@@ -334,22 +334,15 @@ $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
   }else{
   $pagina = \DigitalsiteSaaS\Pagina\Tenant\Diagrama::find($id);
   }
-  $pagina->posicionSD01 = Input::get('posicionsd01');
   $pagina->posicionSD1 = Input::get('posicionsd1');
   $pagina->posicionSD2 = Input::get('posicionsd2');
-  $pagina->posicionSD02 = Input::get('posicionsd02');
   $pagina->posicionSD3 = Input::get('posicionsd3');
-  $pagina->bloque = Input::get('bloque');
   $pagina->posicionSD4 = Input::get('posicionsd4');
   $pagina->posicionSD5 = Input::get('posicionsd5');
   $pagina->posicionSD6 = Input::get('posicionsd6');
   $pagina->posicionSD7 = Input::get('posicionsd7');
   $pagina->posicionSD8 = Input::get('posicionsd8');
   $pagina->posicionSD9 = Input::get('posicionsd9');
-  $pagina->bloqueblog = Input::get('bloqueblog');
-  $pagina->posicionSD03 = Input::get('posicionsd03');
-  $pagina->bloqueficha1 = Input::get('bloqueficha1');
-  $pagina->bloqueficha2 = Input::get('bloqueficha2');
   $pagina->bloqueSD1 = Input::get('bloquesd1');
   $pagina->bloqueSD2 = Input::get('bloquesd2');
   $pagina->bloqueSD3 = Input::get('bloquesd3');
@@ -368,6 +361,10 @@ $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
   $pagina->sectionSD7 = Input::get('sectionsd7');
   $pagina->sectionSD8 = Input::get('sectionsd8');
   $pagina->sectionSD9 = Input::get('sectionsd9');
+  $pagina->bloque = Input::get('bloque');
+  $pagina->bloqueblog = Input::get('bloqueblog');
+  $pagina->bloqueficha1 = Input::get('bloqueficha1');
+  $pagina->bloqueficha2 = Input::get('bloqueficha2');
   $pagina->save();
   return Redirect('gestion/paginas')->with('status', 'ok_create');
  }
