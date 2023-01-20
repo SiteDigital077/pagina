@@ -1262,7 +1262,7 @@ return redirect($url);
 }
 
 
-    public function crearmensajeinput(){
+    public function crearmensajeinput(FormularioFormRequest $request){
 
        if(!$this->tenantName){
      $userma = Messagema::create([
