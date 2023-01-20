@@ -91,7 +91,7 @@
                                          <div class="form-group">
                                              <label class="col-md-1 control-label" for="example-text-input">SectionSD5</label>
                                             <div class="col-md-3">
-                                                 {{Form::text('sectionsd5',  $diagramas->sectionSD1, array('class' => 'form-control', 'placeholder'=>'Ingrese diagrama'))}}
+                                                 {{Form::text('sectionsd5',  $diagramas->sectionSD5, array('class' => 'form-control', 'placeholder'=>'Ingrese diagrama'))}}
                                             </div>
                                             <label class="col-md-1 control-label" for="example-text-input">BloqueSD5</label>
                                             <div class="col-md-3">
