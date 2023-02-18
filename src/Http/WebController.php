@@ -681,7 +681,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       ->where('name','like','%' . session()->get('palabra').'%')
       ->Where('description','like','%' . session()->get('palabra').'%')
       ->where('visible','=','1')
-      ->whereNull('categoriapro_id','=',$idpage)
+     
       ->orderByRaw("RAND()")
       ->paginate(16);
    }else{
@@ -693,10 +693,12 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       ->where('name','like','%' . session()->get('palabra').'%')
       ->Where('description','like','%' . session()->get('palabra').'%')
       ->where('visible','=','1')
-      ->where('categoriapro_id','=',$idpage)
+    
       ->orderByRaw("RAND()")
       ->paginate(16);
    }
+
+
  
      $areadinamizador =  session()->get('areadina');
      $gradodinamizador = session()->get('gradodina');
