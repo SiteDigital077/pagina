@@ -697,7 +697,8 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
       ->orderByRaw("RAND()")
       ->paginate(16);
    }
-
+$products = \DigitalsiteSaaS\Pagina\Tenant\Product::
+     paginate(1000);
 
  
      $areadinamizador =  session()->get('areadina');
