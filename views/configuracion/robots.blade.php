@@ -1,1 +1,3 @@
-<pre>@foreach($seo as $seo){{$seo->robots}}@endforeach</pre>
+@foreach($seo as $seo)
+{!! nl2br(e($seo->robots)) !!}
+@endforeach
