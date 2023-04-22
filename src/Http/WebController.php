@@ -1404,6 +1404,18 @@ return redirect($url);
     $utm_crm = '0';
     else
     $utm_crm = Input::get('utm_crm');
+  if(Input::get('utm_medium') == '')
+    $utm_medium = '0';
+    else
+    $utm_medium = Input::get('utm_medium');
+  if(Input::get('utm_campaign') == '')
+    $utm_campaign = '0';
+    else
+    $utm_campaign = Input::get('utm_campaign');
+  if(Input::get('utm_source') == '')
+    $utm_source = '0';
+    else
+    $utm_source = Input::get('utm_source');
 
    $usermacrm = \DigitalsiteSaaS\Gestion\Tenant\Gestion::create([
    'nombre' => $campo1,
