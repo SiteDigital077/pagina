@@ -1313,7 +1313,6 @@ return redirect($url);
    'ciudad_id' => '1',
    'comentarios' => '1',
    'tipo' => '1',
-   'utm_crm' => Input::get('utm_crm'),
    'utm_source' => Input::get('utm_source'),
    'utm_campaign' => Input::get('utm_campaign'),
    'utm_medium' => Input::get('utm_medium'),
