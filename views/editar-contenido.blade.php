@@ -4329,7 +4329,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Tipo</label>
                                             <div class="col-md-9">
-                                                {{Form::text('contenido', $contenido->contenido, array('class' => 'form-control','placeholder'=>'Ingrese Tipo'))}}
+                                                {{Form::text('contenido', $contenido->content, array('class' => 'form-control','placeholder'=>'Ingrese Tipo'))}}
                                             </div>
                                         </div>
 
