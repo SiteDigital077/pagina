@@ -81,40 +81,37 @@ use RegistersUsers;
     protected function create(Request $request)
     {
 
-      
+      $name = Input::get('name');
+      $email = Input::get('email');
       $fqdns = Input::get('fqdn');
-      $periodo = Input::get('periodo');
-      $fecha_actual = date("Y-m-d");
-      $final = date("Y-m-d",strtotime($fecha_actual."+".$periodo."month"));
+      $periodo = Input::get('date');
+      $fecha_actual = Input::get('date');
+      $final = date("Y-m-d",strtotime($fecha_actual));
       $plan = Input::get('plan');
       $password = Input::get('password');
+      $passwordhash = Hash::make($password);
+
+      $crearusuario = DB::table('sitedesarrollo.users')->insert(['name' => $name,'email' => $email,'remember_token' => $passwordhash,'password' => $passwordhash,'rol_id' => '1']);
 
       $fqdn = sprintf('%s.%s', $fqdns, env('APP_DOMAIN'));
-       
-        $website = new Website;
-        $website->uuid = Str::random(10);
-        $path = public_path() . '/saas/'.$website->uuid;
-        File::makeDirectory($path, 0777, true, true);
-        app(WebsiteRepository::class)->create($website);
-        $hostname = new Hostname();
-        $hostname->fqdn = $fqdn;
-        $hostname = app(HostnameRepository::class)->create($hostname);
-        app(HostnameRepository::class)->attach($hostname, $website);
+      $website = new Website;
+      $website->uuid = Str::random(10);
+      $path = public_path() . '/saas/'.$website->uuid;
+      File::makeDirectory($path, 0777, true, true);
+      app(WebsiteRepository::class)->create($website);
+      $hostname = new Hostname();
+      $hostname->fqdn = $fqdn;
+      $hostname = app(HostnameRepository::class)->create($hostname);
+      app(HostnameRepository::class)->attach($hostname, $website);
   
+      $update = User::where('id', Auth::user()->id)->update(['saas_id' => $hostname->id,]);
+      $updatedate = DB::table('tenancy.hostnames')->where('id', $hostname->id)->update(['presentacion' => $final,'plan_id' => $plan]);
+      $updatedate = DB::table('tenancy.hostnames')->where('id', $hostname->id)->update(['presentacion' => $final,'plan_id' => $plan]);
 
-        $update = User::where('id', Auth::user()->id)
-            ->update(['saas_id' => $hostname->id,]);
-
-         $updatedate = DB::table('tenancy.hostnames')->where('id', $hostname->id)
-            ->update(['presentacion' => $final,'plan_id' => $plan]);
-        
-        $pass = Hash::make($password);
-
-         $mihost =  ($website->uuid.'.');
-         $website = DB::table($mihost.'users')->where('id', '1')
-         ->update(['password' => $pass]);
-
-        return Redirect('/gestion/registrosaas')->with('status', 'ok_create');
+      $pass = Hash::make($password);
+      $mihost =  ($website->uuid.'.');
+      $website = DB::table($mihost.'users')->where('id', '1')->update(['password' => $pass]);
+      return Redirect('/gestion/registrosaas')->with('status', 'ok_create');
     }
 
  
