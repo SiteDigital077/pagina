@@ -139,6 +139,7 @@
   $contenido->video = Input::get('video');
   $contenido->responsive = Input::get('responsive');
   $contenido->animacion = Input::get('animacion');
+  $contenido->idioma = Input::get('idioma');
   $contenido->image = Input::get('FilePath');
   $contenido->imageal = Input::get('imageal');
   $contenido->url = Input::get('enlace');
@@ -292,6 +293,7 @@ $contenido = new \DigitalsiteSaaS\Pagina\Tenant\Select;
   $contenido->image = Input::get('FilePath');
   $contenido->imageal = Input::get('imageal');
   $contenido->video = Input::get('video');
+  $contenido->idioma = Input::get('idioma');
   $contenido->responsive = Input::get('responsive');
   $contenido->animacion = Input::get('animacion');
   $contenido->url = Input::get('enlace');

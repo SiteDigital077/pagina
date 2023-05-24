@@ -97,7 +97,18 @@
                                         </div>
 
                                         {{Form::hidden('posti', '2', array('class' => 'form-control','placeholder'=>'Ingrese la descripción de la página'))}}
-                                        {{Form::hidden('categoria', '0', array('class' => 'form-control','placeholder'=>'Ingrese la descripción de la página'))}}        
+                                        {{Form::hidden('categoria', '0', array('class' => 'form-control','placeholder'=>'Ingrese la descripción de la página'))}}   
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>     
 
                                          <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-textarea-input">Descripción</label>
