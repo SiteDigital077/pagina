@@ -476,8 +476,11 @@ Route::group(['middleware' => ['web']], function (){
  Route::resource('ingreso-comunidad', 'DigitalsiteSaaS\Pagina\Http\WebController@ingresarcomunidad');
  Route::post('mensajes/crearmensajeinput', 'DigitalsiteSaaS\Pagina\Http\WebController@crearmensajeinput');
  Route::get('/', 'DigitalsiteSaaS\Pagina\Http\WebController@index');
+ Route::get('en', 'DigitalsiteSaaS\Pagina\Http\WebController@index');
+ Route::get('es', 'DigitalsiteSaaS\Pagina\Http\WebController@index');
  Route::get('/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@paginas');
  Route::get('en/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@paginas');
+ Route::get('es/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@paginas');
  Route::get('{{id}}', 'DigitalsiteSaaS\Pagina\Http\WebController@subpaginas');
  Route::get('blog/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@blog');
  Route::get('gestiones/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@gestion');
