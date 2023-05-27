@@ -222,6 +222,17 @@
                                         </div>
 
                                          <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Tipo botón</label>
                                             <div class="col-md-9">
                                                 {{ Form::select('contenidos', [$contenido->contents => $contenido->contents,
@@ -390,6 +401,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -511,6 +533,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -644,6 +677,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -759,6 +803,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -880,6 +935,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -998,6 +1064,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -1113,6 +1190,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -1243,6 +1331,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -1395,6 +1494,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -1559,6 +1669,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -1678,6 +1799,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -1794,6 +1926,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -1929,6 +2072,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -2090,6 +2244,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -2237,6 +2402,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -2356,6 +2532,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -2558,6 +2745,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -2713,6 +2911,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -2865,6 +3074,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -2990,6 +3210,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -3127,6 +3358,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -3277,6 +3519,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Responsive</label>
                                             <div class="col-md-9">
@@ -3376,6 +3629,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -3494,6 +3758,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -3609,6 +3884,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -3731,6 +4017,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -3846,6 +4143,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -3975,6 +4283,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -4095,6 +4414,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -4363,6 +4693,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -4534,6 +4875,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -4675,6 +5027,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -4808,6 +5171,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -4962,6 +5336,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -5101,6 +5486,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -5278,6 +5674,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -5451,6 +5858,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -5585,6 +6003,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -5729,6 +6158,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -5853,6 +6293,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -6030,6 +6481,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -6161,6 +6623,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -6309,6 +6782,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -6439,6 +6923,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -6560,6 +7055,17 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-password-input">Nivel de ubicación</label>
                                             <div class="col-md-9">
@@ -6677,6 +7183,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -6810,6 +7327,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -6957,6 +7485,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
@@ -7159,6 +7698,17 @@
                                                  'posicionSD9' => 'posicionSD9',
       
                                                   ], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Idioma</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('idioma', [$contenido->idioma => $contenido->idioma,
+                                                 'es' => 'Español',
+                                                 'en' => 'Ingles',
+                                                 'fr' => 'Frances'
+                                                 ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
 
