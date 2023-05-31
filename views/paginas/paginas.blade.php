@@ -119,7 +119,7 @@
         
            <a href="<?=URL::to('gestion/paginas/eliminar/');?>/{{$paga->id}}" onclick="return confirmar('¿Está seguro que desea eliminar el registro?')"><span id="tup" data-toggle="tooltip" data-placement="right" title="Eliminar página" class="btn btn-danger"><i class="hi hi-trash sidebar-nav-icon"></i></span></a>
            @endif
-           <a href="paginas/editar/{{ $subcategory->id }}"><span id="tup" data-toggle="tooltip" data-placement="bottom" title="Editar página" class="btn btn-info"><i class="fa fa-pencil-square-o sidebar-nav-icon"></i></span></a>
+           <a href="paginas/editarre/{{ $paga->id }}"><span id="tup" data-toggle="tooltip" data-placement="bottom" title="Editar página" class="btn btn-info"><i class="fa fa-pencil-square-o sidebar-nav-icon"></i></span></a>
            </td>
           </tr>
         

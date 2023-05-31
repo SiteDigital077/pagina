@@ -16,11 +16,11 @@
                                     <!-- Basic Form Elements Title -->
                                     <div class="block-title">
                                      
-                                        <h2><strong>Editar</strong> Página</h2>
+                                        <h2><strong>Replicar</strong> Página</h2>
                                     </div>
                            
                                     <!-- Basic Form Elements Content -->
-                                    {{Form::open(array('method' => 'GET','class' => 'form-horizontal','id' => 'defaultForm1', 'url' => array('gestion/paginas/actualizar',$paginas->id)))}}
+                                    {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm1', 'url' => array('gestion/paginas/crearpagina'))) }}
                                         
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-text-input">Nombre Página</label>
@@ -99,7 +99,10 @@
                                             </div>
                                         </div>
 
-                                         <div class="form-group">
+                                    
+                                        @endif
+
+                                           <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-select">Idioma</label>
                                             <div class="col-md-9">
                                                 {{ Form::select('idioma', [$paginas->idioma => $paginas->idioma,
@@ -109,9 +112,8 @@
                                                  ], null, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
-                                        @endif
 
-                                    
+                                        {{Form::hidden('posti', '2', array('class' => 'form-control','placeholder'=>'Ingrese la descripción de la página'))}}
 
 
                                          <div class="form-group">
@@ -163,4 +165,3 @@
 
  @stop
  	
-

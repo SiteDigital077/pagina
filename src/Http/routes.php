@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auths','administrador']], function (){
  Route::post('gestion/paginas/crearpagina', 'DigitalsiteSaaS\Pagina\Http\PaginaController@crearpagina');
  Route::get('gestion/paginas/actualizar/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@actualizar');
  Route::get('gestion/paginas/editar/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@editar');
+ Route::get('gestion/paginas/editarre/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@editarre');
  Route::get('gestion/paginas/subpagina/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@subpagina');
  Route::get('gestion/paginas/eliminar/{id}', 'DigitalsiteSaaS\Pagina\Http\PaginaController@eliminar');
 

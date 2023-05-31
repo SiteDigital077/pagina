@@ -364,6 +364,19 @@ else{
   return view('pagina::paginas.editar-pagina')->with('paginas', $paginas)->with('number', $number);
  }
 
+
+  public function editarre($id){
+  if(!$this->tenantName){
+  $number = Auth::user()->id;
+  $paginas = Page::find($id);
+}
+else{
+  $number = Auth::user()->id;
+  $paginas = \DigitalsiteSaaS\Pagina\Tenant\Page::find($id);
+}
+  return view('pagina::paginas.editar-paginare')->with('paginas', $paginas)->with('number', $number);
+ }
+
  public function subpagina(){
   if(!$this->tenantName){
   $user = Page::where('posti','=','1')->count();

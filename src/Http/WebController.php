@@ -328,7 +328,7 @@ class WebController extends Controller {
      }
 
      $cursos = \DigitalsiteSaaS\Elearning\Tenant\Cursos::all();
-     $contenida = \DigitalsiteSaaS\Pagina\Tenant\Maxi::join('images','images.content_id','=','contents.id')
+     $contenida = \DigitalsiteSaaS\Pagina\Tenant\Content::join('images','images.content_id','=','contents.id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$user->id)->get();
      $formulario = \DigitalsiteSaaS\Pagina\Tenant\Formu::join('contents','inputs.content_id','=','contents.id')
@@ -637,7 +637,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $contenidonumas = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('responsive', $post->id)->Orwhere('page_id', $post->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');
 
      $paginations = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Blogs()->paginate(9);
-   $contenida = \DigitalsiteSaaS\Pagina\Tenant\Maxi::join('images','images.content_id','=','contents.id')
+   $contenida = \DigitalsiteSaaS\Pagina\Tenant\Content::join('images','images.content_id','=','contents.id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$post->id)->get();
    
