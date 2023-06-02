@@ -64,7 +64,7 @@
  use GuzzleHttp\Client;
  use DigitalsiteSaaS\Elearning\Cursos;
  use App\Http\ConnectionsHelper;
-
+ use URL;
 
 
 class WebController extends Controller {
@@ -80,38 +80,42 @@ class WebController extends Controller {
    $this->tenantName = explode(".", $fqdn)[0];
    }
   }
-  private function total(){
-   $cart = session()->get('cart');
-   $total = 0;
-   if($cart == null){}
-   else{
-    foreach ($cart as $item) {
-     $total += $item->precioinivafin * $item->quantity;
-     }}
-    return $total;
-   }
+  
 
-   private function subtotal(){
-    $cart = session()->get('cart');
-    $subtotal = 0;
-    if($cart == null){}
-    else{
-    foreach($cart as $item){
-    $subtotal += $item->preciodescfin * $item->quantity;
-    }}
-    return $subtotal;
-   }
+private function total(){
+ $cart = session()->get('cart');
+ $total = 0;
+ if($cart == null){}
+ else{
+ foreach ($cart as $item) {
+ $total += $item->precioinivafin * $item->quantity;
+ }}
+ return $total;
+}
 
-  public function index(){
+private function subtotal(){
+ $cart = session()->get('cart');
+ $subtotal = 0;
+ if($cart == null){}
+ else{
+ foreach($cart as $item){
+  $subtotal += $item->preciodescfin * $item->quantity;
+ }}
+ return $subtotal;
+}
 
-  $avanzacat = Page::where('categoria', '=', 1)->get();
-  $whatsapp = Whatsapp::all();
-  $planessaas = Planes::all();
-  $departamentos = Departamentocon::all();
-  $municipios = Municipio::all();
+  
 
-  if(!$this->tenantName){
-    $cursos = Cursos::all();
+public function index(){
+
+$avanzacat = Page::where('categoria', '=', 1)->get();
+$whatsapp = Whatsapp::all();
+$planessaas = Planes::all();
+$departamentos = Departamentocon::all();
+$municipios = Municipio::all();
+
+if(!$this->tenantName){
+$cursos = Cursos::all();
    $users = DB::table('pages')->where('posti', '1')->get();
   
     foreach ($users as $user){
@@ -328,7 +332,7 @@ class WebController extends Controller {
      }
 
      $cursos = \DigitalsiteSaaS\Elearning\Tenant\Cursos::all();
-     $contenida = \DigitalsiteSaaS\Pagina\Tenant\Content::join('images','images.content_id','=','contents.id')
+     $contenida = \DigitalsiteSaaS\Pagina\Tenant\Maxi::join('images','images.content_id','=','contents.id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$user->id)->get();
      $formulario = \DigitalsiteSaaS\Pagina\Tenant\Formu::join('contents','inputs.content_id','=','contents.id')
@@ -637,7 +641,7 @@ $categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
    $contenidonumas = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('responsive', $post->id)->Orwhere('page_id', $post->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');
 
      $paginations = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Blogs()->paginate(9);
-   $contenida = \DigitalsiteSaaS\Pagina\Tenant\Content::join('images','images.content_id','=','contents.id')
+   $contenida = \DigitalsiteSaaS\Pagina\Tenant\Maxi::join('images','images.content_id','=','contents.id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$post->id)->get();
    
@@ -744,6 +748,348 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
   dd('No ha pagaf');
  }
     }
+
+
+
+
+
+
+
+public function paginasin($id,$page){
+
+$pages = \Request::path();
+
+
+    $departamentos = Departamentocon::all();
+     $municipios = Municipio::all();
+      $cursos = Cursos::all();
+   $avanzacat = Page::where('categoria', '=', 1)->get(); 
+    $planessaas = Planes::all();
+   if(!$this->tenantName){
+     $plantilla = Template::all();
+   $plantillaes = Template::all();
+   $whatsapp = Whatsapp::all();
+   $promos = Promocion::all();  
+   $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   foreach ($menu as $menus) {
+    $menusa = $menus->slug;
+
+    if(strcmp($menusa, $pages) == 0)
+ 
+    return response()->view('errors.404', [], 404);
+     }
+     $post = Page::where('slug','=',$menusa)->first();
+     $meta = Page::where('slug','=',$menusa)->get();
+     $metas = Page::where('slug','like', $menusa)->count(); 
+   
+   
+   $menufoot = Page::orderBy('posta', 'asc')->get();
+   $masa = DB::table('pages')->count('page_id');
+   $cama = Page::find($post->id);
+
+   $seo =  Seo::where('id','=',1)->get();  
+   $filtros = DB::table('categoriessd')->get();
+   $productsa = Product::inRandomOrder()->get();
+
+   $stock = DB::table('products')
+      //->leftJoin('order_items', 'order_items.product_id', '=', 'products.id')
+      //->select(DB::raw('SUM(quantity) as cantidad'),DB::raw('(products.id) as product'),DB::raw('(product_id) as productse'))
+      //->groupBy('products.id')
+      ->get();
+    
+
+   $diagramas = Diagrama::where('id',"=",$post->id)->get();
+   $fichones = Page::find($post->id)->Fichas()->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'fichones');
+   $empresas = Avanzaempresa::orderBy(DB::raw('RAND()'))->paginate(6);
+   
+   $contenidos = Content::where('page_id',"=",$post->id)
+      /*->where('template',"=",$temaweb->template)*/
+      ->orderBy('nivel','ASC')
+      ->get();
+     $contenido = Content::where('page_id',"=",$post->id)
+    ->orderBy('nivel','ASC')
+    ->get();
+    $mediamini = Content::where('page_id',"=",$post->id)
+    ->orderBy('nivel','ASC')
+    ->get();
+   $banners = Page::find($post->id)->Banners()->orderByRaw("RAND()")->take(1)->get();
+  $terminos = \DigitalsiteSaaS\Pagina\Template::all();
+$categories = Pais::all();
+   $bannersback = Page::find($post->id)->Banners()->orderByRaw("RAND()")->take(1)->get();
+   $contenidona = Maxo::join('contents','contents.id','=','collapse.content_id')
+    ->orderBy('position','ASC')
+    ->where('contents.page_id', '=' ,$post->id)->get();
+     $contenidonu = Maxu::join('contents','contents.id','=','tabs.content_id')
+    ->orderBy('position','ASC')
+    ->where('contents.page_id', '=' ,$post->id)
+    ->get();
+
+    $formulario = Formu::join('contents','inputs.content_id','=','contents.id')
+    ->select('inputs.*', 'inputs.id')
+    ->orderBy('id','ASC')
+    ->where('contents.page_id', '=' ,$post->id)->get();
+
+    $empleos = Empleo::join('contents','contents.id','=','empleos.content_id')
+    ->orderBy('position','ASC')
+    ->where('contents.page_id', '=' ,$post->id)
+    ->get();
+   $contenidonumas = Fichaje::where('responsive', $post->id)->Orwhere('page_id', $post->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');
+   
+     $paginations = Page::find($post->id)->Blogs()->paginate(9);
+   $contenida =Maxi::join('images','images.content_id','=','contents.id')
+    ->orderBy('position','ASC')
+    ->where('contents.page_id', '=' ,$post->id)->get();
+    
+     $eventos = DB::table('events')->where('start_old', '>', date('m/d/Y'))->orderBy('start_old', 'asc')->take(3)->get();
+     $start =  session()->get('start') ? session()->get('start') : 0;
+   $end = session()->get('end') ? session()->get('end') : 100000000000000;
+   $tipo = session()->get('tipo');
+   $totaleventos = DB::table('events')
+    ->whereBetween('start_old', array($start, $end))
+    ->where('class', 'like', '%' . $tipo . '%')
+    ->get();
+     $cart = session()->get('cart');
+     $min_price = Input::has('min_price') ? Input::get('min_price') : 0;
+     $max_price = Input::has('max_price') ? Input::get('max_price') : 10000000;
+     $clientes =  session()->get('clientes');
+     $bustext =  session()->get('bustext');
+     $areafil = session()->get('area');
+     $parametrofil = session()->get('parametro');
+     $subcategoriafil = session()->get('subcategoria');
+      $products =  Product::leftjoin('contents','products.categoriapro_id','=','contents.contents')
+     ->whereBetween('precio', array($min_price, $max_price))
+      ->where('category_id', 'like', '%' . session()->get('categoria') . '%')
+      /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
+      ->where('autor_id', 'like', '%' . session()->get('autor') . '%')
+      ->where('categoriapro_id', 'like', '%' . session()->get('categoria') . '%')
+      ->where('name','like','%' . session()->get('palabra').'%')
+      ->Where('products.description','like','%' . session()->get('palabra').'%')
+      ->where('visible','=','1')
+      ->orderByRaw("RAND()")
+      ->paginate(16);
+     
+     $areadinamizador =  session()->get('areadina');
+     $gradodinamizador = session()->get('gradodina');
+     $campodinamizador = session()->get('campodina');
+     $variabledinamizador = session()->get('variabledina');
+     $casa =  session()->get('casa');
+    
+   
+   $selectores = Select::all();
+   $total = $this->total();
+   $subtotal = $this->subtotal();
+   $filtros = DB::table('categoriessd')->where('categoriapro_id','=',$subcategoriafil)->get();
+   $subcategoria = Categoria::all();
+   $parametro = DB::table('parametro')->get();
+   $autor = DB::table('autor')->get();
+   $area = DB::table('areas')->get();
+
+
+
+   
+   
+   $eventodig = DB::table('tipo_evento')->get();
+   $carousel = DB::table('contents')
+   ->join('carousel','contents.id','=','carousel.content_id')
+   ->get();
+   $carouselimg = Carousel::all();;
+   $colors = DB::table('colors')->get();
+   $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
+     //dd($arr_ip);
+     $ip = $arr_ip['ip'];
+     $ciudad = $arr_ip['city'];
+     $pais = $arr_ip['country'];
+     $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+     $temp = Template::where('id',1)->value('template');
+     
+   return view('Templates.'.$temp.'.desing')->with('contenidos', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('menufoot', $menufoot)->with('galeria', $contenida)->with('plantilla', $plantilla)->with('mascar', $contenido)->with('plantillaes', $plantillaes)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('mediamini', $mediamini)->with('empresas', $empresas)->with('cursos', $cursos)->with('promos', $promos)->with('departamentos',$departamentos)->with('municipios',$municipios);
+   }
+      $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
+  $infosaas = DB::table('tenancy.hostnames')
+  ->join('tenancy.websites','websites.id','=','hostnames.website_id')
+  ->where('hostnames.fqdn',  $hostname->fqdn)
+  ->get();
+  foreach ($infosaas as $infosaasweb) {
+  $mihost =  ($infosaasweb->uuid.'.');
+  $website = DB::table($mihost.'users')->get();
+  $dias = date('Y-m-d');
+  if($dias <=  $infosaasweb->presentacion){
+  $resp = 'true';
+  }else{
+  $resp = 'false'; 
+  }
+}
+$cursos = \DigitalsiteSaaS\Elearning\Tenant\Cursos::all();
+    $avanzacat = \DigitalsiteSaaS\Pagina\Tenant\Page::where('categoria', '=', 1)->get(); 
+    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+   $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+   $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
+   $post = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$pages)->first();
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get(); 
+   $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('slug','=',$pages)->get();
+  $departamentos = \DigitalsiteSaaS\Pagina\Tenant\Departamentocon::all();
+     $municipios = \DigitalsiteSaaS\Pagina\Tenant\Municipio::all();
+   foreach ($meta as $metas) {
+    $metasa = $metas->slug;
+    if(strcmp($metasa, $pages) !== 0)
+ 
+    return response()->view('errors.404', [], 404);
+     }
+   $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
+   $masa = \DigitalsiteSaaS\Pagina\Tenant\Page::count('page_id');
+   $cama = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id);
+  
+   $filtros = DB::table('categoriessd')->get();
+
+
+   $stock = DB::table('products')
+      //->leftJoin('order_items', 'order_items.product_id', '=', 'products.id')
+      //->select(DB::raw('SUM(quantity) as cantidad'),DB::raw('(products.id) as product'),DB::raw('(product_id) as productse'))
+      //->groupBy('products.id')
+      ->get();
+     
+  
+   $planessaas = \DigitalsiteSaaS\Pagina\Tenant\Planes::all();
+
+   $diagramas = \DigitalsiteSaaS\Pagina\Tenant\Diagrama::where('id',"=",$post->id)->get();
+   $fichones = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Fichas()->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'fichones');
+   $empresas = \DigitalsiteSaaS\Avanza\Tenant\Avanzaempresa::orderBy(DB::raw('RAND()'))->paginate(6);
+   $contenidos = \DigitalsiteSaaS\Pagina\Tenant\Content::where('page_id',"=",$post->id)
+      /*->where('template',"=",$temaweb->template)*/
+      ->orderBy('nivel','ASC')
+      ->get();
+      $mediamini = \DigitalsiteSaaS\Pagina\Tenant\Content::where('page_id',"=",$post->id)
+    ->orderBy('nivel','ASC')
+    ->get();
+$productsa = \DigitalsiteSaaS\Pagina\Tenant\Product::inRandomOrder()->get();
+   $banners = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Banners()->orderByRaw("RAND()")->take(1)->get();
+  $terminos = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+$categories = \DigitalsiteSaaS\Pagina\Tenant\Pais::all();
+   $bannersback = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Banners()->orderByRaw("RAND()")->take(1)->get();
+   $contenidona = \DigitalsiteSaaS\Pagina\Tenant\Maxo::join('contents','contents.id','=','collapse.content_id')
+    ->orderBy('position','ASC')
+    ->where('contents.page_id', '=' ,$post->id)->get();
+     $contenidonu = \DigitalsiteSaaS\Pagina\Tenant\Maxu::join('contents','contents.id','=','tabs.content_id')
+    ->orderBy('position','ASC')
+    ->where('contents.page_id', '=' ,$post->id)
+    ->get();
+
+    $empleos = \DigitalsiteSaaS\Pagina\Tenant\Empleo::join('contents','contents.id','=','empleos.content_id')
+    ->orderBy('position','ASC')
+    ->where('contents.page_id', '=' ,$post->id)
+    ->get();
+   $contenidonumas = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('responsive', $post->id)->Orwhere('page_id', $post->id)->orderBy(DB::raw('RAND()'))->paginate(6, ['*'], 'contenidonumas');
+
+     $paginations = \DigitalsiteSaaS\Pagina\Tenant\Page::find($post->id)->Blogs()->paginate(9);
+   $contenida = \DigitalsiteSaaS\Pagina\Tenant\Maxi::join('images','images.content_id','=','contents.id')
+    ->orderBy('position','ASC')
+    ->where('contents.page_id', '=' ,$post->id)->get();
+   
+     $eventos = DB::table('events')->where('start_old', '>', date('m/d/Y'))->orderBy('start_old', 'asc')->take(3)->get();
+     $start =  session()->get('start') ? session()->get('start') : 0;
+   $end = session()->get('end') ? session()->get('end') : 100000000000000;
+   $tipo = session()->get('tipo');
+   $totaleventos = DB::table('events')
+    ->whereBetween('start_old', array($start, $end))
+    ->where('class', 'like', '%' . $tipo . '%')
+    ->get();
+     $formulario = \DigitalsiteSaaS\Pagina\Tenant\Formu::join('contents','inputs.content_id','=','contents.id')
+    ->select('inputs.*', 'inputs.id')
+    ->orderBy('id','ASC')
+    ->where('contents.page_id', '=' ,$post->id)->get();
+     $cart = session()->get('cart');
+   $min_price = Input::has('min_price') ? Input::get('min_price') : 0;
+     $max_price = Input::has('max_price') ? Input::get('max_price') : 10000000;
+     $clientes =  session()->get('clientes');
+     $bustext =  session()->get('bustext');
+     $areafil = session()->get('area');
+     $parametrofil = session()->get('parametro');
+     $autorfil = session()->get('autor');
+     $subcategoriafil = session()->get('subcategoria');
+    
+     $idpage = \DigitalsiteSaaS\Pagina\Tenant\Content::leftjoin('pages','contents.page_id','=','pages.id')
+     ->where('type','=', 'productos')
+     ->where('slug','=', $pages)
+    ->pluck('contents');
+    $idpagecount = \DigitalsiteSaaS\Pagina\Tenant\Content::leftjoin('pages','contents.page_id','=','pages.id')
+     ->where('type','=', 'productos')
+     ->where('slug','=', $pages)
+    ->count();
+  
+    if($idpagecount == 0){
+     $products =  \DigitalsiteSaaS\Pagina\Tenant\Product::whereBetween('precio', array($min_price, $max_price))
+      ->where('category_id', 'like', '%' . session()->get('categoria') . '%')
+      /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
+      ->where('autor_id', 'like', '%' . session()->get('autor') . '%')
+      ->where('categoriapro_id', 'like', '%' . session()->get('categoria') . '%')
+      ->where('name','like','%' . session()->get('palabra').'%')
+      ->Where('description','like','%' . session()->get('palabra').'%')
+      ->where('visible','=','1')
+     
+      ->orderByRaw("RAND()")
+      ->paginate(16);
+   }else{
+      $products =  \DigitalsiteSaaS\Pagina\Tenant\Product::whereBetween('precio', array($min_price, $max_price))
+      ->where('category_id', 'like', '%' . session()->get('categoria') . '%')
+      /* ->where('parametro_id', 'like', '%' . $parametrofil . '%') */
+      ->where('autor_id', 'like', '%' . session()->get('autor') . '%')
+      ->where('categoriapro_id', 'like', '%' . session()->get('categoria') . '%')
+      ->where('name','like','%' . session()->get('palabra').'%')
+      ->Where('description','like','%' . session()->get('palabra').'%')
+      ->where('visible','=','1')
+    
+      ->orderByRaw("RAND()")
+      ->paginate(16);
+   }
+$products = \DigitalsiteSaaS\Pagina\Tenant\Product::
+     paginate(1000);
+
+ 
+     $areadinamizador =  session()->get('areadina');
+     $gradodinamizador = session()->get('gradodina');
+     $campodinamizador = session()->get('campodina');
+     $variabledinamizador = session()->get('variabledina');
+     $casa =  session()->get('casa');
+    
+    
+  
+   
+      $selectores = \DigitalsiteSaaS\Pagina\Tenant\Select::all();
+   $total = $this->total();
+   $subtotal = $this->subtotal();
+   $filtros = DB::table('categoriessd')->where('categoriapro_id','=',$subcategoriafil)->get();
+   $subcategoria = \DigitalsiteSaaS\Pagina\Tenant\Categoria::all();;
+   $parametro = DB::table('parametro')->get();
+   $autor = DB::table('autor')->get();
+   $area = DB::table('areas')->get();
+  
+   
+
+    $seo =  \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get();  
+
+   
+   $eventodig = DB::table('tipo_evento')->get();
+   $carousel = DB::table('contents')
+   ->join('carousel','contents.id','=','carousel.content_id')
+   ->get();
+   $carouselimg = \DigitalsiteSaaS\Pagina\Tenant\Carousel::all();;
+   $colors = DB::table('colors')->get();
+   $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
+     //dd($arr_ip);
+     $ip = $arr_ip['ip'];
+     $ciudad = $arr_ip['city'];
+     $pais = $arr_ip['country'];
+     $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+     $temp = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id',1)->value('template');
+     $promos = \DigitalsiteSaaS\Avanza\Tenant\Promocion::all();  
+     if($resp == 'true'){
+     return view('Templates.'.$temp.'.desing')->with('contenidos', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('menufoot', $menufoot)->with('galeria', $contenida)->with('mascar', $contenidos)->with('pasto', $contenidos)->with('casual', $contenidos)->with('plantilla', $plantilla)->with('plantillaes', $plantillaes)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('contenidu', $contenidos)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('formulario', $formulario)->with('planessaas', $planessaas)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('mediamini', $mediamini)->with('empresas', $empresas)->with('cursos', $cursos)->with('promos', $promos)->with('departamentos',$departamentos)->with('municipios',$municipios);
+ }else{
+  dd('No ha pagaf');
+ }
+    }
+
+
 
 
 

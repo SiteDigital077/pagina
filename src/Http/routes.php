@@ -480,8 +480,8 @@ Route::group(['middleware' => ['web']], function (){
  Route::get('en', 'DigitalsiteSaaS\Pagina\Http\WebController@index');
  Route::get('es', 'DigitalsiteSaaS\Pagina\Http\WebController@index');
  Route::get('/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@paginas');
- Route::get('en/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@paginas');
- Route::get('es/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@paginas');
+
+ Route::get('{id}/{page}', 'DigitalsiteSaaS\Pagina\Http\WebController@paginasin');
  Route::get('{{id}}', 'DigitalsiteSaaS\Pagina\Http\WebController@subpaginas');
  Route::get('blog/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@blog');
  Route::get('gestiones/{id}', 'DigitalsiteSaaS\Pagina\Http\WebController@gestion');
