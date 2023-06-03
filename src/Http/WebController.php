@@ -755,7 +755,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
 
 
 
-public function paginasin($id,$page){
+public function paginasin($page){
 
 $pages = \Request::path();
 
