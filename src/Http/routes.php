@@ -121,9 +121,7 @@ Route::get('gestion/seo', 'DigitalsiteSaaS\Pagina\Http\ConfiguracionController@s
   return View::make('pagina::configuracion.informacion-editemplate')->with('template', $template);
  });
 
- Route::get('/gestion/pagina-principal', 'DigitalsiteSaaS\Pagina\Http\PaginaController@paginaprincipal');
 
-Route::get('/gestion/ordenar-paginas', 'DigitalsiteSaaS\Pagina\Http\PaginaController@paginaordenar');
  
 });
 

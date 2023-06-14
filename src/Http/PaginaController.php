@@ -174,28 +174,8 @@ public function actualizaruserpass($id){
   return View('auth.register')->with('tenantName', $tenantName);
  }
 
-public function paginaprincipal(){
-  if(!$this->tenantName){
-  $roles = Page::orderBy('posti')->get();
-  $conteo = Messagema::where('estado','=','0')->count();
- }else{
-  $roles = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posti')->get();
-  $conteo = \DigitalsiteSaaS\Pagina\Tenant\Messagema::where('estado','=','0')->count();
- }
- return View('pagina::paginas.pagina-principal')->with('roles', $roles)->with('conteo', $conteo);
- }
 
 
-public function paginaordenar(){
-  if(!$this->tenantName){
-  $rolesa =  Page::orderBy('posta','ASC')->get();
-  $conteo = Messagema::where('estado','=','0')->count();
- }else{
-  $rolesa =  \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta','ASC')->get();
-  $conteo = \DigitalsiteSaaS\Pagina\Tenant\Messagema::where('estado','=','0')->count();
- }
- return View('pagina::paginas.ordenar-pagina')->with('rolesa', $rolesa)->with('conteo', $conteo);
- }
 
 
 public function consultaform(){

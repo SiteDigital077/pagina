@@ -1340,6 +1340,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $plantilla = Template::all();
    $plantillaes = Template::find(1);
    $whatsapp = Whatsapp::all();
+   $temp = Template::where('id',1)->value('template');
    $contenido = Fichaje::where('slug','=',$page)->get();
    $contenida = Fichaje::where('slug','=',$page)->get();
    $meta = Page::where('id','=','1')->get();
@@ -1347,11 +1348,10 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
       $menufoot = Page::orderBy('posta', 'asc')->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
    return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('meta', $meta);
-  
    }else{
-
-     $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
+   $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $plantillaes = \DigitalsiteSaaS\Pagina\Tenant\Template::find(1);
+   $temp = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id',1)->value('template');
    $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=','1')->get();
    $contenido = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
    $contenida = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
@@ -1359,7 +1359,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
-   return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('contenida', $contenida)->with('whatsapp', $whatsapp)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('whatsapp', $whatsapp)->with('meta', $meta);
+   return view('templates.'.$temp.'avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('contenida', $contenida)->with('whatsapp', $whatsapp)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('whatsapp', $whatsapp)->with('meta', $meta);
   
     }
   return Response::json($subcategories);

@@ -15,14 +15,7 @@
       </li>
       <li class="active">
        <a href="/gestion/paginas/crear"><i class="fa fa-file-o"></i> Crear página</a>
-      </li>
-      <li>
-       <a href="/gestion/pagina-principal"><i class="fa fa-clipboard"></i> Página entrada</a>
-      </li>
-      <li>
-       <a href="/gestion/ordenar-paginas"><i class="fa fa-cubes"></i> Ordenar páginas</a>
-      </li>
-      
+      </li>  
       <li>
        <a href="/consulta/formularios"><i class="fa fa-commenting-o"></i> Registros <span class="badge">{{$conteo}}</span></a>
       </li>
