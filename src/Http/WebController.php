@@ -1346,7 +1346,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
     foreach ($contenido as $item) {
    $total = $item->identificador;
    }
-   $productos = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('identifciador','=',$total)->get();
+   $productos = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('identificador','=',$total)->get();
    $meta = Page::where('id','=','1')->get();
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
       $menufoot = Page::orderBy('posta', 'asc')->get();
@@ -1362,7 +1362,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    foreach ($contenido as $item) {
    $total = $item->identificador;
    }
-   $productos = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('identifciador','=',$total)->get();
+   $productos = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('identificador','=',$total)->get();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
