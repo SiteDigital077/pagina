@@ -1359,7 +1359,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
-   return view('templates.'.$temp.'avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('contenida', $contenida)->with('whatsapp', $whatsapp)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('whatsapp', $whatsapp)->with('meta', $meta);
+   return view('Templates.'.$temp.'.avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('contenida', $contenida)->with('whatsapp', $whatsapp)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('whatsapp', $whatsapp)->with('meta', $meta);
   
     }
   return Response::json($subcategories);
