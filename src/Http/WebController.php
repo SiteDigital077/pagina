@@ -1343,6 +1343,10 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $temp = Template::where('id',1)->value('template');
    $contenido = Fichaje::where('slug','=',$page)->get();
    $contenida = Fichaje::where('slug','=',$page)->get();
+    foreach ($contenido as $item) {
+   $total = $item->identificador;
+   }
+   $productos = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('identifciador','=',$total)->get();
    $meta = Page::where('id','=','1')->get();
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
       $menufoot = Page::orderBy('posta', 'asc')->get();
@@ -1355,11 +1359,15 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $meta = \DigitalsiteSaaS\Pagina\Tenant\Page::where('id','=','1')->get();
    $contenido = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
    $contenida = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('slug','=',$page)->get();
+   foreach ($contenido as $item) {
+   $total = $item->identificador;
+   }
+   $productos = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('identifciador','=',$total)->get();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
-   return view('Templates.'.$temp.'.avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('contenida', $contenida)->with('whatsapp', $whatsapp)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('whatsapp', $whatsapp)->with('meta', $meta);
+   return view('Templates.'.$temp.'.avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('contenida', $contenida)->with('whatsapp', $whatsapp)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('productos', $productos);
   
     }
   return Response::json($subcategories);
