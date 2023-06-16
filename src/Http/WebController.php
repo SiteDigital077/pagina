@@ -290,15 +290,15 @@ $cursos = Cursos::all();
 
       $cada = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=', 'formulas')->get();
 
- $for = ['darioma07@hotmail.com','dario.martinez@unionsoluciones.com.co','dario.martinez@sitedigital.com.co'];
+ $for = ['darioma07@hotmail.com','darioma07@gmail.com','darioe.martinez.z@gmail.com'];
 
 
       foreach($cada as $cada){
-          $casa = explode(",", $cada->video);
+          $casa = explode(",", trim($cada->video));
 
  
       }
- 
+
 
        $avanzacat = \DigitalsiteSaaS\Pagina\Tenant\Page::where('categoria', '=', 1)->get(); 
      $productsa = \DigitalsiteSaaS\Pagina\Tenant\Product::inRandomOrder()->get();
@@ -1819,7 +1819,7 @@ return redirect($url);
       $datas =\DigitalsiteSaaS\Pagina\Tenant\Content::where('id',$envio)->get();
        foreach ($datas as $user){
         $for = ['darioma07@hotmail.com','darioma07@gmail.com','dario.martinez@sitedigital.com.co'];
-        $id_str = explode(',', $user->video);
+        $id_str = explode(',', trim($user->video));
        Mail::to(Input::get('email'))
        ->bcc($id_str)
      ->send(new Mensajema($userma));
