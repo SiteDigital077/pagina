@@ -1819,10 +1819,10 @@ return redirect($url);
      else{
       $datas =\DigitalsiteSaaS\Pagina\Tenant\Content::where('id',$envio)->get();
        foreach ($datas as $user){
-        $for = ['darioma07@hotmail.com','darioma07@gmail.com','dario.martinez@sitedigital.com.co'];
+        $for = ['darioma07@hotmail.com','darioma07','dario.martinez'];
         $id_str = explode(',', trim($user->video));
        Mail::to(Input::get('email'))
-       ->bcc([$id_str][0])
+       ->bcc($for)
      ->send(new Mensajema($userma));
      }
      return Redirect::to($redireccion)->with('status', 'ok_create');
