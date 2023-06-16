@@ -294,10 +294,11 @@ $cursos = Cursos::all();
 
 
       foreach($cada as $cada){
-          $casa = explode(",", trim($cada->video));
-
+          $casa = explode(",",$cada->video);
+        
  
       }
+
 
 
        $avanzacat = \DigitalsiteSaaS\Pagina\Tenant\Page::where('categoria', '=', 1)->get(); 
@@ -1821,7 +1822,7 @@ return redirect($url);
         $for = ['darioma07@hotmail.com','darioma07@gmail.com','dario.martinez@sitedigital.com.co'];
         $id_str = explode(',', trim($user->video));
        Mail::to(Input::get('email'))
-       ->bcc($id_str)
+       ->bcc([$id_str][0])
      ->send(new Mensajema($userma));
      }
      return Redirect::to($redireccion)->with('status', 'ok_create');
