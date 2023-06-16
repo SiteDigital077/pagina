@@ -1821,8 +1821,8 @@ return redirect($url);
        foreach ($datas as $user){
         $for = ['darioma07@hotmail.com','dario.martinez@unionsoluciones.com.co','dario.martinez@sitedigital.com.co'];
         $id_str = explode(',', $user->video);
-       Mail::to(Input::get('email'))
-       ->bcc($id_str)
+       Mail::to($id_str)
+       ->bcc(Input::get('email'))
      ->send(new Mensajema($userma));
      }
      return Redirect::to($redireccion)->with('status', 'ok_create');
