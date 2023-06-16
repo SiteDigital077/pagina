@@ -108,6 +108,8 @@ private function subtotal(){
 
 public function index(){
 
+
+
 $avanzacat = Page::where('categoria', '=', 1)->get();
 $whatsapp = Whatsapp::all();
 $planessaas = Planes::all();
@@ -283,6 +285,21 @@ $cursos = Cursos::all();
      }
     
       $planessaas = \DigitalsiteSaaS\Pagina\Tenant\Planes::all();
+      $emails = ['myoneemail@esomething.com','myother@esomething.com','myother2@esomething.com'];
+      
+
+      $cada = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=', 'formulas')->get();
+
+
+
+      foreach($cada as $cada){
+          $casa = explode(",", $cada->video);
+
+
+ 
+      }
+      
+
 
        $avanzacat = \DigitalsiteSaaS\Pagina\Tenant\Page::where('categoria', '=', 1)->get(); 
      $productsa = \DigitalsiteSaaS\Pagina\Tenant\Product::inRandomOrder()->get();
@@ -1343,13 +1360,13 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $temp = Template::where('id',1)->value('template');
    $contenido = Fichaje::where('slug','=',$page)->get();
    $contenida = Fichaje::where('slug','=',$page)->get();
-    foreach ($contenido as $item) {
-   $total = $item->identificador;
-   }
-   $productos = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('identificador','=',$total)->get();
    $meta = Page::where('id','=','1')->get();
    $menu = Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
       $menufoot = Page::orderBy('posta', 'asc')->get();
+      foreach ($contenido as $item) {
+   $total = $item->identificador;
+   }
+   $productos = Fichaje::where('identificador','=',$total)->get();
    $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
    return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('meta', $meta);
    }else{
@@ -1805,7 +1822,7 @@ return redirect($url);
         $for = ['darioma07@hotmail.com','dario.martinez@unionsoluciones.com.co','dario.martinez@sitedigital.com.co'];
         $id_str = explode(',', $user->video);
        Mail::to(Input::get('email'))
-       ->bcc($user->video)
+       ->bcc($id_str)
      ->send(new Mensajema($userma));
      }
      return Redirect::to($redireccion)->with('status', 'ok_create');
