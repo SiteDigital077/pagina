@@ -1380,8 +1380,8 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $total = $item->identificador;
    }
    $productos = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('identificador','=',$total)->get();
-   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
-   $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
+   $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
+   $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
    $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
    return view('Templates.'.$temp.'.avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('contenida', $contenida)->with('whatsapp', $whatsapp)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('productos', $productos);
@@ -1819,10 +1819,10 @@ return redirect($url);
      else{
       $datas =\DigitalsiteSaaS\Pagina\Tenant\Content::where('id',$envio)->get();
        foreach ($datas as $user){
-        $for = ['darioma07@hotmail.com','darioma07','dario.martinez'];
+        $for = ['darioma07@hotmail.com','darioma07@gmail.com','dario.martinez@sitedigital.com.co'];
         $id_str = explode(',', trim($user->video));
        Mail::to(Input::get('email'))
-       ->bcc($for)
+       ->bcc([$id_str][0])
      ->send(new Mensajema($userma));
      }
      return Redirect::to($redireccion)->with('status', 'ok_create');
