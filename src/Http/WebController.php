@@ -234,7 +234,7 @@ $cursos = Cursos::all();
      $ciudad = $arr_ip['city'];
         
      $pais = $arr_ip['country'];
-     $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+     $blogfoot = Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
      $empleos = Empleo::join('contents','contents.id','=','empleos.content_id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$user->id)
@@ -404,7 +404,7 @@ $cursos = Cursos::all();
      $ciudad = $arr_ip['city'];
         
      $pais = $arr_ip['country'];
-     $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+     $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
      $empleos = Empleo::join('contents','contents.id','=','empleos.content_id')
     ->orderBy('position','ASC')
     ->where('contents.page_id', '=' ,$user->id)
@@ -576,7 +576,7 @@ $categories = Pais::all();
      $ip = $arr_ip['ip'];
      $ciudad = $arr_ip['city'];
      $pais = $arr_ip['country'];
-     $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+     $blogfoot = Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
      $temp = Template::where('id',1)->value('template');
      
    return view('Templates.'.$temp.'.desing')->with('contenidos', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('menufoot', $menufoot)->with('galeria', $contenida)->with('plantilla', $plantilla)->with('mascar', $contenido)->with('plantillaes', $plantillaes)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('mediamini', $mediamini)->with('empresas', $empresas)->with('cursos', $cursos)->with('promos', $promos)->with('departamentos',$departamentos)->with('municipios',$municipios);
@@ -756,7 +756,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
      $ip = $arr_ip['ip'];
      $ciudad = $arr_ip['city'];
      $pais = $arr_ip['country'];
-     $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+     $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
      $temp = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id',1)->value('template');
      $promos = \DigitalsiteSaaS\Avanza\Tenant\Promocion::all();  
      if($resp == 'true'){
@@ -916,7 +916,7 @@ $categories = Pais::all();
      $ip = $arr_ip['ip'];
      $ciudad = $arr_ip['city'];
      $pais = $arr_ip['country'];
-     $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+     $blogfoot = Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
      $temp = Template::where('id',1)->value('template');
      
    return view('Templates.'.$temp.'.desing')->with('contenidos', $contenidos)->with('contenidona', $contenidona)->with('contenidonu', $contenidonu)->with('contenidonus', $contenidonu)->with('menu', $menu)->with('menufoot', $menufoot)->with('galeria', $contenida)->with('plantilla', $plantilla)->with('mascar', $contenido)->with('plantillaes', $plantillaes)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('paginations', $paginations)->with('fichones', $fichones)->with('contenidonumas', $contenidonumas)->with('cama', $cama)->with('banners', $banners)->with('bannersback', $bannersback)->with('selectores', $selectores)->with('cart', $cart)->with('products', $products)->with('productsa', $productsa)->with('clientes', $clientes)->with('total', $total)->with('subtotal', $subtotal)->with('filtros', $filtros)->with('diagramas', $diagramas)->with('subcategoria', $subcategoria)->with('autor', $autor)->with('parametro', $parametro)->with('area', $area)->with('filtros', $filtros)->with('eventos', $eventos)->with('totaleventos', $totaleventos)->with('stock', $stock)->with('eventodig', $eventodig)->with('colors', $colors)->with('ip', $ip)->with('ciudad', $ciudad)->with('pais', $pais)->with('carousel', $carousel)->with('carouselimg', $carouselimg)->with('blogfoot', $blogfoot)->with('empleos', $empleos)->with('terminos', $terminos)->with('categories', $categories)->with('planessaas', $planessaas)->with('formulario', $formulario)->with('seo', $seo)->with('avanzacat', $avanzacat)->with('mediamini', $mediamini)->with('empresas', $empresas)->with('cursos', $cursos)->with('promos', $promos)->with('departamentos',$departamentos)->with('municipios',$municipios);
@@ -1096,7 +1096,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
      $ip = $arr_ip['ip'];
      $ciudad = $arr_ip['city'];
      $pais = $arr_ip['country'];
-     $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+     $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
      $temp = \DigitalsiteSaaS\Pagina\Tenant\Template::where('id',1)->value('template');
      $promos = \DigitalsiteSaaS\Avanza\Tenant\Promocion::all();  
      if($resp == 'true'){
@@ -1129,7 +1129,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
       $gestioncar = Carousel::inRandomOrder()->take(6)->get();
       $gestioncarta = Carousel::get();
       $colors = DB::table('colors')->get();
-      $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+      $blogfoot = Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
       $cart = session()->get('cart');
       $subtotal = $this->subtotal();
       $meta = Page::where('id','=','1')->get();
@@ -1156,7 +1156,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
       $gestioncar = \DigitalsiteSaaS\Pagina\Tenant\Carousel::inRandomOrder()->take(6)->get();
       $gestioncarta = \DigitalsiteSaaS\Pagina\Tenant\Carousel::get();
       $colors = DB::table('colors')->get();
-      $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+      $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
       $cart = session()->get('cart');
       $subtotal = $this->subtotal();
       $total = $this->total();
@@ -1223,8 +1223,9 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $menufoot = Page::orderBy('posta', 'asc')->get();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
-   $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+   $blogfoot = Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
    $meta = Page::where('id','=','1')->get();
+   $seo =  Seo::where('id','=',1)->get(); 
    }else{
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $subtotal = $this->subtotal();
@@ -1236,16 +1237,17 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
    $cart = session()->get('cart');
    $colors = DB::table('colors')->get();
-   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get(); 
+   $seo =  \DigitalsiteSaaS\Pagina\Tenant\Seo::where('id','=',1)->get(); 
+   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','blog')->inRandomOrder()->take(6)->get(); 
    }
-   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot)->with('menufoot', $menufoot)->with('whatsapp', $whatsapp)->with('meta', $meta);
+   return view('pagina::blog')->with('contenidos', $contenidos)->with('plantilla', $plantilla)->with('menu', $menu)->with('cart', $cart)->with('subtotal', $subtotal)->with('total', $total)->with('colors', $colors)->with('blogfoot', $blogfoot)->with('menufoot', $menufoot)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('seo', $seo);
   }
 
   public function oferta($id){
   if(!$this->tenantName){
    $plantilla = Template::all();
    $ofertas = Empleo::where('titulo_empslug', '=', $id)->get();
-   $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+   $blogfoot = Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
    $menu = Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $menufoot = Page::orderBy('posta', 'desc')->get();
    $arr_ip = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
@@ -1256,7 +1258,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    }else{
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
    $ofertas = \DigitalsiteSaaS\Pagina\Tenant\Empleo::where('titulo_empslug', '=', $id)->get();
-   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
@@ -1367,7 +1369,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $total = $item->identificador;
    }
    $productos = Fichaje::where('identificador','=',$total)->get();
-   $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+   $blogfoot = Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
    return view('avanza::fichaje/avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('contenida', $contenida)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('meta', $meta);
    }else{
    $plantilla = \DigitalsiteSaaS\Pagina\Tenant\Template::all();
@@ -1382,7 +1384,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $productos = \DigitalsiteSaaS\Pagina\Tenant\Fichaje::where('identificador','=',$total)->get();
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'asc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'asc')->get();
-   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
    $whatsapp = \DigitalsiteSaaS\Pagina\Tenant\Whatsapp::all();
    return view('Templates.'.$temp.'.avanza')->with('contenido', $contenido)->with('plantilla', $plantilla)->with('menu', $menu)->with('menufoot', $menufoot)->with('contenida', $contenida)->with('whatsapp', $whatsapp)->with('plantillaes', $plantillaes)->with('blogfoot', $blogfoot)->with('whatsapp', $whatsapp)->with('meta', $meta)->with('productos', $productos);
   
@@ -1401,7 +1403,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $promociones = Avanzaempresa::join('promociones','avanza_empresa.usuario_id','=','promociones.user_id')->where('slug','=',$page)->get();
    $menu = Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
     $menufoot = Page::orderBy('posta', 'desc')->get();
-   $blogfoot = Bloguero::inRandomOrder()->take(6)->get();
+   $blogfoot = Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
     $meta = Page::where('id','=','1')->get();
    $identificador = Avanzaempresa::where('slug', '=', $page)->get();
    foreach ($identificador as $identificador){
@@ -1422,7 +1424,7 @@ $products = \DigitalsiteSaaS\Pagina\Tenant\Product::
    $promociones = \DigitalsiteSaaS\Avanza\Tenant\Avanzaempresa::join('promociones','avanza_empresa.usuario_id','=','promociones.user_id')->where('slug','=',$page)->get();  
    $menu = \DigitalsiteSaaS\Pagina\Tenant\Page::whereNull('page_id')->orderBy('posta', 'desc')->get();
    $menufoot = \DigitalsiteSaaS\Pagina\Tenant\Page::orderBy('posta', 'desc')->get();
-   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Bloguero::inRandomOrder()->take(6)->get();
+   $blogfoot = \DigitalsiteSaaS\Pagina\Tenant\Content::where('type','=','blog')->inRandomOrder()->take(6)->get();
 
    $identificador = \DigitalsiteSaaS\Avanza\Tenant\Avanzaempresa::where('slug', '=', $page)->get();
    foreach ($identificador as $identificador){
