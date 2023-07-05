@@ -35,6 +35,7 @@
                                                   'email' => 'email',
                                                   'emailnoti' => 'emailnoti',
                                                   'date' => 'date',
+                                                  'telefono' => 'telefono',
                                                   'month' => 'month',
                                                   'number' => 'number',
                                                   'select' => 'select',
