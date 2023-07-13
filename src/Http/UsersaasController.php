@@ -80,7 +80,6 @@ use RegistersUsers;
 
     protected function create(Request $request)
     {
-
       $name = Input::get('name');
       $email = Input::get('email');
       $fqdns = Input::get('fqdn');
