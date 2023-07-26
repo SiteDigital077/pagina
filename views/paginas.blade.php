@@ -77,7 +77,7 @@
 
 
   @foreach($menu as $paga)
-   @foreach($paga->subpaginas->take(20) as $subcategory)
+   @foreach($paga->subpaginas->take(50) as $subcategory)
    @endforeach
   @endforeach
 
