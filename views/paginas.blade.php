@@ -130,7 +130,7 @@
         
           <tr>
            <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="{{$paga->id}}">
-            @foreach($paga->subpaginas->take(20) as $subcategory)
+            @foreach($paga->subpaginas->take(50) as $subcategory)
              <table class="table table-striped">
               <tbody>
                <tr>
