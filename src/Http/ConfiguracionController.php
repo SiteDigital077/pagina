@@ -440,6 +440,10 @@ class ConfiguracionController extends Controller
      $contenido->head = Input::get('head');
      $contenido->footer = Input::get('footer');
      $contenido->empresa = Input::get('empresa');
+     $contenido->cook_titulo = Input::get('cook_titulo');
+     $contenido->cook_texto = Input::get('cook_texto');
+     $contenido->cook_enlace = Input::get('cook_enlace');
+     $contenido->cook_estado = Input::get('cook_estado');
      $contenido->save();
      return Redirect('gestion/redes-sociales')->with('status', 'ok_update');
     }

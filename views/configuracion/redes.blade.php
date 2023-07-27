@@ -218,16 +218,40 @@
                                                  {{Form::text('empresa', $plantilla->empresa, array('class' => 'form-control','placeholder'=>'Nombre Empresa'))}}
                                             </div>
                                         </div>
-                                       
 
-                                        {{Form::hidden('terminos', $plantilla->terminos, array('class' => 'form-control','placeholder'=>'Ingrese horario'))}}
-                                        <div class="form-group form-actions">
-                                            <div class="col-md-9 col-md-offset-3">
-                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Editar</button>
-                                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Cancelar</button>
+                                        <h4 class="text-primary"><b>Configuración Cookies</b></h4>
+                                        <hr>
+
+                                         <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-password-input">Título</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('cook_titulo', $plantilla->cook_titulo, array('class' => 'form-control','placeholder'=>'Ingrese título'))}}
                                             </div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-password-input">Texto</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('cook_texto', $plantilla->cook_texto, array('class' => 'form-control','placeholder'=>'Ingrese texto'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-password-input">Enlace</label>
+                                            <div class="col-md-9">
+                                                 {{Form::text('cook_enlace', $plantilla->cook_enlace, array('class' => 'form-control','placeholder'=>'Ingrese Enlace'))}}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Estado</label>
+                                            <div class="col-md-9">
+                                                {{ Form::select('cook_estado', [
+                                                 $plantilla->cook_estado =>  $plantilla->cook_estado,
+                                                 '1' => 'Visible',
+                                                 '0' => 'No Visible'], null, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
 
                                       {{ Form::close() }} 
                                       @endforeach
