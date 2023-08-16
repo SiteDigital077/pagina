@@ -53,6 +53,15 @@ class ConfiguracionController extends Controller
      return view('pagina::configuracion.ver-templates')->with('templates', $templates)->with('tenantName', $tenantName);
     }
 
+
+     public function publico(){
+  return view('pagina::configuracion.publico');
+ }
+
+ public function privado(){
+  return view('pagina::configuracion.privado');
+ }
+
     /**
      * Show the form for creating a new resource.
      *

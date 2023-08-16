@@ -76,6 +76,8 @@
 
  <div class="container">
    <a href="<?=URL::to('/gestor/subir-template');?>"><button type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-star"></span> Subir template</button></a>
+   <a href="<?=URL::to('/gestor/ver-config/publico');?>"><button type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-star"></span> Público</button></a>
+   <a href="<?=URL::to('/gestor/ver-config/privado');?>"><button type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-star"></span> Privado</button></a>
   </div>
 
 <br>
