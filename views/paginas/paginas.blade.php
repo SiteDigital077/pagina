@@ -90,6 +90,7 @@
         @foreach($menu as $paga)
         @if($paga->robot == 0)
         @else 
+         <tr data-toggle="collapse" data-target="#{{$paga->id}}" class="accordion-toggle">
           <td> @if(count($paga->subpaginas) == 0)
             <button class="btn btn-default btn-xs"><i class="fa fa-eye"></i></button>
             @else
